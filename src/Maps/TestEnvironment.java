@@ -13,7 +13,7 @@ public class TestEnvironment extends Map {
 
     public TestEnvironment() {
         super("test_environment.txt", new TestTileset());
-        this.playerStartPosition = getMapTile(2, 11).getLocation();
+        this.playerStartPosition = getMapTile(0, 11).getLocation();
     }
 
     // Enahnced Map Tile Setup

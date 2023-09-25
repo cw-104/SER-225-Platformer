@@ -13,7 +13,7 @@ public class EditorMaps {
             {
                 add("TestMap");
                 add("TitleScreen");
-                add("TestEnviornment");
+                add("TestEnvironment");
             }
         };
     }
