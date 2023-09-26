@@ -14,10 +14,9 @@ import Utils.Point;
 
 import java.util.HashMap;
 
-// This class is for the black bug enemy
-// enemy behaves like a Mario goomba -- walks forward until it hits a solid map tile, and then turns around
-// if it ends up in the air from walking off a cliff, it will fall down until it hits the ground again, and then will continue walking
-public class BugEnemy extends Enemy {
+// This class is for the Dog enemy
+// enemy behaves like a Mario goomba -- walks forward until it h ll down until it hits the ground again, and then will continue walking
+public class DogEnemy extends Enemy {
 
     private float gravity = .5f;
     private float movementSpeed = .5f;
@@ -25,8 +24,9 @@ public class BugEnemy extends Enemy {
     private Direction facingDirection;
     private AirGroundState airGroundState;
 
-    public BugEnemy(Point location, Direction facingDirection) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("BugEnemy.png"), 24, 15), "WALK_LEFT");
+    public DogEnemy(Point location, Direction facingDirection) {
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load("GuardDog2.png"), 24, 15
+        ), "WALK_LEFT");
         this.startFacingDirection = facingDirection;
         this.initialize();
     }
@@ -48,7 +48,7 @@ public class BugEnemy extends Enemy {
         float moveAmountX = 0;
         float moveAmountY = 0;
 
-        // add gravity (if in air, this will cause bug to fall)
+        // add gravity (if in air, this will cause dog to fall)
         moveAmountY += gravity;
 
         // if on ground, walk forward based on facing direction
@@ -60,7 +60,7 @@ public class BugEnemy extends Enemy {
             }
         }
 
-        // move bug
+        // move dog
         moveYHandleCollision(moveAmountY);
         moveXHandleCollision(moveAmountX);
 
@@ -69,7 +69,7 @@ public class BugEnemy extends Enemy {
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction,  MapEntity entityCollidedWith) {
-        // if bug has collided into something while walking forward,
+        // if dog has collided into something while walking forward,
         // it turns around (changes facing direction)
         if (hasCollided) {
             if (direction == Direction.RIGHT) {
@@ -84,7 +84,7 @@ public class BugEnemy extends Enemy {
 
     @Override
     public void onEndCollisionCheckY(boolean hasCollided, Direction direction, MapEntity entityCollidedWith) {
-        // if bug is colliding with the ground, change its air ground state to GROUND
+        // if dog is colliding with the ground, change its air ground state to GROUND
         // if it is not colliding with the ground, it means that it's currently in the air, so its air ground state is changed to AIR
         if (direction == Direction.DOWN) {
             if (hasCollided) {
