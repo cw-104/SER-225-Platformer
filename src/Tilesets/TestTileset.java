@@ -8,8 +8,6 @@ import GameObject.ImageEffect;
 import Level.TileType;
 import Level.Tileset;
 import Utils.SlopeTileLayoutUtils;
-import Level.Enemy;
-import Level.Player;
 
 import java.util.ArrayList;
 
