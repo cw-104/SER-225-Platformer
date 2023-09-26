@@ -4,53 +4,33 @@ import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
-import Maps.TitleScreenMap;
+import Maps.CutsceneMap;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
 
 // This is the class for the main menu screen
-public class MenuScreen extends Screen {
+public class CutsceneScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected int currentMenuItemHovered = 0; // current menu item being "hovered" over
     protected int menuItemSelected = -1;
-    protected SpriteFont playGame;
-    protected SpriteFont credits;
-    protected SpriteFont title;
-    protected SpriteFont titleCSR;
-    protected SpriteFont titleCSB;
-    protected SpriteFont subtitle;
+    protected SpriteFont narration;
+    protected SpriteFont prompt;
     protected Map background;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
     protected KeyLocker keyLocker = new KeyLocker();
 
-    public MenuScreen(ScreenCoordinator screenCoordinator) {
+    public CutsceneScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
 
     @Override
     public void initialize() {
-        playGame = new SpriteFont("PLAY GAME", 200, 119, "Comic Sans", 30, new Color(0, 0, 0));
-        playGame.setOutlineColor(Color.black);
-        playGame.setOutlineThickness(3);
-        credits = new SpriteFont("CREDITS", 200, 219, "Comic Sans", 30, new Color(0, 0, 0));
-        credits.setOutlineColor(Color.black);
-        credits.setOutlineThickness(3);
-        title = new SpriteFont("ESCAPE:", 500, 75, "Comic Sans", 50, new Color(0, 0, 0));
-        title.setOutlineColor(Color.black);
-        title.setOutlineThickness(3);
-        titleCSR = new SpriteFont("ESCAPE:", 505, 75, "Comic Sans", 50, new Color(255, 0, 0));
-        titleCSR.setOutlineColor(Color.red);
-        titleCSR.setOutlineThickness(3);
-        titleCSB = new SpriteFont("ESCAPE:", 495, 75, "Comic Sans", 50, new Color(0, 0, 255));
-        titleCSB.setOutlineColor(Color.blue);
-        titleCSB.setOutlineThickness(3);
-        subtitle = new SpriteFont("Back to Reality", 503, 125, "Comic Sans", 35, new Color(0, 0, 0));
-        subtitle.setOutlineColor(Color.black);
-        subtitle.setOutlineThickness(3);
-        background = new TitleScreenMap();
+        background = new CutsceneMap();
         background.setAdjustCamera(false);
+        narration = new SpriteFont("Where am I?", 120, 410, "Comic Sans", 50, Color.white);
+        prompt = new SpriteFont("Press SPACE to continue...", 430, 520, "Comic Sans", 20, Color.white);
         keyPressTimer = 0;
         menuItemSelected = -1;
         keyLocker.lockKey(Key.SPACE);
@@ -61,7 +41,7 @@ public class MenuScreen extends Screen {
         background.update(null);
 
         // if down or up is pressed, change menu item "hovered" over (blue square in front of text will move along with currentMenuItemHovered changing)
-        if (Keyboard.isKeyDown(Key.DOWN) &&  keyPressTimer == 0) {
+        /*if (Keyboard.isKeyDown(Key.DOWN) &&  keyPressTimer == 0) {
             keyPressTimer = 14;
             currentMenuItemHovered++;
         } else if (Keyboard.isKeyDown(Key.UP) &&  keyPressTimer == 0) {
@@ -71,7 +51,7 @@ public class MenuScreen extends Screen {
             if (keyPressTimer > 0) {
                 keyPressTimer--;
             }
-        }
+        }*/
 
         // if down is pressed on last menu item or up is pressed on first menu item, "loop" the selection back around to the beginning/end
         if (currentMenuItemHovered > 1) {
@@ -81,7 +61,7 @@ public class MenuScreen extends Screen {
         }
 
         // sets location for blue square in front of text (pointerLocation) and also sets color of spritefont text based on which menu item is being hovered
-        if (currentMenuItemHovered == 0) {
+        /*if (currentMenuItemHovered == 0) {
             playGame.setColor(new Color(255, 255, 255));
             credits.setColor(new Color(0, 0, 0));
             pointerLocationX = 170;
@@ -91,30 +71,33 @@ public class MenuScreen extends Screen {
             credits.setColor(new Color(255, 255, 255));
             pointerLocationX = 170;
             pointerLocationY = 230;
-        }
+        }*/
 
         // if space is pressed on menu item, change to appropriate screen based on which menu item was chosen
         if (Keyboard.isKeyUp(Key.SPACE)) {
             keyLocker.unlockKey(Key.SPACE);
         }
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
-            menuItemSelected = currentMenuItemHovered;
+           screenCoordinator.setGameState((GameState.LEVEL));
+            /* menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
-                screenCoordinator.setGameState(GameState.CUTSCENE);
+                screenCoordinator.setGameState(GameState.LEVEL);
             } else if (menuItemSelected == 1) {
                 screenCoordinator.setGameState(GameState.CREDITS);
-            }
+            }*/
         }
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
-        playGame.draw(graphicsHandler);
+        narration.draw(graphicsHandler);
+        prompt.draw(graphicsHandler);
+       /*playGame.draw(graphicsHandler);
         credits.draw(graphicsHandler);
         titleCSR.draw(graphicsHandler);
         titleCSB.draw(graphicsHandler);
         title.draw(graphicsHandler);
-        subtitle.draw(graphicsHandler);
-        graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(49, 207, 240), Color.black, 2);
+        subtitle.draw(graphicsHandler);*/
+        //graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(49, 207, 240), Color.black, 2);
     }
 }

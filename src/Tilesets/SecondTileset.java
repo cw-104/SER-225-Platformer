@@ -12,10 +12,10 @@ import Utils.SlopeTileLayoutUtils;
 import java.util.ArrayList;
 
 // This class represents a "common" tileset of standard tiles defined in the CommonTileset.png file
-public class CommonTileset extends Tileset {
+public class SecondTileset extends Tileset {
 
-    public CommonTileset() {
-        super(ImageLoader.load("title_tile4.png"), 16, 16, 3);
+    public SecondTileset() {
+        super(ImageLoader.load("title_tile.png"), 16, 16, 3);
     }
 
     @Override
@@ -262,7 +262,7 @@ public class CommonTileset extends Tileset {
 
         mapTiles.add(leftStairsTopTile);
 
-        //E tile
+        //Column tile
         Frame eFrame = new FrameBuilder(getSubImage(4, 2))
                 .withScale(tileScale)
                 .build();
@@ -271,34 +271,8 @@ public class CommonTileset extends Tileset {
 
         mapTiles.add(eTile);
 
-        //S tile
-        Frame sFrame = new FrameBuilder(getSubImage(4, 3))
-                .withScale(tileScale)
-                .build();
-
-        MapTileBuilder sTile = new MapTileBuilder(sFrame);
-
-        mapTiles.add(sTile);
-
-        //C tile
-        Frame cFrame = new FrameBuilder(getSubImage(4, 4))
-                .withScale(tileScale)
-                .build();
-
-        MapTileBuilder cTile = new MapTileBuilder(cFrame);
-
-        mapTiles.add(cTile);
-
-        //A tile
-        Frame aFrame = new FrameBuilder(getSubImage(4, 5))
-                .withScale(tileScale)
-                .build();
-
-        MapTileBuilder aTile = new MapTileBuilder(aFrame);
-
-        mapTiles.add(aTile);
-
-        //P tile
+        
+        //Brick tile
         Frame pFrame = new FrameBuilder(getSubImage(3, 5))
                 .withScale(tileScale)
                 .build();
