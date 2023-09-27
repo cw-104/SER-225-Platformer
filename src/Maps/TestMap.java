@@ -17,7 +17,7 @@ public class TestMap extends Map {
 
     public TestMap() {
         super("test_map.txt", new CommonTileset());
-        this.playerStartPosition = getMapTile(2, 11).getLocation();
+        this.playerStartPosition = getMapTile(0, 11).getLocation();
     }
 
     @Override
@@ -30,9 +30,12 @@ public class TestMap extends Map {
         DogEnemy DogEnemy2 = new DogEnemy(getMapTile(25, 10).getLocation().subtractY(35), Direction.LEFT);
         enemies.add(DogEnemy2);
 
-/* 
-        DinosaurEnemy dinosaurEnemy = new DinosaurEnemy(getMapTile(19, 1).getLocation().addY(2), getMapTile(22, 1).getLocation().addY(2), Direction.RIGHT);
-        enemies.add(dinosaurEnemy); */
+        /*
+         * DinosaurEnemy dinosaurEnemy = new DinosaurEnemy(getMapTile(19,
+         * 1).getLocation().addY(2), getMapTile(22, 1).getLocation().addY(2),
+         * Direction.RIGHT);
+         * enemies.add(dinosaurEnemy);
+         */
 
         return enemies;
     }
@@ -47,9 +50,8 @@ public class TestMap extends Map {
                 getMapTile(27, 6).getLocation(),
                 TileType.JUMP_THROUGH_PLATFORM,
                 3,
-                new Rectangle(0, 6,16,4),
-                Direction.RIGHT
-        );
+                new Rectangle(0, 6, 16, 4),
+                Direction.RIGHT);
         enhancedMapTiles.add(hmp);
 
         EndLevelBox endLevelBox = new EndLevelBox(getMapTile(32, 7).getLocation());

@@ -8,12 +8,14 @@ import EnhancedMapTiles.EndLevelBox;
 //import GameObject.Rectangle;
 import Level.*;
 import Tilesets.TestTileset;
+import Utils.Direction;
+import Enemies.DogEnemy;
 
 public class TestEnvironment extends Map {
 
     public TestEnvironment() {
         super("test_environment.txt", new TestTileset());
-        this.playerStartPosition = getMapTile(0, 11).getLocation();
+        this.playerStartPosition = getMapTile(2, 10).getLocation();
     }
 
     // Enahnced Map Tile Setup
@@ -32,10 +34,27 @@ public class TestEnvironment extends Map {
         // );
         // enhancedMapTiles.add(hmp);
 
-        EndLevelBox endLevelBox = new EndLevelBox(getMapTile(32, 7).getLocation());
+        EndLevelBox endLevelBox = new EndLevelBox(getMapTile(65, 8).getLocation());
         enhancedMapTiles.add(endLevelBox);
 
         return enhancedMapTiles;
+    }
+
+    @Override
+    public ArrayList<Enemy> loadEnemies() {
+        ArrayList<Enemy> enemies = new ArrayList<>();
+
+        DogEnemy DogEnemy = new DogEnemy(getMapTile(60, 10).getLocation().subtractY(25), Direction.LEFT);
+        enemies.add(DogEnemy);
+
+        /*
+         * DinosaurEnemy dinosaurEnemy = new DinosaurEnemy(getMapTile(19,
+         * 1).getLocation().addY(2), getMapTile(22, 1).getLocation().addY(2),
+         * Direction.RIGHT);
+         * enemies.add(dinosaurEnemy);
+         */
+
+        return enemies;
     }
 
 }

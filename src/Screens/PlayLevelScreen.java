@@ -7,9 +7,11 @@ import Game.ScreenCoordinator;
 import Level.Map;
 import Level.Player;
 import Level.PlayerListener;
+import Maps.TestEnvironment;
 import Maps.TestMap;
 import Players.Cat;
 import Utils.Point;
+import Maps.TestEnvironment;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen implements PlayerListener {
@@ -28,7 +30,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     public void initialize() {
         // define/setup map
-        this.map = new TestMap();
+        this.map = new TestEnvironment();
 
         // setup player
         this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
@@ -46,7 +48,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     public void update() {
         // based on screen state, perform specific actions
         switch (playLevelScreenState) {
-            // if level is "running" update player and map to keep game logic for the platformer level going
+            // if level is "running" update player and map to keep game logic for the
+            // platformer level going
             case RUNNING:
                 player.update();
                 map.update(player);
@@ -64,7 +67,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                     }
                 }
                 break;
-            // wait on level lose screen to make a decision (either resets level or sends player back to main menu)
+            // wait on level lose screen to make a decision (either resets level or sends
+            // player back to main menu)
             case LEVEL_LOSE:
                 levelLoseScreen.update();
                 break;

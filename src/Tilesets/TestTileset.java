@@ -32,6 +32,14 @@ public class TestTileset extends Tileset {
 
                 mapTiles.add(greenTile);
 
+                // // orange tile
+                // Frame orangeFrame = new FrameBuilder(getSubImage(1, 0))
+                // .withScale(tileScale)
+                // .build();
+                // MapTileBuilder orangeTile = new MapTileBuilder(orangeFrame)
+                // .withTileType(TileType.NOT_PASSABLE);
+                // mapTiles.add(orangeTile);
+
                 // light blue tile
                 Frame lightBlueFrame = new FrameBuilder(getSubImage(0, 1))
                                 .withScale(tileScale)
@@ -98,7 +106,7 @@ public class TestTileset extends Tileset {
 
                 mapTiles.add(rightEndBranchTile);
 
-                // tree trunk
+                // orange tile
                 Frame treeTrunkFrame = new FrameBuilder(getSubImage(1, 0))
                                 .withScale(tileScale)
                                 .build();
