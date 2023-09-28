@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class Max extends Player {
 
     public Max(float x, float y) {
-        super(new SpriteSheet(ImageLoader.load("Max4.png"), 50, 50), x, y, "STAND_RIGHT");
+        super(new SpriteSheet(ImageLoader.load("Max4.png"), 50, 48), x, y, "STAND_RIGHT");
         gravity = .5f;
         terminalVelocityY = 6f;
         jumpHeight = 14.5f;
@@ -133,7 +133,7 @@ public class Max extends Player {
 
             put("CROUCH_LEFT", new Frame[] {// there is no row 4 fix this
                     new FrameBuilder(spriteSheet.getSprite(3, 0))
-                            .withScale(3)
+                            .withScale(3)// keep as 3 for now
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .withBounds(8, 12, 8, 6)
                             .build()
