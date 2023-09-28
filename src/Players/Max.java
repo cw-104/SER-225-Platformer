@@ -48,17 +48,17 @@ public class Max extends Player {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(8, 11, 8, 11)
                             .build()
             });
-
+/* 
             put("WALK_RIGHT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
-                            .withScale(3)
+                            .withScale(5)
                             .withBounds(8, 9, 8, 9)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
-                            .withScale(3)
+                            .withScale(5)
                             .withBounds(8, 9, 8, 9)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 3), 14)
@@ -70,7 +70,7 @@ public class Max extends Player {
                             .withBounds(8, 9, 8, 9)
                             .build()
             });
-
+/* 
             put("WALK_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                             .withScale(3)
@@ -179,7 +179,7 @@ public class Max extends Player {
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .withBounds(8, 9, 8, 9)
                             .build()
-            });
+            });*/
         }};
     }
 }
