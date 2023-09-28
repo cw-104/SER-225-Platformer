@@ -12,6 +12,7 @@ import Maps.TestMap;
 import Players.Cat;
 import Utils.Point;
 import Maps.TestEnvironment;
+import Players.Max;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen implements PlayerListener {
@@ -33,7 +34,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.map = new TestEnvironment();
 
         // setup player
-        this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.player.setMap(map);
         this.player.addListener(this);
         Point playerStartPosition = map.getPlayerStartPosition();

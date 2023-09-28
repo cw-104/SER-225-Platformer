@@ -10,6 +10,9 @@ import Level.*;
 import Tilesets.TestTileset;
 import Utils.Direction;
 import Enemies.DogEnemy;
+import Engine.ImageLoader;
+import EnhancedMapTiles.HorizontalMovingPlatform;
+import GameObject.Rectangle;
 
 public class TestEnvironment extends Map {
 
@@ -23,16 +26,15 @@ public class TestEnvironment extends Map {
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
-        // HorizontalMovingPlatform hmp = new HorizontalMovingPlatform(
-        // ImageLoader.load("GreenPlatform.png"),
-        // getMapTile(24, 6).getLocation(),
-        // getMapTile(27, 6).getLocation(),
-        // TileType.JUMP_THROUGH_PLATFORM,
-        // 3,
-        // new Rectangle(0, 6,16,4),
-        // Direction.RIGHT
-        // );
-        // enhancedMapTiles.add(hmp);
+        HorizontalMovingPlatform hmp = new HorizontalMovingPlatform(
+                ImageLoader.load("GreenPlatform.png"),
+                getMapTile(15, 7).getLocation(),
+                getMapTile(19, 7).getLocation(),
+                TileType.JUMP_THROUGH_PLATFORM,
+                3,
+                new Rectangle(0, 6, 16, 4),
+                Direction.RIGHT);
+        enhancedMapTiles.add(hmp);
 
         EndLevelBox endLevelBox = new EndLevelBox(getMapTile(65, 8).getLocation());
         enhancedMapTiles.add(endLevelBox);
