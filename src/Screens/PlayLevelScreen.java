@@ -37,13 +37,10 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         // define/setup map
         this.map = new TestEnvironment();
 
+        this.Coins = new Coin(1050, 200);
+        Coins.setBounds(new Rectangle(0, 0, 16, 16));
+        Coins.setMap(map);
 
-    
-        this.Coins = new Coin(250, 250);
-			Coins.setBounds(new Rectangle(1, 1, 16, 16));
-			Coins.setMap(map);
-
-            
         // setup player
         this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
         this.player.setMap(map);
@@ -96,8 +93,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                 map.draw(graphicsHandler);
                 player.draw(graphicsHandler);
                 if (Coins.isCollected() == false) {
-					Coins.draw(graphicsHandler);
-				}
+                    Coins.draw(graphicsHandler);
+                }
                 break;
             case LEVEL_COMPLETED:
                 levelClearedScreen.draw(graphicsHandler);

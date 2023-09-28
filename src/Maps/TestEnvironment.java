@@ -36,7 +36,7 @@ public class TestEnvironment extends Map {
                 Direction.RIGHT);
         enhancedMapTiles.add(hmp);
 
-        EndLevelBox endLevelBox = new EndLevelBox(getMapTile(65, 8).getLocation());
+        EndLevelBox endLevelBox = new EndLevelBox(getMapTile(85, 8).getLocation());
         enhancedMapTiles.add(endLevelBox);
 
         return enhancedMapTiles;
@@ -48,6 +48,9 @@ public class TestEnvironment extends Map {
 
         DogEnemy DogEnemy = new DogEnemy(getMapTile(60, 10).getLocation().subtractY(25), Direction.LEFT);
         enemies.add(DogEnemy);
+
+        DogEnemy DogEnemy2 = new DogEnemy(getMapTile(70, 10).getLocation().subtractY(25), Direction.LEFT);
+        enemies.add(DogEnemy2);
 
         /*
          * DinosaurEnemy dinosaurEnemy = new DinosaurEnemy(getMapTile(19,
