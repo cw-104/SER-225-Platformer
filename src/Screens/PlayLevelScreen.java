@@ -32,7 +32,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.map = new TestMap();
 
         // setup player
-        this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+       // this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+         this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); //this is to implement max into the game
         this.player.setMap(map);
         this.player.addListener(this);
         Point playerStartPosition = map.getPlayerStartPosition();

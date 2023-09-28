@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class Max extends Player {
 
     public Max(float x, float y) {
-        super(new SpriteSheet(ImageLoader.load("Max(basic).png"), 32, 32), x, y, "STAND_RIGHT");
+        super(new SpriteSheet(ImageLoader.load("Max4.png"), 50, 50), x, y, "STAND_RIGHT");
         gravity = .5f;
         terminalVelocityY = 6f;
         jumpHeight = 14.5f;
