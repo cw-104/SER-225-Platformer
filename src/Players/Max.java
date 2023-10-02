@@ -8,7 +8,6 @@ import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.Player;
-<<<<<<< HEAD
 
 import java.util.HashMap;
 
@@ -17,7 +16,7 @@ import java.util.HashMap;
 public class Max extends Player {
 
     public Max(float x, float y) {
-        super(new SpriteSheet(ImageLoader.load("Max4.png"), 50, 50), x, y, "STAND_RIGHT");
+        super(new SpriteSheet(ImageLoader.load("Max8.png"), 50, 50), x, y, "STAND_RIGHT");
         gravity = .5f;
         terminalVelocityY = 6f;
         jumpHeight = 14.5f;

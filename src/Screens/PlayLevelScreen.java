@@ -13,10 +13,6 @@ import Maps.TestEnvironment;
 import Maps.TestMap;
 import Players.Cat;
 import Utils.Point;
-<<<<<<< HEAD
-=======
-import Maps.TestEnvironment;
->>>>>>> 1f367e22a070d91aa22881346359767ecf091236
 import Players.Max;
 
 // This class is for when the platformer game is actually being played
@@ -45,12 +41,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         Coins.setMap(map);
 
         // setup player
-<<<<<<< HEAD
        // this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
          this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); //this is to implement max into the game
-=======
-        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
->>>>>>> 1f367e22a070d91aa22881346359767ecf091236
         this.player.setMap(map);
         this.player.addListener(this);
         Point playerStartPosition = map.getPlayerStartPosition();

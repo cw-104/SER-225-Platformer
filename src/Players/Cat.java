@@ -174,7 +174,6 @@ public class Cat extends Player {
                                                                 .build()
                                 });
 
-<<<<<<< HEAD
             put("SWIM_STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(6, 0))
                             .withScale(3)
@@ -185,16 +184,3 @@ public class Cat extends Player {
         }};
     }
 }
-=======
-                                put("SWIM_STAND_LEFT", new Frame[] {
-                                                new FrameBuilder(spriteSheet.getSprite(6, 0))
-                                                                .withScale(3)
-                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                                                .withBounds(8, 9, 8, 9)
-                                                                .build()
-                                });
-                        }
-                };
-        }
-}
->>>>>>> 1f367e22a070d91aa22881346359767ecf091236
