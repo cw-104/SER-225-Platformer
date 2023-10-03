@@ -48,8 +48,8 @@ public abstract class Player extends GameObject {
     // flags
     protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
         protected boolean isAttacking = false;// when max is NOT attacking
-            protected boolean hasBat = false;// used to determine if max has the bat
-            
+            protected boolean hasBat = false;// used to determine if max has the bat     //BESA
+
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
         facingDirection = Direction.RIGHT;
