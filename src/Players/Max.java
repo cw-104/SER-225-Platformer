@@ -54,11 +54,11 @@ public class Max extends Player {
 
             put("WALK_RIGHT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
-                            .withScale(5)
+                            .withScale(3)
                             .withBounds(8, 9, 8, 9)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
-                            .withScale(5)
+                            .withScale(3)
                             .withBounds(8, 9, 8, 9)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 3), 14)
@@ -180,6 +180,21 @@ public class Max extends Player {
                             .withBounds(8, 9, 8, 9)
                             .build()
             });
+
+
+                        put("SWING_KEY", new Frame[] {// testing for batt attacking 
+                                new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
+                                        .withScale(3)
+                                        .build(),
+                                new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
+                                        .withScale(3)
+                                        .build(),
+                                new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
+                                        .withScale(3)
+                                        .build()
+                        });
+
+
         }};
     }
 }
