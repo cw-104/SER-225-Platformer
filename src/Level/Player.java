@@ -56,7 +56,7 @@ public abstract class Player extends GameObject {
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
         playerState = PlayerState.STANDING;
-        playerState=PlayerState.ATTACKING; /// trying to add attack     //BESA
+       // playerState=PlayerState.ATTACKING; /// trying to add attack     //BESA
         previousPlayerState = playerState;
         levelState = LevelState.RUNNING;
     }
@@ -127,7 +127,7 @@ public abstract class Player extends GameObject {
                 case ATTACKING: //when max is attacking  //BESA
                 playerAttacking();
                 break;
-                
+              /* **/ 
         }
     }
 
@@ -150,9 +150,10 @@ public abstract class Player extends GameObject {
         }
         //BESA
         //trying to add attacking
-        else if(Keyboard.isKeyDown(ATTACK_KEY)){
+        else if(Keyboard.isKeyDown(ATTACK_KEY)&& !keyLocker.isKeyLocked(ATTACK_KEY)){
              keyLocker.lockKey(ATTACK_KEY);
             playerState = PlayerState.ATTACKING;
+            isAttacking = true; // for when max is attacking
 
         }
     }
@@ -254,7 +255,22 @@ public abstract class Player extends GameObject {
                                                             //BESA
                                                             //This is for attacking
                                     protected void playerAttacking() {
-                                        
+                                        currentAnimationName = (facingDirection == Direction.RIGHT) ? "ATTACK_RIGHT" : "ATTACK_LEFT";
+
+
+                                        // Check if the attack animation has reached its last frame
+                                                        if (currentFrameIndex == getCurrentAnimation().length - 1) {
+                                                            // The attack animation has finished; return to the previous state
+                                                            playerState = previousPlayerState;
+                                                            isAttacking = false;
+                                                        } else {
+                                                            // Handle any logic related to attacking here, e.g., damaging enemies
+                                                            // Check for collisions with enemies and apply damage as needed
+                                                            // ...
+
+                                                            // Ensure the attack animation continues to update
+                                                            super.update();
+                                                        }
                                     }
 
 
