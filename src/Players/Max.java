@@ -182,15 +182,36 @@ public class Max extends Player {
             });
 
 
-                        put("SWING_KEY", new Frame[] {// testing for batt attacking 
+                        put("ATTACK_LEFT", new Frame[] {// testing for batt attacking 
                                 new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
                                         .withScale(3)
+                                        .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                         .build(),
                                 new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
                                         .withScale(3)
+                                        .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                         .build(),
                                 new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
                                         .withScale(3)
+                                        .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                        .build()
+                        });
+
+
+
+
+                        put("ATTACK_RIGHT", new Frame[] {// testing for batt attacking 
+                                new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
+                                        .withScale(3)
+                                       // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                        .build(),
+                                new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
+                                        .withScale(3)
+                                      //  .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                        .build(),
+                                new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
+                                        .withScale(3)
+                                      //  .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                         .build()
                         });
 
