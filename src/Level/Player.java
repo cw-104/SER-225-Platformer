@@ -43,7 +43,7 @@ public abstract class Player extends GameObject {
     protected Key MOVE_LEFT_KEY = Key.A;
     protected Key MOVE_RIGHT_KEY = Key.D;
     protected Key CROUCH_KEY = Key.S;
-    protected Key SWING_KEY = Key.K;// testing button for swing annimation
+    protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
     protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
@@ -56,7 +56,7 @@ public abstract class Player extends GameObject {
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
         playerState = PlayerState.STANDING;
-        //playerState=PlayerState.ATTACKING; /// trying to add attack     //BESA
+        playerState=PlayerState.ATTACKING; /// trying to add attack     //BESA
         previousPlayerState = playerState;
         levelState = LevelState.RUNNING;
     }
@@ -147,6 +147,13 @@ public abstract class Player extends GameObject {
         // if crouch key is pressed, player enters CROUCHING state
         else if (Keyboard.isKeyDown(CROUCH_KEY)) {
             playerState = PlayerState.CROUCHING;
+        }
+        //BESA
+        //trying to add attacking
+        else if(Keyboard.isKeyDown(ATTACK_KEY)){
+             keyLocker.lockKey(ATTACK_KEY);
+            playerState = PlayerState.ATTACKING;
+
         }
     }
 
