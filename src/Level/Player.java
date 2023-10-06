@@ -4,6 +4,7 @@ import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import GameObject.GameObject;
+import GameObject.IntersectableRectangle;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
 import Utils.AirGroundState;
@@ -67,6 +68,7 @@ public abstract class Player extends GameObject {
     private List<Enemy> activeEnemies = new ArrayList<>();
     private List<MapEntity> listOfMapEntities = new ArrayList<>(); /// map entities list
     private int attackDamage = 10; // Initialize with the appropriate damage value  //BESA
+    private IntersectableRectangle attackHitbox;
 
     public void update() {
         moveAmountX = 0;
@@ -274,6 +276,8 @@ public abstract class Player extends GameObject {
                                                             // Handle any logic related to attacking here, e.g., damaging enemies
                                                             // Check for collisions with enemies and apply damage as needed
                                                             // ... besa
+                                                            attackHitbox = currentFrame.getBounds();
+                                                                    /* 
                                                             for (Iterator<MapEntity> iterator = listOfMapEntities.iterator(); iterator.hasNext();) {
                                                                 MapEntity entity = iterator.next();
                                                                 if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
@@ -289,7 +293,14 @@ public abstract class Player extends GameObject {
                                                                     }
                                                                 }
                                                             }
-                                                            
+                                                            */
+                                                            for (MapEntity entity : listOfMapEntities) {
+                                                                if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
+                                                                    entity.getBounds().intersects(attackHitbox)) {
+                                                                    // Handle damaging the enemy
+                                                                    damageEnemy(entity);
+                                                                }
+                                                            }
 
 
 

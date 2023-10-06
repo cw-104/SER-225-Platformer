@@ -15,6 +15,19 @@ import Utils.Point;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+        //import Level.AttackEntity;
+import java.util.List;
+import java.util.ArrayList;
+//added and may need to take out //besa
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+//import Level.AttackEntity; // Add this import
+
+
+//// may need to tke out the impirts above this comment
 
 // This class is for the Dog enemy
 // enemy behaves like a Mario goomba -- walks forward until it h ll down until it hits the ground again, and then will continue walking
@@ -26,7 +39,10 @@ public class DogEnemy extends Enemy {
     private Direction facingDirection;
     private AirGroundState airGroundState;
     private int health = 1; // Set an initial health value      //besa
+//may need to take out 
+private Timer removalTimer;
 
+/// may need to take out //besa
 
     public DogEnemy(Point location, Direction facingDirection) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("GuardDog2.png"), 24, 15
@@ -69,6 +85,7 @@ public class DogEnemy extends Enemy {
         moveXHandleCollision(moveAmountX);
 
         super.update(player);
+                                    MapEntity[] listOfMapEntities;
                                     //besa
                                     // Check for collisions with attacking entities (e.g., player's attack)
                                     for (MapEntity entity : listOfMapEntities) {
@@ -124,6 +141,22 @@ private void defeat() {
         private void remove() {
         }
     }, 1.0f); // Adjust the delay as needed
+
+    removalTimer = new Timer();
+    removalTimer.schedule(new TimerTask() {
+        @Override
+        public void run() {
+            // Remove the enemy from the level or perform any other cleanup
+            remove();
+        }
+
+        private void remove() {
+            if (removalTimer != null) {
+                removalTimer.cancel();
+            }
+            
+        }
+    }, 1000); // Adjust the delay as needed (1000 milliseconds = 1 second)
 
 
 
