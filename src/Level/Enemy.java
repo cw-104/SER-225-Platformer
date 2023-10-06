@@ -11,6 +11,7 @@ public class Enemy extends MapEntity {
 
     public Enemy(float x, float y, SpriteSheet spriteSheet, String startingAnimation) {
         super(x, y, spriteSheet, startingAnimation);
+        this.health = health;
     }
 
     public Enemy(float x, float y, HashMap<String, Frame[]> animations, String startingAnimation) {
@@ -47,6 +48,16 @@ public class Enemy extends MapEntity {
     }
 
     public void takeDamage(Object attackDamage) {
+    health -= 12;
+    if (health <= 0) {
+        // Enemy is defeated, perform defeat logic (e.g., play defeat animation, remove from the level)
+        defeat();
+    }
+    }
+
+    private void defeat() {
+        // Implement logic for when the enemy is defeated (e.g., play defeat animation, remove from the level)
+        setMapEntityStatus(MapEntityStatus.INACTIVE);
     }
 
     public boolean isDefeated() {

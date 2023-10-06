@@ -86,12 +86,13 @@ private Timer removalTimer;
 
         super.update(player);
                                     MapEntity[] listOfMapEntities;
+                                    MapEntity [] listofMapEntity = [DogEnemy]; // tired and this may be wrong. get sleep 
                                     //besa
                                     // Check for collisions with attacking entities (e.g., player's attack)
                                     for (MapEntity entity : listOfMapEntities) {
-                                        if (entity instanceof AttackEntity && entity.getBounds().intersects(getBounds())) {
+                                        if (entity instanceof MapEntity && entity.getBounds().intersects(getBounds())) {
                                             // Handle damage to the enemy
-                                            takeDamage(((AttackEntity) entity).getDamage()); // Adjust the method call based on your implementation
+                                            takeDamage(((MapEntity) entity).getDamage()); // Adjust the method call based on your implementation
                                         }
                                     }
 
@@ -161,9 +162,6 @@ private void defeat() {
 
 
 }
-
-
-
 
 
 

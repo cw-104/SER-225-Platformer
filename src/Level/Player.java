@@ -387,7 +387,12 @@ public abstract class Player extends GameObject {
             }
         }
     }
-     
+/* 
+    Enemy enemy = new Enemy(spriteSheet, x, y, startingAnimationName, enemyHealth);
+player.addActiveEnemy(enemy);
+*/
+
+     /* 
 // Sample method to handle damaging an enemy
 private void damageEnemy(MapEntity enemy) {  /// LOOOK AT ME!!!!  //BESA
     // Check if the enemy is an instance of an enemy class you have defined
@@ -399,7 +404,7 @@ private void damageEnemy(MapEntity enemy) {  /// LOOOK AT ME!!!!  //BESA
         enemyInstance.takeDamage(attackDamage);
     }
 }
-
+*/
 
 
 
@@ -417,6 +422,11 @@ private void damageEnemy(MapEntity enemy) {
         // Apply damage to the enemy (you may have a health system for enemies)
         enemyInstance.takeDamage(attackDamage); /// LOOK AT MEEEE! //besa
     }
+}
+
+ // Method to add an active enemy to the list
+ public void addActiveEnemy(Enemy enemy) {
+    activeEnemies.add(enemy);
 }
 
     @Override
@@ -513,6 +523,8 @@ private void damageEnemy(MapEntity enemy) {
             }
         }
     }
+
+    
 
     public PlayerState getPlayerState() {
         return playerState;
