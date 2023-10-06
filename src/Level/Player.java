@@ -11,7 +11,7 @@ import Utils.AirGroundState;
 import Utils.Direction;
 
 import java.util.ArrayList;
-//import java.util.Iterator; //currently un-used
+
 import java.util.List;
 
 import Enemies.DogEnemy;
@@ -279,23 +279,7 @@ public abstract class Player extends GameObject {
                                                             // Check for collisions with enemies and apply damage as needed
                                                             // ... besa
                                                             attackHitbox = currentFrame.getBounds();
-                                                                    /* 
-                                                            for (Iterator<MapEntity> iterator = listOfMapEntities.iterator(); iterator.hasNext();) {
-                                                                MapEntity entity = iterator.next();
-                                                                if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
-                                                                    entity.getBounds().intersects(attackHitbox)) {
-                                                                    // Handle damaging the enemy
-                                                                    if (entity instanceof Enemy) {
-                                                                        Enemy enemy = (Enemy) entity;
-                                                                        enemy.takeDamage(attackDamage);
-                                                                        if (enemy.isDefeated()) {
-                                                                            // Remove the defeated enemy from the list of active entities
-                                                                            iterator.remove();
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                            */
+                                                              
                                                             for (MapEntity entity : listOfMapEntities) {
                                                                 if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
                                                                     entity.getBounds().intersects(attackHitbox)) {
