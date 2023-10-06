@@ -48,4 +48,8 @@ public class Enemy extends MapEntity {
 
     public void takeDamage(Object attackDamage) {
     }
+
+    public boolean isDefeated() {
+        return false;
+    }
 }
