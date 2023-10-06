@@ -21,7 +21,7 @@ public class Max extends Player {
                 terminalVelocityY = 6f;
                 jumpHeight = 14.5f;
                 jumpDegrade = .5f;
-                walkSpeed = 4.5f;
+                walkSpeed = 7.5f;
                 momentumYIncrease = .5f;
         }
 
