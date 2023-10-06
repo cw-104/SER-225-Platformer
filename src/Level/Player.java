@@ -14,6 +14,8 @@ import java.util.ArrayList;
 //import java.util.Iterator; //currently un-used
 import java.util.List;
 
+import Enemies.DogEnemy;
+
 public abstract class Player extends GameObject {
     // values that affect player movement
     // these should be set in a subclass
@@ -388,7 +390,7 @@ public abstract class Player extends GameObject {
         }
     }
  
-    Enemy dogEnemy = new Enemy("GuardDog2.png", 24, 15, startingAnimationName, 10);
+    DogEnemy dogEnemy = new DogEnemy("GuardDog2.png", 24, 15, startingAnimationName, 10);
 player.addActiveEnemy(dogEnemy);
 
 
@@ -416,7 +418,7 @@ private void damageEnemy(MapEntity enemy) {
     // Check if the enemy is an instance of an enemy class you have defined
     if (enemy instanceof Enemy) {
         // Cast the enemy to its specific type
-        Enemy enemyInstance = (Enemy) enemy;
+        DogEnemy enemyInstance = (DogEnemy) enemy;//changed to speciffic enemy
 
        // Object attackDamage;// may take out //Besa
         // Apply damage to the enemy (you may have a health system for enemies)
