@@ -11,7 +11,7 @@ public class Enemy extends MapEntity {
 
     public Enemy(float x, float y, SpriteSheet spriteSheet, String startingAnimation) {
         super(x, y, spriteSheet, startingAnimation);
-        this.health = health;
+        this.health = 15;
     }
 
     public Enemy(float x, float y, HashMap<String, Frame[]> animations, String startingAnimation) {
