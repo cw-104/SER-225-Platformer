@@ -67,7 +67,7 @@ public abstract class Player extends GameObject {
 //// Add this attribute to your Player class to keep track of active enemies //
     private List<Enemy> activeEnemies = new ArrayList<>();
     private List<MapEntity> listOfMapEntities = new ArrayList<>(); /// map entities list
-    private int attackDamage = 10; // Initialize with the appropriate damage value  //BESA
+    //private int attackDamage = 10; // Initialize with the appropriate damage value  //BESA
     private IntersectableRectangle attackHitbox;
 
     public void update() {
@@ -381,16 +381,16 @@ public abstract class Player extends GameObject {
                     entity.getBounds().intersects(attackHitbox)) {
                     // Handle damaging the enemy
                     MapEntity DogEnemy;
-                    listOfMapEntities.add(DogEnemy);
+                   listOfMapEntities.add(DogEnemy);
                     damageEnemy(entity);
                 }
             }
         }
     }
-/* 
-    Enemy enemy = new Enemy(spriteSheet, x, y, startingAnimationName, enemyHealth);
-player.addActiveEnemy(enemy);
-*/
+ 
+    Enemy dogEnemy = new Enemy("GuardDog2.png", 24, 15, startingAnimationName, 10);
+player.addActiveEnemy(dogEnemy);
+
 
      /* 
 // Sample method to handle damaging an enemy
@@ -418,9 +418,9 @@ private void damageEnemy(MapEntity enemy) {
         // Cast the enemy to its specific type
         Enemy enemyInstance = (Enemy) enemy;
 
-        Object attackDamage;// may take out //Besa
+       // Object attackDamage;// may take out //Besa
         // Apply damage to the enemy (you may have a health system for enemies)
-        enemyInstance.takeDamage(attackDamage); /// LOOK AT MEEEE! //besa
+        enemyInstance.takeDamage(10); /// LOOK AT MEEEE! //besa
     }
 }
 
