@@ -4,11 +4,14 @@ import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import GameObject.GameObject;
+import GameObject.Rectangle;
 import GameObject.SpriteSheet;
 import Utils.AirGroundState;
 import Utils.Direction;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public abstract class Player extends GameObject {
     // values that affect player movement
@@ -48,7 +51,7 @@ public abstract class Player extends GameObject {
     // flags
     protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
         protected boolean isAttacking = false;// when max is NOT attacking
-            protected boolean hasBat = false;// used to determine if max has the bat     //BESA
+            protected boolean hasBat = false;// used to determine if max has the bat     //WORKING
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -56,10 +59,14 @@ public abstract class Player extends GameObject {
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
         playerState = PlayerState.STANDING;
-       // playerState=PlayerState.ATTACKING; /// trying to add attack     //BESA
+        playerState=PlayerState.ATTACKING; /// trying to add attack     //
         previousPlayerState = playerState;
         levelState = LevelState.RUNNING;
     }
+//// Add this attribute to your Player class to keep track of active enemies //
+    private List<Enemy> activeEnemies = new ArrayList<>();
+    private List<MapEntity> listOfMapEntities = new ArrayList<>(); /// map entities list
+    private int attackDamage = 10; // Initialize with the appropriate damage value  //BESA
 
     public void update() {
         moveAmountX = 0;
@@ -124,7 +131,7 @@ public abstract class Player extends GameObject {
                 playerJumping();
                 break;
                
-                case ATTACKING: //when max is attacking  //BESA
+                case ATTACKING: //when max is attacking  //WORKING NOW
                 playerAttacking();
                 break;
               /* **/ 
@@ -148,7 +155,7 @@ public abstract class Player extends GameObject {
         else if (Keyboard.isKeyDown(CROUCH_KEY)) {
             playerState = PlayerState.CROUCHING;
         }
-        //BESA
+        
         //trying to add attacking
         else if(Keyboard.isKeyDown(ATTACK_KEY)&& !keyLocker.isKeyLocked(ATTACK_KEY)){
              keyLocker.lockKey(ATTACK_KEY);
@@ -252,7 +259,7 @@ public abstract class Player extends GameObject {
             playerState = PlayerState.STANDING;
         }
     }
-                                                            //BESA
+                                                            //working now
                                                             //This is for attacking
                                     protected void playerAttacking() {
                                         currentAnimationName = (facingDirection == Direction.RIGHT) ? "ATTACK_RIGHT" : "ATTACK_LEFT";
@@ -266,7 +273,25 @@ public abstract class Player extends GameObject {
                                                         } else {
                                                             // Handle any logic related to attacking here, e.g., damaging enemies
                                                             // Check for collisions with enemies and apply damage as needed
-                                                            // ...
+                                                            // ... besa
+                                                            for (Iterator<MapEntity> iterator = listOfMapEntities.iterator(); iterator.hasNext();) {
+                                                                MapEntity entity = iterator.next();
+                                                                if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
+                                                                    entity.getBounds().intersects(attackHitbox)) {
+                                                                    // Handle damaging the enemy
+                                                                    if (entity instanceof Enemy) {
+                                                                        Enemy enemy = (Enemy) entity;
+                                                                        enemy.takeDamage(attackDamage);
+                                                                        if (enemy.isDefeated()) {
+                                                                            // Remove the defeated enemy from the list of active entities
+                                                                            iterator.remove();
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                            
+
+
 
                                                             // Ensure the attack animation continues to update
                                                             super.update();
@@ -319,8 +344,69 @@ public abstract class Player extends GameObject {
             } else {
                 this.currentAnimationName = facingDirection == Direction.RIGHT ? "FALL_RIGHT" : "FALL_LEFT";
             }
+            
+        }
+        else if (playerState == PlayerState.ATTACKING) {
+        // Set the animation to the attack animation based on the facing direction
+        this.currentAnimationName = (facingDirection == Direction.RIGHT) ? "ATTACK_RIGHT" : "ATTACK_LEFT";
+
+        // Check if the attack animation has reached its last frame
+        if (currentFrameIndex == getCurrentAnimation().length - 1) {
+            // The attack animation has finished; return to the previous state
+            playerState = previousPlayerState;
+            isAttacking = false;
+        } else {
+            // Continue updating the attack animation
+            super.update();
+
+            // Handle attacking logic here, e.g., check for collisions with enemies
+            // For simplicity, we'll assume enemies are GameObjects with hitboxes
+
+            // Get the current frame's hitbox
+            Rectangle attackHitbox = currentFrame.getBounds();
+
+            for (MapEntity entity : listOfMapEntities) {
+                if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
+                    entity.getBounds().intersects(attackHitbox)) {
+                    // Handle damaging the enemy
+                    MapEntity DogEnemy;
+                    listOfMapEntities.add(DogEnemy);
+                    damageEnemy(entity);
+                }
+            }
         }
     }
+     
+// Sample method to handle damaging an enemy
+private void damageEnemy(MapEntity enemy) {  /// LOOOK AT ME!!!!  //BESA
+    // Check if the enemy is an instance of an enemy class you have defined
+    if (enemy instanceof Enemy) {
+        // Cast the enemy to its specific type
+        Enemy enemyInstance = (Enemy) enemy;
+
+        // Apply damage to the enemy
+        enemyInstance.takeDamage(attackDamage);
+    }
+}
+
+
+
+
+    }
+
+
+                                    // Sample method to handle damaging an enemy
+private void damageEnemy(MapEntity enemy) {
+    // Check if the enemy is an instance of an enemy class you have defined
+    if (enemy instanceof Enemy) {
+        // Cast the enemy to its specific type
+        Enemy enemyInstance = (Enemy) enemy;
+
+        Object attackDamage;// may take out //Besa
+        // Apply damage to the enemy (you may have a health system for enemies)
+        enemyInstance.takeDamage(attackDamage); /// LOOK AT MEEEE! //besa
+    }
+}
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction, MapEntity entityCollidedWith) {
