@@ -404,11 +404,14 @@ private void damageEnemy(MapEntity enemy) {
     // Check if the enemy is an instance of an enemy class you have defined
     if (enemy instanceof Enemy) {
         // Cast the enemy to its specific type
-        DogEnemy enemyInstance = (DogEnemy) enemy;//changed to speciffic enemy
+       // DogEnemy enemyInstance = (DogEnemy) enemy;//changed to speciffic enemy
 
+        
+        /* 
        // Object attackDamage;// may take out //Besa
         // Apply damage to the enemy (you may have a health system for enemies)
         enemyInstance.takeDamage(10); /// LOOK AT MEEEE! //besa
+        */
     }
 }
 
