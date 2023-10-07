@@ -2,12 +2,15 @@ package Level;
 
 import GameObject.Frame;
 import GameObject.SpriteSheet;
+import Utils.Direction;
 
 import java.util.HashMap;
 
 // This class is a base class for all enemies in the game -- all enemies should extend from it
 public class Enemy extends MapEntity {
         private int health; // Besa adding enemy health
+
+    private Direction facingDirection;
 
     public Enemy(float x, float y, SpriteSheet spriteSheet, String startingAnimation) {
         super(x, y, spriteSheet, startingAnimation);
@@ -35,6 +38,26 @@ public class Enemy extends MapEntity {
         super.initialize();
     }
 
+    public void updateEnemyDead() {
+        // change enemy animation to DEATH
+        if (!currentAnimationName.startsWith("DEATH")) {
+            if (facingDirection == Direction.RIGHT) {
+                currentAnimationName = "DEATH_RIGHT";
+            } else {
+                currentAnimationName = "DEATH_LEFT";
+            }
+            super.update();
+        }
+        // if death animation not on last frame yet, continue to play out death
+        // animation
+        else if (currentFrameIndex != getCurrentAnimation().length - 1) {
+            super.update();
+        }
+        
+        }
+
+
+
     public void update(Player player) {
         super.update();
         if (intersects(player)) {
@@ -46,6 +69,7 @@ public class Enemy extends MapEntity {
     public void touchedPlayer(Player player) {
         player.hurtPlayer(this);
     }
+<<<<<<< HEAD
 // comment it out// come back later
 /* 
     public void takeDamage(Object attackDamage) {
@@ -63,5 +87,14 @@ public class Enemy extends MapEntity {
 
     public boolean isDefeated() {
         return false;
+=======
+
+    public Direction getFacingDirection() {
+        return facingDirection;
+    }
+
+    public void setFacingDirection(Direction facingDirection) {
+        this.facingDirection = facingDirection;
+>>>>>>> f201bdcb7bf1b8df80759926970aec4e234a04ab
     }
 }
