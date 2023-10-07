@@ -16,7 +16,7 @@ import java.awt.Color;
 import java.util.HashMap;
 
 public class Bullet extends Enemy {
-    // This class is for the fireball enemy that the DinosaurEnemy class shoots out
+    // This class is for the bullet enemy that the PrisonGuardEnemy class shoots out
     // it will travel in a straight line (x axis) for a set time before disappearing
     // it will disappear early if it collides with a solid map tile
 
@@ -36,7 +36,7 @@ public class Bullet extends Enemy {
 
     public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
-        drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+       // drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Bullet extends Enemy {
 
     @Override
     public void touchedPlayer(Player player) {
-        // if fireball touches player, it disappears
+        // if bullet touches player, it disappears
         super.touchedPlayer(player);
         this.mapEntityStatus = MapEntityStatus.REMOVED;
     }

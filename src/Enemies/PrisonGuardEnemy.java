@@ -56,7 +56,7 @@ public class PrisonGuardEnemy extends Enemy {
         }
         airGroundState = AirGroundState.GROUND;
 
-        // every certain number of frames, the fireball will be shot out
+        // every certain number of frames, the bullet will be shot out
         shootWaitTimer = 50;
     }
 
@@ -65,7 +65,7 @@ public class PrisonGuardEnemy extends Enemy {
         float startBound = startLocation.x;
         float endBound = endLocation.x;
 
-        // if shoot timer is up and dinosaur is not currently shooting, set its state to
+        // if shoot timer is up and prison guard is not currently shooting, set its state to
         // SHOOT
         if (shootWaitTimer == 0 && prisonGuardState != PrisonGuardState.SHOOT_WAIT) {
             prisonGuardState = PrisonGuardState.SHOOT_WAIT;
@@ -109,21 +109,21 @@ public class PrisonGuardEnemy extends Enemy {
             float movementSpeed;
             if (facingDirection == Direction.RIGHT) {
                 bulletX = Math.round(getX()) + getWidth();
-                movementSpeed = 1.5f;
+                movementSpeed = 2.5f;
             } else {
                 bulletX = Math.round(getX() - 21);
-                movementSpeed = -1.5f;
+                movementSpeed = -2.5f;
             }
 
-            int bulletY = Math.round(getY()) + 4;
+            int bulletY = Math.round(getY()+50) ;
 
-            // create Fireball enemy
+            // create bullet enemy
             Bullet bullet = new Bullet(new Point(bulletX, bulletY), movementSpeed, 60);
 
-            // add fireball enemy to the map for it to spawn in the level
+            // add bullet enemy to the map for it to spawn in the level
             map.addEnemy(bullet);
 
-            // change dinosaur back to its WALK state after shooting, reset shootTimer to
+            // change prison guard back to its WALK state after shooting, reset shootTimer to
             // wait a certain number of frames before shooting again
             prisonGuardState = PrisonGuardState.WALK;
 
@@ -137,14 +137,14 @@ public class PrisonGuardEnemy extends Enemy {
         previousPrisonGuardState = prisonGuardState;
     }
 
-    public void draw(GraphicsHandler graphicsHandler) {
+    /*public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
         drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
-    }
+    }*/
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction, MapEntity entityCollidedWith) {
-        // if dinosaur enemy collides with something on the x axis, it turns around and
+        // if prison guard enemy collides with something on the x axis, it turns around and
         // walks the other way
         if (hasCollided) {
             if (direction == Direction.RIGHT) {
@@ -164,39 +164,42 @@ public class PrisonGuardEnemy extends Enemy {
                 put("WALK_LEFT", new Frame[] {
                         new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                                 .withScale(3)
-                                .withBounds(4, 2, 5, 13)
+                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                .withBounds(22,16,12,25)
                                 .build(),
                         new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
                                 .withScale(3)
-                                .withBounds(4, 2, 5, 13)
+                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                .withBounds(22, 16, 12, 25)
                                 .build()
                 });
 
                 put("WALK_RIGHT", new Frame[] {
                         new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                                 .withScale(3)
-                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .withBounds(4, 2, 5, 13)
+                              // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                              .withBounds(12, 16, 12, 25)
                                 .build(),
                         new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
                                 .withScale(3)
-                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .withBounds(4, 2, 5, 13)
+                               // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                              .withBounds(12, 16, 12,25 )
                                 .build()
                 });
 
                 put("SHOOT_LEFT", new Frame[] {
                         new FrameBuilder(spriteSheet.getSprite(1, 0))
                                 .withScale(3)
-                                .withBounds(4, 2, 5, 13)
+                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                .withBounds(22, 16, 12, 25)
                                 .build(),
                 });
 
                 put("SHOOT_RIGHT", new Frame[] {
                         new FrameBuilder(spriteSheet.getSprite(1, 0))
                                 .withScale(3)
-                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .withBounds(4, 2, 5, 13)
+                               // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                .withBounds(12, 16, 12, 25)
                                 .build(),
                 });
             }

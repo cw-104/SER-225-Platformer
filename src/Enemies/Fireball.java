@@ -29,7 +29,7 @@ public class Fireball extends Enemy {
 
         initialize();
 
-        ////jytfyfyfifty
+      
     }
 
     @Override
