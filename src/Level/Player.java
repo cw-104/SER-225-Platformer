@@ -366,17 +366,17 @@ public abstract class Player extends GameObject {
                 if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
                     entity.getBounds().intersects(attackHitbox)) {
                     // Handle damaging the enemy
-                    MapEntity DogEnemy;
-                   listOfMapEntities.add(DogEnemy);
+                   // MapEntity DogEnemy; //COME BACK TO ME LATER  // FINISH THE HEALTH
+                  // listOfMapEntities.add(DogEnemy);//COME BACK TO THIS!!!!!!!!!!!!
                     damageEnemy(entity);
                 }
             }
         }
     }
- 
+ /* //come back to thisq!!!!!!!!
     DogEnemy dogEnemy = new DogEnemy("GuardDog2.png", 24, 15, startingAnimationName, 10);
 player.addActiveEnemy(dogEnemy);
-
+*/
 
      /* 
 // Sample method to handle damaging an enemy
