@@ -46,7 +46,8 @@ public class Enemy extends MapEntity {
     public void touchedPlayer(Player player) {
         player.hurtPlayer(this);
     }
-// comment it out
+// comment it out// come back later
+/* 
     public void takeDamage(Object attackDamage) {
     health -= 12;// can change 
     if (health <= 0) {
@@ -54,7 +55,7 @@ public class Enemy extends MapEntity {
         defeat();
     }
     }
-
+*/
     private void defeat() {
         // Implement logic for when the enemy is defeated (e.g., play defeat animation, remove from the level)
         setMapEntityStatus(MapEntityStatus.INACTIVE);

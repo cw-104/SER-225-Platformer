@@ -84,9 +84,11 @@ private Timer removalTimer;
         moveYHandleCollision(moveAmountY);
         moveXHandleCollision(moveAmountX);
 
-        super.update(player);
+        super.update(player); 
+        /* 
                                     MapEntity[] listOfMapEntities;
                                     MapEntity [] listofMapEntity = [DogEnemy]; // tired and this may be wrong. get sleep 
+                                   
                                     //besa
                                     // Check for collisions with attacking entities (e.g., player's attack)
                                     for (MapEntity entity : listOfMapEntities) {
@@ -95,7 +97,7 @@ private Timer removalTimer;
                                             takeDamage(((MapEntity) entity).getDamage()); // Adjust the method call based on your implementation
                                         }
                                     }
-
+*/
 
     }
 
@@ -121,17 +123,18 @@ private void defeat() {
     // Disable any further updates or collisions for the defeated enemy
     setEnabled(false);
     setCollidable(false);
-
+/*              // come back to this later
     HashMap<String, Frame[]> activeEnemies;
     // Remove the enemy from the list of active enemies
     if (activeEnemies.containsKey(this)) {
         activeEnemies.remove(this);
     }
-
+*/
     // You can also award points, update the player's score, or trigger other game events here
     // Example: player.incrementScore(100);
 /* */
     // If you want the enemy to disappear after a certain amount of time, you can set a timer
+/* 
     Timer.schedule(new TimerTask() {
         @Override
         public void run() {
@@ -142,7 +145,7 @@ private void defeat() {
         private void remove() {
         }
     }, 1.0f); // Adjust the delay as needed
-
+*/
     removalTimer = new Timer();
     removalTimer.schedule(new TimerTask() {
         @Override

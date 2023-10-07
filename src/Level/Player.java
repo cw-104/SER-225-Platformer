@@ -67,9 +67,11 @@ public abstract class Player extends GameObject {
         levelState = LevelState.RUNNING;
     }
 //// Add this attribute to your Player class to keep track of active enemies //
+   
     private List<Enemy> activeEnemies = new ArrayList<>();
     private List<MapEntity> listOfMapEntities = new ArrayList<>(); /// map entities list
     //private int attackDamage = 10; // Initialize with the appropriate damage value  //BESA
+    
     private IntersectableRectangle attackHitbox;
 
     public void update() {
