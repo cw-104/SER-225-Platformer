@@ -40,7 +40,7 @@ public class Max extends Player {
             put("STAND_RIGHT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(8, 11, 8, 11)//originally was 9for height
+                            .withBounds(8, 9, 8, 9)//originally was 9for height
                             .build()
             });
 
@@ -48,7 +48,7 @@ public class Max extends Player {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(8, 11, 8, 11)
+                            .withBounds(8, 9, 8, 9)
                             .build()
             });
 
@@ -186,14 +186,17 @@ public class Max extends Player {
                                 new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
                                         .withScale(3)
                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                        .withBounds(8, 9, 8, 9)
                                         .build(),
                                 new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
                                         .withScale(3)
                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                        .withBounds(8, 9, 8, 9)
                                         .build(),
                                 new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
                                         .withScale(3)
                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                        .withBounds(8, 9, 8, 9)
                                         .build()
                         });
 
@@ -204,14 +207,17 @@ public class Max extends Player {
                                 new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
                                         .withScale(3)
                                        // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                       .withBounds(8, 9, 8, 9)
                                         .build(),
                                 new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
                                         .withScale(3)
                                       //  .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                      .withBounds(8, 9, 8, 9)
                                         .build(),
                                 new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
                                         .withScale(3)
                                       //  .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                      .withBounds(8, 9, 8, 9)
                                         .build()
                         });
 

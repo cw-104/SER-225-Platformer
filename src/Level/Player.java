@@ -62,7 +62,7 @@ public abstract class Player extends GameObject {
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
         playerState = PlayerState.STANDING;
-        playerState=PlayerState.ATTACKING; /// trying to add attack     //
+      //  playerState=PlayerState.ATTACKING; /// trying to add attack     //
         previousPlayerState = playerState;
         levelState = LevelState.RUNNING;
     }
@@ -293,7 +293,7 @@ public abstract class Player extends GameObject {
 
 
                                                             // Ensure the attack animation continues to update
-                                                            super.update();
+                                                           // super.update();
                                                         }
                                     }
 
