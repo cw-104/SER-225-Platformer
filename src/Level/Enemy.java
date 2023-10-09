@@ -95,4 +95,7 @@ public class Enemy extends MapEntity {
     public void setFacingDirection(Direction facingDirection) {
         this.facingDirection = facingDirection;
     }
+
+    public void hurtEnemy(Player player) {
+    }
 }

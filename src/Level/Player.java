@@ -62,7 +62,7 @@ public abstract class Player extends GameObject {
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
         playerState = PlayerState.STANDING;
-      //  playerState=PlayerState.ATTACKING; /// trying to add attack     //
+      //  playerState=PlayerState.ATTACKING; /// trying to add attack     // delete this
         previousPlayerState = playerState;
         levelState = LevelState.RUNNING;
     }
@@ -167,9 +167,21 @@ public abstract class Player extends GameObject {
              keyLocker.lockKey(ATTACK_KEY);
             playerState = PlayerState.ATTACKING;
             isAttacking = true; // for when max is attacking
-
+           
         }
     }
+
+    public void update(Enemy enemy) {
+        super.update();
+        if (intersects(enemy)) {
+            touchedEnemy(enemy);
+        }
+    }
+
+                    /* */// A subclass can override this method to specify what it does when it touches the enemy
+                    public void touchedEnemy(Enemy enemy){
+                enemy.hurtEnemy(this);
+                    }
 
     // player WALKING state logic
     protected void playerWalking() {
@@ -281,7 +293,7 @@ public abstract class Player extends GameObject {
                                                             // Check for collisions with enemies and apply damage as needed
                                                             // ... besa
                                                             attackHitbox = currentFrame.getBounds();
-                                                              
+
                                                             for (MapEntity entity : listOfMapEntities) {
                                                                 if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
                                                                     entity.getBounds().intersects(attackHitbox)) {
@@ -456,6 +468,7 @@ private void damageEnemy(MapEntity enemy) {
             }
         }
     }
+    
 
     // other entities can call this to tell the player they beat a level
     public void completeLevel() {

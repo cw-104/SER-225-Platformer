@@ -41,7 +41,7 @@ public class Max extends Player {
             put("STAND_RIGHT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(8, 9, 8, 9)//originally was 9for height
+                            .withBounds(15, 20, 16, 10)//originally was 9for height
                             .build()
             });
 
@@ -49,26 +49,26 @@ public class Max extends Player {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build()
             });
 
             put("WALK_RIGHT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
                             .withScale(3)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
                             .withScale(3)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 3), 14)
                             .withScale(3)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 4), 14)
                             .withScale(3)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build()
             });
 
@@ -76,29 +76,29 @@ public class Max extends Player {
                     new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 3), 14)
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build()
             });
 
             put("JUMP_RIGHT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(2, 0))
                             .withScale(3)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build()
             });
 
@@ -106,14 +106,14 @@ public class Max extends Player {
                     new FrameBuilder(spriteSheet.getSprite(2, 0))
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build()
             });
 
             put("FALL_RIGHT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(3, 0))
                             .withScale(3)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build()
             });
 
@@ -121,14 +121,14 @@ public class Max extends Player {
                     new FrameBuilder(spriteSheet.getSprite(3, 0))
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build()
             });
 
             put("CROUCH_RIGHT", new Frame[] {//putting 3 for now- fix 
                     new FrameBuilder(spriteSheet.getSprite(3, 0))
                             .withScale(3)
-                            .withBounds(8, 12, 8, 6)
+                            .withBounds(15, 20, 16, 10)
                             .build()
             });
 
@@ -136,7 +136,7 @@ public class Max extends Player {
                     new FrameBuilder(spriteSheet.getSprite(3, 0))
                             .withScale(3)// keep as 3 for now
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(8, 12, 8, 6)
+                            .withBounds(15, 20, 16, 10)
                             .build()
             });
 
@@ -170,7 +170,7 @@ public class Max extends Player {
             put("SWIM_STAND_RIGHT", new Frame[] {// currently no row 6
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build()
             });
 
@@ -178,7 +178,7 @@ public class Max extends Player {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(8, 9, 8, 9)
+                            .withBounds(15, 20, 16, 10)
                             .build()
             });
 
@@ -187,17 +187,17 @@ public class Max extends Player {
                                 new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
                                         .withScale(3)
                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                        .withBounds(8, 9, 8, 9)
+                                        .withBounds(15, 20, 16, 10)
                                         .build(),
                                 new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
                                         .withScale(3)
                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                        .withBounds(8, 9, 8, 9)
+                                        .withBounds(15, 20, 16, 10)
                                         .build(),
                                 new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
                                         .withScale(3)
                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                        .withBounds(8, 9, 8, 9)
+                                        .withBounds(15, 20, 16, 10)
                                         .build()
                         });
 
@@ -208,17 +208,17 @@ public class Max extends Player {
                                 new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
                                         .withScale(3)
                                        // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                       .withBounds(8, 9, 8, 9)
+                                       .withBounds(15, 20, 16, 10)
                                         .build(),
                                 new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
                                         .withScale(3)
                                       //  .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                      .withBounds(8, 9, 8, 9)
+                                      .withBounds(15, 20, 16, 10)
                                         .build(),
                                 new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
                                         .withScale(3)
                                       //  .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                      .withBounds(8, 9, 8, 9)
+                                      .withBounds(15, 20, 16, 10)   // .withBounds(8, 9, 8, 9) // the original bounds
                                         .build()
                         });
 
