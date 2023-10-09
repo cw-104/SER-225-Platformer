@@ -15,19 +15,8 @@ import java.util.HashMap;
 // basically just sets some values for physics and then defines animations
 public class Max extends Player {
 
-<<<<<<< HEAD
-    public Max(float x, float y) {
-        super(new SpriteSheet(ImageLoader.load("Max8.png"), 50, 50), x, y, "STAND_RIGHT");
-        gravity = .5f;
-        terminalVelocityY = 6f;
-        jumpHeight = 14.5f;
-        jumpDegrade = .5f;
-        walkSpeed = 2.3f;
-        momentumYIncrease = .5f;
-    }
-=======
         public Max(float x, float y) {
-                super(new SpriteSheet(ImageLoader.load("Max7.png"), 50, 50), x, y, "STAND_RIGHT");
+                super(new SpriteSheet(ImageLoader.load("Max8.png"), 50, 50), x, y, "STAND_RIGHT");
                 gravity = .5f;
                 terminalVelocityY = 6f;
                 jumpHeight = 14.5f;
@@ -35,7 +24,6 @@ public class Max extends Player {
                 walkSpeed = 7.5f;
                 momentumYIncrease = .5f;
         }
->>>>>>> f201bdcb7bf1b8df80759926970aec4e234a04ab
 
     public void update() {
         super.update();

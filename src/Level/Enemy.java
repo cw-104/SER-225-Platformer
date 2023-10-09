@@ -69,9 +69,8 @@ public class Enemy extends MapEntity {
     public void touchedPlayer(Player player) {
         player.hurtPlayer(this);
     }
-<<<<<<< HEAD
 // comment it out// come back later
-/* 
+
     public void takeDamage(Object attackDamage) {
     health -= 12;// can change 
     if (health <= 0) {
@@ -79,7 +78,7 @@ public class Enemy extends MapEntity {
         defeat();
     }
     }
-*/
+
     private void defeat() {
         // Implement logic for when the enemy is defeated (e.g., play defeat animation, remove from the level)
         setMapEntityStatus(MapEntityStatus.INACTIVE);
@@ -87,7 +86,7 @@ public class Enemy extends MapEntity {
 
     public boolean isDefeated() {
         return false;
-=======
+    }
 
     public Direction getFacingDirection() {
         return facingDirection;
@@ -95,6 +94,5 @@ public class Enemy extends MapEntity {
 
     public void setFacingDirection(Direction facingDirection) {
         this.facingDirection = facingDirection;
->>>>>>> f201bdcb7bf1b8df80759926970aec4e234a04ab
     }
 }
