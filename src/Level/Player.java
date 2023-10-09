@@ -43,7 +43,7 @@ public abstract class Player extends GameObject {
     protected Key MOVE_LEFT_KEY = Key.A;
     protected Key MOVE_RIGHT_KEY = Key.D;
     protected Key CROUCH_KEY = Key.S;
-
+    protected Key ATTACK_KEY = Key.K;// testing button for attack annimation
     // flags
     protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
 
@@ -119,6 +119,7 @@ public abstract class Player extends GameObject {
             case JUMPING:
                 playerJumping();
                 break;
+
         }
     }
 
