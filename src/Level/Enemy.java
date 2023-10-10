@@ -1,13 +1,15 @@
 package Level;
 
 import GameObject.Frame;
+import GameObject.GameObject;
 import GameObject.SpriteSheet;
 import Utils.Direction;
-
 import java.util.HashMap;
 
 // This class is a base class for all enemies in the game -- all enemies should extend from it
 public class Enemy extends MapEntity {
+    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
+    protected LevelState levelState;
 
     private Direction facingDirection;
 
@@ -36,6 +38,12 @@ public class Enemy extends MapEntity {
         super.initialize();
     }
 
+    public void update(Enemy enemy){
+        if (levelState == LevelState.PLAYER_DEAD) {
+        updateEnemyDead();
+    }
+    }
+
     public void updateEnemyDead() {
         // change enemy animation to DEATH
         if (!currentAnimationName.startsWith("DEATH")) {
@@ -53,6 +61,15 @@ public class Enemy extends MapEntity {
         }
         
         }
+
+        // other entities can call this method to hurt the player
+
+        public void hurtEnemy(MapEntity mapEntity, boolean isKKeyPressed) {
+            if (mapEntity instanceof GameObject && isKKeyPressed) {
+                levelState = LevelState.ENEMY_DEAD;
+            }
+        }
+    
 
 
 
