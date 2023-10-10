@@ -93,6 +93,8 @@ public abstract class Player extends GameObject {
 
             // move player with respect to map collisions based on how much player needs to
             // move this frame
+
+            
             lastAmountMovedX = super.moveXHandleCollision(moveAmountX);
             lastAmountMovedY = super.moveYHandleCollision(moveAmountY);
 
@@ -103,6 +105,8 @@ public abstract class Player extends GameObject {
             // update player's animation
             super.update();
         }
+
+        
 
         // if player has beaten level
         else if (levelState == LevelState.LEVEL_COMPLETED) {
