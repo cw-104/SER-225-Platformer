@@ -71,13 +71,18 @@ public abstract class Player extends GameObject {
     private List<Enemy> activeEnemies = new ArrayList<>();
     private List<MapEntity> listOfMapEntities = new ArrayList<>(); /// map entities list
     //private int attackDamage = 10; // Initialize with the appropriate damage value  //BESA
-    
+            private int attackCooldown = 0; // Number of frames to wait before allowing another attack
+
     private IntersectableRectangle attackHitbox;
 
     public void update() {
         moveAmountX = 0;
         moveAmountY = 0;
 
+        // Check if the player can attack again
+    if (attackCooldown > 0) {
+        attackCooldown--;
+    }
         // if player is currently playing through level (has not won or lost)
         if (levelState == LevelState.RUNNING) {
             applyGravity();
@@ -195,7 +200,8 @@ public abstract class Player extends GameObject {
 
                     /* */// A subclass can override this method to specify what it does when it touches the enemy
                     public void touchedEnemy(Enemy enemy){
-                enemy.hurtEnemy(this);
+                //enemy.hurtEnemy(this); //come back to this later //BESA
+                    defeatEnemy(enemy);
                     }
 
     // player WALKING state logic
@@ -303,6 +309,8 @@ public abstract class Player extends GameObject {
                                                             // The attack animation has finished; return to the previous state
                                                             playerState = previousPlayerState;
                                                             isAttacking = false;
+                                                             // Set the attack cooldown to a value (testing purpases is 20, we can change this later) to prevent immediate re-attacks
+                                                                        attackCooldown = 20;
                                                         } else {
                                                             // Handle any logic related to attacking here, e.g., damaging enemies
                                                             // Check for collisions with enemies and apply damage as needed
@@ -313,7 +321,16 @@ public abstract class Player extends GameObject {
                                                                 if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
                                                                     entity.getBounds().intersects(attackHitbox)) {
                                                                     // Handle damaging the enemy
-                                                                    damageEnemy(entity);
+                                                                   // damageEnemy(entity); //come back later
+                                                                   //defeatEnemy(entity);
+
+
+                                                                   if (attackCooldown == 0) {
+                                                                    // Defeat the enemy on touch
+                                                                    defeatEnemy(entity);
+                                                                    // Set the attack cooldown to prevent rapid attacks
+                                                                    attackCooldown = 20;
+                                                                }
                                                                 }
                                                             }
 
@@ -391,57 +408,65 @@ public abstract class Player extends GameObject {
             // Get the current frame's hitbox
             Rectangle attackHitbox = currentFrame.getBounds();
 
-            for (MapEntity entity : listOfMapEntities) {
-                if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
-                    entity.getBounds().intersects(attackHitbox)) {
-                    // Handle damaging the enemy
-                   // MapEntity DogEnemy; //COME BACK TO ME LATER  // FINISH THE HEALTH
-                  // listOfMapEntities.add(DogEnemy);//COME BACK TO THIS!!!!!!!!!!!!
-                    damageEnemy(entity);
-                }
-            }
+                                        for (MapEntity entity : listOfMapEntities) {
+                                            if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
+                                                entity.getBounds().intersects(attackHitbox)) {
+                                                                                    // Handle damaging the enemy
+                                                                                // MapEntity DogEnemy; //COME BACK TO ME LATER  // FINISH THE HEALTH
+                                                                                // listOfMapEntities.add(DogEnemy);//COME BACK TO THIS!!!!!!!!!!!!
+                                              //  damageEnemy(entity); //comeback later
+                                            }
+                                        }
         }
     }
- /* //come back to thisq!!!!!!!!
-    DogEnemy dogEnemy = new DogEnemy("GuardDog2.png", 24, 15, startingAnimationName, 10);
-player.addActiveEnemy(dogEnemy);
-*/
+                                                                /* //come back to thisq!!!!!!!!
+                                                                    DogEnemy dogEnemy = new DogEnemy("GuardDog2.png", 24, 15, startingAnimationName, 10);
+                                                                player.addActiveEnemy(dogEnemy);
+                                                                */
 
-     /* 
-// Sample method to handle damaging an enemy
-private void damageEnemy(MapEntity enemy) {  /// LOOOK AT ME!!!!  //BESA
-    // Check if the enemy is an instance of an enemy class you have defined
-    if (enemy instanceof Enemy) {
-        // Cast the enemy to its specific type
-        Enemy enemyInstance = (Enemy) enemy;
+                                                                    /* 
+                                                                // Sample method to handle damaging an enemy // come back to later
+                                                                private void damageEnemy(MapEntity enemy) {  /// LOOOK AT ME!!!!  //BESA
+                                                                    // Check if the enemy is an instance of an enemy class you have defined
+                                                                    if (enemy instanceof Enemy) {
+                                                                        // Cast the enemy to its specific type
+                                                                        Enemy enemyInstance = (Enemy) enemy;
 
-        // Apply damage to the enemy
-        enemyInstance.takeDamage(attackDamage);
+                                                                        // Apply damage to the enemy
+                                                                        enemyInstance.takeDamage(attackDamage);
+                                                                    }
+                                                                }
+                                                                */
+
+
+
     }
-}
-*/
-
-
-
-    }
-
-
-                                    // Sample method to handle damaging an enemy
-private void damageEnemy(MapEntity enemy) {
-    // Check if the enemy is an instance of an enemy class you have defined
+                                // Method to defeat an enemy on touch
+private void defeatEnemy(MapEntity enemy) {
     if (enemy instanceof Enemy) {
-        // Cast the enemy to its specific type
-       // DogEnemy enemyInstance = (DogEnemy) enemy;//changed to speciffic enemy
-
-        
-        /* 
-       // Object attackDamage;// may take out //Besa
-        // Apply damage to the enemy (you may have a health system for enemies)
-        enemyInstance.takeDamage(10); /// LOOK AT MEEEE! //besa
-        */
+        // Handle defeating the enemy, e.g., removing it from the game
+        enemy.setMapEntityStatus(MapEntityStatus.INACTIVE);
     }
 }
 
+
+                                                                // Sample method to handle damaging an enemy// come back to later 
+                                                                /* 
+                            private void damageEnemy(MapEntity enemy) {
+                                // Check if the enemy is an instance of an enemy class you have defined
+                                if (enemy instanceof Enemy) {
+                                    // Cast the enemy to its specific type
+                                // DogEnemy enemyInstance = (DogEnemy) enemy;//changed to speciffic enemy
+
+                                    
+                                    /* 
+                                // Object attackDamage;// may take out //Besa
+                                    // Apply damage to the enemy (you may have a health system for enemies)
+                                    enemyInstance.takeDamage(10); /// LOOK AT MEEEE! //besa
+                                    */
+                            //    }
+                        //    }
+                             //   */        
  // Method to add an active enemy to the list
  public void addActiveEnemy(Enemy enemy) {
     activeEnemies.add(enemy);

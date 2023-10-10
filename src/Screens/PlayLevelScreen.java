@@ -65,6 +65,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                 Coins.check(player);
 
                 break;
+
+                
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 if (levelCompletedStateChangeStart) {
