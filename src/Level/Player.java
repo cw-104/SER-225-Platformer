@@ -310,7 +310,7 @@ public abstract class Player extends GameObject {
                                                             playerState = previousPlayerState;
                                                             isAttacking = false;
                                                              // Set the attack cooldown to a value (testing purpases is 20, we can change this later) to prevent immediate re-attacks
-                                                                        attackCooldown = 20;
+                                                                        attackCooldown = 5; //was 20 at 1st 
                                                         } else {
                                                             // Handle any logic related to attacking here, e.g., damaging enemies
                                                             // Check for collisions with enemies and apply damage as needed
@@ -329,7 +329,7 @@ public abstract class Player extends GameObject {
                                                                     // Defeat the enemy on touch
                                                                     defeatEnemy(entity);
                                                                     // Set the attack cooldown to prevent rapid attacks
-                                                                    attackCooldown = 20;
+                                                                    attackCooldown = 5;
                                                                 }
                                                                 }
                                                             }
