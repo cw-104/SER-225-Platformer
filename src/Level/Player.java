@@ -126,6 +126,10 @@ public abstract class Player extends GameObject {
         switch (playerState) {
             case STANDING:
                 playerStanding();
+                if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(ATTACK_KEY)) {
+                    keyLocker.lockKey(ATTACK_KEY);
+                    playerState = PlayerState.ATTACKING;
+                }
                 break;
             case WALKING:
                 playerWalking();
@@ -139,6 +143,13 @@ public abstract class Player extends GameObject {
                
                 case ATTACKING: //when max is attacking  //WORKING NOW
                 playerAttacking();
+                if (currentFrameIndex == getCurrentAnimation().length - 1) {
+                    // Attack animation is finished; transition back to another state.
+                    playerState = PlayerState.STANDING; // You can choose a different state.
+                } else {
+                    // Continue playing the attack animation.
+                    super.update();
+                }
                 break;
               /* **/ 
         }
