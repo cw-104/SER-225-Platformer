@@ -93,7 +93,7 @@ public class Enemy extends MapEntity {
         player.hurtPlayer(this);
     }
 // comment it out// come back later
-
+/* 
     public void takeDamage(Object attackDamage) {
     health -= 12;// can change 
     if (health <= 0) {
@@ -110,6 +110,7 @@ public class Enemy extends MapEntity {
     public boolean isDefeated() {
         return false;
     }
+    */
 
     public Direction getFacingDirection() {
         return facingDirection;

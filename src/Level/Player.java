@@ -329,7 +329,7 @@ public abstract class Player extends GameObject {
                                                                     // Defeat the enemy on touch
                                                                     defeatEnemy(entity);
                                                                     // Set the attack cooldown to prevent rapid attacks
-                                                                    attackCooldown = 5;
+                                                                    attackCooldown = 5;//may take out
                                                                 }
                                                                 }
                                                             }
