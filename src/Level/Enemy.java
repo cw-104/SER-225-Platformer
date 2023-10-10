@@ -41,7 +41,7 @@ public class Enemy extends MapEntity {
     }
 
     public void update(Enemy enemy){
-        if (levelState == LevelState.PLAYER_DEAD) {
+        if (levelState == LevelState.ENEMY_DEAD) {
         updateEnemyDead();
     }
     }

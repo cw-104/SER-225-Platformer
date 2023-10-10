@@ -202,12 +202,38 @@ public class PrisonGuardEnemy extends Enemy {
                                 .withBounds(12, 16, 12, 25)
                                 .build(),
                 });
+                put("DEATH_RIGHT", new Frame[] {
+                    new FrameBuilder(spriteSheet.getSprite(0, 8), 8)
+                                    .withScale(3)
+                                    .build(),
+                    new FrameBuilder(spriteSheet.getSprite(0, 8), 8)
+                                    .withScale(3)
+                                    .build(),
+                    new FrameBuilder(spriteSheet.getSprite(0, 8), -1)
+                                    .withScale(3)
+                                    .build()
+    });
+
+                 put("DEATH_LEFT", new Frame[] {
+                    new FrameBuilder(spriteSheet.getSprite(0, 8), 8)
+                                    .withScale(3)
+                                    .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                    .build(),
+                    new FrameBuilder(spriteSheet.getSprite(0, 8), 8)
+                                    .withScale(3)
+                                    .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                    .build(),
+                    new FrameBuilder(spriteSheet.getSprite(0, 8), -1)
+                                    .withScale(3)
+                                    .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                    .build()
+    });
             }
         };
     }
 
     public enum PrisonGuardState {
-        WALK, SHOOT_WAIT, SHOOT
+        WALK, SHOOT_WAIT, SHOOT,
     }
 
 }
