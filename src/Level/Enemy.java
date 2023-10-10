@@ -1,15 +1,19 @@
 package Level;
 
 import GameObject.Frame;
+import GameObject.GameObject;
 import GameObject.SpriteSheet;
 import Utils.Direction;
-
 import java.util.HashMap;
 
 // This class is a base class for all enemies in the game -- all enemies should extend from it
 public class Enemy extends MapEntity {
         private int health; // Besa adding enemy health
-
+    
+    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
+    protected LevelState levelState;
+    
+    private boolean isKKeyPressed = false;
     private Direction facingDirection;
 
     public Enemy(float x, float y, SpriteSheet spriteSheet, String startingAnimation) {
@@ -38,6 +42,12 @@ public class Enemy extends MapEntity {
         super.initialize();
     }
 
+    public void update(Enemy enemy){
+        if (levelState == LevelState.PLAYER_DEAD) {
+        updateEnemyDead();
+    }
+    }
+
     public void updateEnemyDead() {
         // change enemy animation to DEATH
         if (!currentAnimationName.startsWith("DEATH")) {
@@ -55,6 +65,19 @@ public class Enemy extends MapEntity {
         }
         
         }
+        
+        public void setKKeyPressed(boolean keyPressed) {
+            this.isKKeyPressed = keyPressed;
+        }
+
+        // other entities can call this method to hurt the enemy
+
+        public void hurtEnemy(MapEntity mapEntity, boolean isKKeyPressed) {
+            if (mapEntity instanceof GameObject && isKKeyPressed) {
+                levelState = LevelState.ENEMY_DEAD;
+            }
+        }
+    
 
 
 
