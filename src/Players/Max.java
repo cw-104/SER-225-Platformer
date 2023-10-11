@@ -41,7 +41,7 @@ public class Max extends Player {
             put("STAND_RIGHT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
-                            .withBounds(15, 20, 25, 11)//originally was 9for height
+                            .withBounds(15, 20, 20, 11)//originally was 9for height // was .withBounds(15, 20, 20, 11)
                             .build()
             });
 
@@ -49,7 +49,7 @@ public class Max extends Player {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(15, 20, 25, 11)
+                            .withBounds(15, 20, 20, 11)
                             .build()
             });
 

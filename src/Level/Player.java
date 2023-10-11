@@ -71,18 +71,19 @@ public abstract class Player extends GameObject {
     private List<Enemy> activeEnemies = new ArrayList<>();
     private List<MapEntity> listOfMapEntities = new ArrayList<>(); /// map entities list
     //private int attackDamage = 10; // Initialize with the appropriate damage value  //BESA
-            private int attackCooldown = 0; // Number of frames to wait before allowing another attack
+      //      private int attackCooldown = 0; // Number of frames to wait before allowing another attack
 
     private IntersectableRectangle attackHitbox;
 
     public void update() {
         moveAmountX = 0;
         moveAmountY = 0;
-
+/* 
         // Check if the player can attack again
     if (attackCooldown > 0) {
         attackCooldown--;
     }
+    */
         // if player is currently playing through level (has not won or lost)
         if (levelState == LevelState.RUNNING) {
             applyGravity();
@@ -181,7 +182,11 @@ public abstract class Player extends GameObject {
         else if (Keyboard.isKeyDown(CROUCH_KEY)) {
             playerState = PlayerState.CROUCHING;
         }
-        
+        //besa
+        else if (Keyboard.isKeyDown(ATTACK_KEY)) {
+            playerState = PlayerState.ATTACKING;
+            performAttack(); // Implement this method to handle the attack logic.
+        }
         //trying to add attacking
         else if(Keyboard.isKeyDown(ATTACK_KEY)&& !keyLocker.isKeyLocked(ATTACK_KEY)){
              keyLocker.lockKey(ATTACK_KEY);
@@ -191,12 +196,26 @@ public abstract class Player extends GameObject {
         }
     }
 
-    public void update(Enemy enemy) {
-        super.update();
-        if (intersects(enemy)) {
-            touchedEnemy(enemy);
-        }
-    }
+                        public void update(Enemy enemy) {
+                            super.update();
+                            if (intersects(enemy)) {
+                                touchedEnemy(enemy);
+                            }
+                        }
+                                            //besa
+                        private void performAttack() {
+                            if (facingDirection == Direction.RIGHT) {
+                                // Play the attack animation for Max facing right.
+                                playAnimation("ATTACK_RIGHT");
+                            } else {
+                                // Play the attack animation for Max facing left.
+                                playAnimation("ATTACK_LEFT");
+                            }
+                            // Implement any additional attack logic here.
+                        }
+                                //besa
+                    private void playAnimation(String string) {
+                        }
 
                     /* */// A subclass can override this method to specify what it does when it touches the enemy
                     public void touchedEnemy(Enemy enemy){
@@ -307,30 +326,32 @@ public abstract class Player extends GameObject {
                                         // Check if the attack animation has reached its last frame
                                                         if (currentFrameIndex == getCurrentAnimation().length - 1) {
                                                             // The attack animation has finished; return to the previous state
-                                                            playerState = previousPlayerState;
+                                                          //  playerState = previousPlayerState;
+                                                            playerState = PlayerState.STANDING; // may change
                                                             isAttacking = false;
                                                              // Set the attack cooldown to a value (testing purpases is 20, we can change this later) to prevent immediate re-attacks
-                                                                        attackCooldown = 5; //was 20 at 1st 
+                                                                      //  attackCooldown = 5; //was 20 at 1st 
                                                         } else {
                                                             // Handle any logic related to attacking here, e.g., damaging enemies
                                                             // Check for collisions with enemies and apply damage as needed
-                                                            // ... besa
+                                                            super.update(); // ... besa
                                                             attackHitbox = currentFrame.getBounds();
 
                                                             for (MapEntity entity : listOfMapEntities) {
                                                                 if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
                                                                     entity.getBounds().intersects(attackHitbox)) {
                                                                     // Handle damaging the enemy
-                                                                   // damageEnemy(entity); //come back later
+                                                                   // damageEnemy(entity); //come back later //besa
                                                                    //defeatEnemy(entity);
 
-
-                                                                   if (attackCooldown == 0) {
-                                                                    // Defeat the enemy on touch
-                                                                    defeatEnemy(entity);
-                                                                    // Set the attack cooldown to prevent rapid attacks
-                                                                    attackCooldown = 5;//may take out
-                                                                }
+                                                                            /* *
+                                                                            if (attackCooldown == 0) {
+                                                                                // Defeat the enemy on touch
+                                                                                defeatEnemy(entity);
+                                                                                // Set the attack cooldown to prevent rapid attacks
+                                                                                attackCooldown = 5;//may take out
+                                                                            }
+                                                                            */
                                                                 }
                                                             }
 
