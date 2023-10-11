@@ -8,17 +8,17 @@ import java.util.HashMap;
 
 // This class is a base class for all enemies in the game -- all enemies should extend from it
 public class Enemy extends MapEntity {
-        private int health; // Besa adding enemy health
+       
     
     protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
     protected LevelState levelState;
     
-    private boolean isKKeyPressed = false;
+    private boolean isKKeyPressed = true;
     private Direction facingDirection;
 
     public Enemy(float x, float y, SpriteSheet spriteSheet, String startingAnimation) {
         super(x, y, spriteSheet, startingAnimation);
-        this.health = 15;
+        //this.health = 15;
     }
 
     public Enemy(float x, float y, HashMap<String, Frame[]> animations, String startingAnimation) {
@@ -72,10 +72,14 @@ public class Enemy extends MapEntity {
 
         // other entities can call this method to hurt the enemy
 
-        public void hurtEnemy(MapEntity mapEntity, boolean isKKeyPressed) {
+        public void hurtEnemy() {
+          /* *
             if (mapEntity instanceof GameObject && isKKeyPressed) {
                 levelState = LevelState.ENEMY_DEAD;
+                
             }
+*/
+                this.mapEntityStatus = MapEntityStatus.REMOVED;
         }
     
 
@@ -92,6 +96,8 @@ public class Enemy extends MapEntity {
     public void touchedPlayer(Player player) {
         player.hurtPlayer(this);
     }
+
+    
 // comment it out// come back later
 /* 
     public void takeDamage(Object attackDamage) {

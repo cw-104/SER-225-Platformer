@@ -113,7 +113,7 @@ public void takeDamage(int damage) {
     }
 }
 
-private void defeat() {
+public void defeat() {
     // Add logic to handle the defeat of the enemy, such as playing defeat animations or removing it from the level
     // You can also trigger any other actions that should occur when the enemy is defeated
  // Play a defeat animation, if you have one

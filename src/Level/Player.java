@@ -3,6 +3,7 @@ package Level;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
+import GameObject.AnimatedSprite;
 import GameObject.GameObject;
 import GameObject.IntersectableRectangle;
 import GameObject.Rectangle;
@@ -52,7 +53,7 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
+    protected boolean isInvincible = true; // if true, player cannot be hurt by enemies (good for testing)
         protected boolean isAttacking = false;// when max is NOT attacking
             protected boolean hasBat = false;// used to determine if max has the bat     //WORKING
 
@@ -158,7 +159,16 @@ public abstract class Player extends GameObject {
                     playerState = PlayerState.STANDING; // You can choose a different state.
                 } else {
                     // Continue playing the attack animation.
-                    super.update();
+                    super.update();// besa
+                    attackHitbox = currentFrame.getBounds();
+                    for (MapEntity entity : listOfMapEntities) {
+                        if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
+                            entity.getBounds().intersects(attackHitbox)) {
+                            // Handle damaging the enemy
+                            defeatEnemy(entity); // Call a method to defeat the enemy
+                        }
+                    }
+
                 }
                 break;
               /* **/ 
@@ -222,6 +232,22 @@ public abstract class Player extends GameObject {
                 //enemy.hurtEnemy(this); //come back to this later //BESA
                     defeatEnemy(enemy);
                     }
+                    public void attack() {
+                        if (!isAttacking) {
+                            isAttacking = true;
+                    
+                            // Define the attackHitbox based on the player's current position and dimensions
+                            attackHitbox = new Rectangle(x, y, 12, 16); //12 and 16 test values //besa
+                    
+                            // Notify active enemies about the attack
+                            for (Enemy enemy : activeEnemies) {
+                                if (((AnimatedSprite) attackHitbox).intersects(enemy.getBounds())) {
+                                    //enemy.defeat();
+                                }
+                            }
+                        }
+                    }
+                    
 
     // player WALKING state logic
     protected void playerWalking() {
@@ -337,12 +363,14 @@ public abstract class Player extends GameObject {
                                                             super.update(); // ... besa
                                                             attackHitbox = currentFrame.getBounds();
 
-                                                            for (MapEntity entity : listOfMapEntities) {
+                                                            for (Enemy entity : map.getActiveEnemies()) {
                                                                 if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
                                                                     entity.getBounds().intersects(attackHitbox)) {
+                                                                     entity.hurtEnemy();
                                                                     // Handle damaging the enemy
                                                                    // damageEnemy(entity); //come back later //besa
                                                                    //defeatEnemy(entity);
+// remember to add intersecting when player attacks the enemy 
 
                                                                             /* *
                                                                             if (attackCooldown == 0) {
@@ -492,6 +520,7 @@ private void defeatEnemy(MapEntity enemy) {
  public void addActiveEnemy(Enemy enemy) {
     activeEnemies.add(enemy);
 }
+
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction, MapEntity entityCollidedWith) {
