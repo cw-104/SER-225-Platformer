@@ -32,7 +32,7 @@ public class Max extends Player {
 
     public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
-         drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+         //  drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
     }
 
     @Override
@@ -141,27 +141,27 @@ public class Max extends Player {
             });
 
             put("DEATH_RIGHT", new Frame[] {// there is no row 5 fix this
-                    new FrameBuilder(spriteSheet.getSprite(0, 0), 8)
+                    new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
                             .withScale(3)
                             .build(),
-                    new FrameBuilder(spriteSheet.getSprite(0, 1), 8)
+                    new FrameBuilder(spriteSheet.getSprite(5, 1), 8)
                             .withScale(3)
                             .build(),
-                    new FrameBuilder(spriteSheet.getSprite(0, 2), -1)
+                    new FrameBuilder(spriteSheet.getSprite(5, 2), -1)
                             .withScale(3)
                             .build()
             });
 
             put("DEATH_LEFT", new Frame[] {// currently no row 5 
-                    new FrameBuilder(spriteSheet.getSprite(0, 0), 8)
+                    new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build(),
-                    new FrameBuilder(spriteSheet.getSprite(0, 1), 8)
+                    new FrameBuilder(spriteSheet.getSprite(5, 1), 8)
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build(),
-                    new FrameBuilder(spriteSheet.getSprite(0, 2), -1)
+                    new FrameBuilder(spriteSheet.getSprite(5, 2), -1)
                             .withScale(3)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
