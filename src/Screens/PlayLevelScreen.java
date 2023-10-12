@@ -21,7 +21,6 @@ import SpriteFont.SpriteFont;
 import java.util.ArrayList;
 import java.util.List;
 
-
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen implements PlayerListener {
     protected ScreenCoordinator screenCoordinator;
@@ -45,11 +44,11 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.map = new Lab();
 
         // Add Coins (only line needed for both creating and counting)
-        coinList.add(new Coin(1050, 200));
-        coinList.add(new Coin(1500, 250));
-        coinList.add(new Coin(1800, 250));
-        coinList.add(new Coin(1850, 250));
-        coinList.add(new Coin(1750, 250));
+        coinList.add(new Coin(1150, 450));
+        coinList.add(new Coin(1450, 350));
+        coinList.add(new Coin(1800, 400));
+        coinList.add(new Coin(1850, 400));
+        coinList.add(new Coin(1750, 400));
 
         // Setting bounds and coin in map
         for (Coin coin : coinList) {
@@ -71,12 +70,11 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
 
-
-        //Coin Counter Display 
+        // Coin Counter Display
         this.coinCounter = new SpriteFont("Coins: " + this.getCoinCount(), 15, 25, "Arial", 35, new Color(255, 0, 0));
         this.coinCounter.setOutlineColor(Color.black);
         this.coinCounter.setOutlineThickness(2);
-        
+
     }
 
     public void update() {
@@ -110,12 +108,12 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                 break;
             // wait on level lose screen to make a decision (either resets level or sends
             // player back to main menu)
-            case LEVEL_LOSE:{
+            case LEVEL_LOSE: {
                 levelLoseScreen.update();
                 break;
 
             }
-            
+
         }
     }
 
@@ -126,16 +124,16 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                 map.draw(graphicsHandler);
                 player.draw(graphicsHandler);
 
-                // drawing Coin Counter 
+                // drawing Coin Counter
                 coinCounter.draw(graphicsHandler);
 
-                // Checking if Coins have been collected 
+                // Checking if Coins have been collected
                 for (Coin coin : coinList) {
                     if (!coin.isCollected()) {
                         coin.draw(graphicsHandler);
                     }
                 }
-        
+
                 break;
             case LEVEL_COMPLETED:
                 levelClearedScreen.draw(graphicsHandler);
@@ -178,7 +176,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         RUNNING, LEVEL_COMPLETED, LEVEL_LOSE
     }
 
-    // Total # of Coins 
+    // Total # of Coins
     public int getCoinCount() {
         int totalCoins = 0;
         for (Coin coin : coinList) {
