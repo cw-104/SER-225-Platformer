@@ -11,7 +11,6 @@ import Tilesets.TestTileset;
 import Utils.Direction;
 import Enemies.DogEnemy;
 import Enemies.PrisonGuardEnemy;
-import Enemies.DinosaurEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.HorizontalMovingPlatform;
 import GameObject.Rectangle;
@@ -51,8 +50,8 @@ public class TestEnvironment extends Map {
         DogEnemy DogEnemy = new DogEnemy(getMapTile(60, 10).getLocation().subtractY(25), Direction.LEFT);
         enemies.add(DogEnemy);
 
-        PrisonGuardEnemy Guard_1 = new PrisonGuardEnemy(getMapTile(70, 10).getLocation().addY(2),
-                getMapTile(80, 10).getLocation().addY(2), Direction.LEFT);
+        PrisonGuardEnemy Guard_1 = new PrisonGuardEnemy(getMapTile(70, 10).getLocation().subtractY(85),
+                getMapTile(80, 10).getLocation().subtractY(85), Direction.LEFT);
         enemies.add(Guard_1);
 
         return enemies;

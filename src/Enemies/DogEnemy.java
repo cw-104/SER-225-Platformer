@@ -13,6 +13,21 @@ import Utils.Direction;
 import Utils.Point;
 
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
+        //import Level.AttackEntity;
+import java.util.List;
+import java.util.ArrayList;
+//added and may need to take out //besa
+
+//import java.util.List;
+//import java.util.ArrayList;
+//import java.util.Timer;
+//import java.util.TimerTask;
+//import Level.AttackEntity; // Add this import
+
+
+//// may need to tke out the impirts above this comment
 
 // This class is for the Dog enemy
 // enemy behaves like a Mario goomba -- walks forward until it h ll down until it hits the ground again, and then will continue walking
@@ -23,6 +38,11 @@ public class DogEnemy extends Enemy {
     private Direction startFacingDirection;
     private Direction facingDirection;
     private AirGroundState airGroundState;
+    private int health = 1; // Set an initial health value      //besa
+//may need to take out 
+private Timer removalTimer;
+
+/// may need to take out //besa
 
     public DogEnemy(Point location, Direction facingDirection) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("GuardDog2.png"), 24, 15
@@ -64,8 +84,95 @@ public class DogEnemy extends Enemy {
         moveYHandleCollision(moveAmountY);
         moveXHandleCollision(moveAmountX);
 
-        super.update(player);
+        super.update(player); 
+        /* 
+                                    MapEntity[] listOfMapEntities;
+                                    MapEntity [] listofMapEntity = [DogEnemy]; // tired and this may be wrong. get sleep 
+                                   
+                                    //besa
+                                    // Check for collisions with attacking entities (e.g., player's attack)
+                                    for (MapEntity entity : listOfMapEntities) {
+                                        if (entity instanceof MapEntity && entity.getBounds().intersects(getBounds())) {
+                                            // Handle damage to the enemy
+                                            takeDamage(((MapEntity) entity).getDamage()); // Adjust the method call based on your implementation
+                                        }
+                                    }
+*/
+
     }
+
+//besa
+//taking damage
+public void takeDamage(int damage) {
+    if (health > 0) {
+        health -= damage;
+        if (health <= 0) {
+            // Enemy has been defeated
+            defeat();
+        }
+    }
+}
+
+public void defeat() {
+    // Add logic to handle the defeat of the enemy, such as playing defeat animations or removing it from the level
+    // You can also trigger any other actions that should occur when the enemy is defeated
+ // Play a defeat animation, if you have one
+    // Replace "DEFEAT_ANIMATION_NAME" with the actual name of your defeat animation
+    currentAnimationName = "DEFEAT_ANIMATION_NAME";
+
+    // Disable any further updates or collisions for the defeated enemy
+    setEnabled(false);
+    setCollidable(false);
+/*              // come back to this later
+    HashMap<String, Frame[]> activeEnemies;
+    // Remove the enemy from the list of active enemies
+    if (activeEnemies.containsKey(this)) {
+        activeEnemies.remove(this);
+    }
+*/
+    // You can also award points, update the player's score, or trigger other game events here
+    // Example: player.incrementScore(100);
+/* */
+    // If you want the enemy to disappear after a certain amount of time, you can set a timer
+/* 
+    Timer.schedule(new TimerTask() {
+        @Override
+        public void run() {
+            // Remove the enemy from the level or perform any other cleanup
+            remove();
+        }
+
+        private void remove() {
+        }
+    }, 1.0f); // Adjust the delay as needed
+*/
+    removalTimer = new Timer();
+    removalTimer.schedule(new TimerTask() {
+        @Override
+        public void run() {
+            // Remove the enemy from the level or perform any other cleanup
+            remove();
+        }
+
+        private void remove() {
+            if (removalTimer != null) {
+                removalTimer.cancel();
+            }
+            
+        }
+    }, 1000); // Adjust the delay as needed (1000 milliseconds = 1 second)
+
+
+
+}
+
+
+
+    private void setEnabled(boolean b) {
+}
+
+    private void setCollidable(boolean b) {
+}
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction,  MapEntity entityCollidedWith) {

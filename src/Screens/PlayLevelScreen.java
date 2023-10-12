@@ -43,7 +43,10 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         Coins.setMap(map);
 
         // setup player
-        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+        // this.player = new Cat(map.getPlayerStartPosition().x,
+        // map.getPlayerStartPosition().y);
+        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
+                                                                                               // max into the game
         this.player.setMap(map);
         this.player.addListener(this);
         Point playerStartPosition = map.getPlayerStartPosition();
@@ -66,6 +69,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                 Coins.check(player);
 
                 break;
+
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 if (levelCompletedStateChangeStart) {
