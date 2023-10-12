@@ -494,7 +494,7 @@ public abstract class Player extends GameObject {
 private void defeatEnemy(MapEntity enemy) {
     if (enemy instanceof Enemy) {
         // Handle defeating the enemy, e.g., removing it from the game
-        enemy.setMapEntityStatus(MapEntityStatus.INACTIVE);
+        enemy.setMapEntityStatus(MapEntityStatus.REMOVED);
     }
 }
 
