@@ -1,0 +1,14 @@
+import GameObject.GameObject;
+
+public class AttackEntity extends GameObject {
+    private int damage; // Damage value of the attack
+
+    public AttackEntity(float x, float y, String animationName, int damage) {
+        super(x, y, animationName);
+        this.damage = damage;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+}

@@ -1,5 +1,6 @@
 package Screens;
 
+import java.awt.Color;
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Game.GameState;
@@ -14,7 +15,12 @@ import Maps.TestMap;
 import Players.Cat;
 import Utils.Point;
 import Maps.TestEnvironment;
+import Maps.Lab;
 import Players.Max;
+import SpriteFont.SpriteFont;
+import java.util.ArrayList;
+import java.util.List;
+
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen implements PlayerListener {
@@ -27,7 +33,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     protected LevelLoseScreen levelLoseScreen;
     protected boolean levelCompletedStateChangeStart;
 
-    protected Coin Coins;
+    protected List<Coin> coinList = new ArrayList<>();
+    protected SpriteFont coinCounter;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -35,14 +42,25 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     public void initialize() {
         // define/setup map
-        this.map = new TestEnvironment();
+        this.map = new Lab();
 
-        this.Coins = new Coin(1050, 200);
-        Coins.setBounds(new Rectangle(0, 0, 16, 16));
-        Coins.setMap(map);
+        // Add Coins (only line needed for both creating and counting)
+        coinList.add(new Coin(1050, 200));
+        coinList.add(new Coin(1500, 250));
+        coinList.add(new Coin(1800, 250));
+        coinList.add(new Coin(1850, 250));
+        coinList.add(new Coin(1750, 250));
 
+        // Setting bounds and coin in map
+        for (Coin coin : coinList) {
+            coin.setBounds(new Rectangle(0, 0, 16, 16));
+            coin.setMap(map);
+        }
         // setup player
-        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+        // this.player = new Cat(map.getPlayerStartPosition().x,
+        // map.getPlayerStartPosition().y);
+        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
+                                                                                               // max into the game
         this.player.setMap(map);
         this.player.addListener(this);
         Point playerStartPosition = map.getPlayerStartPosition();
@@ -52,19 +70,31 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         levelLoseScreen = new LevelLoseScreen(this);
 
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
+
+
+        //Coin Counter Display 
+        this.coinCounter = new SpriteFont("Coins: " + this.getCoinCount(), 15, 25, "Arial", 35, new Color(255, 0, 0));
+        this.coinCounter.setOutlineColor(Color.black);
+        this.coinCounter.setOutlineThickness(2);
+        
     }
 
     public void update() {
         // based on screen state, perform specific actions
         switch (playLevelScreenState) {
+
             // if level is "running" update player and map to keep game logic for the
             // platformer level going
             case RUNNING:
                 player.update();
                 map.update(player);
-                Coins.check(player);
-
+                // Coin Check
+                for (Coin coin : coinList) {
+                    coin.check(player);
+                }
+                coinCounter.setText("Coins: " + this.getCoinCount());
                 break;
+
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 if (levelCompletedStateChangeStart) {
@@ -80,9 +110,12 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                 break;
             // wait on level lose screen to make a decision (either resets level or sends
             // player back to main menu)
-            case LEVEL_LOSE:
+            case LEVEL_LOSE:{
                 levelLoseScreen.update();
                 break;
+
+            }
+            
         }
     }
 
@@ -92,9 +125,17 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
             case RUNNING:
                 map.draw(graphicsHandler);
                 player.draw(graphicsHandler);
-                if (Coins.isCollected() == false) {
-                    Coins.draw(graphicsHandler);
+
+                // drawing Coin Counter 
+                coinCounter.draw(graphicsHandler);
+
+                // Checking if Coins have been collected 
+                for (Coin coin : coinList) {
+                    if (!coin.isCollected()) {
+                        coin.draw(graphicsHandler);
+                    }
                 }
+        
                 break;
             case LEVEL_COMPLETED:
                 levelClearedScreen.draw(graphicsHandler);
@@ -135,5 +176,14 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
         RUNNING, LEVEL_COMPLETED, LEVEL_LOSE
+    }
+
+    // Total # of Coins 
+    public int getCoinCount() {
+        int totalCoins = 0;
+        for (Coin coin : coinList) {
+            totalCoins += coin.totalCoins();
+        }
+        return totalCoins;
     }
 }

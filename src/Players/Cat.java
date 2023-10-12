@@ -174,14 +174,13 @@ public class Cat extends Player {
                                                                 .build()
                                 });
 
-                                put("SWIM_STAND_LEFT", new Frame[] {
-                                                new FrameBuilder(spriteSheet.getSprite(6, 0))
-                                                                .withScale(3)
-                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                                                .withBounds(8, 9, 8, 9)
-                                                                .build()
-                                });
-                        }
-                };
-        }
+            put("SWIM_STAND_LEFT", new Frame[] {
+                    new FrameBuilder(spriteSheet.getSprite(6, 0))
+                            .withScale(3)
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .withBounds(8, 9, 8, 9)
+                            .build()
+            });
+        }};
+    }
 }

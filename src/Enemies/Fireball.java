@@ -28,6 +28,8 @@ public class Fireball extends Enemy {
         this.existenceFrames = existenceFrames;
 
         initialize();
+
+      
     }
 
     @Override

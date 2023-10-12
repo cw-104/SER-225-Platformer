@@ -10,6 +10,7 @@ import Level.*;
 import Tilesets.TestTileset;
 import Utils.Direction;
 import Enemies.DogEnemy;
+import Enemies.PrisonGuardEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.HorizontalMovingPlatform;
 import GameObject.Rectangle;
@@ -17,7 +18,7 @@ import GameObject.Rectangle;
 public class TestEnvironment extends Map {
 
     public TestEnvironment() {
-        super("test_environment.txt", new TestTileset());
+        super("test_map.txt", new TestTileset());
         this.playerStartPosition = getMapTile(2, 10).getLocation();
     }
 
@@ -49,15 +50,9 @@ public class TestEnvironment extends Map {
         DogEnemy DogEnemy = new DogEnemy(getMapTile(60, 10).getLocation().subtractY(25), Direction.LEFT);
         enemies.add(DogEnemy);
 
-        DogEnemy DogEnemy2 = new DogEnemy(getMapTile(70, 10).getLocation().subtractY(25), Direction.LEFT);
-        enemies.add(DogEnemy2);
-
-        /*
-         * DinosaurEnemy dinosaurEnemy = new DinosaurEnemy(getMapTile(19,
-         * 1).getLocation().addY(2), getMapTile(22, 1).getLocation().addY(2),
-         * Direction.RIGHT);
-         * enemies.add(dinosaurEnemy);
-         */
+        PrisonGuardEnemy Guard_1 = new PrisonGuardEnemy(getMapTile(70, 10).getLocation().subtractY(85),
+                getMapTile(80, 10).getLocation().subtractY(85), Direction.LEFT);
+        enemies.add(Guard_1);
 
         return enemies;
     }
