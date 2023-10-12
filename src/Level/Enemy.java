@@ -12,8 +12,7 @@ public class Enemy extends MapEntity {
     
     protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
     protected LevelState levelState;
-    
-    private boolean isKKeyPressed = true;
+
     private Direction facingDirection;
 
     public Enemy(float x, float y, SpriteSheet spriteSheet, String startingAnimation) {
@@ -44,7 +43,7 @@ public class Enemy extends MapEntity {
 
     public void update(Enemy enemy){
         if (levelState == LevelState.ENEMY_DEAD) {
-        updateEnemyDead();
+       updateEnemyDead();
     }
     }
 
@@ -66,21 +65,18 @@ public class Enemy extends MapEntity {
         
         }
         
-        public void setKKeyPressed(boolean keyPressed) {
-            this.isKKeyPressed = keyPressed;
-        }
+    
 
         // other entities can call this method to hurt the enemy
 
         public void hurtEnemy() {
-          /* *
-            if (mapEntity instanceof GameObject && isKKeyPressed) {
-                levelState = LevelState.ENEMY_DEAD;
+            
+                 this.mapEntityStatus = MapEntityStatus.REMOVED;
                 
             }
-*/
-                this.mapEntityStatus = MapEntityStatus.REMOVED;
-        }
+
+               
+        
     
 
 
@@ -96,27 +92,6 @@ public class Enemy extends MapEntity {
     public void touchedPlayer(Player player) {
         player.hurtPlayer(this);
     }
-
-    
-// comment it out// come back later
-/* 
-    public void takeDamage(Object attackDamage) {
-    health -= 12;// can change 
-    if (health <= 0) {
-        // Enemy is defeated, perform defeat logic (e.g., play defeat animation, remove from the level)
-        defeat();
-    }
-    }
-
-    private void defeat() {
-        // Implement logic for when the enemy is defeated (e.g., play defeat animation, remove from the level)
-        setMapEntityStatus(MapEntityStatus.INACTIVE);
-    }
-
-    public boolean isDefeated() {
-        return false;
-    }
-    */
 
     public Direction getFacingDirection() {
         return facingDirection;

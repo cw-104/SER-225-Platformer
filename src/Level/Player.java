@@ -53,9 +53,9 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-    protected boolean isInvincible = true; // if true, player cannot be hurt by enemies (good for testing)
+    protected boolean isInvincible = true; // if true, player cannot be hurt by enemies (good for testing)// 
         protected boolean isAttacking = false;// when max is NOT attacking
-            protected boolean hasBat = false;// used to determine if max has the bat     //WORKING
+          
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -73,6 +73,7 @@ public abstract class Player extends GameObject {
     private List<MapEntity> listOfMapEntities = new ArrayList<>(); /// map entities list
     
     private IntersectableRectangle attackHitbox;
+    // for the enemy
 
     public void update() {
         moveAmountX = 0;
@@ -164,7 +165,7 @@ public abstract class Player extends GameObject {
 
                 }
                 break;
-              
+        
         }
     }
 
