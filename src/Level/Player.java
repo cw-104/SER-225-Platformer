@@ -53,9 +53,9 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-    protected boolean isInvincible = true; // if true, player cannot be hurt by enemies (good for testing)
+    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
         protected boolean isAttacking = false;// when max is NOT attacking
-            protected boolean hasBat = false;// used to determine if max has the bat     //WORKING
+          
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -152,7 +152,7 @@ public abstract class Player extends GameObject {
                 playerJumping();
                 break;
                
-                case ATTACKING: //when max is attacking  //WORKING NOW
+                case ATTACKING: //when max is attacking  
                 playerAttacking();
                 if (currentFrameIndex == getCurrentAnimation().length - 1) {
                     // Attack animation is finished; transition back to another state.
@@ -171,7 +171,7 @@ public abstract class Player extends GameObject {
 
                 }
                 break;
-              /* **/ 
+        
         }
     }
 
