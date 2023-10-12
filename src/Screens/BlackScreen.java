@@ -4,35 +4,28 @@ import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
+import Maps.BlackScreenMap;
 import Maps.CutsceneMap;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
 
 // This is the class for the main menu screen
-public class CutsceneScreen extends Screen {
+public class BlackScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
-    protected int currentMenuItemHovered = 0; // current menu item being "hovered" over
-    protected int menuItemSelected = -1;
-    protected SpriteFont narration;
-    protected SpriteFont prompt;
     protected Map background;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
     protected KeyLocker keyLocker = new KeyLocker();
 
-    public CutsceneScreen(ScreenCoordinator screenCoordinator) {
+    public BlackScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
 
     @Override
     public void initialize() {
-        background = new CutsceneMap();
+        background = new BlackScreenMap();
         background.setAdjustCamera(false);
-        narration = new SpriteFont("Where am I?", 180, 405, "Helvetica Bold", 25, Color.white);
-        prompt = new SpriteFont("Press SPACE to continue...", 490, 530, "Comic Sans", 15, Color.white);
-        keyPressTimer = 0;
-        menuItemSelected = -1;
         keyLocker.lockKey(Key.SPACE);
     }
 
@@ -46,13 +39,11 @@ public class CutsceneScreen extends Screen {
             keyLocker.unlockKey(Key.SPACE);
         }
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
-           screenCoordinator.setGameState((GameState.CUTSCENE2));
+           screenCoordinator.setGameState((GameState.CUTSCENE1));
         }
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
-        narration.draw(graphicsHandler);
-        prompt.draw(graphicsHandler);
     }
 }
