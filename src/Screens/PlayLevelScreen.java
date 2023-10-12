@@ -14,6 +14,7 @@ import Maps.TestMap;
 import Players.Cat;
 import Utils.Point;
 import Maps.TestEnvironment;
+import Maps.Lab;
 import Players.Max;
 
 // This class is for when the platformer game is actually being played
@@ -35,7 +36,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     public void initialize() {
         // define/setup map
-        this.map = new TestEnvironment();
+        this.map = new Lab();
 
         this.Coins = new Coin(1050, 200);
         Coins.setBounds(new Rectangle(0, 0, 16, 16));
