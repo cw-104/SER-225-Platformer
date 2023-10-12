@@ -29,10 +29,10 @@ public class Max extends Player {
     public void update() {
         super.update();
     }
-
+//drawbounds turns on and off the max bounds 
     public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
-         drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+      //   drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
     }
 
     @Override
