@@ -16,8 +16,6 @@ import Utils.Point;
 import java.awt.Color;
 import java.util.HashMap;
 
-// Guard Death Sprite (0,8), Guard Shoot Sprite(1,0)
-
 public class PrisonGuardEnemy extends Enemy {
     protected Point startLocation;
     protected Point endLocation;
@@ -207,32 +205,7 @@ public class PrisonGuardEnemy extends Enemy {
                                 .withBounds(12, 16, 12, 25)
                                 .build(),
                 });
-                put("DEATH_RIGHT", new Frame[] {
-                        new FrameBuilder(spriteSheet.getSprite(0, 8), 8)
-                                .withScale(3)
-                                .build(),
-                        new FrameBuilder(spriteSheet.getSprite(0, 8), 8)
-                                .withScale(3)
-                                .build(),
-                        new FrameBuilder(spriteSheet.getSprite(0, 8), -1)
-                                .withScale(3)
-                                .build()
-                });
 
-                put("DEATH_LEFT", new Frame[] {
-                        new FrameBuilder(spriteSheet.getSprite(0, 8), 8)
-                                .withScale(3)
-                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .build(),
-                        new FrameBuilder(spriteSheet.getSprite(0, 8), 8)
-                                .withScale(3)
-                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .build(),
-                        new FrameBuilder(spriteSheet.getSprite(0, 8), -1)
-                                .withScale(3)
-                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .build()
-                });
             }
         };
     }

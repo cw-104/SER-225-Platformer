@@ -40,44 +40,13 @@ public class Enemy extends MapEntity {
     public void initialize() {
         super.initialize();
     }
-
-    public void update(Enemy enemy){
-        if (levelState == LevelState.ENEMY_DEAD) {
-       updateEnemyDead();
-    }
-    }
-
-    public void updateEnemyDead() {
-        // change enemy animation to DEATH
-        if (!currentAnimationName.startsWith("DEATH")) {
-            if (facingDirection == Direction.RIGHT) {
-                currentAnimationName = "DEATH_RIGHT";
-            } else {
-                currentAnimationName = "DEATH_LEFT";
-            }
-            super.update();
-        }
-        // if death animation not on last frame yet, continue to play out death
-        // animation
-        else if (currentFrameIndex != getCurrentAnimation().length - 1) {
-            super.update();
-        }
         
-        }
-        
-    
-
         // other entities can call this method to hurt the enemy
 
         public void hurtEnemy() {
-            
                  this.mapEntityStatus = MapEntityStatus.REMOVED;
                 
             }
-
-               
-        
-    
 
 
 
