@@ -15,6 +15,7 @@ import Enemies.PrisonGuardEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.HorizontalMovingPlatform;
 import GameObject.Rectangle;
+import GameObject.Coin;
 
 public class Lab extends Map {
 
