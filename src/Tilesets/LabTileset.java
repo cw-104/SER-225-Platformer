@@ -360,7 +360,7 @@ public class LabTileset extends Tileset {
                                 .build();
 
                 MapTileBuilder floorWallTile_1 = new MapTileBuilder(floorWallFrame_1)
-                                .withTileType(TileType.PASSABLE);
+                                .withTileType(TileType.NOT_PASSABLE);
 
                 mapTiles.add(floorWallTile_1);
 
@@ -369,7 +369,7 @@ public class LabTileset extends Tileset {
                                 .build();
 
                 MapTileBuilder floorWallTile_2 = new MapTileBuilder(floorWallFrame_2)
-                                .withTileType(TileType.PASSABLE);
+                                .withTileType(TileType.NOT_PASSABLE);
 
                 mapTiles.add(floorWallTile_2);
 
@@ -380,7 +380,7 @@ public class LabTileset extends Tileset {
                                 .build();
 
                 MapTileBuilder bPipeTile_1 = new MapTileBuilder(bPipeFrame_1)
-                                .withTileType(TileType.PASSABLE);
+                                .withTileType(TileType.NOT_PASSABLE);
 
                 mapTiles.add(bPipeTile_1);
 
@@ -389,7 +389,7 @@ public class LabTileset extends Tileset {
                                 .build();
 
                 MapTileBuilder bPipeTile_2 = new MapTileBuilder(bPipeFrame_2)
-                                .withTileType(TileType.PASSABLE);
+                                .withTileType(TileType.NOT_PASSABLE);
 
                 mapTiles.add(bPipeTile_2);
 
@@ -398,7 +398,7 @@ public class LabTileset extends Tileset {
                                 .build();
 
                 MapTileBuilder bPipeTile_3 = new MapTileBuilder(bPipeFrame_3)
-                                .withTileType(TileType.PASSABLE);
+                                .withTileType(TileType.NOT_PASSABLE);
 
                 mapTiles.add(bPipeTile_3);
 
@@ -407,7 +407,7 @@ public class LabTileset extends Tileset {
                                 .build();
 
                 MapTileBuilder bPipeTile_4 = new MapTileBuilder(bPipeFrame_4)
-                                .withTileType(TileType.PASSABLE);
+                                .withTileType(TileType.NOT_PASSABLE);
 
                 mapTiles.add(bPipeTile_4);
 
@@ -441,6 +441,81 @@ public class LabTileset extends Tileset {
                                 .withTileType(TileType.PASSABLE);
 
                 mapTiles.add(bedTile_2);
+
+                // Doors
+                Frame doorFrame_1 = new FrameBuilder(getSubImage(3, 1))
+                                .withScale(tileScale)
+                                .build();
+
+                MapTileBuilder doorTile_1 = new MapTileBuilder(doorFrame_1)
+                                .withTileType(TileType.PASSABLE);
+
+                mapTiles.add(doorTile_1);
+
+                Frame doorFrame_2 = new FrameBuilder(getSubImage(4, 1))
+                                .withScale(tileScale)
+                                .build();
+
+                MapTileBuilder doorTile_2 = new MapTileBuilder(doorFrame_2)
+                                .withTileType(TileType.PASSABLE);
+
+                mapTiles.add(doorTile_2);
+
+                // Elevator shaft
+                Frame elevatorFrame_1 = new FrameBuilder(getSubImage(5, 0))
+                                .withScale(tileScale)
+                                .build();
+
+                MapTileBuilder elevatorTile_1 = new MapTileBuilder(elevatorFrame_1)
+                                .withTileType(TileType.PASSABLE);
+
+                mapTiles.add(elevatorTile_1);
+
+                Frame elevatorFrame_2 = new FrameBuilder(getSubImage(5, 1))
+                                .withScale(tileScale)
+                                .build();
+
+                MapTileBuilder elevatorTile_2 = new MapTileBuilder(elevatorFrame_2)
+                                .withTileType(TileType.PASSABLE);
+
+                mapTiles.add(elevatorTile_2);
+
+                // Sludge
+                Frame sludgeFrame_1 = new FrameBuilder(getSubImage(4, 3))
+                                .withScale(tileScale)
+                                .build();
+
+                MapTileBuilder sludgeTile_1 = new MapTileBuilder(sludgeFrame_1)
+                                .withTileType(TileType.PASSABLE);
+
+                mapTiles.add(sludgeTile_1);
+
+                Frame sludgeFrame_2 = new FrameBuilder(getSubImage(4, 4))
+                                .withScale(tileScale)
+                                .build();
+
+                MapTileBuilder sludgeTile_2 = new MapTileBuilder(sludgeFrame_2)
+                                .withTileType(TileType.PASSABLE);
+
+                mapTiles.add(sludgeTile_2);
+
+                Frame sludgeFrame_3 = new FrameBuilder(getSubImage(5, 3))
+                                .withScale(tileScale)
+                                .build();
+
+                MapTileBuilder sludgeTile_3 = new MapTileBuilder(sludgeFrame_3)
+                                .withTileType(TileType.PASSABLE);
+
+                mapTiles.add(sludgeTile_3);
+
+                Frame sludgeFrame_4 = new FrameBuilder(getSubImage(5, 4))
+                                .withScale(tileScale)
+                                .build();
+
+                MapTileBuilder sludgeTile_4 = new MapTileBuilder(sludgeFrame_4)
+                                .withTileType(TileType.PASSABLE);
+
+                mapTiles.add(sludgeTile_4);
 
                 return mapTiles;
 
