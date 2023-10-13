@@ -263,23 +263,31 @@ public class SecondTileset extends Tileset {
         mapTiles.add(leftStairsTopTile);
 
         //Column tile
-        Frame eFrame = new FrameBuilder(getSubImage(4, 2))
+        Frame colFrame = new FrameBuilder(getSubImage(4, 2))
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder eTile = new MapTileBuilder(eFrame);
+        MapTileBuilder colTile = new MapTileBuilder(colFrame);
 
-        mapTiles.add(eTile);
+        mapTiles.add(colTile);
 
         
         //Brick tile
-        Frame pFrame = new FrameBuilder(getSubImage(3, 5))
+        Frame brickFrame = new FrameBuilder(getSubImage(3, 5))
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder pTile = new MapTileBuilder(pFrame);
+        MapTileBuilder brickTile = new MapTileBuilder(brickFrame);
 
-        mapTiles.add(pTile);
+        mapTiles.add(brickTile);
+
+        //Blackout tile
+        Frame blackFrame = new FrameBuilder(getSubImage(4,3))
+                .withScale(tileScale)
+                .build();
+        MapTileBuilder blacktile = new MapTileBuilder(blackFrame);
+
+        mapTiles.add(blacktile);
 
         return mapTiles;
     }

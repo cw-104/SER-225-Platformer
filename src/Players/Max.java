@@ -26,202 +26,202 @@ public class Max extends Player {
                 momentumYIncrease = .5f;
         }
 
-    public void update() {
-        super.update();
-    }
-//drawbounds turns on and off the max bounds 
-    public void draw(GraphicsHandler graphicsHandler) {
-        super.draw(graphicsHandler);
-         //  drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
-    }
+        public void update() {
+                super.update();
+        }
 
-    @Override
-    public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
-        return new HashMap<String, Frame[]>() {{
-            put("STAND_RIGHT", new Frame[] {
-                    new FrameBuilder(spriteSheet.getSprite(0, 0))
-                            .withScale(3)
-                            .withBounds(15, 3, 16,28)//originally was 9for height // was .withBounds(15, 20, 20, 11)
-                            .build()
-            });
+        public void draw(GraphicsHandler graphicsHandler) {
+                super.draw(graphicsHandler);
+                // drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+        }
 
-            put("STAND_LEFT", new Frame[] {
-                    new FrameBuilder(spriteSheet.getSprite(0, 0))
-                            .withScale(3)
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                          .withBounds(20, 3, 16,28)
-                            .build()
-            });
+        @Override
+        public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
+                return new HashMap<String, Frame[]>() {
+                        {
+                                put("STAND_RIGHT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(0, 0))
+                                                                .withScale(3)
+                                                                .withBounds(15, 3, 16, 28)// originally was 9for height
+                                                                                          // // was .withBounds(15, 20,
+                                                                                          // 20, 11)
+                                                                .build()
+                                });
 
-            put("WALK_RIGHT", new Frame[] {
-                    new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
-                            .withScale(3)
-                            .withBounds(15, 3, 16,28)
-                            .build(),
-                    new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
-                            .withScale(3)
-                             .withBounds(15, 3, 16,28)
-                            .build(),
-                    new FrameBuilder(spriteSheet.getSprite(0, 3), 14)
-                            .withScale(3)
-                            .withBounds(15, 3, 16,28)
-                            .build(),
-                    new FrameBuilder(spriteSheet.getSprite(0, 4), 14)
-                            .withScale(3)
-                            .withBounds(15, 3, 16,28)
-                            .build()
-            });
+                                put("STAND_LEFT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(0, 0))
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(20, 3, 16, 28)
+                                                                .build()
+                                });
 
-            put("WALK_LEFT", new Frame[] {
-                    new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
-                            .withScale(3)
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(20, 3, 16,28)
-                            .build(),
-                    new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
-                            .withScale(3)
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(20, 3, 16,28)
-                            .build(),
-                    new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
-                            .withScale(3)
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(20, 3, 16,28)
-                            .build(),
-                    new FrameBuilder(spriteSheet.getSprite(0, 3), 14)
-                            .withScale(3)
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(20, 3, 16,28)
-                            .build()
-            });
+                                put("WALK_RIGHT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
+                                                                .withScale(3)
+                                                                .withBounds(15, 3, 16, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
+                                                                .withScale(3)
+                                                                .withBounds(15, 3, 16, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(0, 3), 14)
+                                                                .withScale(3)
+                                                                .withBounds(15, 3, 16, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(0, 4), 14)
+                                                                .withScale(3)
+                                                                .withBounds(15, 3, 16, 28)
+                                                                .build()
+                                });
 
-            put("JUMP_RIGHT", new Frame[] {
-                    new FrameBuilder(spriteSheet.getSprite(2, 0))
-                            .withScale(3)
-                            .withBounds(15, 3, 16,28)
-                            .build()
-            });
+                                put("WALK_LEFT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(20, 3, 16, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(20, 3, 16, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(20, 3, 16, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(0, 3), 14)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(20, 3, 16, 28)
+                                                                .build()
+                                });
 
-            put("JUMP_LEFT", new Frame[] {
-                    new FrameBuilder(spriteSheet.getSprite(2, 0))
-                            .withScale(3)
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                             .withBounds(20, 3, 16,28)
-                            .build()
-            });
+                                put("JUMP_RIGHT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(2, 0))
+                                                                .withScale(3)
+                                                                .withBounds(15, 3, 16, 28)
+                                                                .build()
+                                });
 
-            put("FALL_RIGHT", new Frame[] {
-                    new FrameBuilder(spriteSheet.getSprite(3, 0))
-                            .withScale(3)
-                             .withBounds(15, 3, 16,28)
-                            .build()
-            });
+                                put("JUMP_LEFT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(2, 0))
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(20, 3, 16, 28)
+                                                                .build()
+                                });
 
-            put("FALL_LEFT", new Frame[] {
-                    new FrameBuilder(spriteSheet.getSprite(3, 0))
-                            .withScale(3)
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(15, 3, 16,28)
-                            .build()
-            });
+                                put("FALL_RIGHT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(3, 0))
+                                                                .withScale(3)
+                                                                .withBounds(15, 3, 16, 28)
+                                                                .build()
+                                });
 
-            put("CROUCH_RIGHT", new Frame[] {//putting 3 for now- fix 
-                    new FrameBuilder(spriteSheet.getSprite(3, 0))
-                            .withScale(3)
-                             .withBounds(15, 20, 25, 28)
-                            .build()
-            });
+                                put("FALL_LEFT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(3, 0))
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(15, 3, 16, 28)
+                                                                .build()
+                                });
 
-            put("CROUCH_LEFT", new Frame[] {// there is no row 4 fix this
-                    new FrameBuilder(spriteSheet.getSprite(3, 0))
-                            .withScale(3)// keep as 3 for now
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(15, 3, 16,28)
-                            .build()
-            });
+                                put("CROUCH_RIGHT", new Frame[] { // putting 3 for now- fix
+                                                new FrameBuilder(spriteSheet.getSprite(3, 0))
+                                                                .withScale(3)
+                                                                .withBounds(15, 20, 25, 28)
+                                                                .build()
+                                });
 
-            put("DEATH_RIGHT", new Frame[] {// there is no row 5 fix this
-                    new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
-                            .withScale(3)
-                            .build(),
-                    new FrameBuilder(spriteSheet.getSprite(5, 1), 8)
-                            .withScale(3)
-                            .build(),
-                    new FrameBuilder(spriteSheet.getSprite(5, 2), -1)
-                            .withScale(3)
-                            .build()
-            });
+                                put("CROUCH_LEFT", new Frame[] { // there is no row 4 fix this
+                                                new FrameBuilder(spriteSheet.getSprite(3, 0))
+                                                                .withScale(3)// keep as 3 for now
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(15, 3, 16, 28)
+                                                                .build()
+                                });
 
-            put("DEATH_LEFT", new Frame[] {// currently no row 5 
-                    new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
-                            .withScale(3)
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .build(),
-                    new FrameBuilder(spriteSheet.getSprite(5, 1), 8)
-                            .withScale(3)
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .build(),
-                    new FrameBuilder(spriteSheet.getSprite(5, 2), -1)
-                            .withScale(3)
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .build()
-            });
+                                put("DEATH_RIGHT", new Frame[] { // there is no row 5 fix this
+                                                new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
+                                                                .withScale(3)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(5, 1), 8)
+                                                                .withScale(3)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(5, 2), -1)
+                                                                .withScale(3)
+                                                                .build()
+                                });
 
-            put("SWIM_STAND_RIGHT", new Frame[] {// currently no row 6
-                    new FrameBuilder(spriteSheet.getSprite(0, 0))
-                            .withScale(3)
-                            .withBounds(15, 3, 16,28)
-                            .build()
-            });
+                                put("DEATH_LEFT", new Frame[] { // currently no row 5
+                                                new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(5, 1), 8)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(5, 2), -1)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .build()
+                                });
 
-            put("SWIM_STAND_LEFT", new Frame[] {
-                    new FrameBuilder(spriteSheet.getSprite(0, 0))
-                            .withScale(3)
-                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(15, 3, 16,28)
-                            .build()
-            });
+                                put("SWIM_STAND_RIGHT", new Frame[] { // currently no row 6
+                                                new FrameBuilder(spriteSheet.getSprite(0, 0))
+                                                                .withScale(3)
+                                                                .withBounds(15, 3, 16, 28)
+                                                                .build()
+                                });
 
+                                put("SWIM_STAND_LEFT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(0, 0))
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(15, 3, 16, 28)
+                                                                .build()
+                                });
 
-                        put("ATTACK_LEFT", new Frame[] {// testing for batt attacking 
-                                new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
-                                        .withScale(3)
-                                        .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                        .withBounds(12, 3, 20,28)
-                                        .build(),
-                                new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
-                                        .withScale(3)
-                                        .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                         .withBounds(12, 3, 20,28)
-                                        .build(),
-                                new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
-                                        .withScale(3)
-                                        .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                        .build()
-                        });
+                                put("ATTACK_LEFT", new Frame[] { // testing for batt attacking
+                                                new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(12, 3, 20, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(12, 3, 20, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .build()
+                                });
 
+                                put("ATTACK_RIGHT", new Frame[] { // testing for batt attacking
+                                                new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
+                                                                .withScale(3)
+                                                                // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(20, 3, 20, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
+                                                                .withScale(3)
+                                                                // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(20, 3, 20, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
+                                                                .withScale(3)
+                                                                // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(20, 3, 20, 28) // .withBounds(8, 9, 8, 9) //
+                                                                                           // the original bounds
+                                                                .build()
+                                });
 
-
-
-                        put("ATTACK_RIGHT", new Frame[] {// testing for batt attacking 
-                                new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
-                                        .withScale(3)
-                                       // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                        .withBounds(20, 3, 20,28)
-                                        .build(),
-                                new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
-                                        .withScale(3)
-                                      //  .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                      .withBounds(20, 3, 20,28)
-                                        .build(),
-                                new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
-                                        .withScale(3)
-                                      //  .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                     .withBounds(20, 3, 20,28)  // .withBounds(8, 9, 8, 9) // the original bounds
-                                        .build()
-                        });
-
-
-        }};
-    }
+                        }
+                };
+        }
 }

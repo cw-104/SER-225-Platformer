@@ -16,7 +16,6 @@ import Utils.Point;
 import java.awt.Color;
 import java.util.HashMap;
 
-
 public class PrisonGuardEnemy extends Enemy {
     protected Point startLocation;
     protected Point endLocation;
@@ -64,7 +63,8 @@ public class PrisonGuardEnemy extends Enemy {
         float startBound = startLocation.x;
         float endBound = endLocation.x;
 
-        // if shoot timer is up and prison guard is not currently shooting, set its state to
+        // if shoot timer is up and prison guard is not currently shooting, set its
+        // state to
         // SHOOT
         if (shootWaitTimer == 0 && prisonGuardState != PrisonGuardState.SHOOT_WAIT) {
             prisonGuardState = PrisonGuardState.SHOOT_WAIT;
@@ -114,7 +114,7 @@ public class PrisonGuardEnemy extends Enemy {
                 movementSpeed = -2.5f;
             }
 
-            int bulletY = Math.round(getY()+50) ;
+            int bulletY = Math.round(getY() + 50);
 
             // create bullet enemy
             Bullet bullet = new Bullet(new Point(bulletX, bulletY), movementSpeed, 60);
@@ -122,7 +122,8 @@ public class PrisonGuardEnemy extends Enemy {
             // add bullet enemy to the map for it to spawn in the level
             map.addEnemy(bullet);
 
-            // change prison guard back to its WALK state after shooting, reset shootTimer to
+            // change prison guard back to its WALK state after shooting, reset shootTimer
+            // to
             // wait a certain number of frames before shooting again
             prisonGuardState = PrisonGuardState.WALK;
 
@@ -136,14 +137,17 @@ public class PrisonGuardEnemy extends Enemy {
         previousPrisonGuardState = prisonGuardState;
     }
 
-    /*public void draw(GraphicsHandler graphicsHandler) {
-        super.draw(graphicsHandler);
-        drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
-    }*/
+    /*
+     * public void draw(GraphicsHandler graphicsHandler) {
+     * super.draw(graphicsHandler);
+     * drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+     * }
+     */
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction, MapEntity entityCollidedWith) {
-        // if prison guard enemy collides with something on the x axis, it turns around and
+        // if prison guard enemy collides with something on the x axis, it turns around
+        // and
         // walks the other way
         if (hasCollided) {
             if (direction == Direction.RIGHT) {
@@ -164,7 +168,7 @@ public class PrisonGuardEnemy extends Enemy {
                         new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                                 .withScale(3)
                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .withBounds(22,16,12,25)
+                                .withBounds(22, 16, 12, 25)
                                 .build(),
                         new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
                                 .withScale(3)
@@ -176,13 +180,13 @@ public class PrisonGuardEnemy extends Enemy {
                 put("WALK_RIGHT", new Frame[] {
                         new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                                 .withScale(3)
-                              // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                              .withBounds(12, 16, 12, 25)
+                                // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                .withBounds(12, 16, 12, 25)
                                 .build(),
                         new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
                                 .withScale(3)
-                               // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                              .withBounds(12, 16, 12,25 )
+                                // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                .withBounds(12, 16, 12, 25)
                                 .build()
                 });
 
@@ -197,11 +201,11 @@ public class PrisonGuardEnemy extends Enemy {
                 put("SHOOT_RIGHT", new Frame[] {
                         new FrameBuilder(spriteSheet.getSprite(1, 0))
                                 .withScale(3)
-                               // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                 .withBounds(12, 16, 12, 25)
                                 .build(),
                 });
-                
+
             }
         };
     }
