@@ -199,6 +199,7 @@ public class Max extends Player {
                                                 new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(12, 3, 20, 28)
                                                                 .build()
                                 });
 
