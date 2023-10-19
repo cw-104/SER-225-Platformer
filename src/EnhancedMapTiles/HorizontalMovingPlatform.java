@@ -22,8 +22,10 @@ public class HorizontalMovingPlatform extends EnhancedMapTile {
     private Direction startDirection;
     private Direction direction;
 
-    public HorizontalMovingPlatform(BufferedImage image, Point startLocation, Point endLocation, TileType tileType, float scale, Rectangle bounds, Direction startDirection) {
-        super(startLocation.x, startLocation.y, new FrameBuilder(image).withBounds(bounds).withScale(scale).build(), tileType);
+    public HorizontalMovingPlatform(BufferedImage image, Point startLocation, Point endLocation, TileType tileType,
+            float scale, Rectangle bounds, Direction startDirection) {
+        super(startLocation.x, startLocation.y, new FrameBuilder(image).withBounds(bounds).withScale(scale).build(),
+                tileType);
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.startDirection = startDirection;
@@ -51,9 +53,19 @@ public class HorizontalMovingPlatform extends EnhancedMapTile {
 
         moveX(moveAmountX);
 
+        int moveAmountY = 0;
+        if (direction == Direction.DOWN) {
+            moveAmountY -= movementSpeed;
+        } else if (direction == Direction.UP) {
+            moveAmountY += movementSpeed;
+        }
+        moveY(moveAmountY);
+
         // if platform reaches the start or end location, it turns around
-        // platform may end up going a bit past the start or end location depending on movement speed
-        // this calculates the difference and pushes the platform back a bit so it ends up right on the start or end location
+        // platform may end up going a bit past the start or end location depending on
+        // movement speed
+        // this calculates the difference and pushes the platform back a bit so it ends
+        // up right on the start or end location
         if (getX1() + getWidth() >= endBound) {
             float difference = endBound - (getX1() + getWidth());
             moveX(-difference);
@@ -66,7 +78,8 @@ public class HorizontalMovingPlatform extends EnhancedMapTile {
             direction = Direction.RIGHT;
         }
 
-        // if tile type is NOT PASSABLE, if the platform is moving and hits into the player (x axis), it will push the player
+        // if tile type is NOT PASSABLE, if the platform is moving and hits into the
+        // player (x axis), it will push the player
         if (tileType == TileType.NOT_PASSABLE) {
             if (intersects(player) && moveAmountX >= 0 && player.getBoundsX1() <= getBoundsX2()) {
                 player.moveXHandleCollision(getBoundsX2() - player.getBoundsX1());
@@ -75,10 +88,12 @@ public class HorizontalMovingPlatform extends EnhancedMapTile {
             }
         }
 
-        // if player is on standing on top of platform, move player by the amount the platform is moving
+        // if player is on standing on top of platform, move player by the amount the
+        // platform is moving
         // this will cause the player to "ride" with the moving platform
         // without this code, the platform would slide right out from under the player
-        if (overlaps(player) && (player.getBoundsY2() + 1) == getBoundsY1() && player.getAirGroundState() == AirGroundState.GROUND) {
+        if (overlaps(player) && (player.getBoundsX2() + 1) == getBoundsX1()
+                && player.getAirGroundState() == AirGroundState.GROUND) {
             player.moveXHandleCollision(moveAmountX);
         }
 

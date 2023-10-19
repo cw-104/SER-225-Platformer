@@ -21,7 +21,7 @@ public class TileBuilder extends JPanel {
     private boolean showEnemies;
 
     public TileBuilder(SelectedTileIndexHolder controlPanelHolder, JLabel hoveredTileIndexLabel) {
-        setBackground(Colors.MAGENTA);
+        setBackground(Colors.WHITE);
         setLocation(0, 0);
         setPreferredSize(new Dimension(585, 562));
         this.controlPanelHolder = controlPanelHolder;
@@ -40,13 +40,16 @@ public class TileBuilder extends JPanel {
             }
 
             @Override
-            public void mouseClicked(MouseEvent e) { }
+            public void mouseClicked(MouseEvent e) {
+            }
 
             @Override
-            public void mouseReleased(MouseEvent e) { }
+            public void mouseReleased(MouseEvent e) {
+            }
 
             @Override
-            public void mouseEntered(MouseEvent e) { }
+            public void mouseEntered(MouseEvent e) {
+            }
         });
 
         addMouseMotionListener(new MouseMotionAdapter() {
@@ -99,8 +102,7 @@ public class TileBuilder extends JPanel {
                     hoveredMapTile.getWidth() - 5,
                     hoveredMapTile.getHeight() - 5,
                     Color.YELLOW,
-                    5
-            );
+                    5);
         }
     }
 
@@ -115,7 +117,8 @@ public class TileBuilder extends JPanel {
         int selectedTileIndex = getSelectedTileIndex(selectedPoint);
         if (selectedTileIndex != -1) {
             MapTile oldMapTile = map.getMapTiles()[selectedTileIndex];
-            MapTile newMapTile =  map.getTileset().getTile(controlPanelHolder.getSelectedTileIndex()).build(oldMapTile.getX(), oldMapTile.getY());
+            MapTile newMapTile = map.getTileset().getTile(controlPanelHolder.getSelectedTileIndex())
+                    .build(oldMapTile.getX(), oldMapTile.getY());
             newMapTile.setMap(map);
             map.getMapTiles()[selectedTileIndex] = newMapTile;
 

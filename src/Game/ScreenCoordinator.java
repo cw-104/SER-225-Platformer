@@ -3,10 +3,16 @@ package Game;
 import Engine.DefaultScreen;
 import Engine.GraphicsHandler;
 import Engine.Screen;
+import Screens.BlackScreen;
 import Screens.CreditsScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
 import Screens.CutsceneScreen;
+import Screens.CutsceneScreen2;
+import Screens.CutsceneScreen3;
+import Screens.CutsceneScreen4;
+import Screens.CutsceneScreen5;
+import Screens.InstructionsScreen;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -51,9 +57,27 @@ public class ScreenCoordinator extends Screen {
 					case CREDITS:
 						currentScreen = new CreditsScreen(this);
 						break;
-					case CUTSCENE:
+					case INSTRUCTIONS:
+						currentScreen = new InstructionsScreen(this);
+						break;
+					case BLACKSCREEN:
+						currentScreen = new BlackScreen(this);
+						break;	
+					case CUTSCENE1:
 						currentScreen = new CutsceneScreen(this);
 						break;
+					case CUTSCENE2:
+						currentScreen = new CutsceneScreen2(this);
+						break;
+					case CUTSCENE3:
+						currentScreen = new CutsceneScreen3(this);
+						break;
+					case CUTSCENE4:
+						currentScreen = new CutsceneScreen4(this);
+						break;
+					case CUTSCENE5:
+						currentScreen = new CutsceneScreen5(this);
+						break;	
 				}
 				currentScreen.initialize();
 			}

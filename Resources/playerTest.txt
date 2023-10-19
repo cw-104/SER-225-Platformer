@@ -1,9 +1,10 @@
+// Class with the changes to the current player class // will come back to later //adding health to player + enemies
+
 package Level;
 
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
-import GameObject.AnimatedSprite;
 import GameObject.GameObject;
 import GameObject.IntersectableRectangle;
 import GameObject.Rectangle;
@@ -53,9 +54,9 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)// 
+    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
         protected boolean isAttacking = false;// when max is NOT attacking
-          
+            protected boolean hasBat = false;// used to determine if max has the bat     //WORKING
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -63,7 +64,7 @@ public abstract class Player extends GameObject {
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
         playerState = PlayerState.STANDING;
-      
+        playerState=PlayerState.ATTACKING; /// trying to add attack     //
         previousPlayerState = playerState;
         levelState = LevelState.RUNNING;
     }
@@ -71,9 +72,9 @@ public abstract class Player extends GameObject {
    
     private List<Enemy> activeEnemies = new ArrayList<>();
     private List<MapEntity> listOfMapEntities = new ArrayList<>(); /// map entities list
+    //private int attackDamage = 10; // Initialize with the appropriate damage value  //BESA
     
     private IntersectableRectangle attackHitbox;
-    // for the enemy
 
     public void update() {
         moveAmountX = 0;
@@ -94,8 +95,6 @@ public abstract class Player extends GameObject {
 
             // move player with respect to map collisions based on how much player needs to
             // move this frame
-
-            
             lastAmountMovedX = super.moveXHandleCollision(moveAmountX);
             lastAmountMovedY = super.moveYHandleCollision(moveAmountY);
 
@@ -106,8 +105,6 @@ public abstract class Player extends GameObject {
             // update player's animation
             super.update();
         }
-
-        
 
         // if player has beaten level
         else if (levelState == LevelState.LEVEL_COMPLETED) {
@@ -131,10 +128,6 @@ public abstract class Player extends GameObject {
         switch (playerState) {
             case STANDING:
                 playerStanding();
-                if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(ATTACK_KEY)) {
-                    keyLocker.lockKey(ATTACK_KEY);
-                    playerState = PlayerState.ATTACKING;
-                }
                 break;
             case WALKING:
                 playerWalking();
@@ -148,24 +141,8 @@ public abstract class Player extends GameObject {
                
                 case ATTACKING: //when max is attacking  //WORKING NOW
                 playerAttacking();
-                if (currentFrameIndex == getCurrentAnimation().length - 1) {
-                    // Attack animation is finished; transition back to another state.
-                    playerState = PlayerState.STANDING; // You can choose a different state.
-                } else {
-                    // Continue playing the attack animation.
-                    super.update();
-                    attackHitbox = currentFrame.getBounds();
-                    for (MapEntity entity : listOfMapEntities) {
-                        if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
-                            entity.getBounds().intersects(attackHitbox)) {
-                            // Handle damaging the enemy
-                            defeatEnemy(entity); // Call a method to defeat the enemy
-                        }
-                    }
-
-                }
                 break;
-        
+              /* **/ 
         }
     }
 
@@ -187,61 +164,14 @@ public abstract class Player extends GameObject {
             playerState = PlayerState.CROUCHING;
         }
         
-        else if (Keyboard.isKeyDown(ATTACK_KEY)) {
-            playerState = PlayerState.ATTACKING;
-            performAttack(); // Implement this method to handle the attack logic.
-        }
         //trying to add attacking
         else if(Keyboard.isKeyDown(ATTACK_KEY)&& !keyLocker.isKeyLocked(ATTACK_KEY)){
              keyLocker.lockKey(ATTACK_KEY);
             playerState = PlayerState.ATTACKING;
             isAttacking = true; // for when max is attacking
-           
+
         }
     }
-
-                        public void update(Enemy enemy) {
-                            super.update();
-                            if (intersects(enemy)) {
-                                touchedEnemy(enemy);
-                            }
-                        }
-                                           
-                        private void performAttack() {
-                            if (facingDirection == Direction.RIGHT) {
-                                // Play the attack animation for Max facing right.
-                                playAnimation("ATTACK_RIGHT");
-                            } else {
-                                // Play the attack animation for Max facing left.
-                                playAnimation("ATTACK_LEFT");
-                            }
-                            // Implement any additional attack logic here.
-                        }
-                               
-                    private void playAnimation(String string) {
-                        }
-
-                    /* */// A subclass can override this method to specify what it does when it touches the enemy
-                    public void touchedEnemy(Enemy enemy){
-               
-                    defeatEnemy(enemy);
-                    }
-                    public void attack() {
-                        if (!isAttacking) {
-                            isAttacking = true;
-                    
-                            // Define the attackHitbox based on the player's current position and dimensions
-                            attackHitbox = new Rectangle(x, y, 12, 16); //12 and 16 testvalues  for attack hitbox//besa
-                    
-                            // Notify active enemies about the attack
-                            for (Enemy enemy : activeEnemies) {
-                                if (((AnimatedSprite) attackHitbox).intersects(enemy.getBounds())) {
-                                   
-                                }
-                            }
-                        }
-                    }
-                    
 
     // player WALKING state logic
     protected void playerWalking() {
@@ -337,7 +267,7 @@ public abstract class Player extends GameObject {
             playerState = PlayerState.STANDING;
         }
     }
-                                                            
+                                                            //working now
                                                             //This is for attacking
                                     protected void playerAttacking() {
                                         currentAnimationName = (facingDirection == Direction.RIGHT) ? "ATTACK_RIGHT" : "ATTACK_LEFT";
@@ -346,30 +276,26 @@ public abstract class Player extends GameObject {
                                         // Check if the attack animation has reached its last frame
                                                         if (currentFrameIndex == getCurrentAnimation().length - 1) {
                                                             // The attack animation has finished; return to the previous state
-                                                          
-                                                            playerState = PlayerState.STANDING; // may change
+                                                            playerState = previousPlayerState;
                                                             isAttacking = false;
-                                                             
                                                         } else {
                                                             // Handle any logic related to attacking here, e.g., damaging enemies
                                                             // Check for collisions with enemies and apply damage as needed
-                                                            super.update(); 
+                                                            // ... besa
                                                             attackHitbox = currentFrame.getBounds();
-
-                                                            for (Enemy entity : map.getActiveEnemies()) {
+                                                              
+                                                            for (MapEntity entity : listOfMapEntities) {
                                                                 if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
                                                                     entity.getBounds().intersects(attackHitbox)) {
-                                                                     entity.hurtEnemy();
-                                                                   
-// remember to add intersecting when player attacks the enemy 
-
+                                                                    // Handle damaging the enemy
+                                                                    damageEnemy(entity);
                                                                 }
                                                             }
 
 
 
                                                             // Ensure the attack animation continues to update
-                                                           // super.update();
+                                                            super.update();
                                                         }
                                     }
 
@@ -440,39 +366,61 @@ public abstract class Player extends GameObject {
             // Get the current frame's hitbox
             Rectangle attackHitbox = currentFrame.getBounds();
 
-                                        for (MapEntity entity : listOfMapEntities) {
-                                            if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
-                                                entity.getBounds().intersects(attackHitbox)) {
-                                                                                    // Handle damaging the enemy
-                                                                                // MapEntity DogEnemy; //COME BACK TO ME LATER  // FINISH THE HEALTH
-                                                                                // listOfMapEntities.add(DogEnemy);//COME BACK TO THIS!!!!!!!!!!!!
-                                              //  damageEnemy(entity); //comeback later
-                                            }
-                                        }
+            for (MapEntity entity : listOfMapEntities) {
+                if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
+                    entity.getBounds().intersects(attackHitbox)) {
+                    // Handle damaging the enemy
+                   // MapEntity DogEnemy; //COME BACK TO ME LATER  // FINISH THE HEALTH
+                  // listOfMapEntities.add(DogEnemy);//COME BACK TO THIS!!!!!!!!!!!!
+                    damageEnemy(entity);
+                }
+            }
         }
     }
-                                                                /* //come back to thisq!!!!!!!!
-                                                                    DogEnemy dogEnemy = new DogEnemy("GuardDog2.png", 24, 15, startingAnimationName, 10);
-                                                                player.addActiveEnemy(dogEnemy);
-                                                                */
+ /* //come back to thisq!!!!!!!!
+    DogEnemy dogEnemy = new DogEnemy("GuardDog2.png", 24, 15, startingAnimationName, 10);
+player.addActiveEnemy(dogEnemy);
+*/
+
+     /* 
+// Sample method to handle damaging an enemy
+private void damageEnemy(MapEntity enemy) {  /// LOOOK AT ME!!!!  //BESA
+    // Check if the enemy is an instance of an enemy class you have defined
+    if (enemy instanceof Enemy) {
+        // Cast the enemy to its specific type
+        Enemy enemyInstance = (Enemy) enemy;
+
+        // Apply damage to the enemy
+        enemyInstance.takeDamage(attackDamage);
+    }
+}
+*/
 
 
 
     }
-                                // Method to defeat an enemy on touch
-private void defeatEnemy(MapEntity enemy) {
+
+
+                                    // Sample method to handle damaging an enemy
+private void damageEnemy(MapEntity enemy) {
+    // Check if the enemy is an instance of an enemy class you have defined
     if (enemy instanceof Enemy) {
-        // Handle defeating the enemy, e.g., removing it from the game
-        enemy.setMapEntityStatus(MapEntityStatus.REMOVED);
+        // Cast the enemy to its specific type
+       // DogEnemy enemyInstance = (DogEnemy) enemy;//changed to speciffic enemy
+
+        
+        /* 
+       // Object attackDamage;// may take out //Besa
+        // Apply damage to the enemy (you may have a health system for enemies)
+        enemyInstance.takeDamage(10); /// LOOK AT MEEEE! //besa
+        */
     }
 }
 
-  
  // Method to add an active enemy to the list
  public void addActiveEnemy(Enemy enemy) {
     activeEnemies.add(enemy);
 }
-
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction, MapEntity entityCollidedWith) {
@@ -510,7 +458,6 @@ private void defeatEnemy(MapEntity enemy) {
             }
         }
     }
-    
 
     // other entities can call this to tell the player they beat a level
     public void completeLevel() {

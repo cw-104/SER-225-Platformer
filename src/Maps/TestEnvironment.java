@@ -18,7 +18,7 @@ import GameObject.Rectangle;
 public class TestEnvironment extends Map {
 
     public TestEnvironment() {
-        super("test_environment.txt", new TestTileset());
+        super("test_map.txt", new TestTileset());
         this.playerStartPosition = getMapTile(2, 10).getLocation();
     }
 

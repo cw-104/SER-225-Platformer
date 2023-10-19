@@ -61,7 +61,7 @@ public abstract class Map {
 
     // map tiles in map that are animated
     protected ArrayList<MapTile> animatedMapTiles;
-
+    
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
         this.tileset = tileset;
@@ -399,4 +399,5 @@ public abstract class Map {
 
     public int getEndBoundX() { return endBoundX; }
     public int getEndBoundY() { return endBoundY; }
-}
+} 
+  
