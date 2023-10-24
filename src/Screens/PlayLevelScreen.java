@@ -184,7 +184,9 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     public int getCoinCount() {
         int totalCoins = 0;
         for (Coin coin : coinList) {
-            totalCoins += coin.totalCoins();
+            if(coin.isCollected()) {
+            totalCoins ++;
+            }
         }
         return totalCoins;
     }

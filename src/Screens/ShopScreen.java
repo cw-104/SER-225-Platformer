@@ -7,7 +7,7 @@ import Level.Map;
 import Maps.ShopScreenMap;
 import SpriteFont.SpriteFont;
 import Screens.PlayLevelScreen;
-
+import GameObject.Coin;
 import java.awt.*;
 
 // This is the class for the main menu screen
@@ -36,7 +36,7 @@ public class ShopScreen extends Screen {
 
     @Override
     public void initialize() {
-        speedUp = new SpriteFont("Speed up", 75, 300, "Comic Sans", 25, new Color(0, 0, 0));
+        speedUp = new SpriteFont("Speed up (5)", 70, 300, "Comic Sans", 25, new Color(0, 0, 0));
         speedUp.setOutlineColor(Color.black);
         speedUp.setOutlineThickness(3);
         speedUpPurchased = false;
@@ -139,6 +139,7 @@ public class ShopScreen extends Screen {
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
+                //int coins = PlayLevelScreen.getCoinCount();
                 //check for correct amt coins
                 //remove coins
                 //apply effect
@@ -174,6 +175,5 @@ public class ShopScreen extends Screen {
         }else if(menuItemSelected == 4) {
             exitText.draw(graphicsHandler);
         }
-        //graphicsHandler.drawFilledRectangleWithBorder(pointerLocationX, pointerLocationY, 20, 20, new Color(49, 207, 240), Color.black, 2);
     }
 }
