@@ -7,12 +7,14 @@ import Screens.BlackScreen;
 import Screens.CreditsScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
+import Screens.ShopIntroScreen;
 import Screens.CutsceneScreen;
 import Screens.CutsceneScreen2;
 import Screens.CutsceneScreen3;
 import Screens.CutsceneScreen4;
 import Screens.CutsceneScreen5;
 import Screens.InstructionsScreen;
+import Screens.ShopScreen;;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -78,6 +80,12 @@ public class ScreenCoordinator extends Screen {
 					case CUTSCENE5:
 						currentScreen = new CutsceneScreen5(this);
 						break;	
+					case SHOPINTRO:
+						currentScreen = new ShopIntroScreen(this);
+						break;	
+					case SHOP:
+						currentScreen = new ShopScreen(this);
+						break;
 				}
 				currentScreen.initialize();
 			}

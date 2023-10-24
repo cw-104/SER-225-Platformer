@@ -43,6 +43,7 @@ public class Coin extends MapEntity {
         return coinTotal;
     }
 
+
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
         if (!isCollected) {
