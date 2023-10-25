@@ -26,6 +26,7 @@ public abstract class Player extends GameObject {
     protected float jumpDegrade = 0;
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
+    protected float speedPowerUp;// added to implement speed powerup. may need to take out //Besa
 
     // values used to handle player movement
     protected float jumpForce = 0;
@@ -123,6 +124,10 @@ public abstract class Player extends GameObject {
     // add gravity to player, which is a downward force
     protected void applyGravity() {
         moveAmountY += gravity + momentumY;
+    }
+    protected void applyPowerUp(){
+
+        moveAmountX += speedPowerUp + speedPowerUp; // may need to change this // besa
     }
 
     // based on player's current state, call appropriate player state handling
