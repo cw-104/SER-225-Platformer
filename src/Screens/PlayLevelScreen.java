@@ -56,9 +56,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
             coin.setMap(map);
         }
         // setup player
-        // this.player = new Cat(map.getPlayerStartPosition().x,
-        // map.getPlayerStartPosition().y);
-        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
+        //this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+       this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
                                                                                                // max into the game
         this.player.setMap(map);
         this.player.addListener(this);
