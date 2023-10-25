@@ -54,7 +54,7 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-    protected boolean isInvincible = true; // if true, player cannot be hurt by enemies (good for testing)
+    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
         protected boolean isAttacking = false;// when max is NOT attacking
           
 
@@ -125,11 +125,11 @@ public abstract class Player extends GameObject {
     protected void applyGravity() {
         moveAmountY += gravity + momentumY;
     }
-    protected void applyPowerUp(){
+                                                                  protected void applyPowerUp(){
 
-        moveAmountX += speedPowerUp + speedPowerUp; // may need to change this // besa
-    }
-
+                                moveAmountX += speedPowerUp + speedPowerUp; // may need to change this // besa
+                            }
+                                 
     // based on player's current state, call appropriate player state handling
     // method
     protected void handlePlayerState() {
@@ -277,18 +277,18 @@ public abstract class Player extends GameObject {
     }
 
     // player CROUCHING state logic
-   protected void playerCrouching() {
-    // if crouch key is released, player enters STANDING state
-    if (Keyboard.isKeyUp(CROUCH_KEY)) {
-        playerState = PlayerState.STANDING;
-    }
+    protected void playerCrouching() {
+        // if crouch key is released, player enters STANDING state
+        if (Keyboard.isKeyUp(CROUCH_KEY)) {
+            playerState = PlayerState.STANDING;
+        }
 
-    // if jump key is pressed, player enters JUMPING state
-    if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
-        keyLocker.lockKey(JUMP_KEY);
-        playerState = PlayerState.JUMPING;
+        // if jump key is pressed, player enters JUMPING state
+        if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
+            keyLocker.lockKey(JUMP_KEY);
+            playerState = PlayerState.JUMPING;
+        }
     }
-}
 
     // player JUMPING state logic
     protected void playerJumping() {
