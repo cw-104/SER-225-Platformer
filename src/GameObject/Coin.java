@@ -32,7 +32,7 @@ public class Coin extends MapEntity {
 
     private void collectCoin(Player player) {
         isCollected = true;
-        coinTotal++;
+        //coinTotal++;
         player.addCoins(1);
     }
 

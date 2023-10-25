@@ -161,12 +161,13 @@ public class ShopScreen extends Screen {
                 if(coins >= 3) {
                     player.removeCoins(3);
                     coinCount.setText("Coins: " + player.getCoins());
+                    speedUpPurchased = true;
                 }
                 //check for correct amt coins
                 //remove coins
                 //apply effect
                 //mark purchased
-                speedUpPurchased = true;
+                
                 //screenCoordinator.setGameState(GameState.BLACKSCREEN);
                 
             } else if (menuItemSelected == 1 || menuItemSelected == 2 || menuItemSelected == 3) {
