@@ -38,6 +38,9 @@ public abstract class Player extends GameObject {
     public void removeCoins(int lessCoins) {
         coins -= lessCoins;
     }
+    public void resetCoins() {
+        coins = 0;
+    }
 
     // values used to handle player movement
     protected float jumpForce = 0;
@@ -65,7 +68,7 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-    protected boolean isInvincible = true; // if true, player cannot be hurt by enemies (good for testing)
+    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
         protected boolean isAttacking = false;// when max is NOT attacking
           
 
