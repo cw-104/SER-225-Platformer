@@ -28,6 +28,18 @@ public abstract class Player extends GameObject {
     protected float momentumYIncrease = 0;
     protected float speedPowerUp;// added to implement speed powerup. may need to take out //Besa
 
+    //coin
+    protected int coins;
+    public int getCoins() {
+        return coins;
+    }
+    public void addCoins(int newCoins) {
+        coins += newCoins;
+    }
+    public void removeCoins(int lessCoins) {
+        coins -= lessCoins;
+    }
+
     // values used to handle player movement
     protected float jumpForce = 0;
     protected float momentumY = 0;
@@ -576,7 +588,6 @@ private void defeatEnemy(MapEntity enemy) {
     }
 
     
-
     public PlayerState getPlayerState() {
         return playerState;
     }
