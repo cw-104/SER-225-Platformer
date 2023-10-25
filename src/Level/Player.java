@@ -27,6 +27,18 @@ public abstract class Player extends GameObject {
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
 
+    //coin
+    protected int coins;
+    public int getCoins() {
+        return coins;
+    }
+    public void addCoins(int newCoins) {
+        coins += newCoins;
+    }
+    public void removeCoins(int lessCoins) {
+        coins -= lessCoins;
+    }
+
     // values used to handle player movement
     protected float jumpForce = 0;
     protected float momentumY = 0;

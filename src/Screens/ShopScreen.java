@@ -5,9 +5,12 @@ import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
 import Maps.ShopScreenMap;
+import Players.Max;
 import SpriteFont.SpriteFont;
 import Screens.PlayLevelScreen;
 import GameObject.Coin;
+import GameObject.Sprite;
+import Level.Player;
 import java.awt.*;
 
 // This is the class for the main menu screen
@@ -25,20 +28,32 @@ public class ShopScreen extends Screen {
     protected SpriteFont emptyText;
     protected SpriteFont exitText;
     protected SpriteFont purchasedText;
+    protected SpriteFont coinCount;
+    protected int coins;
     protected Map background;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
     protected KeyLocker keyLocker = new KeyLocker();
+    protected Player player;
+    protected PlayLevelScreen playLevelScreen;
 
-    public ShopScreen(ScreenCoordinator screenCoordinator) {
-        this.screenCoordinator = screenCoordinator;
+
+
+    public ShopScreen(PlayLevelScreen playLevelScreen) {
+        this.playLevelScreen = playLevelScreen;
+        initialize();
     }
+
 
     @Override
     public void initialize() {
+        //player for access coin count
+        this.player = new Max(0,0);
+        //text and icons for shop items
         speedUp = new SpriteFont("Speed up (5)", 70, 300, "Comic Sans", 25, new Color(0, 0, 0));
         speedUp.setOutlineColor(Color.black);
         speedUp.setOutlineThickness(3);
+        //marks if item is purchased so it prevents doubles
         speedUpPurchased = false;
         item2 = new SpriteFont("Slot 2", 225, 300, "Comic Sans", 25, new Color(0, 0, 0));
         item2.setOutlineColor(Color.black);
@@ -52,12 +67,16 @@ public class ShopScreen extends Screen {
         exit = new SpriteFont("Leave", 675, 300, "Comic Sans", 25, new Color(0, 0, 0));
         exit.setOutlineColor(Color.black);
         exit.setOutlineThickness(3);
+        //max's text about the item
         speedUpText = new SpriteFont("\"Energy drink.\" Why is that in quotations?", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         emptyText = new SpriteFont("There's nothing here", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         exitText = new SpriteFont("I don't want anything.", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         purchasedText = new SpriteFont("I guess this is mine now", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         speedUpText.setOutlineColor(Color.black);
         speedUpText.setOutlineThickness(3);
+        //coint counter in the shop
+        coins = player.getCoins();
+        coinCount = new SpriteFont(("Coins: " + coins), 225, 20, "Comic Sans", 25, new Color(225,225,225));
 
         background = new ShopScreenMap();
         background.setAdjustCamera(false);
@@ -90,7 +109,7 @@ public class ShopScreen extends Screen {
             currentMenuItemHovered = 1;
         }
 
-        // sets location for blue square in front of text (pointerLocation) and also sets color of spritefont text based on which menu item is being hovered
+        // sets color of spritefont text based on which menu item is being hovered
         if (currentMenuItemHovered == 0) {
             if(speedUpPurchased == false) {
             speedUp.setColor(new Color(255, 255, 255));
@@ -139,7 +158,10 @@ public class ShopScreen extends Screen {
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
-                //int coins = PlayLevelScreen.getCoinCount();
+                if(coins >= 3) {
+                    player.removeCoins(3);
+                    coinCount.setText("Coins: " + player.getCoins());
+                }
                 //check for correct amt coins
                 //remove coins
                 //apply effect
@@ -151,10 +173,10 @@ public class ShopScreen extends Screen {
                 //add when there are things to purchase
             } else if (menuItemSelected == 4) {
                 //when level 2 exists this should send there - menu is temp
-                screenCoordinator.setGameState(GameState.MENU);
+                playLevelScreen.resetLevel();
             }
-        }    
-    }
+        }
+    } 
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
@@ -163,6 +185,7 @@ public class ShopScreen extends Screen {
         item3.draw(graphicsHandler);
         item4.draw(graphicsHandler);
         exit.draw(graphicsHandler);
+        coinCount.draw(graphicsHandler);
         
         //the text for each item only appears when the item is hovered 
         menuItemSelected = currentMenuItemHovered;

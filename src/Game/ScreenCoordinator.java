@@ -79,12 +79,6 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case CUTSCENE5:
 						currentScreen = new CutsceneScreen5(this);
-						break;	
-					case SHOPINTRO:
-						currentScreen = new ShopIntroScreen(this);
-						break;	
-					case SHOP:
-						currentScreen = new ShopScreen(this);
 						break;
 				}
 				currentScreen.initialize();

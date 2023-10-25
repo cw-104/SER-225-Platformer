@@ -7,7 +7,7 @@ import Level.Map;
 import Maps.Cutscene2Map;
 import Maps.ShopHallMap;
 import SpriteFont.SpriteFont;
-
+import Level.Player;
 import java.awt.*;
 
 // This is the class for the main menu screen
@@ -18,9 +18,12 @@ public class ShopIntroScreen extends Screen {
     protected Map background;
     protected int keyPressTimer;
     protected KeyLocker keyLocker = new KeyLocker();
+    protected PlayLevelScreen playLevelScreen;
+    protected Player player;
 
-    public ShopIntroScreen(ScreenCoordinator screenCoordinator) {
-        this.screenCoordinator = screenCoordinator;
+    public ShopIntroScreen(PlayLevelScreen playLevelScreen) {
+        this.playLevelScreen = playLevelScreen;
+        initialize();
     }
 
     @Override
@@ -33,7 +36,7 @@ public class ShopIntroScreen extends Screen {
         keyLocker.lockKey(Key.SPACE);
     }
 
-    public void update() {
+    /*public void update() {
         // update background map (to play tile animations)
         background.update(null);
 
@@ -44,13 +47,26 @@ public class ShopIntroScreen extends Screen {
             keyLocker.unlockKey(Key.SPACE);
         }
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
-           screenCoordinator.setGameState((GameState.SHOP));
+           playLevelScreen.goToShop();
            
+        }
+    }*/
+
+    @Override
+    public void update() {
+        if (Keyboard.isKeyUp(Key.SPACE)) {
+            keyLocker.unlockKey(Key.SPACE);
+        }
+
+        // if space is pressed, reset level. if escape is pressed, go back to main menu
+        if (Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE)) {
+            playLevelScreen.goToShop(player);
         }
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
+        //graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), Color.black);
         narration.drawWithParsedNewLines(graphicsHandler, 3);
         prompt.draw(graphicsHandler);
     }

@@ -26,13 +26,14 @@ public class Coin extends MapEntity {
 
     public void check(Player player) {
         if ((intersects(player) || overlaps(player)) && !isCollected) {
-            collectCoin();
+            collectCoin(player);
         }
     }
 
-    private void collectCoin() {
+    private void collectCoin(Player player) {
         isCollected = true;
         coinTotal++;
+        player.addCoins(1);
     }
 
     public boolean isCollected() {
