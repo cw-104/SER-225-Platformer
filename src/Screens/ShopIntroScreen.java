@@ -20,6 +20,7 @@ public class ShopIntroScreen extends Screen {
     protected KeyLocker keyLocker = new KeyLocker();
     protected PlayLevelScreen playLevelScreen;
     protected Player player;
+    protected int totalCoins;
 
     public ShopIntroScreen(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
@@ -60,7 +61,7 @@ public class ShopIntroScreen extends Screen {
 
         // if space is pressed, reset level. if escape is pressed, go back to main menu
         if (Keyboard.isKeyDown(Key.SPACE) && !keyLocker.isKeyLocked(Key.SPACE)) {
-            playLevelScreen.goToShop(player);
+            playLevelScreen.goToShop(this.player);
         }
     }
 

@@ -75,7 +75,7 @@ public class ShopScreen extends Screen {
         speedUpText.setOutlineColor(Color.black);
         speedUpText.setOutlineThickness(3);
         //coint counter in the shop
-        coins = player.getCoins();
+        coins = playLevelScreen.getCoins();
         coinCount = new SpriteFont(("Coins: " + coins), 225, 20, "Comic Sans", 25, new Color(225,225,225));
 
         background = new ShopScreenMap();
@@ -155,10 +155,11 @@ public class ShopScreen extends Screen {
         if (Keyboard.isKeyUp(Key.SPACE)) {
             keyLocker.unlockKey(Key.SPACE);
         }
-        if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
+        if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE) && keyPressTimer == 0) {
+            keyPressTimer = 14;
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
-                if(coins >= 3) {
+                if(coins >= 0 && speedUpPurchased == false) {
                     player.removeCoins(3);
                     coinCount.setText("Coins: " + player.getCoins());
                     speedUpPurchased = true;
@@ -186,7 +187,7 @@ public class ShopScreen extends Screen {
         item3.draw(graphicsHandler);
         item4.draw(graphicsHandler);
         exit.draw(graphicsHandler);
-        coinCount.draw(graphicsHandler);
+        //coinCount.draw(graphicsHandler);
         
         //the text for each item only appears when the item is hovered 
         menuItemSelected = currentMenuItemHovered;

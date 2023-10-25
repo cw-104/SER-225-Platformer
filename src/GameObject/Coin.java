@@ -40,8 +40,8 @@ public class Coin extends MapEntity {
         return isCollected;
     }
 
-    public int totalCoins() {
-        return coinTotal;
+    public int totalCoins(Player player) {
+        return player.getCoins();
     }
 
     @Override

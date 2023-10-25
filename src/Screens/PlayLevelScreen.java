@@ -107,7 +107,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                     levelClearedScreen.update();
                     screenTimer--;
                     if (screenTimer == 0) {
-                        goToShopIntro(player);
+                        goToShopIntro(this.player);
                     }
                 }
                 break;
@@ -210,9 +210,13 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         int totalCoins = 0;
         for (Coin coin : coinList) {
             if(coin.isCollected()) {
-            totalCoins ++;
+            player.addCoins(1);;
             }
         }
         return totalCoins;
+    }
+
+    public int getCoins() {
+        return player.getCoins();
     }
 }
