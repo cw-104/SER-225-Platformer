@@ -26,6 +26,7 @@ public abstract class Player extends GameObject {
     protected float jumpDegrade = 0;
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
+    protected int lives = 3;
 
     // coin
     protected int coins;
@@ -239,7 +240,10 @@ public abstract class Player extends GameObject {
     /* */// A subclass can override this method to specify what it does when it touches
          // the enemy
     public void touchedEnemy(Enemy enemy) {
-
+        lives--;
+        if (lives <= 0) {
+        }
+        // enemy.hurtEnemy(this); //come back to this later //BESA
         defeatEnemy(enemy);
     }
 
@@ -512,9 +516,14 @@ public abstract class Player extends GameObject {
     // other entities can call this method to hurt the player
     public void hurtPlayer(MapEntity mapEntity) {
         if (!isInvincible) {
-            // if map entity is an enemy, kill player on touch
-            if (mapEntity instanceof Enemy) {
-                levelState = LevelState.PLAYER_DEAD;
+            if (lives > 0) {
+                if (mapEntity instanceof Enemy) {
+                    lives--; // Reduce the player's lives
+
+                }
+            }
+            if (lives <= 0) {
+                levelState = LevelState.PLAYER_DEAD; // Set to dead only if all lives are lost
             }
         }
     }
@@ -603,5 +612,13 @@ public abstract class Player extends GameObject {
 
     public void addListener(PlayerListener listener) {
         listeners.add(listener);
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 }
