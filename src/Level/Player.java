@@ -520,14 +520,17 @@ private void defeatEnemy(MapEntity enemy) {
     // other entities can call this method to hurt the player
     public void hurtPlayer(MapEntity mapEntity) {
         if (!isInvincible) {
+            if(lives > 0){
             if (mapEntity instanceof Enemy) {
                 lives--; // Reduce the player's lives
+            }
+        }
                 if (lives <= 0) {
                     levelState = LevelState.PLAYER_DEAD; // Set to dead only if all lives are lost
                 }
             }
         }
-    }
+    
     
     
     // other entities can call this to tell the player they beat a level
