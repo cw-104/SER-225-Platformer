@@ -26,7 +26,7 @@ public abstract class Player extends GameObject {
     protected float jumpDegrade = 0;
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
-    protected int lives = 3;
+    protected float speedPowerUp;// added to implement speed powerup. may need to take out //Besa
 
     // coin
     protected int coins;
@@ -73,7 +73,7 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)//
+    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isAttacking = false;// when max is NOT attacking
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
@@ -139,6 +139,11 @@ public abstract class Player extends GameObject {
     // add gravity to player, which is a downward force
     protected void applyGravity() {
         moveAmountY += gravity + momentumY;
+    }
+
+    protected void applyPowerUp() {
+
+        moveAmountX += speedPowerUp + speedPowerUp; // may need to change this // besa
     }
 
     // based on player's current state, call appropriate player state handling
