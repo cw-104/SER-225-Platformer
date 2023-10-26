@@ -171,6 +171,7 @@ public class ShopScreen extends Screen {
                     coinCount.setText("Coins: " + player.getCoins());
                     speedUpPurchased = true;
                 }
+                  
                 //check for correct amt coins
                 //remove coins
                 //apply effect
@@ -199,6 +200,10 @@ public class ShopScreen extends Screen {
         if(menuItemSelected == 0 && this.player.getCoins() < 3 && speedUpPurchased == false) {
             notEnough.draw(graphicsHandler);
         }
+        if (this.player.getCoins() < 3 && speedUpPurchased == false) {
+        // Display a message for not enough coins
+        notEnough.draw(graphicsHandler);
+    }
         if(menuItemSelected == 0 && speedUpPurchased == false && this.player.getCoins() >= 3) {
             speedUpText.drawWithParsedNewLines(graphicsHandler, 2);
         } else if(menuItemSelected == 0 && speedUpPurchased == true) {
