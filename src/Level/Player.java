@@ -66,7 +66,7 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-        protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
+    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)// 
         protected boolean isAttacking = false;// when max is NOT attacking
           
 
@@ -76,7 +76,7 @@ public abstract class Player extends GameObject {
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
         playerState = PlayerState.STANDING;
-      //  playerState=PlayerState.ATTACKING; /// trying to add attack     // delete this
+      
         previousPlayerState = playerState;
         levelState = LevelState.RUNNING;
     }
@@ -84,20 +84,14 @@ public abstract class Player extends GameObject {
    
     private List<Enemy> activeEnemies = new ArrayList<>();
     private List<MapEntity> listOfMapEntities = new ArrayList<>(); /// map entities list
-    //private int attackDamage = 10; // Initialize with the appropriate damage value  //BESA
-      //      private int attackCooldown = 0; // Number of frames to wait before allowing another attack
-
+    
     private IntersectableRectangle attackHitbox;
+    // for the enemy
 
     public void update() {
         moveAmountX = 0;
         moveAmountY = 0;
-/* 
-        // Check if the player can attack again
-    if (attackCooldown > 0) {
-        attackCooldown--;
-    }
-    */
+
         // if player is currently playing through level (has not won or lost)
         if (levelState == LevelState.RUNNING) {
             applyGravity();
@@ -165,14 +159,14 @@ public abstract class Player extends GameObject {
                 playerJumping();
                 break;
                
-                case ATTACKING: //when max is attacking  
+                case ATTACKING: //when max is attacking  //WORKING NOW
                 playerAttacking();
                 if (currentFrameIndex == getCurrentAnimation().length - 1) {
                     // Attack animation is finished; transition back to another state.
                     playerState = PlayerState.STANDING; // You can choose a different state.
                 } else {
                     // Continue playing the attack animation.
-                    super.update();// besa
+                    super.update();
                     attackHitbox = currentFrame.getBounds();
                     for (MapEntity entity : listOfMapEntities) {
                         if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
@@ -205,7 +199,7 @@ public abstract class Player extends GameObject {
         else if (Keyboard.isKeyDown(CROUCH_KEY)) {
             playerState = PlayerState.CROUCHING;
         }
-        //besa
+        
         else if (Keyboard.isKeyDown(ATTACK_KEY)) {
             playerState = PlayerState.ATTACKING;
             performAttack(); // Implement this method to handle the attack logic.
@@ -225,7 +219,7 @@ public abstract class Player extends GameObject {
                                 touchedEnemy(enemy);
                             }
                         }
-                                            //besa
+                                           
                         private void performAttack() {
                             if (facingDirection == Direction.RIGHT) {
                                 // Play the attack animation for Max facing right.
@@ -236,7 +230,7 @@ public abstract class Player extends GameObject {
                             }
                             // Implement any additional attack logic here.
                         }
-                                //besa
+                               
                     private void playAnimation(String string) {
                         }
 
@@ -253,12 +247,12 @@ public abstract class Player extends GameObject {
                             isAttacking = true;
                     
                             // Define the attackHitbox based on the player's current position and dimensions
-                            attackHitbox = new Rectangle(x, y, 12, 16); //12 and 16 test values //besa
+                            attackHitbox = new Rectangle(x, y, 12, 16); //12 and 16 testvalues  for attack hitbox//besa
                     
                             // Notify active enemies about the attack
                             for (Enemy enemy : activeEnemies) {
                                 if (((AnimatedSprite) attackHitbox).intersects(enemy.getBounds())) {
-                                    //enemy.defeat();
+                                   
                                 }
                             }
                         }
@@ -294,18 +288,18 @@ public abstract class Player extends GameObject {
     }
 
     // player CROUCHING state logic
-    protected void playerCrouching() {
-        // if crouch key is released, player enters STANDING state
-        if (Keyboard.isKeyUp(CROUCH_KEY)) {
-            playerState = PlayerState.STANDING;
-        }
-
-        // if jump key is pressed, player enters JUMPING state
-        if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
-            keyLocker.lockKey(JUMP_KEY);
-            playerState = PlayerState.JUMPING;
-        }
+   protected void playerCrouching() {
+    // if crouch key is released, player enters STANDING state
+    if (Keyboard.isKeyUp(CROUCH_KEY)) {
+        playerState = PlayerState.STANDING;
     }
+
+    // if jump key is pressed, player enters JUMPING state
+    if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
+        keyLocker.lockKey(JUMP_KEY);
+        playerState = PlayerState.JUMPING;
+    }
+}
 
     // player JUMPING state logic
     protected void playerJumping() {
@@ -359,7 +353,7 @@ public abstract class Player extends GameObject {
             playerState = PlayerState.STANDING;
         }
     }
-                                                            //working now
+                                                            
                                                             //This is for attacking
                                     protected void playerAttacking() {
                                         currentAnimationName = (facingDirection == Direction.RIGHT) ? "ATTACK_RIGHT" : "ATTACK_LEFT";
@@ -368,34 +362,23 @@ public abstract class Player extends GameObject {
                                         // Check if the attack animation has reached its last frame
                                                         if (currentFrameIndex == getCurrentAnimation().length - 1) {
                                                             // The attack animation has finished; return to the previous state
-                                                          //  playerState = previousPlayerState;
+                                                          
                                                             playerState = PlayerState.STANDING; // may change
                                                             isAttacking = false;
-                                                             // Set the attack cooldown to a value (testing purpases is 20, we can change this later) to prevent immediate re-attacks
-                                                                      //  attackCooldown = 5; //was 20 at 1st 
+                                                             
                                                         } else {
                                                             // Handle any logic related to attacking here, e.g., damaging enemies
                                                             // Check for collisions with enemies and apply damage as needed
-                                                            super.update(); // ... besa
+                                                            super.update(); 
                                                             attackHitbox = currentFrame.getBounds();
 
                                                             for (Enemy entity : map.getActiveEnemies()) {
                                                                 if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
                                                                     entity.getBounds().intersects(attackHitbox)) {
                                                                      entity.hurtEnemy();
-                                                                    // Handle damaging the enemy
-                                                                   // damageEnemy(entity); //come back later //besa
-                                                                   //defeatEnemy(entity);
+                                                                   
 // remember to add intersecting when player attacks the enemy 
 
-                                                                            /* *
-                                                                            if (attackCooldown == 0) {
-                                                                                // Defeat the enemy on touch
-                                                                                defeatEnemy(entity);
-                                                                                // Set the attack cooldown to prevent rapid attacks
-                                                                                attackCooldown = 5;//may take out
-                                                                            }
-                                                                            */
                                                                 }
                                                             }
 
@@ -489,20 +472,6 @@ public abstract class Player extends GameObject {
                                                                 player.addActiveEnemy(dogEnemy);
                                                                 */
 
-                                                                    /* 
-                                                                // Sample method to handle damaging an enemy // come back to later
-                                                                private void damageEnemy(MapEntity enemy) {  /// LOOOK AT ME!!!!  //BESA
-                                                                    // Check if the enemy is an instance of an enemy class you have defined
-                                                                    if (enemy instanceof Enemy) {
-                                                                        // Cast the enemy to its specific type
-                                                                        Enemy enemyInstance = (Enemy) enemy;
-
-                                                                        // Apply damage to the enemy
-                                                                        enemyInstance.takeDamage(attackDamage);
-                                                                    }
-                                                                }
-                                                                */
-
 
 
     }
@@ -514,24 +483,7 @@ private void defeatEnemy(MapEntity enemy) {
     }
 }
 
-
-                                                                // Sample method to handle damaging an enemy// come back to later 
-                                                                /* 
-                            private void damageEnemy(MapEntity enemy) {
-                                // Check if the enemy is an instance of an enemy class you have defined
-                                if (enemy instanceof Enemy) {
-                                    // Cast the enemy to its specific type
-                                // DogEnemy enemyInstance = (DogEnemy) enemy;//changed to speciffic enemy
-
-                                    
-                                    /* 
-                                // Object attackDamage;// may take out //Besa
-                                    // Apply damage to the enemy (you may have a health system for enemies)
-                                    enemyInstance.takeDamage(10); /// LOOK AT MEEEE! //besa
-                                    */
-                            //    }
-                        //    }
-                             //   */        
+  
  // Method to add an active enemy to the list
  public void addActiveEnemy(Enemy enemy) {
     activeEnemies.add(enemy);
