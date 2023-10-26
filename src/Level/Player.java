@@ -27,6 +27,21 @@ public abstract class Player extends GameObject {
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
 
+    //coin
+    protected int coins;
+    public int getCoins() {
+        return coins;
+    }
+    public void addCoins(int newCoins) {
+        coins += newCoins;
+    }
+    public void removeCoins(int lessCoins) {
+        coins -= lessCoins;
+    }
+    public void resetCoins() {
+        coins = 0;
+    }
+
     // values used to handle player movement
     protected float jumpForce = 0;
     protected float momentumY = 0;
@@ -272,18 +287,18 @@ public abstract class Player extends GameObject {
     }
 
     // player CROUCHING state logic
-    protected void playerCrouching() {
-        // if crouch key is released, player enters STANDING state
-        if (Keyboard.isKeyUp(CROUCH_KEY)) {
-            playerState = PlayerState.STANDING;
-        }
-
-        // if jump key is pressed, player enters JUMPING state
-        if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
-            keyLocker.lockKey(JUMP_KEY);
-            playerState = PlayerState.JUMPING;
-        }
+   protected void playerCrouching() {
+    // if crouch key is released, player enters STANDING state
+    if (Keyboard.isKeyUp(CROUCH_KEY)) {
+        playerState = PlayerState.STANDING;
     }
+
+    // if jump key is pressed, player enters JUMPING state
+    if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
+        keyLocker.lockKey(JUMP_KEY);
+        playerState = PlayerState.JUMPING;
+    }
+}
 
     // player JUMPING state logic
     protected void playerJumping() {
@@ -571,7 +586,6 @@ private void defeatEnemy(MapEntity enemy) {
     }
 
     
-
     public PlayerState getPlayerState() {
         return playerState;
     }

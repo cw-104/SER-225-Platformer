@@ -7,6 +7,8 @@ import EnhancedMapTiles.EndLevelBox;
 import EnhancedMapTiles.HorizontalMovingPlatform;
 import GameObject.Rectangle;
 import Level.*;
+import NPCs.Walrus;
+import NPCs.Shop;
 import Tilesets.TestTileset;
 import Tilesets.LabTileset;
 import Utils.Direction;
