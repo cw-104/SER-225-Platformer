@@ -133,7 +133,8 @@ public class MenuScreen extends Screen {
             } else if (menuItemSelected == 2) {
                 screenCoordinator.setGameState(GameState.INSTRUCTIONS);
             } else if (menuItemSelected == 3) {
-                screenCoordinator.setGameState(GameState.LEVEL);
+                //temp change for testing - return to level when done with shop
+                screenCoordinator.setGameState(GameState.SHOPINTRO);
             }
             
         }
