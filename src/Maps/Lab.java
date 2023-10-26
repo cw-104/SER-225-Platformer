@@ -71,6 +71,10 @@ public class Lab extends Map {
                                 24).getLocation().subtractY(25), Direction.LEFT);
                 enemies.add(DogEnemy_5);
 
+                DogEnemy DogEnemy_6 = new DogEnemy(getMapTile(88,
+                                13).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_6);
+
                 PrisonGuardEnemy Guard_1 = new PrisonGuardEnemy(getMapTile(10, 5).getLocation().subtractY(75),
                                 getMapTile(15, 5).getLocation().subtractY(75), Direction.RIGHT);
                 enemies.add(Guard_1);
