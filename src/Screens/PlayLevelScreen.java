@@ -75,7 +75,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
 
         // Coin Counter Display
-        this.coinCounter = new SpriteFont("Coins: " + this.getCoinCount(), 15, 25, "Arial", 35, new Color(255, 0, 0));
+        this.coinCounter = new SpriteFont("Coins: " + player.getCoins(), 15, 25, "Arial", 35, new Color(255, 0, 0));
         this.coinCounter.setOutlineColor(Color.black);
         this.coinCounter.setOutlineThickness(2);
 
@@ -94,7 +94,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                 for (Coin coin : coinList) {
                     coin.check(player);
                 }
-                coinCounter.setText("Coins: " + player.getCoins()/*this.getCoinCount()*/);
+                coinCounter.setText("Coins: " + this.player.getCoins()/*this.getCoinCount()*/);
                 break;
 
             // if level has been completed, bring up level cleared screen
@@ -115,6 +115,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
             // player back to main menu)
             case LEVEL_LOSE: {
                 levelLoseScreen.update();
+                this.player.resetCoins();
                 break;
 
             }
@@ -178,6 +179,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     @Override
     public void onDeath() {
+        //player.resetCoins();
         if (playLevelScreenState != PlayLevelScreenState.LEVEL_LOSE) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_LOSE;
         }
@@ -209,13 +211,9 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         int totalCoins = 0;
         for (Coin coin : coinList) {
             if(coin.isCollected()) {
-            player.addCoins(1);;
+            player.addCoins(1);
             }
         }
         return totalCoins;
-    }
-
-    public int getCoins() {
-        return player.getCoins();
     }
 }

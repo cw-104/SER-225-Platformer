@@ -39,6 +39,9 @@ public abstract class Player extends GameObject {
     public void removeCoins(int lessCoins) {
         coins -= lessCoins;
     }
+    public void resetCoins() {
+        coins = 0;
+    }
 
     // values used to handle player movement
     protected float jumpForce = 0;

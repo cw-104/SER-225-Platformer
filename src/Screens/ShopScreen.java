@@ -48,7 +48,7 @@ public class ShopScreen extends Screen {
     @Override
     public void initialize() {
         //player for access coin count
-        this.player = new Max(0,0);
+        this.player = playLevelScreen.player;
         //text and icons for shop items
         speedUp = new SpriteFont("Speed up (5)", 70, 300, "Comic Sans", 25, new Color(0, 0, 0));
         speedUp.setOutlineColor(Color.black);
@@ -75,7 +75,7 @@ public class ShopScreen extends Screen {
         speedUpText.setOutlineColor(Color.black);
         speedUpText.setOutlineThickness(3);
         //coint counter in the shop
-        coins = playLevelScreen.getCoins();
+        coins = player.getCoins();
         coinCount = new SpriteFont(("Coins: " + coins), 225, 20, "Comic Sans", 25, new Color(225,225,225));
 
         background = new ShopScreenMap();
@@ -101,6 +101,8 @@ public class ShopScreen extends Screen {
                 keyPressTimer--;
             }
         }
+
+        coinCount.setText("Coins: " + player.getCoins());
 
         // if down is pressed on last menu item or up is pressed on first menu item, "loop" the selection back around to the beginning/end
         if (currentMenuItemHovered > 4) {
@@ -159,7 +161,7 @@ public class ShopScreen extends Screen {
             keyPressTimer = 14;
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
-                if(coins >= 0 && speedUpPurchased == false) {
+                if(this.player.getCoins() >= 3 && speedUpPurchased == false) {
                     player.removeCoins(3);
                     coinCount.setText("Coins: " + player.getCoins());
                     speedUpPurchased = true;
@@ -168,8 +170,6 @@ public class ShopScreen extends Screen {
                 //remove coins
                 //apply effect
                 //mark purchased
-                
-                //screenCoordinator.setGameState(GameState.BLACKSCREEN);
                 
             } else if (menuItemSelected == 1 || menuItemSelected == 2 || menuItemSelected == 3) {
                 //add when there are things to purchase
@@ -187,7 +187,7 @@ public class ShopScreen extends Screen {
         item3.draw(graphicsHandler);
         item4.draw(graphicsHandler);
         exit.draw(graphicsHandler);
-        //coinCount.draw(graphicsHandler);
+        coinCount.draw(graphicsHandler);
         
         //the text for each item only appears when the item is hovered 
         menuItemSelected = currentMenuItemHovered;
