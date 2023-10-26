@@ -7,13 +7,14 @@ import Level.Map;
 import Maps.ShopScreenMap;
 import Players.Max;
 import SpriteFont.SpriteFont;
+import Utils.Colors;
 import Screens.PlayLevelScreen;
 import GameObject.Coin;
 import GameObject.Sprite;
 import Level.Player;
 import java.awt.*;
 
-// This is the class for the main menu screen
+// This is the class for the shop screen
 public class ShopScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected int currentMenuItemHovered = 0; // current menu item being "hovered" over
@@ -29,6 +30,7 @@ public class ShopScreen extends Screen {
     protected SpriteFont exitText;
     protected SpriteFont purchasedText;
     protected SpriteFont coinCount;
+    protected SpriteFont notEnough;
     protected int coins;
     protected Map background;
     protected int keyPressTimer;
@@ -50,33 +52,36 @@ public class ShopScreen extends Screen {
         //player for access coin count
         this.player = playLevelScreen.player;
         //text and icons for shop items
-        speedUp = new SpriteFont("Speed up (5)", 70, 300, "Comic Sans", 25, new Color(0, 0, 0));
+        speedUp = new SpriteFont("Speed up (3)", 65, 300, "Comic Sans", 25, new Color(0, 0, 0));
         speedUp.setOutlineColor(Color.black);
         speedUp.setOutlineThickness(3);
-        //marks if item is purchased so it prevents doubles
+        //marks if item is purchased so  prevents doubles
         speedUpPurchased = false;
-        item2 = new SpriteFont("Slot 2", 225, 300, "Comic Sans", 25, new Color(0, 0, 0));
+        //items not yet in shop
+        item2 = new SpriteFont("Slot 2", 245, 300, "Comic Sans", 25, new Color(0, 0, 0));
         item2.setOutlineColor(Color.black);
         item2.setOutlineThickness(3);
-        item3 = new SpriteFont("Slot 3", 375, 300, "Comic Sans", 25, new Color(0, 0, 0));
+        item3 = new SpriteFont("Slot 3", 385, 300, "Comic Sans", 25, new Color(0, 0, 0));
         item3.setOutlineColor(Color.black);
         item3.setOutlineThickness(3);
-        item4 = new SpriteFont("Slot 4", 525, 300, "Comic Sans", 25, new Color(0, 0, 0));
+        item4 = new SpriteFont("Slot 4", 535, 300, "Comic Sans", 25, new Color(0, 0, 0));
         item4.setOutlineColor(Color.black);
         item4.setOutlineThickness(3);
-        exit = new SpriteFont("Leave", 675, 300, "Comic Sans", 25, new Color(0, 0, 0));
+        //leave screen text
+        exit = new SpriteFont("Leave", 685, 300, "Comic Sans", 25, new Color(0, 0, 0));
         exit.setOutlineColor(Color.black);
         exit.setOutlineThickness(3);
         //max's text about the item
-        speedUpText = new SpriteFont("\"Energy drink.\" Why is that in quotations?", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
+        speedUpText = new SpriteFont("\"Energy drink.\" Why is that in quotations?\n[Increases Speed]", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         emptyText = new SpriteFont("There's nothing here", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         exitText = new SpriteFont("I don't want anything.", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         purchasedText = new SpriteFont("I guess this is mine now", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         speedUpText.setOutlineColor(Color.black);
         speedUpText.setOutlineThickness(3);
+        notEnough = new SpriteFont("Don't have enough coins", 180, 400, "Comic Sans", 25, new Color(255,255,255));
         //coint counter in the shop
         coins = player.getCoins();
-        coinCount = new SpriteFont(("Coins: " + coins), 225, 20, "Comic Sans", 25, new Color(225,225,225));
+        coinCount = new SpriteFont(("Coins: " + coins), 60, 180, "Comic Sans", 25, new Color(225,225,225));
 
         background = new ShopScreenMap();
         background.setAdjustCamera(false);
@@ -191,8 +196,11 @@ public class ShopScreen extends Screen {
         
         //the text for each item only appears when the item is hovered 
         menuItemSelected = currentMenuItemHovered;
-        if(menuItemSelected == 0 && speedUpPurchased == false) {
-            speedUpText.draw(graphicsHandler);
+        if(menuItemSelected == 0 && this.player.getCoins() < 3 && speedUpPurchased == false) {
+            notEnough.draw(graphicsHandler);
+        }
+        if(menuItemSelected == 0 && speedUpPurchased == false && this.player.getCoins() >= 3) {
+            speedUpText.drawWithParsedNewLines(graphicsHandler, 2);
         } else if(menuItemSelected == 0 && speedUpPurchased == true) {
                 purchasedText.draw(graphicsHandler);
         } else if (menuItemSelected == 1 || menuItemSelected == 2 || menuItemSelected == 3) {
