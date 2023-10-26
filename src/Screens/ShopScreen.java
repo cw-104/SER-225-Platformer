@@ -12,9 +12,7 @@ import GameObject.Coin;
 import GameObject.Sprite;
 import Level.Player;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import Screens.ShopItem;
+
 // This is the class for the main menu screen
 public class ShopScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
@@ -39,22 +37,18 @@ public class ShopScreen extends Screen {
     protected Player player;
     protected PlayLevelScreen playLevelScreen;
 
-    private List<ShopItem> shopItems;  // A list to store your shop items
+
 
     public ShopScreen(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
         initialize();
-
-                         shopItems = new ArrayList<>();
-        shopItems.add(new ShopItem("Speed Up", 5, "An energy drink to boost your speed."));
-
     }
 
 
     @Override
     public void initialize() {
         //player for access coin count
-        this.player = new Max(0,0);
+        this.player = playLevelScreen.player;
         //text and icons for shop items
         speedUp = new SpriteFont("Speed up (5)", 70, 300, "Comic Sans", 25, new Color(0, 0, 0));
         speedUp.setOutlineColor(Color.black);
@@ -81,7 +75,7 @@ public class ShopScreen extends Screen {
         speedUpText.setOutlineColor(Color.black);
         speedUpText.setOutlineThickness(3);
         //coint counter in the shop
-       // coins = playLevelScreen.getCoins(); //besa //come back to this
+        coins = player.getCoins();
         coinCount = new SpriteFont(("Coins: " + coins), 225, 20, "Comic Sans", 25, new Color(225,225,225));
 
         background = new ShopScreenMap();
@@ -107,6 +101,8 @@ public class ShopScreen extends Screen {
                 keyPressTimer--;
             }
         }
+
+        coinCount.setText("Coins: " + player.getCoins());
 
         // if down is pressed on last menu item or up is pressed on first menu item, "loop" the selection back around to the beginning/end
         if (currentMenuItemHovered > 4) {
@@ -165,32 +161,16 @@ public class ShopScreen extends Screen {
             keyPressTimer = 14;
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
-                ShopItem selectedItem = shopItems.get(menuItemSelected);
-                if (!selectedItem.isPurchased() && coins >= selectedItem.getPrice()) {
-                    // Deduct the price from coins and mark the item as purchased
-                    player.removeCoins(selectedItem.getPrice());
+                if(this.player.getCoins() >= 3 && speedUpPurchased == false) {
+                    player.removeCoins(3);
                     coinCount.setText("Coins: " + player.getCoins());
-                    selectedItem.setPurchased(true);
-                    // Apply the effect for item 0 (if needed)
+                    speedUpPurchased = true;
                 }
                 //check for correct amt coins
                 //remove coins
                 //apply effect
                 //mark purchased
                 
-                //screenCoordinator.setGameState(GameState.BLACKSCREEN);
-             else  if(menuItemSelected ==1){
-                        keyPressTimer = 14;
-            menuItemSelected = currentMenuItemHovered;
-            
-            if (player.getCoins() >= 5 && !speedUpPurchased) {
-                player.removeCoins(5);  // Deduct the correct amount of coins
-                coinCount.setText("Coins: " + player.getCoins());
-                // Apply the effect for item 2
-                // You can handle applying the effect here.
-                speedUpPurchased = true;
-
-
             } else if (menuItemSelected == 1 || menuItemSelected == 2 || menuItemSelected == 3) {
                 //add when there are things to purchase
             } else if (menuItemSelected == 4) {
@@ -198,8 +178,8 @@ public class ShopScreen extends Screen {
                 playLevelScreen.resetLevel();
             }
         }
-    } }
-    }
+    } 
+
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
         speedUp.draw(graphicsHandler);
@@ -207,7 +187,7 @@ public class ShopScreen extends Screen {
         item3.draw(graphicsHandler);
         item4.draw(graphicsHandler);
         exit.draw(graphicsHandler);
-        //coinCount.draw(graphicsHandler);
+        coinCount.draw(graphicsHandler);
         
         //the text for each item only appears when the item is hovered 
         menuItemSelected = currentMenuItemHovered;
@@ -220,23 +200,5 @@ public class ShopScreen extends Screen {
         }else if(menuItemSelected == 4) {
             exitText.draw(graphicsHandler);
         }
-        
-        for (int i = 0; i < shopItems.size(); i++) {
-            ShopItem item = shopItems.get(i);
-            if (i == currentMenuItemHovered) {
-                if (!item.isPurchased()) {
-                    // Highlight the item
-                    // Draw the shop item text
-                    speedUp.draw(graphicsHandler);
-                }else {
-                    // Draw "Purchased" text or some other indicator
-                }
-            } else {
-                if (item.isPurchased()) {
-                    // Draw "Purchased" text or some other indicator
-                }
-            }
-        }
     }
 }
-
