@@ -27,17 +27,21 @@ public abstract class Player extends GameObject {
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
 
-    //coin
+    // coin
     protected int coins;
+
     public int getCoins() {
         return coins;
     }
+
     public void addCoins(int newCoins) {
         coins += newCoins;
     }
+
     public void removeCoins(int lessCoins) {
         coins -= lessCoins;
     }
+
     public void resetCoins() {
         coins = 0;
     }
@@ -68,9 +72,8 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)// 
-        protected boolean isAttacking = false;// when max is NOT attacking
-          
+    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)//
+    protected boolean isAttacking = false;// when max is NOT attacking
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -78,15 +81,15 @@ public abstract class Player extends GameObject {
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
         playerState = PlayerState.STANDING;
-      
+
         previousPlayerState = playerState;
         levelState = LevelState.RUNNING;
     }
-//// Add this attribute to your Player class to keep track of active enemies //
-   
+    //// Add this attribute to your Player class to keep track of active enemies //
+
     private List<Enemy> activeEnemies = new ArrayList<>();
     private List<MapEntity> listOfMapEntities = new ArrayList<>(); /// map entities list
-    
+
     private IntersectableRectangle attackHitbox;
     // for the enemy
 
@@ -110,7 +113,6 @@ public abstract class Player extends GameObject {
             // move player with respect to map collisions based on how much player needs to
             // move this frame
 
-            
             lastAmountMovedX = super.moveXHandleCollision(moveAmountX);
             lastAmountMovedY = super.moveYHandleCollision(moveAmountY);
 
@@ -121,8 +123,6 @@ public abstract class Player extends GameObject {
             // update player's animation
             super.update();
         }
-
-        
 
         // if player has beaten level
         else if (levelState == LevelState.LEVEL_COMPLETED) {
@@ -160,8 +160,8 @@ public abstract class Player extends GameObject {
             case JUMPING:
                 playerJumping();
                 break;
-               
-                case ATTACKING: //when max is attacking  //WORKING NOW
+
+            case ATTACKING: // when max is attacking //WORKING NOW
                 playerAttacking();
                 if (currentFrameIndex == getCurrentAnimation().length - 1) {
                     // Attack animation is finished; transition back to another state.
@@ -172,7 +172,7 @@ public abstract class Player extends GameObject {
                     attackHitbox = currentFrame.getBounds();
                     for (MapEntity entity : listOfMapEntities) {
                         if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
-                            entity.getBounds().intersects(attackHitbox)) {
+                                entity.getBounds().intersects(attackHitbox)) {
                             // Handle damaging the enemy
                             defeatEnemy(entity); // Call a method to defeat the enemy
                         }
@@ -180,7 +180,7 @@ public abstract class Player extends GameObject {
 
                 }
                 break;
-        
+
         }
     }
 
@@ -201,62 +201,63 @@ public abstract class Player extends GameObject {
         else if (Keyboard.isKeyDown(CROUCH_KEY)) {
             playerState = PlayerState.CROUCHING;
         }
-        
+
         else if (Keyboard.isKeyDown(ATTACK_KEY)) {
             playerState = PlayerState.ATTACKING;
             performAttack(); // Implement this method to handle the attack logic.
         }
-        //trying to add attacking
-        else if(Keyboard.isKeyDown(ATTACK_KEY)&& !keyLocker.isKeyLocked(ATTACK_KEY)){
-             keyLocker.lockKey(ATTACK_KEY);
+        // trying to add attacking
+        else if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(ATTACK_KEY)) {
+            keyLocker.lockKey(ATTACK_KEY);
             playerState = PlayerState.ATTACKING;
             isAttacking = true; // for when max is attacking
-           
+
         }
     }
 
-                        public void update(Enemy enemy) {
-                            super.update();
-                            if (intersects(enemy)) {
-                                touchedEnemy(enemy);
-                            }
-                        }
-                                           
-                        private void performAttack() {
-                            if (facingDirection == Direction.RIGHT) {
-                                // Play the attack animation for Max facing right.
-                                playAnimation("ATTACK_RIGHT");
-                            } else {
-                                // Play the attack animation for Max facing left.
-                                playAnimation("ATTACK_LEFT");
-                            }
-                            // Implement any additional attack logic here.
-                        }
-                               
-                    private void playAnimation(String string) {
-                        }
+    public void update(Enemy enemy) {
+        super.update();
+        if (intersects(enemy)) {
+            touchedEnemy(enemy);
+        }
+    }
 
-                    /* */// A subclass can override this method to specify what it does when it touches the enemy
-                    public void touchedEnemy(Enemy enemy){
-               
-                    defeatEnemy(enemy);
-                    }
-                    public void attack() {
-                        if (!isAttacking) {
-                            isAttacking = true;
-                    
-                            // Define the attackHitbox based on the player's current position and dimensions
-                            attackHitbox = new Rectangle(x, y, 12, 16); //12 and 16 testvalues  for attack hitbox//besa
-                    
-                            // Notify active enemies about the attack
-                            for (Enemy enemy : activeEnemies) {
-                                if (((AnimatedSprite) attackHitbox).intersects(enemy.getBounds())) {
-                                   
-                                }
-                            }
-                        }
-                    }
-                    
+    private void performAttack() {
+        if (facingDirection == Direction.RIGHT) {
+            // Play the attack animation for Max facing right.
+            playAnimation("ATTACK_RIGHT");
+        } else {
+            // Play the attack animation for Max facing left.
+            playAnimation("ATTACK_LEFT");
+        }
+        // Implement any additional attack logic here.
+    }
+
+    private void playAnimation(String string) {
+    }
+
+    /* */// A subclass can override this method to specify what it does when it touches
+         // the enemy
+    public void touchedEnemy(Enemy enemy) {
+
+        defeatEnemy(enemy);
+    }
+
+    public void attack() {
+        if (!isAttacking) {
+            isAttacking = true;
+
+            // Define the attackHitbox based on the player's current position and dimensions
+            attackHitbox = new Rectangle(x, y, 12, 16); // 12 and 16 testvalues for attack hitbox//besa
+
+            // Notify active enemies about the attack
+            for (Enemy enemy : activeEnemies) {
+                if (((AnimatedSprite) attackHitbox).intersects(enemy.getBounds())) {
+
+                }
+            }
+        }
+    }
 
     // player WALKING state logic
     protected void playerWalking() {
@@ -287,18 +288,18 @@ public abstract class Player extends GameObject {
     }
 
     // player CROUCHING state logic
-   protected void playerCrouching() {
-    // if crouch key is released, player enters STANDING state
-    if (Keyboard.isKeyUp(CROUCH_KEY)) {
-        playerState = PlayerState.STANDING;
-    }
+    protected void playerCrouching() {
+        // if crouch key is released, player enters STANDING state
+        if (Keyboard.isKeyUp(CROUCH_KEY)) {
+            playerState = PlayerState.STANDING;
+        }
 
-    // if jump key is pressed, player enters JUMPING state
-    if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
-        keyLocker.lockKey(JUMP_KEY);
-        playerState = PlayerState.JUMPING;
+        // if jump key is pressed, player enters JUMPING state
+        if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
+            keyLocker.lockKey(JUMP_KEY);
+            playerState = PlayerState.JUMPING;
+        }
     }
-}
 
     // player JUMPING state logic
     protected void playerJumping() {
@@ -352,44 +353,38 @@ public abstract class Player extends GameObject {
             playerState = PlayerState.STANDING;
         }
     }
-                                                            
-                                                            //This is for attacking
-                                    protected void playerAttacking() {
-                                        currentAnimationName = (facingDirection == Direction.RIGHT) ? "ATTACK_RIGHT" : "ATTACK_LEFT";
 
+    // This is for attacking
+    protected void playerAttacking() {
+        currentAnimationName = (facingDirection == Direction.RIGHT) ? "ATTACK_RIGHT" : "ATTACK_LEFT";
 
-                                        // Check if the attack animation has reached its last frame
-                                                        if (currentFrameIndex == getCurrentAnimation().length - 1) {
-                                                            // The attack animation has finished; return to the previous state
-                                                          
-                                                            playerState = PlayerState.STANDING; // may change
-                                                            isAttacking = false;
-                                                             
-                                                        } else {
-                                                            // Handle any logic related to attacking here, e.g., damaging enemies
-                                                            // Check for collisions with enemies and apply damage as needed
-                                                            super.update(); 
-                                                            attackHitbox = currentFrame.getBounds();
+        // Check if the attack animation has reached its last frame
+        if (currentFrameIndex == getCurrentAnimation().length - 1) {
+            // The attack animation has finished; return to the previous state
 
-                                                            for (Enemy entity : map.getActiveEnemies()) {
-                                                                if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
-                                                                    entity.getBounds().intersects(attackHitbox)) {
-                                                                     entity.hurtEnemy();
-                                                                   
-// remember to add intersecting when player attacks the enemy 
+            playerState = PlayerState.STANDING; // may change
+            isAttacking = false;
 
-                                                                }
-                                                            }
+        } else {
+            // Handle any logic related to attacking here, e.g., damaging enemies
+            // Check for collisions with enemies and apply damage as needed
+            super.update();
+            attackHitbox = currentFrame.getBounds();
 
+            for (Enemy entity : map.getActiveEnemies()) {
+                if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
+                        entity.getBounds().intersects(attackHitbox)) {
+                    entity.hurtEnemy();
 
+                    // remember to add intersecting when player attacks the enemy
 
-                                                            // Ensure the attack animation continues to update
-                                                           // super.update();
-                                                        }
-                                    }
+                }
+            }
 
-
-
+            // Ensure the attack animation continues to update
+            // super.update();
+        }
+    }
 
     // while player is in air, this is called, and will increase momentumY by a set
     // amount until player reaches terminal velocity
@@ -434,60 +429,58 @@ public abstract class Player extends GameObject {
             } else {
                 this.currentAnimationName = facingDirection == Direction.RIGHT ? "FALL_RIGHT" : "FALL_LEFT";
             }
-            
+
+        } else if (playerState == PlayerState.ATTACKING) {
+            // Set the animation to the attack animation based on the facing direction
+            this.currentAnimationName = (facingDirection == Direction.RIGHT) ? "ATTACK_RIGHT" : "ATTACK_LEFT";
+
+            // Check if the attack animation has reached its last frame
+            if (currentFrameIndex == getCurrentAnimation().length - 1) {
+                // The attack animation has finished; return to the previous state
+                playerState = previousPlayerState;
+                isAttacking = false;
+            } else {
+                // Continue updating the attack animation
+                super.update();
+
+                // Handle attacking logic here, e.g., check for collisions with enemies
+                // For simplicity, we'll assume enemies are GameObjects with hitboxes
+
+                // Get the current frame's hitbox
+                Rectangle attackHitbox = currentFrame.getBounds();
+
+                for (MapEntity entity : listOfMapEntities) {
+                    if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
+                            entity.getBounds().intersects(attackHitbox)) {
+                        // Handle damaging the enemy
+                        // MapEntity DogEnemy; //COME BACK TO ME LATER // FINISH THE HEALTH
+                        // listOfMapEntities.add(DogEnemy);//COME BACK TO THIS!!!!!!!!!!!!
+                        // damageEnemy(entity); //comeback later
+                    }
+                }
+            }
         }
-        else if (playerState == PlayerState.ATTACKING) {
-        // Set the animation to the attack animation based on the facing direction
-        this.currentAnimationName = (facingDirection == Direction.RIGHT) ? "ATTACK_RIGHT" : "ATTACK_LEFT";
+        /*
+         * //come back to thisq!!!!!!!!
+         * DogEnemy dogEnemy = new DogEnemy("GuardDog2.png", 24, 15,
+         * startingAnimationName, 10);
+         * player.addActiveEnemy(dogEnemy);
+         */
 
-        // Check if the attack animation has reached its last frame
-        if (currentFrameIndex == getCurrentAnimation().length - 1) {
-            // The attack animation has finished; return to the previous state
-            playerState = previousPlayerState;
-            isAttacking = false;
-        } else {
-            // Continue updating the attack animation
-            super.update();
+    }
 
-            // Handle attacking logic here, e.g., check for collisions with enemies
-            // For simplicity, we'll assume enemies are GameObjects with hitboxes
-
-            // Get the current frame's hitbox
-            Rectangle attackHitbox = currentFrame.getBounds();
-
-                                        for (MapEntity entity : listOfMapEntities) {
-                                            if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
-                                                entity.getBounds().intersects(attackHitbox)) {
-                                                                                    // Handle damaging the enemy
-                                                                                // MapEntity DogEnemy; //COME BACK TO ME LATER  // FINISH THE HEALTH
-                                                                                // listOfMapEntities.add(DogEnemy);//COME BACK TO THIS!!!!!!!!!!!!
-                                              //  damageEnemy(entity); //comeback later
-                                            }
-                                        }
+    // Method to defeat an enemy on touch
+    private void defeatEnemy(MapEntity enemy) {
+        if (enemy instanceof Enemy) {
+            // Handle defeating the enemy, e.g., removing it from the game
+            enemy.setMapEntityStatus(MapEntityStatus.REMOVED);
         }
     }
-                                                                /* //come back to thisq!!!!!!!!
-                                                                    DogEnemy dogEnemy = new DogEnemy("GuardDog2.png", 24, 15, startingAnimationName, 10);
-                                                                player.addActiveEnemy(dogEnemy);
-                                                                */
 
-
-
+    // Method to add an active enemy to the list
+    public void addActiveEnemy(Enemy enemy) {
+        activeEnemies.add(enemy);
     }
-                                // Method to defeat an enemy on touch
-private void defeatEnemy(MapEntity enemy) {
-    if (enemy instanceof Enemy) {
-        // Handle defeating the enemy, e.g., removing it from the game
-        enemy.setMapEntityStatus(MapEntityStatus.REMOVED);
-    }
-}
-
-  
- // Method to add an active enemy to the list
- public void addActiveEnemy(Enemy enemy) {
-    activeEnemies.add(enemy);
-}
-
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction, MapEntity entityCollidedWith) {
@@ -525,7 +518,6 @@ private void defeatEnemy(MapEntity enemy) {
             }
         }
     }
-    
 
     // other entities can call this to tell the player they beat a level
     public void completeLevel() {
@@ -585,7 +577,6 @@ private void defeatEnemy(MapEntity enemy) {
         }
     }
 
-    
     public PlayerState getPlayerState() {
         return playerState;
     }
