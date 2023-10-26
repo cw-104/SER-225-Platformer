@@ -20,7 +20,7 @@ public class Max extends Player {
                 super(new SpriteSheet(ImageLoader.load("Max11.png"), 50, 50), x, y, "STAND_RIGHT");
                 gravity = .5f;
                 terminalVelocityY = 6f;
-                jumpHeight = 14.5f;
+                jumpHeight = 16.5f;
                 jumpDegrade = .5f;
                 walkSpeed = 7.5f;
                 momentumYIncrease = .5f;
