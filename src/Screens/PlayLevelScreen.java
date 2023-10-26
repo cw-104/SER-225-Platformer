@@ -34,6 +34,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     protected ShopIntroScreen shopIntroScreen;
     protected ShopScreen shopScreen;
     protected boolean levelCompletedStateChangeStart;
+    protected SpriteFont livesDisplay;
 
     protected List<Coin> coinList = new ArrayList<>();
     protected SpriteFont coinCounter;
@@ -80,6 +81,10 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.coinCounter.setOutlineColor(Color.black);
         this.coinCounter.setOutlineThickness(2);
 
+        //health 
+        this.livesDisplay = new SpriteFont("Lives: " + player.getLives(), 15, 60, "Arial", 35, new Color(255, 0, 0));
+        this.livesDisplay.setOutlineColor(Color.black);
+        this.livesDisplay.setOutlineThickness(2);
     }
 
     public void update() {
@@ -163,6 +168,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                 shopScreen.draw(graphicsHandler);
                 break;
         }
+        livesDisplay.setText("Lives: " + player.getLives());
+        livesDisplay.draw(graphicsHandler);
     }
 
     public PlayLevelScreenState getPlayLevelScreenState() {

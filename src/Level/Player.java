@@ -26,6 +26,7 @@ public abstract class Player extends GameObject {
     protected float jumpDegrade = 0;
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
+    protected int lives = 3;
 
     //coin
     protected int coins;
@@ -65,7 +66,7 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-    protected boolean isInvincible = true; // if true, player cannot be hurt by enemies (good for testing)
+        protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
         protected boolean isAttacking = false;// when max is NOT attacking
           
 
@@ -241,6 +242,9 @@ public abstract class Player extends GameObject {
 
                     /* */// A subclass can override this method to specify what it does when it touches the enemy
                     public void touchedEnemy(Enemy enemy){
+                        lives--;
+                        if (lives <= 0) {
+                         }               
                 //enemy.hurtEnemy(this); //come back to this later //BESA
                     defeatEnemy(enemy);
                     }
@@ -564,14 +568,16 @@ private void defeatEnemy(MapEntity enemy) {
     // other entities can call this method to hurt the player
     public void hurtPlayer(MapEntity mapEntity) {
         if (!isInvincible) {
-            // if map entity is an enemy, kill player on touch
             if (mapEntity instanceof Enemy) {
-                levelState = LevelState.PLAYER_DEAD;
+                lives--; // Reduce the player's lives
+                if (lives <= 0) {
+                    levelState = LevelState.PLAYER_DEAD; // Set to dead only if all lives are lost
+                }
             }
         }
     }
     
-
+    
     // other entities can call this to tell the player they beat a level
     public void completeLevel() {
         levelState = LevelState.LEVEL_COMPLETED;
@@ -658,5 +664,13 @@ private void defeatEnemy(MapEntity enemy) {
 
     public void addListener(PlayerListener listener) {
         listeners.add(listener);
+    }
+    
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 }
