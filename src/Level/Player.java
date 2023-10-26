@@ -26,6 +26,7 @@ public abstract class Player extends GameObject {
     protected float jumpDegrade = 0;
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
+    int lives = 3;
     protected float speedPowerUp;// added to implement speed powerup. may need to take out //Besa
 
     // coin
