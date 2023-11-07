@@ -51,7 +51,7 @@ public class CutsceneScreen2 extends Screen {
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
-        narration.drawWithParsedNewLines(graphicsHandler, 2);
+        narration.drawWithParsedNewLines(graphicsHandler, 3);
         prompt.draw(graphicsHandler);
     }
 }

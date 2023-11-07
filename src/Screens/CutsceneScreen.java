@@ -30,7 +30,7 @@ public class CutsceneScreen extends Screen {
         background = new CutsceneMap();
         background.setAdjustCamera(false);
         narration = new SpriteFont("Where am I?", 180, 405, "Helvetica Bold", 25, Color.white);
-        prompt = new SpriteFont("Press SPACE to continue...", 490, 530, "Comic Sans", 15, Color.white);
+        prompt = new SpriteFont("Press SPACE to continue...", 490, 510, "Comic Sans", 15, Color.white);
         keyPressTimer = 0;
         menuItemSelected = -1;
         keyLocker.lockKey(Key.SPACE);
