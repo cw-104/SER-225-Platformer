@@ -330,6 +330,23 @@ public abstract class Player extends GameObject {
                     jumpForce = 0;
                 }
             }
+        }// jump + attack attempt
+        else if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(ATTACK_KEY)) {
+            keyLocker.lockKey(ATTACK_KEY);
+            playerState = PlayerState.ATTACKING;
+//besa
+currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP_LEFT";
+
+            // player is set to be in air and then player is sent into the air
+            airGroundState = AirGroundState.AIR;
+            jumpForce = jumpHeight;
+            if (jumpForce > 0) {
+                moveAmountY -= jumpForce;
+                jumpForce -= jumpDegrade;
+                if (jumpForce < 0) {
+                    jumpForce = 0;
+                }
+            }
         }
 
         // if player is in air (currently in a jump) and has more jumpForce, continue
@@ -371,9 +388,9 @@ public abstract class Player extends GameObject {
         // Check if the attack animation has reached its last frame
         if (currentFrameIndex == getCurrentAnimation().length - 1) {
             // The attack animation has finished; return to the previous state
-
-            playerState = PlayerState.STANDING; // may change
-            isAttacking = false;
+            playerState = previousPlayerState;
+           // playerState = PlayerState.STANDING; // may change
+           // isAttacking = false; //besa
 
         } else {
             // Handle any logic related to attacking here, e.g., damaging enemies

@@ -32,7 +32,7 @@ public class Max extends Player {
 
         public void draw(GraphicsHandler graphicsHandler) {
                 super.draw(graphicsHandler);
-                drawBounds(graphicsHandler, new Color(255, 0, 0, 170));//besa
+                drawBounds(graphicsHandler, new Color(255, 0, 0, 170));//turns bounds on/off
         }
 
         @Override
