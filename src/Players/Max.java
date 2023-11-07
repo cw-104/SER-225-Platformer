@@ -146,27 +146,27 @@ public class Max extends Player {
                                 });
 
                                 put("DEATH_RIGHT", new Frame[] { 
-                                                new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(4, 4), 8)
                                                                 .withScale(3)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(5, 1), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(4, 5), 8)
                                                                 .withScale(3)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(5, 2), -1)
+                                                new FrameBuilder(spriteSheet.getSprite(5, 0), -1)
                                                                 .withScale(3)
                                                                 .build()
                                 });
 
                                 put("DEATH_LEFT", new Frame[] { 
-                                                new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(4, 5), 8)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(5, 1), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(4, 5), 8)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(5, 2), -1)
+                                                new FrameBuilder(spriteSheet.getSprite(5, 0), -1)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .build()
