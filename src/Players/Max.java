@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class Max extends Player {
 
         public Max(float x, float y) {
-                super(new SpriteSheet(ImageLoader.load("Max16.png"), 50, 50), x, y, "STAND_RIGHT");
+                super(new SpriteSheet(ImageLoader.load("Max19.png"), 50, 50), x, y, "STAND_RIGHT");
                 gravity = .5f;
                 terminalVelocityY = 6f;
                 jumpHeight = 16.5f;
@@ -188,17 +188,17 @@ public class Max extends Player {
                                 });
 
                                 put("ATTACK_LEFT", new Frame[] { 
-                                                new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(7, 6), 8)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(1, 3, 33, 28)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(1, 7), 8)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(1, 3, 33, 28)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
+                                                new FrameBuilder(spriteSheet.getSprite(3, 7), -1)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(1, 3, 33, 28)
@@ -206,17 +206,17 @@ public class Max extends Player {
                                 });
 
                                 put("ATTACK_RIGHT", new Frame[] { // testing for batt attacking
-                                                new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(7, 6), 8)//6,0
                                                                 .withScale(3)
                                                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(18, 3, 33, 28)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(1, 7), 8)//6,1
                                                                 .withScale(3)
                                                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(18, 3, 33, 28)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
+                                                new FrameBuilder(spriteSheet.getSprite(3, 7), -1)//6,2
                                                                 .withScale(3)
                                                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(18, 3, 33, 28) // .withBounds(8, 9, 8, 9) //
