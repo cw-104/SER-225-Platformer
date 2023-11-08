@@ -54,7 +54,7 @@ public class Hunter extends Enemy {
         }
         airGroundState = AirGroundState.GROUND;
 
-        // every certain number of frames, the bullet will be shot out
+        // every certain number of frames, the arrow will be shot out
         shootWaitTimer = 60;
     }
 
@@ -63,7 +63,7 @@ public class Hunter extends Enemy {
         float startBound = startLocation.x;
         float endBound = endLocation.x;
 
-        // if shoot timer is up and prison guard is not currently shooting, set its
+        // if shoot timer is up and hunter is not currently shooting, set its
         // state to
         // SHOOT
         if (shootWaitTimer == 0 && hunterState != HunterState.SHOOT_WAIT) {
@@ -149,7 +149,7 @@ public class Hunter extends Enemy {
     
      public void draw(GraphicsHandler graphicsHandler) {
      super.draw(graphicsHandler);
-      drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+      //drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
       }
      
 

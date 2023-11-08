@@ -31,7 +31,7 @@ public class Arrow1 extends Enemy {
 
      public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
-       drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+       //drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
     }
 
     @Override
@@ -50,7 +50,7 @@ public class Arrow1 extends Enemy {
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction, MapEntity entityCollidedWith) {
-        // if fireball collides with anything solid on the x axis, it is removed
+        // if arrow collides with anything solid on the x axis, it is removed
         if (hasCollided) {
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         }
@@ -58,7 +58,7 @@ public class Arrow1 extends Enemy {
 
     @Override
     public void touchedPlayer(Player player) {
-        // if fireball touches player, it disappears
+        // if arrow touches player, it disappears
         super.touchedPlayer(player);
         this.mapEntityStatus = MapEntityStatus.REMOVED;
     }

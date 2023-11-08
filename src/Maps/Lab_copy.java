@@ -12,6 +12,7 @@ import NPCs.Shop;
 import Tilesets.TestTileset;
 import Tilesets.LabTileset;
 import Utils.Direction;
+import Enemies.DinosaurEnemy;
 import Enemies.DogEnemy;
 import Enemies.Hunter;
 import Enemies.PrisonGuardEnemy;
@@ -52,9 +53,10 @@ public class Lab_copy extends Map {
         public ArrayList<Enemy> loadEnemies() {
                 ArrayList<Enemy> enemies = new ArrayList<>();
 
-                Hunter hunter = new Hunter(getMapTile(6 ,25).getLocation().addY(2), getMapTile(22, 1).getLocation().addY(2), Direction.RIGHT);
+                Hunter hunter = new Hunter(getMapTile(6 ,25).getLocation().subtractY(63), getMapTile(15, 25).getLocation().subtractY(63), Direction.RIGHT);
                 enemies.add(hunter);
-                /*
+              
+                /* *
                  * DinosaurEnemy dinosaurEnemy = new DinosaurEnemy(getMapTile(19,
                  * 1).getLocation().addY(2), getMapTile(22, 1).getLocation().addY(2),
                  * Direction.RIGHT);
