@@ -185,7 +185,7 @@ public class ShopScreen extends Screen {
                 }
             } else if (menuItemSelected == 3) {
                 //when level 2 exists this should send there - menu is temp
-                playLevelScreen.level2();
+                playLevelScreen.goToCutscene(player);
             }
         }
     } 
