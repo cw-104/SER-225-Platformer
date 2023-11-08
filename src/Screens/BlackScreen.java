@@ -14,6 +14,7 @@ import java.awt.*;
 public class BlackScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected Map background;
+    protected SpriteFont prompt;
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
     protected KeyLocker keyLocker = new KeyLocker();
@@ -25,6 +26,7 @@ public class BlackScreen extends Screen {
     @Override
     public void initialize() {
         background = new BlackScreenMap();
+        prompt = new SpriteFont("Press SPACE to continue...", 300, 500, "Comic Sans", 15, Color.white);
         background.setAdjustCamera(false);
         keyLocker.lockKey(Key.SPACE);
     }
@@ -45,5 +47,6 @@ public class BlackScreen extends Screen {
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
+        prompt.draw(graphicsHandler);
     }
 }
