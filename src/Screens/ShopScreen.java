@@ -181,7 +181,7 @@ public class ShopScreen extends Screen {
                 //add when there are things to purchase
             } else if (menuItemSelected == 4) {
                 //when level 2 exists this should send there - menu is temp
-                playLevelScreen.resetLevel();
+                playLevelScreen.level2();
             }
         }
     } 
