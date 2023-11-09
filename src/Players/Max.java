@@ -8,6 +8,7 @@ import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.Player;
+import Screens.PlayLevelScreen;
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -32,7 +33,7 @@ public class Max extends Player {
 
         public void draw(GraphicsHandler graphicsHandler) {
                 super.draw(graphicsHandler);
-                //drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+                // drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
         }
 
         @Override
@@ -81,7 +82,7 @@ public class Max extends Player {
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(19, 3, 16, 28)
                                                                 .build(),
-                                                 new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
+                                                new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(19, 3, 16, 28)
@@ -129,23 +130,23 @@ public class Max extends Player {
                                 });
 
                                 put("CROUCH_RIGHT", new Frame[] { // putting 3 for now- fix
-                                               new FrameBuilder(spriteSheet.getSprite(1, 6), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(1, 6), 8)
                                                                 .withScale(3)
                                                                 .withBounds(15, 8, 20, 23)
                                                                 .build(),
-                                                
+
                                 });
 
                                 put("CROUCH_LEFT", new Frame[] { // there is no row 4 fix this
-                                                  new FrameBuilder(spriteSheet.getSprite(1, 6), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(1, 6), 8)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(15, 8, 20, 23)
                                                                 .build(),
-                                                
+
                                 });
 
-                                put("DEATH_RIGHT", new Frame[] { 
+                                put("DEATH_RIGHT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
                                                                 .withScale(3)
                                                                 .build(),
@@ -157,7 +158,7 @@ public class Max extends Player {
                                                                 .build()
                                 });
 
-                                put("DEATH_LEFT", new Frame[] { 
+                                put("DEATH_LEFT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
@@ -187,7 +188,7 @@ public class Max extends Player {
                                                                 .build()
                                 });
 
-                                put("ATTACK_LEFT", new Frame[] { 
+                                put("ATTACK_LEFT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)

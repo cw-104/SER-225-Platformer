@@ -112,6 +112,7 @@ public class PrisonGuardEnemy extends Enemy {
             } else {
                 bulletX = Math.round(getX() - 21);
                 movementSpeed = -2.5f;
+
             }
 
             int bulletY = Math.round(getY() + 50);
@@ -130,6 +131,7 @@ public class PrisonGuardEnemy extends Enemy {
             // reset shoot wait timer so the process can happen again (dino walks around,
             // then waits, then shoots)
             shootWaitTimer = 130;
+
         }
 
         super.update(player);
