@@ -13,6 +13,8 @@ import Tilesets.TestTileset;
 import Tilesets.LabTileset;
 import Utils.Direction;
 import Enemies.DogEnemy;
+import Enemies.DogEnemyLevel2;
+import Enemies.Hunter;
 import Enemies.PrisonGuardEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.HorizontalMovingPlatform;
@@ -51,6 +53,9 @@ public class Lab extends Map {
         public ArrayList<Enemy> loadEnemies() {
                 ArrayList<Enemy> enemies = new ArrayList<>();
 
+             /*     Hunter hunter = new Hunter(getMapTile(8 ,9).getLocation().subtractY(63), getMapTile(16, 9).getLocation().subtractY(63), Direction.RIGHT);
+                enemies.add(hunter); */
+
                 DogEnemy DogEnemy_1 = new DogEnemy(getMapTile(18,
                                 9).getLocation().subtractY(25), Direction.LEFT);
                 enemies.add(DogEnemy_1);
@@ -74,6 +79,88 @@ public class Lab extends Map {
                 DogEnemy DogEnemy_6 = new DogEnemy(getMapTile(88,
                                 13).getLocation().subtractY(25), Direction.LEFT);
                 enemies.add(DogEnemy_6);
+                
+                DogEnemy DogEnemy_7 = new DogEnemy(getMapTile(26,
+                                24).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_7);
+
+
+                DogEnemy DogEnemy_8 = new DogEnemy(getMapTile(27,
+                                24).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_8);
+
+                DogEnemy DogEnemy_9 = new DogEnemy(getMapTile(29,
+                                24).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_9);
+                
+                
+                DogEnemy DogEnemy_11 = new DogEnemy(getMapTile(30,
+                                24).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_11);
+
+             
+                DogEnemy DogEnemy_12 = new DogEnemy(getMapTile(31,
+                                24).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_12);
+               
+
+                DogEnemy DogEnemy_13 = new DogEnemy(getMapTile(32,
+                                24).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_13);
+              
+
+                DogEnemy DogEnemy_14 = new DogEnemy(getMapTile(33,
+                                24).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_14);
+
+         
+                DogEnemy DogEnemy_15 = new DogEnemy(getMapTile(34,
+                                24).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_15);
+
+                 DogEnemy DogEnemy_16 = new DogEnemy(getMapTile(35,
+                                24).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_16);
+ 
+                DogEnemy DogEnemy_17 = new DogEnemy(getMapTile(36,
+                                24).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_17);
+
+                DogEnemy DogEnemy_18 = new DogEnemy(getMapTile(86,
+                                13).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_18);
+                
+                DogEnemy DogEnemy_19 = new DogEnemy(getMapTile(87,
+                                13).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_19);
+
+                 DogEnemy DogEnemy_20 = new DogEnemy(getMapTile(89,
+                                13).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_20);
+                
+                DogEnemy DogEnemy_21 = new DogEnemy(getMapTile(90,
+                                13).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_21);
+                
+                DogEnemy DogEnemy_22 = new DogEnemy(getMapTile(91,
+                                13).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_22);
+                
+                DogEnemy DogEnemy_23 = new DogEnemy(getMapTile(92,
+                                13).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_23);
+                
+                DogEnemy DogEnemy_24 = new DogEnemy(getMapTile(61,
+                                9).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_24);
+
+                DogEnemy DogEnemy_25 = new DogEnemy(getMapTile(83,
+                                20).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_25);
+
+                DogEnemy DogEnemy_26 = new DogEnemy(getMapTile(71,
+                                20).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(DogEnemy_26);
 
                 PrisonGuardEnemy Guard_1 = new PrisonGuardEnemy(getMapTile(10, 5).getLocation().subtractY(75),
                                 getMapTile(15, 5).getLocation().subtractY(75), Direction.RIGHT);
@@ -146,6 +233,10 @@ public class Lab extends Map {
                 PrisonGuardEnemy Guard_18 = new PrisonGuardEnemy(getMapTile(58, 17).getLocation().subtractY(75),
                                 getMapTile(61, 17).getLocation().subtractY(75), Direction.RIGHT);
                 enemies.add(Guard_18);
+
+                PrisonGuardEnemy Guard_19 = new PrisonGuardEnemy(getMapTile(12, 17).getLocation().subtractY(75),
+                                getMapTile(15, 17).getLocation().subtractY(75), Direction.RIGHT);
+                enemies.add(Guard_19);
 
                 /*
                  * DinosaurEnemy dinosaurEnemy = new DinosaurEnemy(getMapTile(19,

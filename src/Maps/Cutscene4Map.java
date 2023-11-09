@@ -5,7 +5,6 @@ import Engine.ImageLoader;
 import GameObject.Sprite;
 import Level.Map;
 import Tilesets.Bunker2Tileset;
-import Tilesets.SecondTileset;
 import Utils.Colors;
 import Utils.Point;
 
@@ -18,10 +17,6 @@ public class Cutscene4Map extends Map {
 
     public Cutscene4Map() {
         super("cutscene_map.txt", new Bunker2Tileset());
-        /*Point maxLocation = getMapTile(6, 9).getLocation().subtractX(24).subtractY(250);
-        max = new Sprite(ImageLoader.loadSubImage("cutScene1.png", Colors.MAGENTA, 0, 0, 30, 33));
-        max.setScale(7);
-        max.setLocation(maxLocation.x, maxLocation.y);*/
         Point maxRealLocation = getMapTile(2,9).getLocation().subtractX(70).subtractY(24);
         maxReal = new Sprite(ImageLoader.loadSubImage("Max7.png", Colors.MAGENTA, 0, 1, 36, 31));
         maxReal.setScale(3);

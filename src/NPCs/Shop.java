@@ -26,7 +26,7 @@ public class Shop extends NPC {
         textbox.setText("Hello!");
         textboxOffsetX = -4;
         textboxOffsetY = -34;
-        this.screenCoordinator = screenCoordinator;
+        
     }
 
     public void update(Player player) {

@@ -1,4 +1,3 @@
-
 package Enemies;
 
 import Builders.FrameBuilder;
@@ -15,23 +14,19 @@ import Utils.Point;
 
 import java.util.HashMap;
 
-// This class is for the Dog enemy
-// enemy behaves like a Mario goomba -- walks forward until it h ll down until it hits the ground again, and then will continue walking
-public class DogEnemy extends Enemy {
-
+public class DogEnemyLevel2 extends Enemy {
     private float gravity = .5f;
-    private float movementSpeed = .5f;
+    private float movementSpeed = 2f;
     private Direction startFacingDirection;
     private Direction facingDirection;
     private AirGroundState airGroundState;
 
-    public DogEnemy(Point location, Direction facingDirection) {
+    public DogEnemyLevel2(Point location, Direction facingDirection) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("GuardDog2.png"), 24, 15
         ), "WALK_LEFT");
         this.startFacingDirection = facingDirection;
         this.initialize();
     }
-
     @Override
     public void initialize() {
         super.initialize();
@@ -70,8 +65,6 @@ public class DogEnemy extends Enemy {
 
 
 }
-
-
 
     private void setEnabled(boolean b) {
 }
@@ -136,3 +129,4 @@ public class DogEnemy extends Enemy {
         }};
     }
 }
+
