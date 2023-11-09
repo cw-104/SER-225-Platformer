@@ -45,7 +45,7 @@ public class Lab_copy extends Map {
                                 Direction.LEFT);
                 enhancedMapTiles.add(hmp);
 
-                EndLevelBox endLevelBox = new EndLevelBox(getMapTile(98, 27).getLocation());
+                EndLevelBox endLevelBox = new EndLevelBox(getMapTile(99, 12).getLocation());
                 enhancedMapTiles.add(endLevelBox);
 
                 return enhancedMapTiles;
