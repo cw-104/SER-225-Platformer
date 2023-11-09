@@ -45,7 +45,7 @@ public class Lab_copy extends Map {
                                 Direction.LEFT);
                 enhancedMapTiles.add(hmp);
 
-                EndLevelBox endLevelBox = new EndLevelBox(getMapTile(98, 27).getLocation());
+                EndLevelBox endLevelBox = new EndLevelBox(getMapTile(99, 12).getLocation());
                 enhancedMapTiles.add(endLevelBox);
 
                 return enhancedMapTiles;
@@ -78,6 +78,18 @@ public class Lab_copy extends Map {
                 PrisonGuardEnemy Guard_5 = new PrisonGuardEnemy(getMapTile(67, 43).getLocation().subtractY(75),
                                 getMapTile(70, 43).getLocation().subtractY(75), Direction.RIGHT);
                 enemies.add(Guard_5);
+
+                Hunter Hunter_1 = new Hunter(getMapTile(30, 25).getLocation().subtractY(75),
+                                getMapTile(38, 25).getLocation().subtractY(75), Direction.RIGHT);
+                enemies.add(Hunter_1);
+
+                Hunter Hunter_2 = new Hunter(getMapTile(50, 15).getLocation().subtractY(75),
+                                getMapTile(53, 15).getLocation().subtractY(75), Direction.RIGHT);
+                enemies.add(Hunter_2);
+
+                Hunter Hunter_3 = new Hunter(getMapTile(86, 12).getLocation().subtractY(75),
+                                getMapTile(99, 12).getLocation().subtractY(75), Direction.RIGHT);
+                enemies.add(Hunter_3);
 
                 /*
                  * DinosaurEnemy dinosaurEnemy = new DinosaurEnemy(getMapTile(19,
