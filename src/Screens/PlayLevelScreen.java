@@ -40,15 +40,21 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     protected List<Coin> coinList = new ArrayList<>();
     protected SpriteFont coinCounter;
-
+private int currentLevel =1;
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
+        this.currentLevel =1;
     }
+public void changeLevel(int newLevel){
 
+    currentLevel = newLevel;
+}
     public void initialize() {
-        // define/setup map
-        this.map = new Lab();
+        if( currentLevel ==1){
 
+            this.map =new Lab();
+             this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y,this.currentLevel);
+           }
         // Add Coins (only line needed for both creating and counting)
         coinList.add(new Coin(1150, 450));
         coinList.add(new Coin(1450, 350));
@@ -63,7 +69,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         }
         // setup player
         //this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
-       this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
+       this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, currentLevel  ); // this is to implement
                                                                                                // max into the game
         this.player.setMap(map);
         this.player.addListener(this);
@@ -108,7 +114,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         }
         // setup player
         //this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
-       this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
+       this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, this.currentLevel); // this is to implement
                                                                                                // max into the game
         this.player.setMap(map);
         this.player.addListener(this);
@@ -138,8 +144,12 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     }
 // this will be used to test functionality of level 2 test map
 public void initialize1() {
-    // define/setup map
-    //this.map = new Lab_copy();
+   if( currentLevel ==2){
+
+    this.map =new Lab_copy();
+     this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y,this.currentLevel);
+   }
+   
 
     // Add Coins (only line needed for both creating and counting)
     coinList.add(new Coin(1150, 450));
@@ -155,8 +165,8 @@ public void initialize1() {
     }
     // setup player
     //this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
-   this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
-                                                                                           // max into the game
+  
+   
     this.player.setMap(map);
     this.player.addListener(this);
     Point playerStartPosition = map.getPlayerStartPosition();
@@ -298,6 +308,7 @@ public void initialize1() {
     
 
     public void level2() {
+        changeLevel(2);
         initialize1(this.player);
     }
 
@@ -332,4 +343,5 @@ public void initialize1() {
         }
         return totalCoins;
     }
+    
 }

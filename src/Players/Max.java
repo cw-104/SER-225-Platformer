@@ -7,6 +7,7 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
+import Level.LevelState;
 import Level.Player;
 
 import java.awt.Color;
@@ -15,8 +16,9 @@ import java.util.HashMap;
 // This is the class for the max player character
 // basically just sets some values for physics and then defines animations
 public class Max extends Player {
-private int MaxInLevel = 0;// create  getter and setter method to call this 
-        public Max(float x, float y) {
+private int currentLevel;
+private int MaxInLevel =0;
+        public Max(float x, float y, int currentLevel) {
                 super(new SpriteSheet(ImageLoader.load("Max19.png"), 50, 50), x, y, "STAND_RIGHT");
                 gravity = .5f;
                 terminalVelocityY = 6f;
@@ -24,16 +26,18 @@ private int MaxInLevel = 0;// create  getter and setter method to call this
                 jumpDegrade = .5f;
                 walkSpeed = 7.5f;
                 momentumYIncrease = .5f;
+                this.currentLevel =currentLevel;
         }
-
         public void update() {
                 super.update();
         }
 
         public void draw(GraphicsHandler graphicsHandler) {
                 super.draw(graphicsHandler);
-                drawBounds(graphicsHandler, new Color(255, 0, 0, 170));//turns bounds on/off
+              //  drawBounds(graphicsHandler, new Color(255, 0, 0, 170));//turns bounds on/off
         }
+
+        
 
         @Override
         public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
@@ -103,6 +107,8 @@ private int MaxInLevel = 0;// create  getter and setter method to call this
                                                                 .withScale(3)
                                                                 .withBounds(15, 3, 16, 28)
                                                                 .build()
+
+                                                                
                                 });
 
                                 put("JUMP_LEFT", new Frame[] {
@@ -111,6 +117,29 @@ private int MaxInLevel = 0;// create  getter and setter method to call this
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(19, 3, 16, 28)
                                                                 .build()
+                                });
+
+//jumpattack
+                put("JUMPATTACK_RIGHT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(4, 6))
+                                                                .withScale(3)
+                                                                .withBounds(1, 3, 33, 28)
+                                                                .build(),
+                                              
+
+                                                                
+                                });
+
+                                put("JUMPATTACK_LEFT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(4, 6))
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                 .withBounds(1, 3, 33, 28)
+                                                                .build(),
+                                                 
+                                
+
+                             
                                 });
 
                                 put("FALL_RIGHT", new Frame[] {
@@ -224,30 +253,30 @@ private int MaxInLevel = 0;// create  getter and setter method to call this
                                                                 .build()
                                 });
                                 
-//attempt to change the sprites in changing kevel //startOfTest
-                                if(MaxInLevel>0){ //using column 6 as testvale //remember to come back and add the ptoper sprite sets
-put("ATTACK_LEFT", new Frame[] { 
-                                                new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
-                                                                .withScale(3)
-                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                                                .withBounds(1, 3, 33, 28)
-                                                                .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 7), 8)
-                                                                .withScale(3)
-                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                                                .withBounds(1, 3, 33, 28)
-                                                                .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(8, 6), -1)
-                                                                .withScale(3)
-                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                                                .withBounds(1, 3, 33, 28)
-                                                                .build()
-                                });
+                               //attempt to change the sprites in changing kevel //startOfTest
+                                                                if(MaxInLevel>0){ //using column 6 as testvale //remember to come back and add the ptoper sprite sets
+                                put("ATTACK_LEFT", new Frame[] { 
+                                                                                new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
+                                                                                                .withScale(3)
+                                                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                                                .withBounds(1, 3, 33, 28)
+                                                                                                .build(),
+                                                                                new FrameBuilder(spriteSheet.getSprite(6, 7), 8)
+                                                                                                .withScale(3)
+                                                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                                                .withBounds(1, 3, 33, 28)
+                                                                                                .build(),
+                                                                                new FrameBuilder(spriteSheet.getSprite(8, 6), -1)
+                                                                                                .withScale(3)
+                                                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                                                .withBounds(1, 3, 33, 28)
+                                                                                                .build()
+                                                                });
 
-}//EndOfTest
+                                }//EndOfTest
 //attempt to change the sprites in changing kevel //startOfTest //right side 
                                 if(MaxInLevel>0){ //using column 6 as testvale //remember to come back and add the ptoper sprite sets
-put("ATTACK_LEFT", new Frame[] { 
+put("ATTACK_RIGHT", new Frame[] { 
                                                 new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
                                                                 .withScale(3)
                                                                 .withBounds(1, 3, 33, 28)
@@ -270,11 +299,21 @@ put("ATTACK_LEFT", new Frame[] {
         }
         public int setMaxinLevel(int MaxInLevel){
                 this.MaxInLevel = MaxInLevel + 1 ;
-                return MaxInLevel;
-        }
+                if (levelState == LevelState.LEVEL_COMPLETED){
+                        MaxInLevel ++;
+                }
+                return MaxInLevel++;
+        }//come back 
+        //option a: swap images based on counter or B: have multiple max methods with differnt pngs
 
         public int getMAxInLevel( int MaxInLevel){
                 return MaxInLevel;
         }
         
 }
+
+
+        
+        
+        
+
