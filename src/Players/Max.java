@@ -15,7 +15,7 @@ import java.util.HashMap;
 // This is the class for the max player character
 // basically just sets some values for physics and then defines animations
 public class Max extends Player {
-
+private int MaxInLevel = 0;// create  getter and setter method to call this 
         public Max(float x, float y) {
                 super(new SpriteSheet(ImageLoader.load("Max19.png"), 50, 50), x, y, "STAND_RIGHT");
                 gravity = .5f;
