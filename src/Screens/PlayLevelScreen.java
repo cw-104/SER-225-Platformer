@@ -34,6 +34,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     protected LevelLoseScreen levelLoseScreen;
     protected ShopIntroScreen shopIntroScreen;
     protected ShopScreen shopScreen;
+    protected CutsceneLev2Screen cutsceneLev2Screen;
     protected boolean levelCompletedStateChangeStart;
     protected SpriteFont livesDisplay;
 
@@ -168,6 +169,55 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         levelLoseScreen = new LevelLoseScreen(this);
         shopIntroScreen = new ShopIntroScreen(this);
         shopScreen = new ShopScreen(this);
+        cutsceneLev2Screen = new CutsceneLev2Screen(this);
+
+        this.playLevelScreenState = PlayLevelScreenState.RUNNING;
+
+        // Coin Counter Display
+        this.coinCounter = new SpriteFont("Coins: " + player.getCoins(), 15, 25, "Arial", 35, new Color(255, 0, 0));
+        this.coinCounter.setOutlineColor(Color.black);
+        this.coinCounter.setOutlineThickness(2);
+
+        //health 
+        this.livesDisplay = new SpriteFont("Lives: " + player.getLives(), 15, 60, "Arial", 35, new Color(255, 0, 0));
+        this.livesDisplay.setOutlineColor(Color.black);
+        this.livesDisplay.setOutlineThickness(2);
+    }
+
+    //initializes second level
+    public void initialize1(Player prev) {
+        // define/setup map
+        this.map = new Lab_copy();
+
+        // Add Coins (only line needed for both creating and counting)
+        coinList.add(new Coin(1150, 450));
+        coinList.add(new Coin(1450, 350));
+        coinList.add(new Coin(1800, 400));
+        coinList.add(new Coin(1850, 400));
+        coinList.add(new Coin(1750, 400));
+
+        // Setting bounds and coin in map
+        for (Coin coin : coinList) {
+            coin.setBounds(new Rectangle(0, 0, 16, 16));
+            coin.setMap(map);
+        }
+        // setup player
+        //this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+       this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
+                                                                                               // max into the game
+        this.player.setMap(map);
+        this.player.addListener(this);
+        Point playerStartPosition = map.getPlayerStartPosition();
+        this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
+        //sets the coins and lives as carried over from past level - add powerups changes here too probably
+        this.player.setCoins(prev.getCoins());
+        this.player.setLives(prev.getLives());
+
+        levelClearedScreen = new LevelClearedScreen();
+        levelLoseScreen = new LevelLoseScreen(this);
+        shopIntroScreen = new ShopIntroScreen(this);
+        shopScreen = new ShopScreen(this);
+        cutsceneLev2Screen = new CutsceneLev2Screen(this);
 
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
 
@@ -230,6 +280,10 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                 shopScreen.update();
                 break;
             }
+            case CUTSCENELEV2: {
+                cutsceneLev2Screen.update();;
+                break;
+            }
 
         }
     }
@@ -264,6 +318,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
             case SHOP:
                 shopScreen.draw(graphicsHandler);
                 break;
+            case CUTSCENELEV2:
+                cutsceneLev2Screen.draw(graphicsHandler);
         }
         livesDisplay.setText("Lives: " + player.getLives());
         livesDisplay.draw(graphicsHandler);
@@ -296,6 +352,10 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         initialize1();
     }
 
+    public void level2() {
+        initialize1(this.player);
+    }
+
     public void goBackToMenu() {
         screenCoordinator.setGameState(GameState.MENU);
     }
@@ -308,9 +368,13 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         playLevelScreenState = PlayLevelScreenState.SHOP;
     }
 
+    public void goToCutscene(Player player) {
+        playLevelScreenState = PlayLevelScreenState.CUTSCENELEV2;
+    }
+
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, LEVEL_LOSE, SHOPINTRO, SHOP
+        RUNNING, LEVEL_COMPLETED, LEVEL_LOSE, SHOPINTRO, SHOP, CUTSCENELEV2
     }
 
     // Total # of Coins

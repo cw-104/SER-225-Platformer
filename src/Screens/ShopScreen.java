@@ -1,16 +1,10 @@
 package Screens;
 
 import Engine.*;
-import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
 import Maps.ShopScreenMap;
-import Players.Max;
 import SpriteFont.SpriteFont;
-import Utils.Colors;
-import Screens.PlayLevelScreen;
-import GameObject.Coin;
-import GameObject.Sprite;
 import Level.Player;
 import java.awt.*;
 
@@ -23,7 +17,9 @@ public class ShopScreen extends Screen {
     protected SpriteFont exit;
     protected SpriteFont speedUpText;
     protected boolean speedUpPurchased;
-    protected SpriteFont item2;
+    protected SpriteFont healthUp;
+    protected SpriteFont healthUpText;
+    protected boolean healthUpPurchased;
     protected SpriteFont item3;
     protected SpriteFont item4;
     protected SpriteFont emptyText;
@@ -52,28 +48,28 @@ public class ShopScreen extends Screen {
         //player for access coin count
         this.player = playLevelScreen.player;
         //text and icons for shop items
-        speedUp = new SpriteFont("Speed up (3)", 65, 300, "Comic Sans", 25, new Color(0, 0, 0));
+        speedUp = new SpriteFont("Speed up (30)", 72, 280, "Comic Sans", 25, new Color(0, 0, 0));
         speedUp.setOutlineColor(Color.black);
         speedUp.setOutlineThickness(3);
+
+        healthUp = new SpriteFont("Health up (20)", 280, 280, "Comic Sans", 25, new Color(0, 0, 0));
+        healthUp.setOutlineColor(Color.black);
+        healthUp.setOutlineThickness(3);
         //marks if item is purchased so  prevents doubles
         speedUpPurchased = false;
+        healthUpPurchased = false;
         //items not yet in shop
-        item2 = new SpriteFont("Slot 2", 245, 300, "Comic Sans", 25, new Color(0, 0, 0));
-        item2.setOutlineColor(Color.black);
-        item2.setOutlineThickness(3);
-        item3 = new SpriteFont("Slot 3", 385, 300, "Comic Sans", 25, new Color(0, 0, 0));
+        item3 = new SpriteFont("Coming Soon", 500, 280, "Comic Sans", 25, new Color(0, 0, 0));
         item3.setOutlineColor(Color.black);
         item3.setOutlineThickness(3);
-        item4 = new SpriteFont("Slot 4", 535, 300, "Comic Sans", 25, new Color(0, 0, 0));
-        item4.setOutlineColor(Color.black);
-        item4.setOutlineThickness(3);
         //leave screen text
-        exit = new SpriteFont("Leave", 685, 300, "Comic Sans", 25, new Color(0, 0, 0));
+        exit = new SpriteFont("Leave", 680, 300, "Comic Sans", 25, new Color(0, 0, 0));
         exit.setOutlineColor(Color.black);
         exit.setOutlineThickness(3);
         //max's text about the item
         speedUpText = new SpriteFont("\"Energy drink.\" Why is that in quotations?\n[Increases Speed]", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
-        emptyText = new SpriteFont("There's nothing here", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
+        healthUpText = new SpriteFont("\"Health drink.\" That's not suspicious at all\n[+1 Life]", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
+        emptyText = new SpriteFont("Coming soon to a vending machine near you.\nI guess.", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         exitText = new SpriteFont("I don't want anything.", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         purchasedText = new SpriteFont("I guess this is mine now", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         speedUpText.setOutlineColor(Color.black);
@@ -81,7 +77,7 @@ public class ShopScreen extends Screen {
         notEnough = new SpriteFont("Don't have enough coins", 180, 400, "Comic Sans", 25, new Color(255,255,255));
         //coint counter in the shop
         coins = player.getCoins();
-        coinCount = new SpriteFont(("Coins: " + coins), 60, 180, "Comic Sans", 25, new Color(225,225,225));
+        coinCount = new SpriteFont(("Coins: " + coins), 20, 20, "Comic Sans", 30, new Color(0,0,0));
 
         background = new ShopScreenMap();
         background.setAdjustCamera(false);
@@ -110,7 +106,7 @@ public class ShopScreen extends Screen {
         coinCount.setText("Coins: " + player.getCoins());
 
         // if down is pressed on last menu item or up is pressed on first menu item, "loop" the selection back around to the beginning/end
-        if (currentMenuItemHovered > 4) {
+        if (currentMenuItemHovered > 3) {
             currentMenuItemHovered = 0;
         } else if (currentMenuItemHovered < 0) {
             currentMenuItemHovered = 1;
@@ -125,36 +121,31 @@ public class ShopScreen extends Screen {
                 speedUp.setColor(new Color (255, 0, 0));
             }
             exit.setColor(new Color(0, 0, 0));
-            item2.setColor(new Color(0,0,0));
+            healthUp.setColor(new Color(0,0,0));
             item3.setColor(new Color(0,0,0));
-            item4.setColor(new Color(0,0,0));
             pointerLocationX = 470;
             pointerLocationY = 130;
         } else if (currentMenuItemHovered == 1) {
             speedUp.setColor(new Color(0, 0, 0));
-            item2.setColor(new Color(255,255,255));
+            if(healthUpPurchased == false) {
+            healthUp.setColor(new Color(255, 255, 255));
+            }
+            else {
+                healthUp.setColor(new Color (255, 0, 0));
+            }
             item3.setColor(new Color(0,0,0));
-            item4.setColor(new Color(0,0,0));
             exit.setColor(new Color(0, 0, 0));
             pointerLocationX = 470;
             pointerLocationY = 230;
         } else if (currentMenuItemHovered == 2) {
             speedUp.setColor(new Color(0,0,0));
-            item2.setColor(new Color(0,0,0));
+            healthUp.setColor(new Color(0,0,0));
             item3.setColor(new Color(255,255,255));
-            item4.setColor(new Color(0,0,0));
             exit.setColor(new Color(0, 0, 0));
         } else if (currentMenuItemHovered == 3) {
             speedUp.setColor(new Color(0,0,0));
-            item2.setColor(new Color(0,0,0));
+            healthUp.setColor(new Color(0,0,0));
             item3.setColor(new Color(0,0,0));
-            item4.setColor(new Color(255,255,255));
-            exit.setColor(new Color(0, 0, 0));
-        } else if (currentMenuItemHovered == 4) {
-            speedUp.setColor(new Color(0,0,0));
-            item2.setColor(new Color(0,0,0));
-            item3.setColor(new Color(0,0,0));
-            item4.setColor(new Color(0,0,0));
             exit.setColor(new Color(255,255,255));
         }
 
@@ -166,8 +157,8 @@ public class ShopScreen extends Screen {
             keyPressTimer = 14;
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
-                if(this.player.getCoins() >= 3 && speedUpPurchased == false) {
-                    player.removeCoins(3);
+                if(this.player.getCoins() >= 30 && speedUpPurchased == false) {
+                    player.removeCoins(30);
                     coinCount.setText("Coins: " + player.getCoins());
                     speedUpPurchased = true;
                 }
@@ -177,11 +168,15 @@ public class ShopScreen extends Screen {
                 //apply effect
                 //mark purchased
                 
-            } else if (menuItemSelected == 1 || menuItemSelected == 2 || menuItemSelected == 3) {
-                //add when there are things to purchase
-            } else if (menuItemSelected == 4) {
+            } else if (menuItemSelected == 1 ) {
+                if(this.player.getCoins() >= 20 && healthUpPurchased == false) {
+                    player.removeCoins(20);
+                    coinCount.setText("Coins: " + player.getCoins());
+                    healthUpPurchased = true;
+                }
+            } else if (menuItemSelected == 3) {
                 //when level 2 exists this should send there - menu is temp
-                playLevelScreen.level2();
+                playLevelScreen.goToCutscene(player);
             }
         }
     } 
@@ -189,28 +184,47 @@ public class ShopScreen extends Screen {
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
         speedUp.draw(graphicsHandler);
-        item2.draw(graphicsHandler);
+        healthUp.draw(graphicsHandler);
         item3.draw(graphicsHandler);
-        item4.draw(graphicsHandler);
+        //item4.draw(graphicsHandler);
         exit.draw(graphicsHandler);
         coinCount.draw(graphicsHandler);
         
         //the text for each item only appears when the item is hovered 
         menuItemSelected = currentMenuItemHovered;
-        if(menuItemSelected == 0 && this.player.getCoins() < 3 && speedUpPurchased == false) {
-            notEnough.draw(graphicsHandler);
-        }
-        if (this.player.getCoins() < 3 && speedUpPurchased == false) {
-        // Display a message for not enough coins
-        notEnough.draw(graphicsHandler);
-    }
-        if(menuItemSelected == 0 && speedUpPurchased == false && this.player.getCoins() >= 3) {
-            speedUpText.drawWithParsedNewLines(graphicsHandler, 2);
-        } else if(menuItemSelected == 0 && speedUpPurchased == true) {
+        //if speed up hovered
+        if(menuItemSelected == 0) {
+            //message when not enough coins
+            if(this.player.getCoins() < 30 && speedUpPurchased == false) {
+                notEnough.draw(graphicsHandler);
+            }
+            //description of item
+            else if(this.player.getCoins() >= 30 && speedUpPurchased == false) {
+                speedUpText.drawWithParsedNewLines(graphicsHandler, 2);
+            }
+            //purchased text
+            else if(speedUpPurchased == true) {
                 purchasedText.draw(graphicsHandler);
-        } else if (menuItemSelected == 1 || menuItemSelected == 2 || menuItemSelected == 3) {
-            emptyText.draw(graphicsHandler);
-        }else if(menuItemSelected == 4) {
+            }
+        }
+        else if(menuItemSelected == 1) {
+            //message when not enough coins
+            if(this.player.getCoins() < 20 && healthUpPurchased == false) {
+                notEnough.draw(graphicsHandler);
+            }
+            //description of item
+            else if(this.player.getCoins() >= 20 && healthUpPurchased == false) {
+                healthUpText.drawWithParsedNewLines(graphicsHandler, 2);
+            }
+            //purchased text
+            else if(healthUpPurchased == true) {
+                purchasedText.draw(graphicsHandler);
+            }
+        }
+        else if(menuItemSelected == 2) {
+            emptyText.drawWithParsedNewLines(graphicsHandler, 2);
+        }
+        else if(menuItemSelected == 3) {
             exitText.draw(graphicsHandler);
         }
     }

@@ -4,28 +4,29 @@ import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.Sprite;
 import Level.Map;
-import Tilesets.Bunker2Tileset;
+import Tilesets.LabCutsceneTileset;
 import Utils.Colors;
 import Utils.Point;
 
-// Represents the map that is used as a background for the main menu and credits menu screen
-public class Cutscene2Map extends Map {
+// Represents the map that is used as a background for the 1-2 cutscene
+public class BunkerHallMap extends Map {
 
-    private Sprite maxReal;
+    private Sprite max;
     private Sprite textBox;
     private Sprite intercom_icon;
+    
 
-    public Cutscene2Map() {
-        super("cutscene_map.txt", new Bunker2Tileset());
-        Point maxRealLocation = getMapTile(2,9).getLocation().subtractX(70).subtractY(24);
-        maxReal = new Sprite(ImageLoader.loadSubImage("Max7.png", Colors.MAGENTA, 0, 1, 36, 31));
-        maxReal.setScale(3);
-        maxReal.setLocation(maxRealLocation.x, maxRealLocation.y);
-        Point textBoxLocation = getMapTile(2, 0).getLocation().subtractX(0).subtractY(-12);
+    public BunkerHallMap() {
+        super("shop_hall.txt", new LabCutsceneTileset());
+        Point maxLocation = getMapTile(1, 7).getLocation().subtractX(24).subtractY(235);
+        max = new Sprite(ImageLoader.loadSubImage("Max7.png", Colors.MAGENTA, 0, 1, 36, 31));
+        max.setScale(3);
+        max.setLocation(maxLocation.x, maxLocation.y);
+        Point textBoxLocation = getMapTile(1, 0).getLocation().subtractX(-20).subtractY(-12);
         textBox = new Sprite(ImageLoader.loadSubImage("textBox2.png", Colors.MAGENTA, 0, 0, 199, 49));
         textBox.setScale(3);
         textBox.setLocation(textBoxLocation.x, textBoxLocation.y);
-        Point intercomIconLocation = getMapTile(3,0).getLocation().subtractX(42).subtractY(-20);
+        Point intercomIconLocation = getMapTile(2,0).getLocation().subtractX(43).subtractY(-22);
         intercom_icon = new Sprite (ImageLoader.loadSubImage("camera_speech.png", Colors.MAGENTA, 0, 0, 21, 20));
         intercom_icon.setScale(2);
         intercom_icon.setLocation(intercomIconLocation.x, intercomIconLocation.y);
@@ -35,9 +36,11 @@ public class Cutscene2Map extends Map {
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
-        maxReal.draw(graphicsHandler);
+        max.draw(graphicsHandler);
         textBox.draw(graphicsHandler);
         intercom_icon.draw(graphicsHandler);
     }
 
 }
+
+

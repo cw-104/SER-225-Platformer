@@ -1,10 +1,8 @@
 package Screens;
 
 import Engine.*;
-import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
-import Maps.Cutscene2Map;
 import Maps.ShopHallMap;
 import SpriteFont.SpriteFont;
 import Level.Player;
@@ -37,22 +35,6 @@ public class ShopIntroScreen extends Screen {
         keyLocker.lockKey(Key.SPACE);
     }
 
-    /*public void update() {
-        // update background map (to play tile animations)
-        background.update(null);
-
-
-        
-        // if space is pressed on menu item, change to appropriate screen based on which menu item was chosen
-        if (Keyboard.isKeyUp(Key.SPACE)) {
-            keyLocker.unlockKey(Key.SPACE);
-        }
-        if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
-           playLevelScreen.goToShop();
-           
-        }
-    }*/
-
     @Override
     public void update() {
         if (Keyboard.isKeyUp(Key.SPACE)) {
@@ -67,7 +49,6 @@ public class ShopIntroScreen extends Screen {
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
-        //graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), Color.black);
         narration.drawWithParsedNewLines(graphicsHandler, 3);
         prompt.draw(graphicsHandler);
     }
