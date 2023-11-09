@@ -16,11 +16,11 @@ import Utils.Point;
 import java.awt.Color;
 import java.util.HashMap;
 
-public class PrisonGuardEnemy extends Enemy {
+public class Hunter extends Enemy {
     protected Point startLocation;
     protected Point endLocation;
 
-    protected float movementSpeed = 1f;
+    protected float movementSpeed = 2f;
     private Direction startFacingDirection;
     protected Direction facingDirection;
     protected AirGroundState airGroundState;
@@ -29,11 +29,11 @@ public class PrisonGuardEnemy extends Enemy {
 
     protected int shootTimer;
 
-    protected PrisonGuardState prisonGuardState;
-    protected PrisonGuardState previousPrisonGuardState;
+    protected HunterState hunterState;
+    protected HunterState previousHunterState;
 
-    public PrisonGuardEnemy(Point startLocation, Point endLocation, Direction facingDirection) {
-        super(startLocation.x, startLocation.y, new SpriteSheet(ImageLoader.load("GuardSpriteSheet.png"), 50, 50),
+    public Hunter(Point startLocation, Point endLocation, Direction facingDirection) {
+        super(startLocation.x, startLocation.y, new SpriteSheet(ImageLoader.load("Hunter.png"), 50, 50),
                 "WALK_LEFT");
         this.startLocation = startLocation;
         this.endLocation = endLocation;
@@ -44,8 +44,8 @@ public class PrisonGuardEnemy extends Enemy {
     @Override
     public void initialize() {
         super.initialize();
-        prisonGuardState = PrisonGuardState.WALK;
-        previousPrisonGuardState = prisonGuardState;
+        hunterState = HunterState.WALK;
+        previousHunterState = hunterState;
         facingDirection = startFacingDirection;
         if (facingDirection == Direction.RIGHT) {
             currentAnimationName = "WALK_RIGHT";
@@ -54,8 +54,8 @@ public class PrisonGuardEnemy extends Enemy {
         }
         airGroundState = AirGroundState.GROUND;
 
-        // every certain number of frames, the bullet will be shot out
-        shootWaitTimer = 50;
+        // every certain number of frames, the arrow will be shot out
+        shootWaitTimer = 60;
     }
 
     @Override
@@ -63,16 +63,16 @@ public class PrisonGuardEnemy extends Enemy {
         float startBound = startLocation.x;
         float endBound = endLocation.x;
 
-        // if shoot timer is up and prison guard is not currently shooting, set its
+        // if shoot timer is up and hunter is not currently shooting, set its
         // state to
         // SHOOT
-        if (shootWaitTimer == 0 && prisonGuardState != PrisonGuardState.SHOOT_WAIT) {
-            prisonGuardState = PrisonGuardState.SHOOT_WAIT;
+        if (shootWaitTimer == 0 && hunterState != HunterState.SHOOT_WAIT) {
+            hunterState = HunterState.SHOOT_WAIT;
         } else {
             shootWaitTimer--;
         }
 
-        if (prisonGuardState == PrisonGuardState.WALK) {
+        if (hunterState == HunterState.WALK) {
             if (facingDirection == Direction.RIGHT) {
                 currentAnimationName = "WALK_RIGHT";
                 moveXHandleCollision(movementSpeed);
@@ -92,61 +92,70 @@ public class PrisonGuardEnemy extends Enemy {
             }
         }
 
-        if (prisonGuardState == PrisonGuardState.SHOOT_WAIT) {
-            if (previousPrisonGuardState == PrisonGuardState.WALK) {
+        if (hunterState == HunterState.SHOOT_WAIT) {
+            if (previousHunterState == HunterState.WALK) {
                 shootTimer = 65;
                 currentAnimationName = facingDirection == Direction.RIGHT ? "SHOOT_RIGHT" : "SHOOT_LEFT";
             } else if (shootTimer == 0) {
-                prisonGuardState = PrisonGuardState.SHOOT;
+                hunterState = HunterState.SHOOT;
             } else {
                 shootTimer--;
             }
         }
-
-        if (prisonGuardState == PrisonGuardState.SHOOT) {
-            int bulletX;
+ 
+        if (hunterState == HunterState.SHOOT) {
+            int arrowX;
             float movementSpeed;
             if (facingDirection == Direction.RIGHT) {
-                bulletX = Math.round(getX()) + getWidth();
-                movementSpeed = 2.5f;
+                arrowX = Math.round(getX()) + getWidth();
+                movementSpeed = 3f;
             } else {
-                bulletX = Math.round(getX() - 21);
-                movementSpeed = -2.5f;
+                arrowX = Math.round(getX() - 21);
+                movementSpeed = -3f;
             }
 
-            int bulletY = Math.round(getY() + 50);
+            int arrowY = Math.round(getY() + 50);
 
-            // create bullet enemy
-            Bullet bullet = new Bullet(new Point(bulletX, bulletY), movementSpeed, 60);
+            // create arrow enemy
+            Arrow arrow = new Arrow(new Point(arrowX, arrowY), movementSpeed, 60);
+            Arrow1 arrow1 = new Arrow1(new Point(arrowX, arrowY), movementSpeed, 60);
+
+            if(facingDirection == Direction.RIGHT)
+            {
+            // add arrow enemy to the map for it to spawn in the level
+            map.addEnemy(arrow1);
+
+            }
+            else {
+                map.addEnemy(arrow);
+            }
            
-            // add bullet enemy to the map for it to spawn in the level
-            map.addEnemy(bullet);
-
-            // change prison guard back to its WALK state after shooting, reset shootTimer
+           
+            // change hunter back to its WALK state after shooting, reset shootTimer
             // to
             // wait a certain number of frames before shooting again
-            prisonGuardState = PrisonGuardState.WALK;
+            hunterState = HunterState.WALK;
 
-            // reset shoot wait timer so the process can happen again (dino walks around,
+            // reset shoot wait timer so the process can happen again (hunter walks around,
             // then waits, then shoots)
             shootWaitTimer = 130;
         }
 
         super.update(player);
 
-        previousPrisonGuardState = prisonGuardState;
+        previousHunterState = hunterState;
     }
 
-    /*
-     * public void draw(GraphicsHandler graphicsHandler) {
-     * super.draw(graphicsHandler);
-     * drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
-     * }
-     */
+    
+     public void draw(GraphicsHandler graphicsHandler) {
+     super.draw(graphicsHandler);
+      //drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+      }
+     
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction, MapEntity entityCollidedWith) {
-        // if prison guard enemy collides with something on the x axis, it turns around
+        // if Hunter enemy collides with something on the x axis, it turns around
         // and
         // walks the other way
         if (hasCollided) {
@@ -168,12 +177,17 @@ public class PrisonGuardEnemy extends Enemy {
                         new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                                 .withScale(3)
                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .withBounds(22, 16, 12, 25)
+                                .withBounds(12, 2, 35, 40)
                                 .build(),
                         new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
                                 .withScale(3)
                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .withBounds(22, 16, 12, 25)
+                                .withBounds(12, 2, 35, 40)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
+                                .withScale(3)
+                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                .withBounds(12, 2, 35, 40)
                                 .build()
                 });
 
@@ -181,28 +195,34 @@ public class PrisonGuardEnemy extends Enemy {
                         new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                                 .withScale(3)
                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .withBounds(12, 16, 12, 25)
+                                .withBounds(12, 2, 35, 40)
                                 .build(),
                         new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
                                 .withScale(3)
                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .withBounds(12, 16, 12, 25)
+                                .withBounds(12, 2, 35, 40)
+                                .build(),
+
+                        new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
+                                .withScale(3)
+                                //.withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                .withBounds(12, 2, 35, 40)
                                 .build()
                 });
 
                 put("SHOOT_LEFT", new Frame[] {
-                        new FrameBuilder(spriteSheet.getSprite(1, 0))
+                        new FrameBuilder(spriteSheet.getSprite(0, 3))
                                 .withScale(3)
                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .withBounds(22, 16, 12, 25)
+                                .withBounds(12, 2, 35, 40)
                                 .build(),
                 });
 
                 put("SHOOT_RIGHT", new Frame[] {
-                        new FrameBuilder(spriteSheet.getSprite(1, 0))
+                        new FrameBuilder(spriteSheet.getSprite(0, 3))
                                 .withScale(3)
                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                .withBounds(12, 16, 12, 25)
+                                .withBounds(8, 2, 35, 40)
                                 .build(),
                 });
 
@@ -210,7 +230,7 @@ public class PrisonGuardEnemy extends Enemy {
         };
     }
 
-    public enum PrisonGuardState {
+    public enum HunterState {
         WALK, SHOOT_WAIT, SHOOT,
     }
 
