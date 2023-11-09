@@ -5,7 +5,6 @@ import Engine.ImageLoader;
 import GameObject.Sprite;
 import Level.Map;
 import Tilesets.Bunker2Tileset;
-import Tilesets.SecondTileset;
 import Utils.Colors;
 import Utils.Point;
 

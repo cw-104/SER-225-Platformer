@@ -1,16 +1,10 @@
 package Screens;
 
 import Engine.*;
-import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
 import Maps.ShopScreenMap;
-import Players.Max;
 import SpriteFont.SpriteFont;
-import Utils.Colors;
-import Screens.PlayLevelScreen;
-import GameObject.Coin;
-import GameObject.Sprite;
 import Level.Player;
 import java.awt.*;
 
@@ -54,11 +48,11 @@ public class ShopScreen extends Screen {
         //player for access coin count
         this.player = playLevelScreen.player;
         //text and icons for shop items
-        speedUp = new SpriteFont("Speed up (3)", 72, 280, "Comic Sans", 25, new Color(0, 0, 0));
+        speedUp = new SpriteFont("Speed up (20)", 72, 280, "Comic Sans", 25, new Color(0, 0, 0));
         speedUp.setOutlineColor(Color.black);
         speedUp.setOutlineThickness(3);
 
-        healthUp = new SpriteFont("Health up (4)", 280, 280, "Comic Sans", 25, new Color(0, 0, 0));
+        healthUp = new SpriteFont("Health up (25)", 280, 280, "Comic Sans", 25, new Color(0, 0, 0));
         healthUp.setOutlineColor(Color.black);
         healthUp.setOutlineThickness(3);
         //marks if item is purchased so  prevents doubles
@@ -68,9 +62,6 @@ public class ShopScreen extends Screen {
         item3 = new SpriteFont("Coming Soon", 500, 280, "Comic Sans", 25, new Color(0, 0, 0));
         item3.setOutlineColor(Color.black);
         item3.setOutlineThickness(3);
-        /*item4 = new SpriteFont("Slot 4", 535, 300, "Comic Sans", 25, new Color(0, 0, 0));
-        item4.setOutlineColor(Color.black);
-        item4.setOutlineThickness(3);*/
         //leave screen text
         exit = new SpriteFont("Leave", 680, 300, "Comic Sans", 25, new Color(0, 0, 0));
         exit.setOutlineColor(Color.black);
@@ -166,8 +157,8 @@ public class ShopScreen extends Screen {
             keyPressTimer = 14;
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
-                if(this.player.getCoins() >= 3 && speedUpPurchased == false) {
-                    player.removeCoins(3);
+                if(this.player.getCoins() >= 20 && speedUpPurchased == false) {
+                    player.removeCoins(20);
                     coinCount.setText("Coins: " + player.getCoins());
                     speedUpPurchased = true;
                 }
@@ -178,8 +169,8 @@ public class ShopScreen extends Screen {
                 //mark purchased
                 
             } else if (menuItemSelected == 1 ) {
-                if(this.player.getCoins() >= 4 && healthUpPurchased == false) {
-                    player.removeCoins(4);
+                if(this.player.getCoins() >= 25 && healthUpPurchased == false) {
+                    player.removeCoins(25);
                     coinCount.setText("Coins: " + player.getCoins());
                     healthUpPurchased = true;
                 }
@@ -204,11 +195,11 @@ public class ShopScreen extends Screen {
         //if speed up hovered
         if(menuItemSelected == 0) {
             //message when not enough coins
-            if(this.player.getCoins() < 3 && speedUpPurchased == false) {
+            if(this.player.getCoins() < 20 && speedUpPurchased == false) {
                 notEnough.draw(graphicsHandler);
             }
             //description of item
-            else if(this.player.getCoins() >= 3 && speedUpPurchased == false) {
+            else if(this.player.getCoins() >= 20 && speedUpPurchased == false) {
                 speedUpText.drawWithParsedNewLines(graphicsHandler, 2);
             }
             //purchased text
@@ -218,11 +209,11 @@ public class ShopScreen extends Screen {
         }
         else if(menuItemSelected == 1) {
             //message when not enough coins
-            if(this.player.getCoins() < 4 && healthUpPurchased == false) {
+            if(this.player.getCoins() < 25 && healthUpPurchased == false) {
                 notEnough.draw(graphicsHandler);
             }
             //description of item
-            else if(this.player.getCoins() >= 4 && healthUpPurchased == false) {
+            else if(this.player.getCoins() >= 25 && healthUpPurchased == false) {
                 healthUpText.drawWithParsedNewLines(graphicsHandler, 2);
             }
             //purchased text
