@@ -658,4 +658,7 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
     public void setLives(int lives) {
         this.lives = lives;
     }
+    public void addExtraLife() {
+        this.lives++; // Increment the player's lives by one
+    }
 }

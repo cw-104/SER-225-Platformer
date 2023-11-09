@@ -4,9 +4,7 @@ import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.Sprite;
 import Level.Map;
-import Tilesets.Bunker2Tileset;
 import Tilesets.LabCutsceneTileset;
-import Tilesets.SecondTileset;
 import Utils.Colors;
 import Utils.Point;
 
@@ -16,7 +14,7 @@ public class BunkerHallMap extends Map {
     private Sprite max;
     private Sprite textBox;
     private Sprite intercom_icon;
-    private Sprite vending_machine;
+    
 
     public BunkerHallMap() {
         super("shop_hall.txt", new LabCutsceneTileset());
@@ -41,7 +39,6 @@ public class BunkerHallMap extends Map {
         max.draw(graphicsHandler);
         textBox.draw(graphicsHandler);
         intercom_icon.draw(graphicsHandler);
-        //vending_machine.draw(graphicsHandler);
     }
 
 }

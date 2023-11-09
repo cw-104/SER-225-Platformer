@@ -1,25 +1,18 @@
 package Maps;
 
-import java.awt.Color;
-
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
-import Engine.ScreenManager;
 import GameObject.Sprite;
 import Level.Map;
-import Tilesets.Bunker2Tileset;
 import Tilesets.LabCutsceneTileset;
-import Tilesets.SecondTileset;
 import Utils.Colors;
 import Utils.Point;
 
 // Represents the map that is used as a background for the main menu and credits menu screen
 public class ShopScreenMap extends Map {
 
-    private Sprite max;
     private Sprite textBox;
     private Sprite max_icon;
-    private Sprite vending_machine;
     private Sprite speedUpSprite;
     private Sprite healthUpSprite;
     private Sprite vending;
@@ -58,8 +51,6 @@ public class ShopScreenMap extends Map {
     public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
         vending.draw(graphicsHandler);
-        //graphicsHandler.drawFilledRectangle(0, 0, ScreenManager.getScreenWidth(), ScreenManager.getScreenHeight(), Color.darkGray);
-        //graphicsHandler.drawFilledRectangle(20,220, 750, 130, Color.lightGray);
         textBox.draw(graphicsHandler);
         max_icon.draw(graphicsHandler);
         speedUpSprite.draw(graphicsHandler);
