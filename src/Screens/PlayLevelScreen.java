@@ -124,6 +124,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         levelLoseScreen = new LevelLoseScreen(this);
         shopIntroScreen = new ShopIntroScreen(this);
         shopScreen = new ShopScreen(this);
+        cutsceneLev2Screen = new CutsceneLev2Screen(this);
 
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
 
