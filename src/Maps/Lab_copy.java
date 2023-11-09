@@ -79,6 +79,18 @@ public class Lab_copy extends Map {
                                 getMapTile(70, 43).getLocation().subtractY(75), Direction.RIGHT);
                 enemies.add(Guard_5);
 
+                Hunter Hunter_1 = new Hunter(getMapTile(30, 25).getLocation().subtractY(75),
+                                getMapTile(38, 25).getLocation().subtractY(75), Direction.RIGHT);
+                enemies.add(Hunter_1);
+
+                Hunter Hunter_2 = new Hunter(getMapTile(50, 15).getLocation().subtractY(75),
+                                getMapTile(53, 15).getLocation().subtractY(75), Direction.RIGHT);
+                enemies.add(Hunter_2);
+
+                Hunter Hunter_3 = new Hunter(getMapTile(86, 12).getLocation().subtractY(75),
+                                getMapTile(99, 12).getLocation().subtractY(75), Direction.RIGHT);
+                enemies.add(Hunter_3);
+
                 /*
                  * DinosaurEnemy dinosaurEnemy = new DinosaurEnemy(getMapTile(19,
                  * 1).getLocation().addY(2), getMapTile(22, 1).getLocation().addY(2),
