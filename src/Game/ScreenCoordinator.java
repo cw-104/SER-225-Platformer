@@ -7,14 +7,12 @@ import Screens.BlackScreen;
 import Screens.CreditsScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
-import Screens.ShopIntroScreen;
 import Screens.CutsceneScreen;
 import Screens.CutsceneScreen2;
 import Screens.CutsceneScreen3;
 import Screens.CutsceneScreen4;
 import Screens.CutsceneScreen5;
 import Screens.InstructionsScreen;
-import Screens.ShopScreen;;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown

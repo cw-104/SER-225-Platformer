@@ -27,7 +27,7 @@ public class CutsceneScreen5 extends Screen {
         background = new Cutscene2Map();
         background.setAdjustCamera(false);
         //fun fact if you're trying to remember why \n isn't working: use the other draw command it has one that works with \n
-        narration = new SpriteFont("Your task begins now. Good luck!", 175, 22, "Helvetica Bold", 25, Color.white);
+        narration = new SpriteFont("You have been provided a weapon for ease of\ntravel. Your task begins now. Good luck!", 175, 22, "Helvetica Bold", 22, Color.white);
         prompt = new SpriteFont("Press SPACE to continue...", 490, 130, "Comic Sans", 15, Color.white);
         keyPressTimer = 0;
         keyLocker.lockKey(Key.SPACE);
