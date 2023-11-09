@@ -334,7 +334,7 @@ public abstract class Player extends GameObject {
                 }
             }
         }// jump + attack attempt
-        else if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(ATTACK_KEY)) {
+        else if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
             keyLocker.lockKey(ATTACK_KEY);
             playerState = PlayerState.ATTACKING;
 //besa
@@ -381,6 +381,17 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
         // enters STANDING state
         else if (previousAirGroundState == AirGroundState.AIR && airGroundState == AirGroundState.GROUND) {
             playerState = PlayerState.STANDING;
+        }
+        // trying to add attacking
+        if (Keyboard.isKeyDown(ATTACK_KEY) ) {
+          //  keyLocker.lockKey(ATTACK_KEY);
+            playerState = PlayerState.ATTACKING;
+            isAttacking = true; // for when max is attacking
+//need to add make separate state for attacking in the air // could possibly get around without doing it, but that would be easiest method
+// make attack a part of other states
+//
+// use: hasAnimationLooped - to 
+
         }
     }
 
