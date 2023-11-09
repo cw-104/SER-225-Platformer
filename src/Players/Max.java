@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class Max extends Player {
 private int currentLevel;
 private int MaxInLevel =0;
-        public Max(float x, float y, int currentLevel) {
+        public Max(float x, float y){
                 super(new SpriteSheet(ImageLoader.load("Max19.png"), 50, 50), x, y, "STAND_RIGHT");
                 gravity = .5f;
                 terminalVelocityY = 6f;
@@ -191,9 +191,7 @@ private int MaxInLevel =0;
                                                                 .build()
                                 });
 
-                                put("DEATH_LEFT", new Frame[] { 
-                                                new FrameBuilder(spriteSheet.getSprite(4, 5), 8)
-
+                               
                                 put("DEATH_LEFT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
 

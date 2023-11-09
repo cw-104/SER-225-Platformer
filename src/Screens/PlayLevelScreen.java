@@ -53,7 +53,7 @@ public void changeLevel(int newLevel){
         if( currentLevel ==1){
 
             this.map =new Lab();
-             this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y,this.currentLevel);
+             this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
            }
         // Add Coins (only line needed for both creating and counting)
         coinList.add(new Coin(1150, 450));
@@ -293,11 +293,11 @@ public void changeLevel(int newLevel){
         this.livesDisplay.setOutlineThickness(2);
     }
 // this will be used to test functionality of level 2 test map
-public void initialize1() {
+public void initialize2() {
    if( currentLevel ==2){
 
     this.map =new Lab_copy();
-     this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y,this.currentLevel);
+     this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
    }
    
 
