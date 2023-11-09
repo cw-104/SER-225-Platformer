@@ -173,7 +173,7 @@ public class ShopScreen extends Screen {
                 // Inside ShopScreen.java
 
             } else if (menuItemSelected == 1) {
-                int costOfExtraLife = 3;      
+                int costOfExtraLife = 20;      
                     if(this.player.getCoins() >= costOfExtraLife && !this.healthUpPurchased) {
                         this.player.removeCoins(costOfExtraLife); 
                         this.player.addExtraLife(); 
