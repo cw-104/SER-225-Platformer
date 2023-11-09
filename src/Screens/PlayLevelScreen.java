@@ -162,6 +162,7 @@ public void initialize1() {
     Point playerStartPosition = map.getPlayerStartPosition();
     this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
 
+    
     levelClearedScreen = new LevelClearedScreen();
     levelLoseScreen = new LevelLoseScreen(this);
     shopIntroScreen = new ShopIntroScreen(this);
@@ -294,9 +295,7 @@ public void initialize1() {
     public void resetLevel() {
         initialize();
     }
-    public void level2() {
-        initialize1();
-    }
+    
 
     public void level2() {
         initialize1(this.player);

@@ -223,8 +223,58 @@ private int MaxInLevel = 0;// create  getter and setter method to call this
                                                                                            // the original bounds
                                                                 .build()
                                 });
+                                
+//attempt to change the sprites in changing kevel //startOfTest
+                                if(MaxInLevel>0){ //using column 6 as testvale //remember to come back and add the ptoper sprite sets
+put("ATTACK_LEFT", new Frame[] { 
+                                                new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(1, 3, 33, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(6, 7), 8)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(1, 3, 33, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(8, 6), -1)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(1, 3, 33, 28)
+                                                                .build()
+                                });
 
+}//EndOfTest
+//attempt to change the sprites in changing kevel //startOfTest //right side 
+                                if(MaxInLevel>0){ //using column 6 as testvale //remember to come back and add the ptoper sprite sets
+put("ATTACK_LEFT", new Frame[] { 
+                                                new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
+                                                                .withScale(3)
+                                                                .withBounds(1, 3, 33, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(6, 7), 8)
+                                                                .withScale(3)                                                             
+                                                                .withBounds(1, 3, 33, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(8, 6), -1)
+                                                                .withScale(3)                                                         
+                                                                .withBounds(1, 3, 33, 28)
+                                                                .build()
+                                });
+
+}//EndOfTest //right side 
                         }
                 };
+
+
         }
+        public int setMaxinLevel(int MaxInLevel){
+                this.MaxInLevel = MaxInLevel + 1 ;
+                return MaxInLevel;
+        }
+
+        public int getMAxInLevel( int MaxInLevel){
+                return MaxInLevel;
+        }
+        
 }
