@@ -167,19 +167,32 @@ public class ShopScreen extends Screen {
                 //remove coins
                 //apply effect
                 //mark purchased
-                
-            } else if (menuItemSelected == 1 ) {
-                if(this.player.getCoins() >= 20 && healthUpPurchased == false) {
-                    player.removeCoins(20);
-                    coinCount.setText("Coins: " + player.getCoins());
-                    healthUpPurchased = true;
+
+               
+               
+                // Inside ShopScreen.java
+
+            } else if (menuItemSelected == 1) {
+                int costOfExtraLife = 3;      
+                    if(this.player.getCoins() >= costOfExtraLife && !this.healthUpPurchased) {
+                        this.player.removeCoins(costOfExtraLife); 
+                        this.player.addExtraLife(); 
+                        this.healthUpPurchased = true;
+                    }
+
+            // } else if (menuItemSelected == 1 ) {
+            //     if(this.player.getCoins() >= 4 && healthUpPurchased == false) {
+            //         player.removeCoins(4);
+            //         coinCount.setText("Coins: " + player.getCoins());
+            //         healthUpPurchased = true;
+
                 }
             } else if (menuItemSelected == 3) {
                 //when level 2 exists this should send there - menu is temp
                 playLevelScreen.goToCutscene(player);
             }
         }
-    } 
+    
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
