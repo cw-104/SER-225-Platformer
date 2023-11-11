@@ -120,7 +120,7 @@ public void changeLevel(int newLevel){
 
         // this.player = new Cat(map.getPlayerStartPosition().x,
         // map.getPlayerStartPosition().y);
-        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
+        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, currentLevel); // this is to implement
 
                                                                                                // max into the game
         this.player.setMap(map);
@@ -215,7 +215,7 @@ public void changeLevel(int newLevel){
         // setup player
         // this.player = new Cat(map.getPlayerStartPosition().x,
         // map.getPlayerStartPosition().y);
-        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
+        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, currentLevel); // this is to implement
                                                                                                // max into the game
         this.player.setMap(map);
         this.player.addListener(this);
@@ -262,7 +262,7 @@ public void changeLevel(int newLevel){
 
         // this.player = new Cat(map.getPlayerStartPosition().x,
         // map.getPlayerStartPosition().y);
-        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
+        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, currentLevel); // this is to implement
 
                                                                                                // max into the game
         this.player.setMap(map);
@@ -293,11 +293,11 @@ public void changeLevel(int newLevel){
         this.livesDisplay.setOutlineThickness(2);
     }
 // this will be used to test functionality of level 2 test map
-public void initialize1() {
+public void initialize2() {
    if( currentLevel ==2){
 
     this.map =new Lab_copy();
-     this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y,this.currentLevel);
+     this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, currentLevel);
    }
    
 
