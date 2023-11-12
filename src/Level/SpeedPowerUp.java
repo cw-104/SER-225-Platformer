@@ -32,8 +32,32 @@ public class SpeedPowerUp  extends MapEntity{
         
 
     public void applyPowerUp(Player player) {
-      //  player.applySpeedBoost(speedBoostAmount, durationFrames);
+       player.applySpeedPowerUp(20, 5);//just changed // besa
       //may need to change this file
+    }
+
+
+
+    public boolean isCollected() {
+      return isCollected;//besa
+    }
+
+
+
+    public void setCollected(boolean collected) {
+      isCollected = collected;
+    }
+
+
+
+    public float getSpeedBoostAmount() {
+        return speedBoostAmount;
+    }
+
+
+
+    public int getDurationFrames() {
+        return durationFrames;
     }
 
 

@@ -27,11 +27,11 @@ public abstract class Player extends GameObject {
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
     int lives = 3;
-    protected float speedPowerUp;// added to implement speed powerup. may need to take out //Besa
+    //protected float speedPowerUp;// added to implement speed powerup. may need to take out //Besa
     private int currentLevel = 1; // Default level is 1// used to determine which level max/ player is in 
     // coin
     protected int coins;
-
+    private SpeedPowerUp speedPowerUp;
     public int getCoins() {
         return coins;
     }
@@ -125,6 +125,15 @@ public abstract class Player extends GameObject {
 
             updateLockedKeys();
 
+            if (speedPowerUp != null) {
+                speedPowerUp.update();
+                if (speedPowerUp.isCollected()) {
+                    speedPowerUp.applyPowerUp(this);
+                    speedPowerUp = null; // Speed power-up used, set it to null
+                }
+            }
+
+
             // update player's animation
             super.update();
         }
@@ -144,11 +153,22 @@ public abstract class Player extends GameObject {
     protected void applyGravity() {
         moveAmountY += gravity + momentumY;
     }
-
+/* *
     protected void applyPowerUp() {
-
+//besa //come back to this
         moveAmountX += speedPowerUp + speedPowerUp; // may need to change this // besa
     }
+*/
+public void applySpeedPowerUp(float speedBoostAmount, int durationFrames) {
+    speedPowerUp = new SpeedPowerUp(getX(), getY(), 20, 5);//trying out 20,5// besa
+}
+public void checkSpeedPowerUpCollision(SpeedPowerUp powerUp) {
+    if (intersects(powerUp) && !powerUp.isCollected()) {
+        powerUp.setCollected(true);
+        applySpeedPowerUp(powerUp.getSpeedBoostAmount(), powerUp.getDurationFrames());
+    }
+}
+
 
     // based on player's current state, call appropriate player state handling
     // method
