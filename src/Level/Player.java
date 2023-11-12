@@ -28,7 +28,7 @@ public abstract class Player extends GameObject {
     protected float momentumYIncrease = 0;
     int lives = 3;
     protected float speedPowerUp;// added to implement speed powerup. may need to take out //Besa
-
+    private int currentLevel = 1; // Default level is 1// used to determine which level max/ player is in 
     // coin
     protected int coins;
 
@@ -568,6 +568,7 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
     // other entities can call this to tell the player they beat a level
     public void completeLevel() {
         levelState = LevelState.LEVEL_COMPLETED;
+      
     }
 
     // if player has beaten level, this will be the update cycle
@@ -660,5 +661,17 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
     }
     public void addExtraLife() {
         this.lives++; // Increment the player's lives by one
+    }
+    // Add a method to apply a speed power-up
+public void applySpeedPowerUp(float speedIncrease) {
+    walkSpeed += speedIncrease;
+    // Example usage in  game logic// player.applySpeedPowerUp(2.0f); // Increases walk speed by 2 units//besa
+}
+
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+    public void incrementLevel() {
+        currentLevel++;
     }
 }

@@ -17,8 +17,10 @@ import java.util.HashMap;
 // basically just sets some values for physics and then defines animations
 public class Max extends Player {
 
+        private int MaxInLevel;
+
         public Max(float x, float y, int currentLevel) {
-                super(new SpriteSheet(ImageLoader.load("Max11.png"), 50, 50), x, y, "STAND_RIGHT");
+                super(new SpriteSheet(ImageLoader.load("Max19.png"), 50, 50), x, y, "STAND_RIGHT");
                 gravity = .5f;
                 terminalVelocityY = 6f;
                 jumpHeight = 16.5f;
@@ -225,7 +227,56 @@ public class Max extends Player {
                                                                 .build()
                                 });
 
+// checking to see if max is in another level 
+
+
+if (MaxInLevel > 2) {
+        // Change the attack animations based on the player's level
+        put("ATTACK_LEFT", new Frame[] {
+            new FrameBuilder(spriteSheet.getSprite(6, 4), 8)
+                .withScale(3)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .withBounds(1, 3, 33, 28)
+                .build(),
+            new FrameBuilder(spriteSheet.getSprite(6, 5 ), 8)//+1
+                .withScale(3)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .withBounds(1, 3, 33, 28)
+                .build(),
+            new FrameBuilder(spriteSheet.getSprite(6, 6), -1)
+                .withScale(3)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .withBounds(1, 3, 33, 28)
+                .build()
+        });
+
+        put("ATTACK_RIGHT", new Frame[] {
+            new FrameBuilder(spriteSheet.getSprite(6, 4), 8)
+                .withScale(3)
+                .withBounds(18, 3, 33, 28)
+                .build(),
+            new FrameBuilder(spriteSheet.getSprite(6, 5), 8)
+                .withScale(3)
+                .withBounds(18, 3, 33, 28)
+                .build(),
+            new FrameBuilder(spriteSheet.getSprite(6, 6 ), -1)
+                .withScale(3)
+                .withBounds(18, 3, 33, 28)
+                .build()
+        });
+    }
+
+
+
+
+
+
                         }
                 };
         }
+
+        public void setMaxInLevel() {
+                this.MaxInLevel++; // Increment MaxInLevel
+            }
+
 }

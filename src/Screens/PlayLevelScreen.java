@@ -53,7 +53,7 @@ public void changeLevel(int newLevel){
         if( currentLevel ==1){
 
             this.map =new Lab();
-             this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y,this.currentLevel);
+             this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y,this.currentLevel);// took out 'this.currentLevel' //may add back
            }
         // Add Coins (only line needed for both creating and counting)
         coinList.add(new Coin(1150, 450));
@@ -442,6 +442,7 @@ public void initialize2() {
         if (playLevelScreenState != PlayLevelScreenState.LEVEL_COMPLETED) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
             levelCompletedStateChangeStart = true;
+           // goToNextLevel(); // Add this line
         }
     }
 
@@ -493,6 +494,16 @@ public void initialize2() {
             }
         }
         return totalCoins;
+    }
+
+    public void goToNextLevel() {
+        if (currentLevel == 1) {
+            level2();
+        } else if (currentLevel == 2) {
+            // You can add logic for further levels here if needed
+            // For now, let's reset the level after completing level 2
+            resetLevel();
+        }
     }
     
 }
