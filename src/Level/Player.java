@@ -97,7 +97,8 @@ public abstract class Player extends GameObject {
 
     private IntersectableRectangle attackHitbox;
     // for the enemy
-
+// Flag to track whether the player is currently performing a jump attack
+private boolean isJumpAttacking = false;// besa +atatck jump
     public void update() {
         moveAmountX = 0;
         moveAmountY = 0;
@@ -193,7 +194,28 @@ public void checkSpeedPowerUpCollision(SpeedPowerUp powerUp) {
 
             case ATTACKING: // when max is attacking //WORKING NOW
                 playerAttacking();
-                if (currentFrameIndex == getCurrentAnimation().length - 1) {
+               
+                if (isJumpAttacking) {
+                    // Check if the jump attack animation has reached its last frame
+                    if (currentFrameIndex == getCurrentAnimation().length - 1) {
+                        // The jump attack animation has finished; return to the previous state
+                        playerState = previousPlayerState;
+                        isJumpAttacking = false;
+                    } else {
+                        // Continue updating the jump attack animation
+                        super.update();
+
+                        // Handle jump attacking logic here, e.g., check for collisions with enemies
+                        attackHitbox = currentFrame.getBounds();
+                        for (MapEntity entity : listOfMapEntities) {
+                            if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
+                                    entity.getBounds().intersects(attackHitbox)) {
+                                defeatEnemy(entity);
+                            }
+                        }
+                    }
+                }//just added
+                else if (currentFrameIndex == getCurrentAnimation().length - 1) {
                     // Attack animation is finished; transition back to another state.
                     playerState = PlayerState.STANDING; // You can choose a different state.
                 } else {
@@ -345,6 +367,7 @@ public void checkSpeedPowerUpCollision(SpeedPowerUp powerUp) {
 
             // player is set to be in air and then player is sent into the air
             airGroundState = AirGroundState.AIR;
+
             jumpForce = jumpHeight;
             if (jumpForce > 0) {
                 moveAmountY -= jumpForce;
@@ -353,7 +376,51 @@ public void checkSpeedPowerUpCollision(SpeedPowerUp powerUp) {
                     jumpForce = 0;
                 }
             }
-        }// jump + attack attempt
+        
+        }
+        else if (airGroundState == AirGroundState.AIR) {
+            if (jumpForce > 0) {
+                moveAmountY -= jumpForce;
+                jumpForce -= jumpDegrade;
+                if (jumpForce < 0) {
+                    jumpForce = 0;
+                }
+            }
+
+            // allows you to move left and right while in the air
+            if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
+                moveAmountX -= walkSpeed;
+            } else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
+                moveAmountX += walkSpeed;
+            }
+
+            // if player is falling, increases momentum as player falls so it falls faster
+            // over time
+            if (moveAmountY > 0) {
+                increaseMomentum();
+            }
+
+            // Check if the player is attacking while jumping
+            if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(ATTACK_KEY)) {
+                keyLocker.lockKey(ATTACK_KEY);
+                isJumpAttacking = true;
+                currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_ATTACK_RIGHT" : "JUMP_ATTACK_LEFT";
+
+                // player is set to be in air and then player is sent into the air
+                airGroundState = AirGroundState.AIR;
+                jumpForce = jumpHeight;
+                if (jumpForce > 0) {
+                    moveAmountY -= jumpForce;
+                    jumpForce -= jumpDegrade;
+                    if (jumpForce < 0) {
+                        jumpForce = 0;
+                    }
+                }
+            }
+        }
+
+        
+        // jump + attack attempt
         else if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
             keyLocker.lockKey(ATTACK_KEY);
             playerState = PlayerState.ATTACKING;
