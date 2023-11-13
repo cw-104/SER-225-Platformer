@@ -416,6 +416,7 @@ public void initialize2() {
                 break;
             case LEVEL_COMPLETED:
                 levelClearedScreen.draw(graphicsHandler);
+              //  Max.setMaxInLevel(); //maybe able to fix
                 break;
             case LEVEL_LOSE:
                 levelLoseScreen.draw(graphicsHandler);
@@ -442,6 +443,7 @@ public void initialize2() {
         if (playLevelScreenState != PlayLevelScreenState.LEVEL_COMPLETED) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
             levelCompletedStateChangeStart = true;
+            Max.setMaxInLevel(); // Call the method to update the maximum instances of Max
            // goToNextLevel(); // Add this line
         }
     }

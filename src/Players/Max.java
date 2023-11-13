@@ -17,7 +17,7 @@ import java.util.HashMap;
 // basically just sets some values for physics and then defines animations
 public class Max extends Player {
 
-        private int MaxInLevel;
+        private static int MaxInLevel;
 
         public Max(float x, float y, int currentLevel) {
                 super(new SpriteSheet(ImageLoader.load("Max19.png"), 50, 50), x, y, "STAND_RIGHT");
@@ -27,6 +27,7 @@ public class Max extends Player {
                 jumpDegrade = .5f;
                 walkSpeed = 7.5f;
                 momentumYIncrease = .5f;
+                MaxInLevel = 0; // Initialize MaxInLevel to 0 //attempt to have max change in the next level //besa
         }
 
         public void update() {
@@ -230,7 +231,8 @@ public class Max extends Player {
 // checking to see if max is in another level 
 
 
-if (MaxInLevel > 2) {
+if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it worked and it did //besa
+        setMaxInLevel();
         // Change the attack animations based on the player's level
         put("ATTACK_LEFT", new Frame[] {
             new FrameBuilder(spriteSheet.getSprite(6, 4), 8)
@@ -275,8 +277,9 @@ if (MaxInLevel > 2) {
                 };
         }
 
-        public void setMaxInLevel() {
-                this.MaxInLevel++; // Increment MaxInLevel
+        public static   void setMaxInLevel() {
+              //  this.MaxInLevel++; // Increment MaxInLevel
+                MaxInLevel++; // Increment MaxInLevel
             }
 
 }
