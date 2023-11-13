@@ -7,6 +7,7 @@ import Maps.ShopScreenMap;
 import SpriteFont.SpriteFont;
 import Level.Player;
 import java.awt.*;
+import java.util.ArrayList;
 
 // This is the class for the shop screen
 public class ShopScreen extends Screen {
@@ -35,13 +36,25 @@ public class ShopScreen extends Screen {
     protected Player player;
     protected PlayLevelScreen playLevelScreen;
 
-
+// Create a list to hold shop items
+//private List<ShopItem> shopItems;//besa // uncomment
 
     public ShopScreen(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
         initialize();
+        initializeShopItems();
     }
+   
 
+private void initializeShopItems() {
+     ArrayList shopItems = new ArrayList<>();//may takout
+        shopItems = new ArrayList<>();
+
+        // Add shop items with their name, price, and description
+        shopItems.add(new ShopItem("Speed Up", 30, "Increases Speed"));
+        shopItems.add(new ShopItem("Health Up", 20, "+1 Life"));
+        // Add more items as needed
+    }
 
     @Override
     public void initialize() {
@@ -191,6 +204,7 @@ public class ShopScreen extends Screen {
                 //when level 2 exists this should send there - menu is temp
                 playLevelScreen.goToCutscene(player);
             }
+            
         }
     
 
