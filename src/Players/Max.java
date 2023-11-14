@@ -271,7 +271,7 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
                                                 setMaxInLevel();
                                                 // Change the attack animations based on the player's/ Max's level
                                                 put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
-                                                new FrameBuilder(spriteSheet.getSprite(6, 4), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)
                                                         .withScale(3)
                                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                         .withBounds(1, 3, 33, 28)
@@ -289,7 +289,7 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
                                                 });
 
                                                 put("ATTACK_RIGHT", new Frame[] {
-                                                new FrameBuilder(spriteSheet.getSprite(6, 4), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)
                                                         .withScale(3)
                                                         .withBounds(18, 3, 33, 28)
                                                         .build(),
