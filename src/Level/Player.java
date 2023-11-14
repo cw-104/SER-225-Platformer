@@ -752,7 +752,7 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
     // Add a method to apply a speed power-up
 public void applySpeedPowerUp(float speedIncrease) {
     walkSpeed += speedIncrease;
-    // Example usage in  game logic// player.applySpeedPowerUp(2.0f); // Increases walk speed by 2 units//besa
+    // Example usage in  the game logic// player.applySpeedPowerUp(2.0f); // Increases walk speed by 2 units//besa
 }
 
     public int getCurrentLevel() {

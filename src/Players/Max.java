@@ -36,7 +36,7 @@ public class Max extends Player {
 
         public void draw(GraphicsHandler graphicsHandler) {
                 super.draw(graphicsHandler);
-                 drawBounds(graphicsHandler, new Color(255, 0, 0, 170));// turn this on/ off to see the bounds for Max
+               //drawBounds(graphicsHandler, new Color(255, 0, 0, 170));// turn this on/ off to see the bounds for Max
         }
 
         @Override
@@ -308,10 +308,7 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
                 };
         }
 
-                        
-                
-        
-
+         
         public static   void setMaxInLevel() {
               //  this.MaxInLevel++; // Increment MaxInLevel
                 MaxInLevel++; // Increment MaxInLevel
