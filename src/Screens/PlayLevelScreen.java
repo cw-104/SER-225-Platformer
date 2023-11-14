@@ -443,7 +443,7 @@ public void initialize2() {
         if (playLevelScreenState != PlayLevelScreenState.LEVEL_COMPLETED) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
             levelCompletedStateChangeStart = true;
-            Max.setMaxInLevel(); // Call the method to update the maximum instances of Max
+            Max.setMaxInLevel(); // Call this method to update the maximum instances of Max //will increase by 1 when called
            // goToNextLevel(); // Add this line
         }
     }

@@ -27,7 +27,7 @@ public class Max extends Player {
                 jumpDegrade = .5f;
                 walkSpeed = 7.5f;
                 momentumYIncrease = .5f;
-                MaxInLevel = 0; // Initialize MaxInLevel to 0 //attempt to have max change in the next level //besa
+                MaxInLevel = 0; // Initialize MaxInLevel to 0 //has max change in the next level // "Max.setMaxInLevel();" is called in level complete to increase
         }
 
         public void update() {
@@ -36,7 +36,7 @@ public class Max extends Player {
 
         public void draw(GraphicsHandler graphicsHandler) {
                 super.draw(graphicsHandler);
-                // drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+                 drawBounds(graphicsHandler, new Color(255, 0, 0, 170));// turn this on/ off to see the bounds for Max
         }
 
         @Override
@@ -230,11 +230,11 @@ public class Max extends Player {
 
 // checking to see if max is in another level 
 
-
-if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it worked and it did //besa
+//Repeat this process for the next level but change it to 2 (for level 3). //LOOK AT ME!! CHANGES MAX SPRITE FOR THE LEVEL  
+if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it worked and it did 
         setMaxInLevel();
-        // Change the attack animations based on the player's level
-        put("ATTACK_LEFT", new Frame[] {
+        // Change the attack animations based on the player's/ Max's level
+        put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
             new FrameBuilder(spriteSheet.getSprite(6, 4), 8)
                 .withScale(3)
                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
@@ -266,16 +266,51 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
                 .withBounds(18, 3, 33, 28)
                 .build()
         });
-    }
+    }                                   // sprites for level 3 will go here // for testing purposes change 2 to 1 or 0 to see if the sprite work[if level 3 test map is not ready]
+                                        if (MaxInLevel == 2) { //was originally > 2 // changed it to 0 to see if it worked and it did 
+                                                setMaxInLevel();
+                                                // Change the attack animations based on the player's/ Max's level
+                                                put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
+                                                new FrameBuilder(spriteSheet.getSprite(6, 4), 8)
+                                                        .withScale(3)
+                                                        .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                        .withBounds(1, 3, 33, 28)
+                                                        .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(6, 5 ), 8)//+1
+                                                        .withScale(3)
+                                                        .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                        .withBounds(1, 3, 33, 28)
+                                                        .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(6, 6), -1)
+                                                        .withScale(3)
+                                                        .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                        .withBounds(1, 3, 33, 28)
+                                                        .build()
+                                                });
 
-
-
-
-
+                                                put("ATTACK_RIGHT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(6, 4), 8)
+                                                        .withScale(3)
+                                                        .withBounds(18, 3, 33, 28)
+                                                        .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(6, 5), 8)
+                                                        .withScale(3)
+                                                        .withBounds(18, 3, 33, 28)
+                                                        .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(6, 6 ), -1)
+                                                        .withScale(3)
+                                                        .withBounds(18, 3, 33, 28)
+                                                        .build()
+                                                });
+                                        }
 
                         }
                 };
         }
+
+                        
+                
+        
 
         public static   void setMaxInLevel() {
               //  this.MaxInLevel++; // Increment MaxInLevel
