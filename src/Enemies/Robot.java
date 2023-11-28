@@ -41,7 +41,7 @@ public class Robot extends Enemy {
     }
     public void draw(GraphicsHandler graphicsHandler) {
      super.draw(graphicsHandler);
-      drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+      //drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
       }
     @Override
     public void update(Player player) {

@@ -21,7 +21,7 @@ public class Arrow extends Enemy {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("Arrow.png"), 29 , 7), "DEFAULT");
         this.movementSpeed = movementSpeed;
 
-        // how long the arow will exist for before disappearing
+        // how long the arrow will exist for before disappearing
         this.existenceFrames = existenceFrames;
 
         initialize();
@@ -41,7 +41,7 @@ public class Arrow extends Enemy {
         if (existenceFrames == 0) {
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         } else {
-            // move fireball forward
+            // move arrow forward
             moveXHandleCollision(movementSpeed);
             super.update(player);
         }
