@@ -4,6 +4,8 @@ import Level.Map;
 import Maps.TestEnvironment;
 import Maps.TestMap;
 import Maps.TitleScreenMap;
+import Maps.CutsceneLev3Map;
+import Maps.ShopHallMap;
 import Maps.Lab;
 import Maps.Lab_copy;
 
@@ -18,6 +20,8 @@ public class EditorMaps {
                 add("TestEnvironment");
                 add("Lab");
                 add("Lab_copy");
+                add("ShopHallMap");
+                add("CutsceneLev3Map");
             }
         };
     }
@@ -34,6 +38,10 @@ public class EditorMaps {
                 return new Lab();
             case "Lab_copy":
                 return new Lab_copy();
+            case "CutsceneLev3Map":
+                return new CutsceneLev3Map();
+            case "ShopHallMap":
+                return new ShopHallMap();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }

@@ -11,9 +11,6 @@ import GameObject.Rectangle;
 import Level.Map;
 import Level.Player;
 import Level.PlayerListener;
-import Maps.TestEnvironment;
-import Maps.TestMap;
-import Players.Cat;
 import Utils.Point;
 import Maps.TestEnvironment;
 import Maps.Lab;
@@ -34,9 +31,13 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     protected LevelLoseScreen levelLoseScreen;
     protected ShopIntroScreen shopIntroScreen;
     protected ShopScreen shopScreen;
+    protected ShopCutsceneLev2Screen shopCutsceneLev2Screen;
     protected CutsceneLev2Screen cutsceneLev2Screen;
+    protected Shop2Screen shop2Screen;
+    protected CutsceneLev3Screen cutsceneLev3Screen;
     protected boolean levelCompletedStateChangeStart;
     protected SpriteFont livesDisplay;
+    protected int shopCheck;
 
     protected List<Coin> coinList = new ArrayList<>();
     protected SpriteFont coinCounter;
@@ -133,6 +134,8 @@ public void changeLevel(int newLevel){
         shopIntroScreen = new ShopIntroScreen(this);
         shopScreen = new ShopScreen(this);
         cutsceneLev2Screen = new CutsceneLev2Screen(this);
+        shop2Screen = new Shop2Screen(this);
+        cutsceneLev3Screen = new CutsceneLev3Screen(this);
 
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
 
@@ -150,6 +153,7 @@ public void changeLevel(int newLevel){
     public void initialize1() {
         // define/setup map
         this.map = new Lab_copy();
+        
 
         // Add Coins (only line needed for both creating and counting)
         coinList.add(new Coin(1150, 450));
@@ -227,6 +231,8 @@ public void changeLevel(int newLevel){
         shopIntroScreen = new ShopIntroScreen(this);
         shopScreen = new ShopScreen(this);
         cutsceneLev2Screen = new CutsceneLev2Screen(this);
+        shop2Screen = new Shop2Screen(this);
+        cutsceneLev3Screen = new CutsceneLev3Screen(this);
 
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
 
@@ -245,6 +251,7 @@ public void changeLevel(int newLevel){
     public void initialize1(Player prev) {
         // define/setup map
         this.map = new Lab_copy();
+        
 
         // Add Coins (only line needed for both creating and counting)
         coinList.add(new Coin(1150, 450));
@@ -274,11 +281,15 @@ public void changeLevel(int newLevel){
         this.player.setCoins(prev.getCoins());
         this.player.setLives(prev.getLives());
 
+
         levelClearedScreen = new LevelClearedScreen();
         levelLoseScreen = new LevelLoseScreen(this);
         shopIntroScreen = new ShopIntroScreen(this);
         shopScreen = new ShopScreen(this);
         cutsceneLev2Screen = new CutsceneLev2Screen(this);
+        shop2Screen = new Shop2Screen(this);
+        cutsceneLev3Screen = new CutsceneLev3Screen(this);
+        shopCutsceneLev2Screen = new ShopCutsceneLev2Screen(this);
 
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
 
@@ -291,6 +302,8 @@ public void changeLevel(int newLevel){
         this.livesDisplay = new SpriteFont("Lives: " + player.getLives(), 15, 60, "Arial", 35, new Color(255, 0, 0));
         this.livesDisplay.setOutlineColor(Color.black);
         this.livesDisplay.setOutlineThickness(2);
+
+        
     }
 // this will be used to test functionality of level 2 test map
 public void initialize2() {
@@ -327,6 +340,8 @@ public void initialize2() {
     levelLoseScreen = new LevelLoseScreen(this);
     shopIntroScreen = new ShopIntroScreen(this);
     shopScreen = new ShopScreen(this);
+    shop2Screen = new Shop2Screen(this);
+    cutsceneLev3Screen = new CutsceneLev3Screen(this);
 
     this.playLevelScreenState = PlayLevelScreenState.RUNNING;
 
@@ -365,7 +380,12 @@ public void initialize2() {
                     levelClearedScreen.update();
                     screenTimer--;
                     if (screenTimer == 0) {
-                        goToShopIntro(this.player);
+                        if(shopCheck < 2) {
+                            goToShopIntro(this.player);
+                        }
+                        else if(shopCheck == 2) {
+                            goToShopScene2(this.player);
+                        }
                     }
                 }
                 break;
@@ -389,9 +409,20 @@ public void initialize2() {
             }
             case CUTSCENELEV2: {
                 cutsceneLev2Screen.update();
-                ;
                 break;
             }
+            case SHOP2: {
+                shop2Screen.update();
+                break;
+            }
+            case CUTSCENELEV3: {
+                cutsceneLev3Screen.update();
+                break;
+            }
+            case SHOPSCENE2: {
+            shopCutsceneLev2Screen.update();
+                break;
+            }    
 
         }
     }
@@ -428,6 +459,17 @@ public void initialize2() {
                 break;
             case CUTSCENELEV2:
                 cutsceneLev2Screen.draw(graphicsHandler);
+                break;
+            case SHOP2:
+                shop2Screen.draw(graphicsHandler);
+                break;
+            case CUTSCENELEV3:
+                cutsceneLev3Screen.draw(graphicsHandler);
+                break;
+            case SHOPSCENE2:
+            shopCutsceneLev2Screen.draw(graphicsHandler);
+                break;
+                
         }
         livesDisplay.setText("Lives: " + player.getLives());
         livesDisplay.draw(graphicsHandler);
@@ -461,6 +503,7 @@ public void initialize2() {
     public void level2() {
         changeLevel(2);
         initialize1(this.player);
+        shopCheck = 2;
     }
 
     public void goBackToMenu() {
@@ -479,9 +522,21 @@ public void initialize2() {
         playLevelScreenState = PlayLevelScreenState.CUTSCENELEV2;
     }
 
+    public void goToShopScene2(Player player) {
+        playLevelScreenState = PlayLevelScreenState.SHOPSCENE2;
+    }
+
+    public void goToShop2(Player player) {
+        playLevelScreenState = PlayLevelScreenState.SHOP2;
+    }
+
+    public void goToCutscene2(Player player) {
+        playLevelScreenState = PlayLevelScreenState.CUTSCENELEV3;
+    }
+
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, LEVEL_LOSE, SHOPINTRO, SHOP, CUTSCENELEV2
+        RUNNING, LEVEL_COMPLETED, LEVEL_LOSE, SHOPINTRO, SHOP, CUTSCENELEV2, SHOPSCENE2, SHOP2, CUTSCENELEV3
     }
 
     // Total # of Coins
