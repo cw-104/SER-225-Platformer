@@ -2,6 +2,8 @@ package Maps;
 
 import java.util.ArrayList;
 
+import javax.management.relation.Role;
+
 import Engine.ImageLoader;
 import EnhancedMapTiles.EndLevelBox;
 import EnhancedMapTiles.HorizontalMovingPlatform;
@@ -15,6 +17,8 @@ import Utils.Direction;
 import Enemies.DogEnemy;
 import Enemies.DogEnemyLevel2;
 import Enemies.Hunter;
+import Enemies.Alien;
+import Enemies.Robot;
 import Enemies.PrisonGuardEnemy;
 import Engine.ImageLoader;
 import EnhancedMapTiles.HorizontalMovingPlatform;
@@ -55,6 +59,17 @@ public class Lab extends Map {
 
              /*     Hunter hunter = new Hunter(getMapTile(8 ,9).getLocation().subtractY(63), getMapTile(16, 9).getLocation().subtractY(63), Direction.RIGHT);
                 enemies.add(hunter); */
+/* 
+             Robot robot_1 = new Robot(getMapTile(10,
+                                9).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(robot_1);*/
+
+
+             /*    Alien alien_1 = new Alien(getMapTile(8 ,9).getLocation().subtractY(63), getMapTile(16, 9).getLocation().subtractY(63), Direction.RIGHT);
+                enemies.add(alien_1);*/
+                 
+               /* //use Alien alien_1 = new Alien(getMapTile(8 ,9).getLocation().subtractY(98), getMapTile(16, 9).getLocation().subtractY(98), Direction.RIGHT);
+                enemies.add(alien_1);*/
 
                 DogEnemy DogEnemy_1 = new DogEnemy(getMapTile(18,
                                 9).getLocation().subtractY(25), Direction.LEFT);
