@@ -34,6 +34,8 @@ public class ShopScreen extends Screen {
     protected KeyLocker keyLocker = new KeyLocker();
     protected Player player;
     protected PlayLevelScreen playLevelScreen;
+    protected SpriteFont shieldUp;
+    protected boolean shieldUpPurchased;
 
 
 
@@ -185,6 +187,17 @@ public class ShopScreen extends Screen {
             //         player.removeCoins(4);
             //         coinCount.setText("Coins: " + player.getCoins());
             //         healthUpPurchased = true;
+
+            // if (menuItemSelected == 2) { // Assuming 2 is the menu item for the shield power-up
+            //     int costOfShield = 25;
+            //     if (this.player.getCoins() >= costOfShield && !shieldUpPurchased) {
+            //         this.player.removeCoins(costOfShield);
+            //         this.player.activateShield(); // Activate the shield power-up
+            //         shieldUpPurchased = true;
+            //     }
+            // }
+        
+
 
                 }
             else if (menuItemSelected == 2) {

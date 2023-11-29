@@ -10,6 +10,7 @@ import GameObject.Rectangle;
 import GameObject.SpriteSheet;
 import Utils.AirGroundState;
 import Utils.Direction;
+import Utils.GameContext;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,12 @@ public abstract class Player extends GameObject {
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
     int lives = 3;
-    protected float speedPowerUp;// added to implement speed powerup. may need to take out //Besa
+   
+
+    // private boolean hasShield = false;
+    // private ShieldPowerUp shieldPowerUp = new ShieldPowerUp();
+    // private int shieldCount = 0;
+    protected boolean hasShield = false;
 
     // coin
     protected int coins;
@@ -50,7 +56,47 @@ public abstract class Player extends GameObject {
     public void setCoins(int value) {
         coins = value;
     }
+    public void activateShield() {
+        GameContext.setPlayerHasShield(true);
+    }
+    
+    public void deactivateShield() {
+        GameContext.setPlayerHasShield(false);
+    }
+    
+    public boolean hasShield() {
+        return GameContext.playerHasShield();
+    }
 
+    
+    
+    public void touchedEnemy(Enemy enemy) {
+        defeatEnemy(enemy);
+    }
+       
+    
+    
+
+
+     
+
+        // public void touchedEnemy(Enemy enemy) {
+        //     if (hasShield) {
+        //         // Shield absorbs the damage
+        //         hasShield = false; // deactivate the shield after absorbing a hit
+        //     } else {
+        //         // Regular damage handling
+        //         lives--;
+        //         if (lives <= 0) {
+        //             // Handle player death
+        //         }
+        //     }
+        // }
+    
+        // public void activateShield() {
+        //     shieldPowerUp.activate();
+        //     hasShield = true;
+        
     // values used to handle player movement
     protected float jumpForce = 0;
     protected float momentumY = 0;
@@ -77,7 +123,7 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-    protected boolean isInvincible = true; // if true, player cannot be hurt by enemies (good for testing)
+    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isAttacking = false;// when max is NOT attacking
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
@@ -145,10 +191,9 @@ public abstract class Player extends GameObject {
         moveAmountY += gravity + momentumY;
     }
 
-    protected void applyPowerUp() {
+    // protected void applyPowerUp() {
 
-        moveAmountX += speedPowerUp + speedPowerUp; // may need to change this // besa
-    }
+    // }
 
     // based on player's current state, call appropriate player state handling
     // method
@@ -248,13 +293,7 @@ public abstract class Player extends GameObject {
 
     /* */// A subclass can override this method to specify what it does when it touches
          // the enemy
-    public void touchedEnemy(Enemy enemy) {
-        lives--;
-        if (lives <= 0) {
-        }
-        // enemy.hurtEnemy(this); //come back to this later //BESA
-        defeatEnemy(enemy);
-    }
+
 
     public void attack() {
         if (!isAttacking) {
@@ -550,20 +589,27 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
         }
     }
 
+
+
     // other entities can call this method to hurt the player
     public void hurtPlayer(MapEntity mapEntity) {
         if (!isInvincible) {
-            if (lives > 0) {
+            if (GameContext.playerHasShield()) {
+                deactivateShield(); // Shield is used up
+            } 
+            else if(lives > 0 ) {
                 if (mapEntity instanceof Enemy) {
                     lives--; // Reduce the player's lives
-
+                }
+                
+                if (lives <= 0){
+                    levelState = LevelState.PLAYER_DEAD; // Set to dead if lives are lost
                 }
             }
-            if (lives <= 0) {
-                levelState = LevelState.PLAYER_DEAD; // Set to dead only if all lives are lost
-            }
+
         }
     }
+    
 
     // other entities can call this to tell the player they beat a level
     public void completeLevel() {

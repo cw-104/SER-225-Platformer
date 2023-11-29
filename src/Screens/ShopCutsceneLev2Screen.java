@@ -58,4 +58,3 @@ public class ShopCutsceneLev2Screen extends Screen {
 
 
 
-

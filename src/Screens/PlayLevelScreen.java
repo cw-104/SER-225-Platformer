@@ -39,6 +39,9 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     protected SpriteFont livesDisplay;
     protected int shopCheck;
 
+    protected SpriteFont shieldDisplay;
+
+
     protected List<Coin> coinList = new ArrayList<>();
     protected SpriteFont coinCounter;
 private int currentLevel =1;
@@ -148,6 +151,12 @@ public void changeLevel(int newLevel){
         this.livesDisplay = new SpriteFont("Lives: " + player.getLives(), 15, 60, "Arial", 35, new Color(255, 0, 0));
         this.livesDisplay.setOutlineColor(Color.black);
         this.livesDisplay.setOutlineThickness(2);
+        
+        // shield
+        this.shieldDisplay = new SpriteFont("Shield: 0", 15, 90, "Arial", 35, new Color(255, 0, 0));
+        this.shieldDisplay.setOutlineColor(Color.black);
+        this.shieldDisplay.setOutlineThickness(2);
+
     }
 
     public void initialize1() {
@@ -356,6 +365,12 @@ public void initialize2() {
     this.livesDisplay.setOutlineThickness(2);
 }
     public void update() {
+        if (player.hasShield()) {
+            shieldDisplay.setText("Shield: 1");
+        } else {
+            shieldDisplay.setText("Shield: 0");
+        }
+        
         // based on screen state, perform specific actions
         switch (playLevelScreenState) {
 
@@ -473,6 +488,10 @@ public void initialize2() {
         }
         livesDisplay.setText("Lives: " + player.getLives());
         livesDisplay.draw(graphicsHandler);
+
+        shieldDisplay.setText("Shield: " + (player.hasShield() ? "1" : "0"));
+        shieldDisplay.draw(graphicsHandler);
+        
     }
 
     public PlayLevelScreenState getPlayLevelScreenState() {
