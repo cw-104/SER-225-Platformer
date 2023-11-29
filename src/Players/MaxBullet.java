@@ -20,16 +20,15 @@ public class MaxBullet extends Enemy implements BulletInteractable{
     private int existenceFrames;
 
     public MaxBullet(Point location, float movementSpeed, int existenceFrames, Direction direction) {
-        super(null, location.x, location.y, "currentAnimationName");
+        super( location.x, location.y, new SpriteSheet(ImageLoader.load("bullet.png"), 31, 11), "DEFAULT");
         this.movementSpeed = movementSpeed;
         this.existenceFrames = existenceFrames;
 
         // Set the initial direction
-        setFacingDirection(direction);
+       // setFacingDirection(direction);
 
         // Load animations
-        loadAnimations(new SpriteSheet(ImageLoader.load("bullet.png"), 31, 11));
-        setAnimation("DEFAULT");
+       
     }
 
     public void setFacingDirection(Direction direction) {
@@ -52,8 +51,7 @@ public class MaxBullet extends Enemy implements BulletInteractable{
         }
     }
 
-    private void setMapEntityStatus(MapEntityStatus removed) {
-    }
+    //private void setMapEntityStatus(MapEntityStatus removed) {}
 
     public Direction getFacingDirection() {
         return getFacingDirection();
@@ -64,6 +62,7 @@ public class MaxBullet extends Enemy implements BulletInteractable{
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction, MapEntity entityCollidedWith) {
         // If bullet collides with anything solid on the x-axis, mark it for removal
         if (hasCollided) {
+            
             setMapEntityStatus(MapEntityStatus.REMOVED);
         }
     }

@@ -19,8 +19,8 @@ public class Max extends Player {
 
         private static int MaxInLevel;
 
-        public Max(float x, float y, int currentLevel) {
-                super(new SpriteSheet(ImageLoader.load("Max21.png"), 50, 50), x, y, "STAND_RIGHT");
+        public Max(float x, float y, int currentLevel) {//added current level//may have to take out 
+                super(new SpriteSheet(ImageLoader.load("Max21.png"), 50, 50), x, y, "STAND_RIGHT", currentLevel);
                 gravity = .5f;
                 terminalVelocityY = 6f;
                 jumpHeight = 16.5f;
@@ -270,7 +270,7 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
                                         if (MaxInLevel == 2) { //was originally > 2 // changed it to 0 to see if it worked and it did 
                                                 setMaxInLevel();
                                                 // Change the attack animations based on the player's/ Max's level
-                                                put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
+                                                put("SHOOT_LEFT", new Frame[] {// sprites for attacking with axe
                                                 new FrameBuilder(spriteSheet.getSprite(8, 3), 8)//8,3
                                                         .withScale(3)
                                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
@@ -288,7 +288,7 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
                                                         .build()
                                                 });
 
-                                                put("ATTACK_RIGHT", new Frame[] {
+                                                put("SHOOT_RIGHT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(8, 3), 8)//8,3
                                                         .withScale(3)
                                                         .withBounds(18, 3, 33, 28)

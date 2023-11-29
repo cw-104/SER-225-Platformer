@@ -37,6 +37,7 @@ public abstract class Player extends GameObject {
         return coins;
     }
     private static int MaxInLevel;
+    private int level; // to determine the current level // may use as a replacement to maxInLevel to avoid confusion//besa
     
     public void addCoins(int newCoins) {
         coins += newCoins;
@@ -82,7 +83,7 @@ public abstract class Player extends GameObject {
     protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isAttacking = false;// when max is NOT attacking
         protected boolean isShooting = false;// for max shooting gun //stating as false
-    public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
+    public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName,int initialLevel) {
         super(spriteSheet, x, y, startingAnimationName);
         facingDirection = Direction.RIGHT;
         airGroundState = AirGroundState.AIR;
@@ -91,6 +92,7 @@ public abstract class Player extends GameObject {
 
         previousPlayerState = playerState;
         levelState = LevelState.RUNNING;
+        this.level = initialLevel;// just added to detmine level //besa 
     }
     //// Add this attribute to your Player class to keep track of active enemies //
 
@@ -242,6 +244,7 @@ public void checkSpeedPowerUpCollision(SpeedPowerUp powerUp) {
 
         }
     }
+   
 
     // player STANDING state logic
     protected void playerStanding() {
@@ -269,7 +272,16 @@ public void checkSpeedPowerUpCollision(SpeedPowerUp powerUp) {
         else if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(ATTACK_KEY)) {
             keyLocker.lockKey(ATTACK_KEY);
             playerState = PlayerState.ATTACKING;
-            isAttacking = true; // for when max is attacking
+System.out.println("hello they are atttacking now, outside the statment");
+            
+            if(MaxInLevel ==0){// besa //just added this //LOOKATME
+                 isAttacking = true; // for when max is attacking
+                 System.out.println("hello they are atttacking now");
+                 attack();//just added
+            }
+           else if (MaxInLevel >= 2){
+            isShooting = true;
+           }
 
         }
     }
@@ -520,10 +532,12 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
         }
     }
     protected void playerShooting(){ // add the logic for shooting 
+        if(MaxInLevel ==2){
         currentAnimationName = (facingDirection == Direction.RIGHT) ? "SHOOT_RIGHT" : "SHOOT_LEFT";
 
         int bulletx;
         float speedmovebull;
+        
         if(facingDirection == Direction.RIGHT){
             //edit code so bullet flies when k is pressed
             bulletx = Math.round(getX()+ getWidth());
@@ -537,6 +551,7 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
         int bulletY = Math.round(getY() +90);
         MaxBullet bullet = new MaxBullet(getLocation(), speedmovebull, bulletY, facingDirection);
         map.addEnemy(bullet);
+            }
     }
 
     // while player is in air, this is called, and will increase momentumY by a set
@@ -760,6 +775,7 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
 
     public void setLevelState(LevelState levelState) {
         this.levelState = levelState;
+        setMaxInLevel();
     }
 
     public void addListener(PlayerListener listener) {
@@ -788,15 +804,30 @@ public void applySpeedPowerUp(float speedIncrease) {
     public void incrementLevel() {
         currentLevel++;
     }
-
+// method to determine what level max is in; similar to the one in max class for the sprite
  public int getMaxInLevel(){
     return MaxInLevel;
  }
 //remember to check sprites
-
+//for when max is in level 3 have the bullet attack 
     public static   void setMaxInLevel() { // incraments MaxInLevel
         //  this.MaxInLevel++; // Increment MaxInLevel
           MaxInLevel++; // Increment MaxInLevel
       }
-      
+
+    public void checkAttack(Map map) {
+        if(isAttacking ){
+System.out.println("i am checking the attack of max");
+playerAttacking();
+        }
+                    else if (isShooting =true){
+                    playerShooting();
+                }
+    }
+    //detects bullet interactions
+    public interface BulletInteractable {// for when bullet interacts with objects
+        void onInteract(MapEntity entity);
+        void onInteract(Player player);
+    }   
+
 }

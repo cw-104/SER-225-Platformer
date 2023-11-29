@@ -350,6 +350,11 @@ public void initialize2() {
             // platformer level going
             case RUNNING:
                 player.update();
+                // Add a condition to check if the player is at level 3 before allowing shooting
+            if (player.getCurrentLevel() >= 3) {
+                player.checkAttack(map);
+            }
+
                 map.update(player);
                 // Coin Check
                 for (Coin coin : coinList) {
@@ -391,7 +396,7 @@ public void initialize2() {
             }
             case CUTSCENELEV2: {
                 cutsceneLev2Screen.update();
-                ;
+               // ;
                 break;
             }
 
@@ -447,8 +452,12 @@ public void initialize2() {
         if (playLevelScreenState != PlayLevelScreenState.LEVEL_COMPLETED) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
             levelCompletedStateChangeStart = true;
+            player.setMaxInLevel();//just added //besa 
+            
             Max.setMaxInLevel(); // Call this method to update the maximum instances of Max //will increase by 1 when called
-           // goToNextLevel(); // Add this line
+           
+            goToNextLevel(); // Add this line//uncommented
+
         }
     }
 
