@@ -8,6 +8,7 @@ import Game.GameState;
 import Game.ScreenCoordinator;
 import GameObject.Coin;
 import GameObject.Rectangle;
+import Level.Enemy;
 import Level.Map;
 import Level.Player;
 import Level.PlayerListener;
@@ -19,6 +20,7 @@ import Maps.TestEnvironment;
 import Maps.Lab;
 import Maps.Lab_copy;
 import Players.Max;
+//import Players.MaxBullet;//deleted
 import SpriteFont.SpriteFont;
 import java.util.ArrayList;
 import java.util.List;
@@ -392,6 +394,8 @@ public void initialize2() {
                 ;
                 break;
             }
+
+  
 
         }
     }

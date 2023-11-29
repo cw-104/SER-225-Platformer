@@ -192,17 +192,17 @@ public class Max extends Player {
                                 });
 
                                 put("ATTACK_LEFT", new Frame[] {
-                                                new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(0, 7), 8)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(1, 3, 33, 28)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(1, 7), 8)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(1, 3, 33, 28)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
+                                                new FrameBuilder(spriteSheet.getSprite(2, 7), -1)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(1, 3, 33, 28)
@@ -210,17 +210,17 @@ public class Max extends Player {
                                 });
 
                                 put("ATTACK_RIGHT", new Frame[] { // testing for batt attacking
-                                                new FrameBuilder(spriteSheet.getSprite(6, 0), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(0, 7), 8)
                                                                 .withScale(3)
                                                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(18, 3, 33, 28)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 1), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(1, 7), 8)
                                                                 .withScale(3)
                                                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(18, 3, 33, 28)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 2), -1)
+                                                new FrameBuilder(spriteSheet.getSprite(2, 7), -1)
                                                                 .withScale(3)
                                                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(18, 3, 33, 28) // .withBounds(8, 9, 8, 9) //
@@ -271,17 +271,17 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
                                                 setMaxInLevel();
                                                 // Change the attack animations based on the player's/ Max's level
                                                 put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
-                                                new FrameBuilder(spriteSheet.getSprite(6, 4), 8)//8,3
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)//8,3
                                                         .withScale(3)
                                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                         .withBounds(1, 3, 33, 28)
                                                         .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 5 ), 8)//+1
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)//+1
                                                         .withScale(3)
                                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                         .withBounds(1, 3, 33, 28)
                                                         .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 6), -1)
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), -1)
                                                         .withScale(3)
                                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                         .withBounds(1, 3, 33, 28)
@@ -289,15 +289,15 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
                                                 });
 
                                                 put("ATTACK_RIGHT", new Frame[] {
-                                                new FrameBuilder(spriteSheet.getSprite(6, 4), 8)//8,3
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)//8,3
                                                         .withScale(3)
                                                         .withBounds(18, 3, 33, 28)
                                                         .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 5), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)
                                                         .withScale(3)
                                                         .withBounds(18, 3, 33, 28)
                                                         .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 6 ), -1)
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3 ), -1)
                                                         .withScale(3)
                                                         .withBounds(18, 3, 33, 28)
                                                         .build()

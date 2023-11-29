@@ -8,6 +8,7 @@ import GameObject.GameObject;
 import GameObject.IntersectableRectangle;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
+import Players.MaxBullet;
 import Utils.AirGroundState;
 import Utils.Direction;
 
@@ -35,7 +36,8 @@ public abstract class Player extends GameObject {
     public int getCoins() {
         return coins;
     }
-
+    private static int MaxInLevel;
+    
     public void addCoins(int newCoins) {
         coins += newCoins;
     }
@@ -79,7 +81,7 @@ public abstract class Player extends GameObject {
     // flags
     protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isAttacking = false;// when max is NOT attacking
-
+        protected boolean isShooting = false;// for max shooting gun //stating as false
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
         facingDirection = Direction.RIGHT;
@@ -215,6 +217,7 @@ public void checkSpeedPowerUpCollision(SpeedPowerUp powerUp) {
                         }
                     }
                 }//just added
+
                 else if (currentFrameIndex == getCurrentAnimation().length - 1) {
                     // Attack animation is finished; transition back to another state.
                     playerState = PlayerState.STANDING; // You can choose a different state.
@@ -231,6 +234,10 @@ public void checkSpeedPowerUpCollision(SpeedPowerUp powerUp) {
                     }
 
                 }
+                    break;
+                case SHOOTING:
+                playerShooting();
+
                 break;
 
         }
@@ -291,9 +298,8 @@ public void checkSpeedPowerUpCollision(SpeedPowerUp powerUp) {
     /* */// A subclass can override this method to specify what it does when it touches
          // the enemy
     public void touchedEnemy(Enemy enemy) {
-        lives--;
-        if (lives <= 0) {
-        }
+       
+        System.out.println("i'm working");
         // enemy.hurtEnemy(this); //come back to this later //BESA
         defeatEnemy(enemy);
     }
@@ -513,6 +519,25 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
             // super.update();
         }
     }
+    protected void playerShooting(){ // add the logic for shooting 
+        currentAnimationName = (facingDirection == Direction.RIGHT) ? "SHOOT_RIGHT" : "SHOOT_LEFT";
+
+        int bulletx;
+        float speedmovebull;
+        if(facingDirection == Direction.RIGHT){
+            //edit code so bullet flies when k is pressed
+            bulletx = Math.round(getX()+ getWidth());
+            speedmovebull = 1.5f;
+        }
+        else{
+            bulletx= Math.round(getX()-21);
+            speedmovebull = -1.5f;
+        }
+
+        int bulletY = Math.round(getY() +90);
+        MaxBullet bullet = new MaxBullet(getLocation(), speedmovebull, bulletY, facingDirection);
+        map.addEnemy(bullet);
+    }
 
     // while player is in air, this is called, and will increase momentumY by a set
     // amount until player reaches terminal velocity
@@ -599,9 +624,11 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
 
     // Method to defeat an enemy on touch
     private void defeatEnemy(MapEntity enemy) {
+        System.out.println("i'm working");
         if (enemy instanceof Enemy) {
             // Handle defeating the enemy, e.g., removing it from the game
             enemy.setMapEntityStatus(MapEntityStatus.REMOVED);
+            System.out.println("i'm working");
         }
     }
 
@@ -761,4 +788,15 @@ public void applySpeedPowerUp(float speedIncrease) {
     public void incrementLevel() {
         currentLevel++;
     }
+
+ public int getMaxInLevel(){
+    return MaxInLevel;
+ }
+//remember to check sprites
+
+    public static   void setMaxInLevel() { // incraments MaxInLevel
+        //  this.MaxInLevel++; // Increment MaxInLevel
+          MaxInLevel++; // Increment MaxInLevel
+      }
+      
 }

@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class Fireball extends Enemy {
     private float movementSpeed;
     private int existenceFrames;
-
+//was originally firball change to maxbullet
     public Fireball(Point location, float movementSpeed, int existenceFrames) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("Fireball.png"), 7, 7), "DEFAULT");
         this.movementSpeed = movementSpeed;
@@ -54,12 +54,13 @@ public class Fireball extends Enemy {
         }
     }
 
-    @Override
+    @Override //add touched enemy hurt
     public void touchedPlayer(Player player) {
         // if fireball touches player, it disappears
         super.touchedPlayer(player);
         this.mapEntityStatus = MapEntityStatus.REMOVED;
     }
+    
 
     @Override
     public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {

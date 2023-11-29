@@ -45,10 +45,15 @@ public class Enemy extends MapEntity {
 
         public void hurtEnemy() {
                  this.mapEntityStatus = MapEntityStatus.REMOVED;
-                
+               //  System.out.println("i'm working");
             }
 
+            
 
+// Common interface or superclass for both MaxBullet and Enemy
+public interface BulletInteractable {
+    void onInteract(MapEntity entity);
+}
 
     public void update(Player player) {
         super.update();
