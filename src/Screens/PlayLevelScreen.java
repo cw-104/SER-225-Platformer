@@ -60,7 +60,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     public void initialize() {
         // define/setup map
-        this.map = new Lab();
+      this.map = new Lab();
         this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
 
         // Add Coins (only line needed for both creating and counting)
@@ -311,12 +311,39 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     public void initialize2(Player prev) {
         // define/setup map
 
-        this.map = new Space();
+        
+         this.map = new Space();
         this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
 
         coinList.clear();
-        // Add Coins (only line needed for both creating and counting)
-        coinList.add(new Coin(1150, 450));
+        
+        coinList.add(new Coin(1350, 3600));
+        coinList.add(new Coin(250, 4100));
+        coinList.add(new Coin(400, 4100));
+         coinList.add(new Coin(600, 4100));
+          coinList.add(new Coin(800, 4100));
+           coinList.add(new Coin(1200, 3950));
+            coinList.add(new Coin(1600, 4100));
+             coinList.add(new Coin(1800, 4100));
+              coinList.add(new Coin(2400, 4100));
+               coinList.add(new Coin(2800, 4100));
+                coinList.add(new Coin(3200, 4100));
+                 coinList.add(new Coin(3600, 4100));
+                 coinList.add(new Coin(3800, 4100));
+                 coinList.add(new Coin(4200, 4100));
+                 coinList.add(new Coin(4600, 3500));
+                coinList.add(new Coin(5400, 3800));
+                coinList.add(new Coin(5900, 4100));
+                coinList.add(new Coin(6200, 4100));
+                coinList.add(new Coin(6400, 3600));
+                coinList.add(new Coin(6900, 4100));
+                coinList.add(new Coin(7200, 4100));
+                coinList.add(new Coin(7550, 3600));
+                coinList.add(new Coin(750, 3800));
+                coinList.add(new Coin(7990, 4000));
+
+      
+
 
         // Setting bounds and coin in map
         for (Coin coin : coinList) {
