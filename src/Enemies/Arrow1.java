@@ -41,7 +41,7 @@ public class Arrow1 extends Enemy {
         if (existenceFrames == 0) {
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         } else {
-            // move fireball forward
+            // move arrow forward
             moveXHandleCollision(movementSpeed);
             super.update(player);
         }

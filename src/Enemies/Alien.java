@@ -16,11 +16,11 @@ import Utils.Point;
 import java.awt.Color;
 import java.util.HashMap;
 
-public class Hunter extends Enemy {
+public class Alien extends Enemy {
     protected Point startLocation;
     protected Point endLocation;
 
-    protected float movementSpeed = 2f;
+    protected float movementSpeed = 5f;
     private Direction startFacingDirection;
     protected Direction facingDirection;
     protected AirGroundState airGroundState;
@@ -29,11 +29,11 @@ public class Hunter extends Enemy {
 
     protected int shootTimer;
 
-    protected HunterState hunterState;
-    protected HunterState previousHunterState;
+    protected AlienState alienState;
+    protected AlienState previousAlienState;
 
-    public Hunter(Point startLocation, Point endLocation, Direction facingDirection) {
-        super(startLocation.x, startLocation.y, new SpriteSheet(ImageLoader.load("Hunter.png"), 50, 50),
+    public Alien(Point startLocation, Point endLocation, Direction facingDirection) {
+        super(startLocation.x, startLocation.y, new SpriteSheet(ImageLoader.load("Alien.png"), 50, 50),
                 "WALK_LEFT");
         this.startLocation = startLocation;
         this.endLocation = endLocation;
@@ -44,8 +44,8 @@ public class Hunter extends Enemy {
     @Override
     public void initialize() {
         super.initialize();
-        hunterState = HunterState.WALK;
-        previousHunterState = hunterState;
+        alienState = AlienState.WALK;
+        previousAlienState = alienState;
         facingDirection = startFacingDirection;
         if (facingDirection == Direction.RIGHT) {
             currentAnimationName = "WALK_RIGHT";
@@ -54,8 +54,8 @@ public class Hunter extends Enemy {
         }
         airGroundState = AirGroundState.GROUND;
 
-        // every certain number of frames, the arrow will be shot out
-        shootWaitTimer = 60;
+        // every certain number of frames, the laser will be shot out
+        shootWaitTimer = 40;
     }
 
     @Override
@@ -66,13 +66,13 @@ public class Hunter extends Enemy {
         // if shoot timer is up and hunter is not currently shooting, set its
         // state to
         // SHOOT
-        if (shootWaitTimer == 0 && hunterState != HunterState.SHOOT_WAIT) {
-            hunterState = HunterState.SHOOT_WAIT;
+        if (shootWaitTimer == 0 && alienState != AlienState.SHOOT_WAIT) {
+            alienState = AlienState.SHOOT_WAIT;
         } else {
             shootWaitTimer--;
         }
 
-        if (hunterState == HunterState.WALK) {
+        if (alienState == AlienState.WALK) {
             if (facingDirection == Direction.RIGHT) {
                 currentAnimationName = "WALK_RIGHT";
                 moveXHandleCollision(movementSpeed);
@@ -92,59 +92,51 @@ public class Hunter extends Enemy {
             }
         }
 
-        if (hunterState == HunterState.SHOOT_WAIT) {
-            if (previousHunterState == HunterState.WALK) {
-                shootTimer = 65;
+        if (alienState == AlienState.SHOOT_WAIT) {
+            if (previousAlienState == AlienState.WALK) {
+                shootTimer = 45;
                 currentAnimationName = facingDirection == Direction.RIGHT ? "SHOOT_RIGHT" : "SHOOT_LEFT";
             } else if (shootTimer == 0) {
-                hunterState = HunterState.SHOOT;
+                alienState = AlienState.SHOOT;
+               
             } else {
                 shootTimer--;
             }
         }
  
-        if (hunterState == HunterState.SHOOT) {
-            int arrowX;
+        if (alienState == AlienState.SHOOT) {
+            int laserX;
             float movementSpeed;
             if (facingDirection == Direction.RIGHT) {
-                arrowX = Math.round(getX()) + getWidth();
-                movementSpeed = 3f;
+                laserX = Math.round(getX()) + getWidth();
+                movementSpeed = 5f;
             } else {
-                arrowX = Math.round(getX() - 21);
-                movementSpeed = -3f;
+                laserX = Math.round(getX() - 21);
+                movementSpeed = -5f;
             }
 
-            int arrowY = Math.round(getY() + 50);
+            int laserY = Math.round(getY() + 85);
 
-            // create arrow enemy
-            Arrow arrow = new Arrow(new Point(arrowX, arrowY), movementSpeed, 60);
-            Arrow1 arrow1 = new Arrow1(new Point(arrowX, arrowY), movementSpeed, 60);
-
-            if(facingDirection == Direction.RIGHT)
-            {
-            // add arrow enemy to the map for it to spawn in the level
-            map.addEnemy(arrow1);
-            map.addEnemy(arrow1);
-            }
-            else {
-                map.addEnemy(arrow);
-                map.addEnemy(arrow);
-            }
+            // create laser enemy
+            Laser laser = new Laser(new Point(laserX, laserY), movementSpeed, 60);
            
+             map.addEnemy(laser);
+             map.addEnemy(laser);
+             map.addEnemy(laser);
            
-            // change hunter back to its WALK state after shooting, reset shootTimer
+            // change alien back to its WALK state after shooting, reset shootTimer
             // to
             // wait a certain number of frames before shooting again
-            hunterState = HunterState.WALK;
+            alienState = AlienState.WALK;
 
             // reset shoot wait timer so the process can happen again (hunter walks around,
             // then waits, then shoots)
-            shootWaitTimer = 130;
+            shootWaitTimer = 100;
         }
 
         super.update(player);
 
-        previousHunterState = hunterState;
+        previousAlienState = alienState;
     }
 
     
@@ -156,7 +148,7 @@ public class Hunter extends Enemy {
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction, MapEntity entityCollidedWith) {
-        // if Hunter enemy collides with something on the x axis, it turns around
+        // if alien enemy collides with something on the x axis, it turns around
         // and
         // walks the other way
         if (hasCollided) {
@@ -176,17 +168,17 @@ public class Hunter extends Enemy {
             {
                 put("WALK_LEFT", new Frame[] {
                         new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
-                                .withScale(3)
+                                .withScale(4)
                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                 .withBounds(12, 2, 35, 40)
                                 .build(),
                         new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
-                                .withScale(3)
+                                .withScale(4)
                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                 .withBounds(12, 2, 35, 40)
                                 .build(),
                         new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
-                                .withScale(3)
+                                .withScale(4)
                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                 .withBounds(12, 2, 35, 40)
                                 .build()
@@ -194,18 +186,18 @@ public class Hunter extends Enemy {
 
                 put("WALK_RIGHT", new Frame[] {
                         new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
-                                .withScale(3)
+                                .withScale(4)
                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                 .withBounds(12, 2, 35, 40)
                                 .build(),
                         new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
-                                .withScale(3)
+                                .withScale(4)
                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                 .withBounds(12, 2, 35, 40)
                                 .build(),
 
                         new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
-                                .withScale(3)
+                                .withScale(4)
                                 //.withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                 .withBounds(12, 2, 35, 40)
                                 .build()
@@ -213,7 +205,7 @@ public class Hunter extends Enemy {
 
                 put("SHOOT_LEFT", new Frame[] {
                         new FrameBuilder(spriteSheet.getSprite(0, 3))
-                                .withScale(3)
+                                .withScale(4)
                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                 .withBounds(12, 2, 35, 40)
                                 .build(),
@@ -221,7 +213,7 @@ public class Hunter extends Enemy {
 
                 put("SHOOT_RIGHT", new Frame[] {
                         new FrameBuilder(spriteSheet.getSprite(0, 3))
-                                .withScale(3)
+                                .withScale(4)
                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                 .withBounds(8, 2, 35, 40)
                                 .build(),
@@ -231,7 +223,7 @@ public class Hunter extends Enemy {
         };
     }
 
-    public enum HunterState {
+    public enum AlienState {
         WALK, SHOOT_WAIT, SHOOT,
     }
 
