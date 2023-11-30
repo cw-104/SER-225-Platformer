@@ -25,7 +25,7 @@ private int MaxInLevel =0;
                 terminalVelocityY = 6f;
                 jumpHeight = 16.5f;
                 jumpDegrade = .5f;
-                walkSpeed = 7.5f;
+                walkSpeed = 7.5f; 
                 momentumYIncrease = .5f;
                 this.currentLevel =currentLevel;
         }

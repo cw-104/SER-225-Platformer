@@ -6,21 +6,22 @@ import GameObject.Sprite;
 import Level.Map;
 import Tilesets.ForestTileset;
 import Tilesets.LabCutsceneTileset;
+import Tilesets.SpaceTileset;
 import Utils.Colors;
 import Utils.Point;
 
 // Represents the map that is used as a background for the 1-2 cutscene
-public class CutsceneLev3Map extends Map {
+public class FinalCutsceneMap extends Map {
 
     private Sprite max;
     private Sprite textBox;
     private Sprite intercom_icon;
-    private Sprite elevator;
+    
     
 
-    public CutsceneLev3Map() {
-        super("cutscene_lev3.txt", new ForestTileset());
-        Point maxLocation = getMapTile(1, 7).getLocation().subtractX(24).subtractY(235);
+    public FinalCutsceneMap() {
+        super("final_cutscene.txt", new SpaceTileset());
+        Point maxLocation = getMapTile(1, 7).getLocation().subtractX(24).subtractY(135);
         max = new Sprite(ImageLoader.loadSubImage("Max7.png", Colors.MAGENTA, 0, 1, 36, 31));
         max.setScale(3);
         max.setLocation(maxLocation.x, maxLocation.y);
@@ -32,10 +33,7 @@ public class CutsceneLev3Map extends Map {
         intercom_icon = new Sprite (ImageLoader.loadSubImage("camera_speech.png", Colors.MAGENTA, 0, 0, 21, 20));
         intercom_icon.setScale(2);
         intercom_icon.setLocation(intercomIconLocation.x, intercomIconLocation.y);
-        Point elevLocation = getMapTile(7,4).getLocation().subtractX(24).subtractY(-12);
-        elevator = new Sprite (ImageLoader.loadSubImage("elevator.png", Colors.MAGENTA, 0, 0, 40, 60));
-        elevator.setScale(3);
-        elevator.setLocation(elevLocation.x, elevLocation.y);
+       
     }
 
     @Override
@@ -44,7 +42,7 @@ public class CutsceneLev3Map extends Map {
         max.draw(graphicsHandler);
         textBox.draw(graphicsHandler);
         intercom_icon.draw(graphicsHandler);
-        elevator.draw(graphicsHandler);
+        
     }
 
 }

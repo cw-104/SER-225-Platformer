@@ -8,7 +8,7 @@ import SpriteFont.SpriteFont;
 
 import java.awt.*;
 
-// This is the class for the main menu screen
+// This is the class for the second shop cutscene
 public class ShopCutsceneLev2Screen extends Screen {
     protected SpriteFont narration;
     protected SpriteFont prompt;

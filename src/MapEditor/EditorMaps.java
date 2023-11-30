@@ -5,9 +5,11 @@ import Maps.TestEnvironment;
 import Maps.TestMap;
 import Maps.TitleScreenMap;
 import Maps.CutsceneLev3Map;
+import Maps.FinalCutsceneMap;
 import Maps.ShopHallMap;
 import Maps.Lab;
 import Maps.Lab_copy;
+import Maps.Space;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,8 @@ public class EditorMaps {
                 add("Lab_copy");
                 add("ShopHallMap");
                 add("CutsceneLev3Map");
+                add("Space");
+                add("FinalCutsceneMap");
             }
         };
     }
@@ -37,11 +41,14 @@ public class EditorMaps {
             case "Lab":
                 return new Lab();
             case "Lab_copy":
-                return new Lab_copy();
             case "CutsceneLev3Map":
                 return new CutsceneLev3Map();
             case "ShopHallMap":
                 return new ShopHallMap();
+            case "Space":
+                return new Space();
+            case "FinalCutsceneMap":
+                return new FinalCutsceneMap();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }
