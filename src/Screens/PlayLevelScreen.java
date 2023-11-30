@@ -318,6 +318,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         // changes here too probably
         this.player.setCoins(prev.getCoins());
         this.player.setLives(prev.getLives());
+        this.player.setSpeedMultiplier(prev.getSpeedMultiplier());
 
         levelClearedScreen = new LevelClearedScreen();
         levelLoseScreen = new LevelLoseScreen(this);
