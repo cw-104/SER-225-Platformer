@@ -53,13 +53,11 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         currentLevel = newLevel;
     }
 
-    currentLevel = newLevel;
-}
-   public void initialize() {
-       // define/setup map
-          this.map =new Lab();
-             this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
-           
+    public void initialize() {
+        // define/setup map
+        this.map = new Lab();
+        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+
         // Add Coins (only line needed for both creating and counting)
         coinList.add(new Coin(1150, 450));
         coinList.add(new Coin(1450, 350));
@@ -157,8 +155,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         // define/setup map
         this.map = new Lab_copy();
         coinList.clear();
-        
-        //Third layer coins 
+
+        // Third layer coins
         coinList.add(new Coin(300, 1900));
         coinList.add(new Coin(680, 1850));
         coinList.add(new Coin(800, 1850));
@@ -182,9 +180,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         coinList.add(new Coin(6900, 950));
         coinList.add(new Coin(7300, 950));
 
-
-
-        // second layer coins 
+        // second layer coins
         coinList.add(new Coin(6900, 2500));
         coinList.add(new Coin(6800, 2500));
         coinList.add(new Coin(6700, 2500));
@@ -192,10 +188,10 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         coinList.add(new Coin(6200, 2340));
         coinList.add(new Coin(6400, 2340));
         coinList.add(new Coin(6000, 2450));
-        coinList.add(new Coin(5800, 2550)); 
-        coinList.add(new Coin(5400, 2750)); 
-        coinList.add(new Coin(5300, 2750)); 
-        coinList.add(new Coin(5200, 2750)); 
+        coinList.add(new Coin(5800, 2550));
+        coinList.add(new Coin(5400, 2750));
+        coinList.add(new Coin(5300, 2750));
+        coinList.add(new Coin(5200, 2750));
         coinList.add(new Coin(4500, 2200));
         coinList.add(new Coin(4700, 2200));
         coinList.add(new Coin(4600, 2200));
@@ -227,33 +223,33 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         coinList.add(new Coin(1100, 2750));
         coinList.add(new Coin(1120, 2220));
         coinList.add(new Coin(800, 2320));
-     
-        //starter level coins    
-       coinList.add(new Coin(900, 3390));
-       coinList.add(new Coin(1100, 3390));
+
+        // starter level coins
+        coinList.add(new Coin(900, 3390));
+        coinList.add(new Coin(1100, 3390));
         coinList.add(new Coin(1300, 3390));
         coinList.add(new Coin(1700, 3450));
         coinList.add(new Coin(2000, 3200));
         coinList.add(new Coin(2190, 3200));
         coinList.add(new Coin(2330, 3200));
-         coinList.add(new Coin(2500, 3250));
-         coinList.add(new Coin(3200, 3350));
-         coinList.add(new Coin(3350, 3350));
-         coinList.add(new Coin(4000, 3380));
-         coinList.add(new Coin(4100, 3380));
-          coinList.add(new Coin(4710, 3278));
-          coinList.add(new Coin(4810, 3278));
-          coinList.add(new Coin(5000, 3350));
-          coinList.add(new Coin(5080, 3278));
-          coinList.add(new Coin(5210, 3278));
-          coinList.add(new Coin(4700, 3540));
-          coinList.add(new Coin(5000, 3540));
-          coinList.add(new Coin(5200, 3540));
-          coinList.add(new Coin(5500, 3540));
-          coinList.add(new Coin(6000, 3280));
-          coinList.add(new Coin(6500, 3550));
-          coinList.add(new Coin(6800, 3550));
-          coinList.add(new Coin(7450, 3350));
+        coinList.add(new Coin(2500, 3250));
+        coinList.add(new Coin(3200, 3350));
+        coinList.add(new Coin(3350, 3350));
+        coinList.add(new Coin(4000, 3380));
+        coinList.add(new Coin(4100, 3380));
+        coinList.add(new Coin(4710, 3278));
+        coinList.add(new Coin(4810, 3278));
+        coinList.add(new Coin(5000, 3350));
+        coinList.add(new Coin(5080, 3278));
+        coinList.add(new Coin(5210, 3278));
+        coinList.add(new Coin(4700, 3540));
+        coinList.add(new Coin(5000, 3540));
+        coinList.add(new Coin(5200, 3540));
+        coinList.add(new Coin(5500, 3540));
+        coinList.add(new Coin(6000, 3280));
+        coinList.add(new Coin(6500, 3550));
+        coinList.add(new Coin(6800, 3550));
+        coinList.add(new Coin(7450, 3350));
         coinList.add(new Coin(7390, 3200));
         coinList.add(new Coin(7450, 2980));
         coinList.add(new Coin(7390, 2760));
@@ -297,6 +293,50 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.livesDisplay.setOutlineThickness(2);
     }
 
+    public void initialize2(Player prev) {
+        // define/setup map
+        this.map = new Space();
+        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+
+        coinList.clear();
+        // Add Coins (only line needed for both creating and counting)
+        coinList.add(new Coin(1150, 450));
+
+        // Setting bounds and coin in map
+        for (Coin coin : coinList) {
+            coin.setBounds(new Rectangle(0, 0, 16, 16));
+            coin.setMap(map);
+        }
+        // setup player */
+
+        // this.player = new Cat(map.getPlayerStartPosition().x,
+        // map.getPlayerStartPosition().y);
+        this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
+
+        // max into the game
+        this.player.setMap(map);
+        this.player.addListener(this);
+        Point playerStartPosition = map.getPlayerStartPosition();
+        this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
+
+        levelClearedScreen = new LevelClearedScreen();
+        levelLoseScreen = new LevelLoseScreen(this);
+        shopIntroScreen = new ShopIntroScreen(this);
+        shopScreen = new ShopScreen(this);
+        cutsceneLev2Screen = new CutsceneLev2Screen(this);
+
+        this.playLevelScreenState = PlayLevelScreenState.RUNNING;
+
+        // Coin Counter Display
+        this.coinCounter = new SpriteFont("Coins: " + player.getCoins(), 15, 25, "Arial", 35, new Color(255, 0, 0));
+        this.coinCounter.setOutlineColor(Color.black);
+        this.coinCounter.setOutlineThickness(2);
+
+        // health
+        this.livesDisplay = new SpriteFont("Lives: " + player.getLives(), 15, 60, "Arial", 35, new Color(255, 0, 0));
+        this.livesDisplay.setOutlineColor(Color.black);
+        this.livesDisplay.setOutlineThickness(2);
+    }
 
     public void update() {
         // based on screen state, perform specific actions
@@ -418,6 +458,11 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     public void level2() {
         changeLevel(2);
         initialize1(this.player);
+    }
+
+    public void level3() {
+        changeLevel(3);
+        initialize2(this.player);
     }
 
     public void goBackToMenu() {
