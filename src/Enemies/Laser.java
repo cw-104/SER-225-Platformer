@@ -13,15 +13,15 @@ import Utils.Direction;
 import Utils.Point;
 import java.awt.Color;
 import java.util.HashMap;
-public class Arrow extends Enemy {
+public class Laser extends Enemy {
     private float movementSpeed;
     private int existenceFrames;
 
-    public  Arrow(Point location, float movementSpeed, int existenceFrames) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("Arrow.png"), 29 , 7), "DEFAULT");
+    public  Laser(Point location, float movementSpeed, int existenceFrames) {
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load("laser.png"), 29 , 7), "DEFAULT");
         this.movementSpeed = movementSpeed;
 
-        // how long the arrow will exist for before disappearing
+        // how long the laser will exist for before disappearing
         this.existenceFrames = existenceFrames;
 
         initialize();
@@ -31,7 +31,7 @@ public class Arrow extends Enemy {
 
      public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
-      // drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+      //drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Arrow extends Enemy {
         if (existenceFrames == 0) {
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         } else {
-            // move arrow forward
+            // move laser forward
             moveXHandleCollision(movementSpeed);
             super.update(player);
         }
@@ -50,7 +50,7 @@ public class Arrow extends Enemy {
 
     @Override
     public void onEndCollisionCheckX(boolean hasCollided, Direction direction, MapEntity entityCollidedWith) {
-        // if arrow collides with anything solid on the x axis, it is removed
+        // if laser collides with anything solid on the x axis, it is removed
         if (hasCollided) {
             this.mapEntityStatus = MapEntityStatus.REMOVED;
         }
@@ -58,7 +58,7 @@ public class Arrow extends Enemy {
 
     @Override
     public void touchedPlayer(Player player) {
-        // if arrow touches player, it disappears
+        // if laser touches player, it disappears
         super.touchedPlayer(player);
         this.mapEntityStatus = MapEntityStatus.REMOVED;
     }

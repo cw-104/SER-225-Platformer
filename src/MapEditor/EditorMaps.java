@@ -8,6 +8,7 @@ import Maps.CutsceneLev3Map;
 import Maps.ShopHallMap;
 import Maps.Lab;
 import Maps.Lab_copy;
+import Maps.Space;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,8 @@ public class EditorMaps {
                 add("Lab_copy");
                 add("ShopHallMap");
                 add("CutsceneLev3Map");
+                add("Space");
+
             }
         };
     }
@@ -37,11 +40,13 @@ public class EditorMaps {
             case "Lab":
                 return new Lab();
             case "Lab_copy":
-                return new Lab_copy();
             case "CutsceneLev3Map":
                 return new CutsceneLev3Map();
             case "ShopHallMap":
                 return new ShopHallMap();
+            case "Space":
+                return new Space();
+
             default:
                 throw new RuntimeException("Unrecognized map name");
         }
