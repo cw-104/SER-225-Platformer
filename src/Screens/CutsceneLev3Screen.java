@@ -3,7 +3,6 @@ package Screens;
 import Engine.*;
 import Level.Map;
 import Level.Player;
-import Maps.BunkerHallMap;
 import Maps.CutsceneLev3Map;
 import SpriteFont.SpriteFont;
 
@@ -45,7 +44,7 @@ public class CutsceneLev3Screen extends Screen {
             keyLocker.unlockKey(Key.SPACE);
         }
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
-            playLevelScreen.level2();
+            playLevelScreen.goToCutscene2_1(player);
            
         }
     }

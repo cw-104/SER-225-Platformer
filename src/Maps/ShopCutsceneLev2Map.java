@@ -5,11 +5,10 @@ import Engine.ImageLoader;
 import GameObject.Sprite;
 import Level.Map;
 import Tilesets.ForestTileset;
-import Tilesets.LabCutsceneTileset;
 import Utils.Colors;
 import Utils.Point;
 
-// Represents the map that is used as a background for the main menu and credits menu screen
+// Represents the map that is used as a background for the shop 2 cutscene
 public class ShopCutsceneLev2Map extends Map {
 
     private Sprite max;

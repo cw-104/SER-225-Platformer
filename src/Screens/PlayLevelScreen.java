@@ -35,6 +35,10 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     protected CutsceneLev2Screen cutsceneLev2Screen;
     protected Shop2Screen shop2Screen;
     protected CutsceneLev3Screen cutsceneLev3Screen;
+    protected CutsceneLev3Screen2 cutsceneLev3Screen2;
+    protected FinalCutscene1Screen finalCutscene1Screen;
+    protected FinalCutscene2Screen finalCutscene2Screen;
+    protected FinalCutscene3Screen finalCutscene3Screen;
     protected boolean levelCompletedStateChangeStart;
     protected SpriteFont livesDisplay;
     protected int shopCheck;
@@ -136,6 +140,10 @@ public void changeLevel(int newLevel){
         cutsceneLev2Screen = new CutsceneLev2Screen(this);
         shop2Screen = new Shop2Screen(this);
         cutsceneLev3Screen = new CutsceneLev3Screen(this);
+        cutsceneLev3Screen2 = new CutsceneLev3Screen2(this);
+        finalCutscene1Screen = new FinalCutscene1Screen(this);
+        finalCutscene2Screen = new FinalCutscene2Screen(this);
+        finalCutscene3Screen = new FinalCutscene3Screen(this);
 
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
 
@@ -290,6 +298,9 @@ public void changeLevel(int newLevel){
         shop2Screen = new Shop2Screen(this);
         cutsceneLev3Screen = new CutsceneLev3Screen(this);
         shopCutsceneLev2Screen = new ShopCutsceneLev2Screen(this);
+        finalCutscene1Screen = new FinalCutscene1Screen(this);
+        finalCutscene2Screen = new FinalCutscene2Screen(this);
+        finalCutscene3Screen = new FinalCutscene3Screen(this);
 
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
 
@@ -419,10 +430,26 @@ public void initialize2() {
                 cutsceneLev3Screen.update();
                 break;
             }
+            case CUTSCENELEV3_2: {
+                cutsceneLev3Screen2.update();
+                break;
+            }
             case SHOPSCENE2: {
             shopCutsceneLev2Screen.update();
                 break;
+            }
+            case ENDCUTSCENE1: {
+                finalCutscene1Screen.update();
+                break;
             }    
+            case ENDCUTSCENE2: {
+                finalCutscene2Screen.update();
+                break;
+            }
+            case ENDCUTSCENE3: {
+                finalCutscene3Screen.update();
+                break;
+            }
 
         }
     }
@@ -466,9 +493,21 @@ public void initialize2() {
             case CUTSCENELEV3:
                 cutsceneLev3Screen.draw(graphicsHandler);
                 break;
+            case CUTSCENELEV3_2:
+                cutsceneLev3Screen2.draw(graphicsHandler);
+                break;
             case SHOPSCENE2:
             shopCutsceneLev2Screen.draw(graphicsHandler);
                 break;
+            case ENDCUTSCENE1:
+            finalCutscene1Screen.draw(graphicsHandler);
+            break;
+            case ENDCUTSCENE2:
+            finalCutscene1Screen.draw(graphicsHandler);
+            break;
+            case ENDCUTSCENE3:
+            finalCutscene1Screen.draw(graphicsHandler);
+            break;
                 
         }
         livesDisplay.setText("Lives: " + player.getLives());
@@ -534,9 +573,23 @@ public void initialize2() {
         playLevelScreenState = PlayLevelScreenState.CUTSCENELEV3;
     }
 
+    public void goToCutscene2_1(Player player) {
+        playLevelScreenState = PlayLevelScreenState.CUTSCENELEV3_2;
+    }
+
+    public void goToEndCutscene1(Player player) {
+        playLevelScreenState = PlayLevelScreenState.ENDCUTSCENE1;
+    }
+    public void goToEndCutscene2(Player player) {
+        playLevelScreenState = PlayLevelScreenState.ENDCUTSCENE2;
+    }
+    public void goToEndCutscene3(Player player) {
+        playLevelScreenState = PlayLevelScreenState.ENDCUTSCENE3;
+    }
+
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, LEVEL_LOSE, SHOPINTRO, SHOP, CUTSCENELEV2, SHOPSCENE2, SHOP2, CUTSCENELEV3
+        RUNNING, LEVEL_COMPLETED, LEVEL_LOSE, SHOPINTRO, SHOP, CUTSCENELEV2, SHOPSCENE2, SHOP2, CUTSCENELEV3, CUTSCENELEV3_2, ENDCUTSCENE1, ENDCUTSCENE2, ENDCUTSCENE3
     }
 
     // Total # of Coins

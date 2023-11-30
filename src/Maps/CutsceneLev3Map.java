@@ -15,6 +15,7 @@ public class CutsceneLev3Map extends Map {
     private Sprite max;
     private Sprite textBox;
     private Sprite intercom_icon;
+    private Sprite elevator;
     
 
     public CutsceneLev3Map() {
@@ -31,7 +32,10 @@ public class CutsceneLev3Map extends Map {
         intercom_icon = new Sprite (ImageLoader.loadSubImage("camera_speech.png", Colors.MAGENTA, 0, 0, 21, 20));
         intercom_icon.setScale(2);
         intercom_icon.setLocation(intercomIconLocation.x, intercomIconLocation.y);
-
+        Point elevLocation = getMapTile(7,4).getLocation().subtractX(24).subtractY(-12);
+        elevator = new Sprite (ImageLoader.loadSubImage("elevator.png", Colors.MAGENTA, 0, 0, 40, 60));
+        elevator.setScale(3);
+        elevator.setLocation(elevLocation.x, elevLocation.y);
     }
 
     @Override
@@ -40,6 +44,7 @@ public class CutsceneLev3Map extends Map {
         max.draw(graphicsHandler);
         textBox.draw(graphicsHandler);
         intercom_icon.draw(graphicsHandler);
+        elevator.draw(graphicsHandler);
     }
 
 }
