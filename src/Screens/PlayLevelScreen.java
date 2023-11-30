@@ -44,6 +44,9 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     protected SpriteFont livesDisplay;
     protected int shopCheck;
 
+    protected SpriteFont shieldDisplay;
+
+
     protected List<Coin> coinList = new ArrayList<>();
     protected SpriteFont coinCounter;
     private int currentLevel = 1;
@@ -58,10 +61,24 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         currentLevel = newLevel;
     }
 
+
+    public void setPlayer(Player player) {
+        this.player = player;
+        this.player.setMap(map);
+    }
+
+public void changeLevel(int newLevel){
+
+
     public void initialize() {
+
+        
+       if( currentLevel ==1){
+
         // define/setup map
       this.map = new Lab();
         this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+ 
 
         // Add Coins (only line needed for both creating and counting)
         coinList.add(new Coin(1150, 450));
@@ -159,10 +176,26 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.livesDisplay = new SpriteFont("Lives: " + player.getLives(), 15, 60, "Arial", 35, new Color(255, 0, 0));
         this.livesDisplay.setOutlineColor(Color.black);
         this.livesDisplay.setOutlineThickness(2);
+        
+        // shield
+        this.shieldDisplay = new SpriteFont("Shield: 0", 15, 90, "Arial", 35, new Color(255, 0, 0));
+        this.shieldDisplay.setOutlineColor(Color.black);
+        this.shieldDisplay.setOutlineThickness(2);
+
     }
+
+
+    // public void setPlayer(Player player) {
+    //     this.player = player;
+    //     // You might need to set the map for the player again
+    //     this.player.setMap(map);
+    //     // Update any other necessary player settings here
+    // }
+
 
     // initializes second level
     public void initialize1(Player prev) {
+
         // define/setup map
         this.map = new Lab_copy();
 
@@ -363,6 +396,9 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
         this.player.setCoins(prev.getCoins());
         this.player.setLives(prev.getLives());
+        this.player.setSpeedMultiplier(prev.getSpeedMultiplier()); 
+
+        
 
 
         levelClearedScreen = new LevelClearedScreen();
@@ -393,6 +429,12 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     }
 
     public void update() {
+        if (player.hasShield()) {
+            shieldDisplay.setText("Shield: 1");
+        } else {
+            shieldDisplay.setText("Shield: 0");
+        }
+        
         // based on screen state, perform specific actions
         switch (playLevelScreenState) {
 
@@ -541,6 +583,10 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         }
         livesDisplay.setText("Lives: " + player.getLives());
         livesDisplay.draw(graphicsHandler);
+
+        shieldDisplay.setText("Shield: " + (player.hasShield() ? "1" : "0"));
+        shieldDisplay.draw(graphicsHandler);
+        
     }
 
     public PlayLevelScreenState getPlayLevelScreenState() {
@@ -606,6 +652,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     public void goToCutscene2(Player player) {
         playLevelScreenState = PlayLevelScreenState.CUTSCENELEV3;
     }
+    
 
     public void goToCutscene2_1(Player player) {
         playLevelScreenState = PlayLevelScreenState.CUTSCENELEV3_2;
@@ -638,3 +685,5 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     }
 
 }
+
+
