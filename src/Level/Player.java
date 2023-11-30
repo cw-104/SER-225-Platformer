@@ -47,6 +47,7 @@ public abstract class Player extends GameObject {
     public void resetCoins() {
         coins = 0;
     }
+
     public void setCoins(int value) {
         coins = value;
     }
@@ -77,7 +78,7 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
+    protected boolean isInvincible = true; // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isAttacking = false;// when max is NOT attacking
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
@@ -630,6 +631,7 @@ public abstract class Player extends GameObject {
     public void setLives(int lives) {
         this.lives = lives;
     }
+
     public void addExtraLife() {
         this.lives++; // Increment the player's lives by one
     }

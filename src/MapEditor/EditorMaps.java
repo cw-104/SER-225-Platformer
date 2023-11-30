@@ -6,6 +6,7 @@ import Maps.TestMap;
 import Maps.TitleScreenMap;
 import Maps.Lab;
 import Maps.Lab_copy;
+import Maps.Space;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class EditorMaps {
                 add("TestEnvironment");
                 add("Lab");
                 add("Lab_copy");
+                add("Space");
             }
         };
     }
@@ -34,6 +36,8 @@ public class EditorMaps {
                 return new Lab();
             case "Lab_copy":
                 return new Lab_copy();
+            case "Space":
+                return new Space();
             default:
                 throw new RuntimeException("Unrecognized map name");
         }

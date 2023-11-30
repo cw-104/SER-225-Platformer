@@ -18,6 +18,7 @@ import Utils.Point;
 import Maps.TestEnvironment;
 import Maps.Lab;
 import Maps.Lab_copy;
+import Maps.Space;
 import Players.Max;
 import SpriteFont.SpriteFont;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     public void initialize() {
         // define/setup map
-        this.map = new Lab();
+        this.map = new Space();
 
         // Add Coins (only line needed for both creating and counting)
         coinList.add(new Coin(1150, 450));
