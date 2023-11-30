@@ -242,7 +242,7 @@ public class Max extends Player {
 // checking to see if max is in another level 
 
 //Repeat this process for the next level but change it to 2 (for level 3). //LOOK AT ME!! CHANGES MAX SPRITE FOR THE LEVEL  
-if (MaxInLevel == 2) { //was originally > 2 // changed it to 0 to see if it worked and it did 
+if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it worked and it did 
         setMaxInLevel();
         // Change the attack animations based on the player's/ Max's level
         put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
@@ -256,7 +256,7 @@ if (MaxInLevel == 2) { //was originally > 2 // changed it to 0 to see if it work
                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                 .withBounds(1, 3, 33, 28)
                 .build(),
-            new FrameBuilder(spriteSheet.getSprite(6, 6), -1)
+            new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
                 .withScale(3)
                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                 .withBounds(1, 3, 33, 28)
@@ -272,27 +272,27 @@ if (MaxInLevel == 2) { //was originally > 2 // changed it to 0 to see if it work
                 .withScale(3)
                 .withBounds(18, 3, 33, 28)
                 .build(),
-            new FrameBuilder(spriteSheet.getSprite(6, 6 ), -1)
+            new FrameBuilder(spriteSheet.getSprite(6, 6 ), 8)
                 .withScale(3)
                 .withBounds(18, 3, 33, 28)
                 .build()
         });
     }                                   // sprites for level 3 will go here // for testing purposes change 2 to 1 or 0 to see if the sprite work[if level 3 test map is not ready]
-                                        if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it worked and it did 
+                                        if (MaxInLevel == 2) { //was originally > 2 // changed it to 0 to see if it worked and it did 
                                                 setMaxInLevel();
                                                 // Change the attack animations based on the player's/ Max's level
                                                 put("SHOOT_LEFT", new Frame[] {// sprites for attacking with axe
-                                                new FrameBuilder(spriteSheet.getSprite(7, 3), 8)//8,3
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)//8,3
                                                         .withScale(3)
                                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                         .withBounds(1, 3, 33, 28)
                                                         .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(7, 3), 8)//+1
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)//+1
                                                         .withScale(3)
                                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                         .withBounds(1, 3, 33, 28)
                                                         .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(7, 3), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)
                                                         .withScale(3)
                                                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                         .withBounds(1, 3, 33, 28)
@@ -300,15 +300,15 @@ if (MaxInLevel == 2) { //was originally > 2 // changed it to 0 to see if it work
                                                 });
 
                                                 put("SHOOT_RIGHT", new Frame[] {
-                                                new FrameBuilder(spriteSheet.getSprite(7, 3), 8)//8,3
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)//8,3
                                                         .withScale(3)
                                                         .withBounds(18, 3, 33, 28)
                                                         .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(7, 3), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)
                                                         .withScale(3)
                                                         .withBounds(18, 3, 33, 28)
                                                         .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(7, 3 ), 8)
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3 ), 8)
                                                         .withScale(3)
                                                         .withBounds(18, 3, 33, 28)
                                                         .build()

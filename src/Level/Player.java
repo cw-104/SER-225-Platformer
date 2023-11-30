@@ -581,7 +581,7 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
 
                 }
             }
-  if(MaxInLevel ==1){
+  if(MaxInLevel ==2){
         currentAnimationName = (facingDirection == Direction.RIGHT) ? "SHOOT_RIGHT" : "SHOOT_LEFT";
 
         int bulletx;
