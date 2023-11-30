@@ -28,7 +28,7 @@ public class InstructionsScreen extends Screen {
         background = new TitleScreenMap();
         background.setAdjustCamera(false);
         instructionsLabel = new SpriteFont("INSTRUCTIONS:", 15, 7, "Times New Roman", 30, Color.white);
-        buttonsLabel = new SpriteFont("W - Jump\nA - Move Left\nS - Crouch\nD - Move Right\nK - Attack\nGood Luck :)", 130, 121, "Helvetica Bold", 40, Color.white);
+        buttonsLabel = new SpriteFont("W - Jump\nA - Move Left\nS - Crouch\nD - Move Right\nK - Attack\nP- Pause\nGood Luck :)", 130, 121, "Helvetica Bold", 40, Color.white);
         returnInstructionsLabel = new SpriteFont("Press Space to return to the menu", 20, 532, "Times New Roman", 30, Color.white);
         keyLocker.lockKey(Key.SPACE);
     }
