@@ -67,7 +67,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.player.setMap(map);
     }
 
-public void changeLevel(int newLevel){
+
 
 
     public void initialize() {
@@ -183,7 +183,7 @@ public void changeLevel(int newLevel){
         this.shieldDisplay.setOutlineThickness(2);
 
     }
-
+    }
 
     // public void setPlayer(Player player) {
     //     this.player = player;
@@ -522,8 +522,8 @@ public void changeLevel(int newLevel){
                 break;
             }
 
-        }
-    }
+        }}
+    
 
     public void draw(GraphicsHandler graphicsHandler) {
         // based on screen state, draw appropriate graphics
@@ -684,8 +684,6 @@ public void changeLevel(int newLevel){
         return totalCoins;
     }
 
-    }
-    }
+    
+
 }
-
-
