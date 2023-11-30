@@ -684,6 +684,8 @@ public void changeLevel(int newLevel){
         return totalCoins;
     }
 
+    }
+    }
 }
 
 
