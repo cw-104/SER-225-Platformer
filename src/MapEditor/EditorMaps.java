@@ -41,6 +41,7 @@ public class EditorMaps {
             case "Lab":
                 return new Lab();
             case "Lab_copy":
+                return new Lab_copy();
             case "CutsceneLev3Map":
                 return new CutsceneLev3Map();
             case "ShopHallMap":

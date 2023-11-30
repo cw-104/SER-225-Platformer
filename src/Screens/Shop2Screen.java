@@ -34,6 +34,7 @@ public class Shop2Screen extends Screen {
     protected KeyLocker keyLocker = new KeyLocker();
     protected Player player;
     protected PlayLevelScreen playLevelScreen;
+    
 
 
 
@@ -162,9 +163,9 @@ public class Shop2Screen extends Screen {
             keyPressTimer = 14;
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
-                if(this.player.getCoins() >= 30 && speedUpPurchased == false) {
+                if (this.player.getCoins() >= 30 && !speedUpPurchased) {
                     player.removeCoins(30);
-                    coinCount.setText("Coins: " + player.getCoins());
+                    player.increaseSpeed(2.2f); // Increase speed
                     speedUpPurchased = true;
                 }
                   
@@ -183,22 +184,19 @@ public class Shop2Screen extends Screen {
                         this.player.removeCoins(costOfExtraLife); 
                         this.player.addExtraLife(); 
                         this.healthUpPurchased = true;
+                    }            
+
+                }
+                else if (menuItemSelected == 2) {
+                    int costOfShield = 25;
+                    if (this.player.getCoins() >= costOfShield && !this.shieldPurchased) {
+                        this.player.removeCoins(costOfShield);
+                        this.player.activateShield(); // Activate shield
+                        this.shieldPurchased = true;
                     }
-
-            // } else if (menuItemSelected == 1 ) {
-            //     if(this.player.getCoins() >= 4 && healthUpPurchased == false) {
-            //         player.removeCoins(4);
-            //         coinCount.setText("Coins: " + player.getCoins());
-            //         healthUpPurchased = true;
-
                 }
-            else if (menuItemSelected == 2) {
-                if(this.player.getCoins() >= 25 && shieldPurchased == false) {
-                    player.removeCoins(25);
-                    coinCount.setText("Coins: " + player.getCoins());
-                    shieldPurchased = true;
-                }
-            }
+
+
             } else if (menuItemSelected == 3) {
                 playLevelScreen.goToCutscene2(player);
             }
