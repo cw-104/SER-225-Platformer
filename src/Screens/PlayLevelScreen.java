@@ -49,11 +49,18 @@ private int currentLevel =1;
         this.screenCoordinator = screenCoordinator;
         this.currentLevel =1;
     }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+        this.player.setMap(map);
+    }
+
 public void changeLevel(int newLevel){
 
     currentLevel = newLevel;
 }
     public void initialize() {
+        
         if( currentLevel ==1){
 
             this.map =new Lab();
@@ -158,6 +165,13 @@ public void changeLevel(int newLevel){
         this.shieldDisplay.setOutlineThickness(2);
 
     }
+
+    // public void setPlayer(Player player) {
+    //     this.player = player;
+    //     // You might need to set the map for the player again
+    //     this.player.setMap(map);
+    //     // Update any other necessary player settings here
+    // }
 
     public void initialize1() {
         // define/setup map
@@ -289,6 +303,9 @@ public void changeLevel(int newLevel){
         // changes here too probably
         this.player.setCoins(prev.getCoins());
         this.player.setLives(prev.getLives());
+        this.player.setSpeedMultiplier(prev.getSpeedMultiplier()); 
+
+        
 
 
         levelClearedScreen = new LevelClearedScreen();
@@ -315,7 +332,7 @@ public void changeLevel(int newLevel){
         
     }
 // this will be used to test functionality of level 2 test map
-public void initialize2() {
+public void initialize2(Player prev) {
    if( currentLevel ==2){
 
     this.map =new Lab_copy();
@@ -343,6 +360,7 @@ public void initialize2() {
     this.player.addListener(this);
     Point playerStartPosition = map.getPlayerStartPosition();
     this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
+    this.player.setSpeedMultiplier(prev.getSpeedMultiplier()); 
 
     
     levelClearedScreen = new LevelClearedScreen();
@@ -363,6 +381,7 @@ public void initialize2() {
     this.livesDisplay = new SpriteFont("Lives: " + player.getLives(), 15, 60, "Arial", 35, new Color(255, 0, 0));
     this.livesDisplay.setOutlineColor(Color.black);
     this.livesDisplay.setOutlineThickness(2);
+    
 }
     public void update() {
         if (player.hasShield()) {
@@ -552,6 +571,7 @@ public void initialize2() {
     public void goToCutscene2(Player player) {
         playLevelScreenState = PlayLevelScreenState.CUTSCENELEV3;
     }
+    
 
     // This enum represents the different states this screen can be in
     private enum PlayLevelScreenState {
@@ -568,5 +588,5 @@ public void initialize2() {
         }
         return totalCoins;
     }
-    
+
 }

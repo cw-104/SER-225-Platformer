@@ -29,10 +29,8 @@ public abstract class Player extends GameObject {
     protected float momentumYIncrease = 0;
     int lives = 3;
    
-
-    // private boolean hasShield = false;
-    // private ShieldPowerUp shieldPowerUp = new ShieldPowerUp();
-    // private int shieldCount = 0;
+    private float speedMultiplier = 1.0f;
+    
     protected boolean hasShield = false;
 
     // coin
@@ -68,35 +66,36 @@ public abstract class Player extends GameObject {
         return GameContext.playerHasShield();
     }
 
+    public void increaseSpeed(float multiplier) {
+        this.speedMultiplier *= multiplier;
+        this.walkSpeed *= this.speedMultiplier; // Update walkSpeed based on the new multiplier
+    }
+    
+    public void setWalkSpeed(float newSpeed) {
+        this.walkSpeed = newSpeed;
+    }
+    
+    public float getWalkSpeed() {
+        return this.walkSpeed;
+    }
+        // New method to set the speed multiplier
+        public void setSpeedMultiplier(float multiplier) {
+            this.speedMultiplier = multiplier;
+        }
+    
+        // New method to get the speed multiplier
+        public float getSpeedMultiplier() {
+            return this.speedMultiplier;
+        }
+
+    
     
     
     public void touchedEnemy(Enemy enemy) {
         defeatEnemy(enemy);
     }
        
-    
-    
 
-
-     
-
-        // public void touchedEnemy(Enemy enemy) {
-        //     if (hasShield) {
-        //         // Shield absorbs the damage
-        //         hasShield = false; // deactivate the shield after absorbing a hit
-        //     } else {
-        //         // Regular damage handling
-        //         lives--;
-        //         if (lives <= 0) {
-        //             // Handle player death
-        //         }
-        //     }
-        // }
-    
-        // public void activateShield() {
-        //     shieldPowerUp.activate();
-        //     hasShield = true;
-        
     // values used to handle player movement
     protected float jumpForce = 0;
     protected float momentumY = 0;
@@ -152,8 +151,6 @@ public abstract class Player extends GameObject {
         if (levelState == LevelState.RUNNING) {
             applyGravity();
 
-            // update player's state and current actions, which includes things like
-            // determining how much it should move each frame and if its walking or jumping
             do {
                 previousPlayerState = playerState;
                 handlePlayerState();
@@ -311,33 +308,34 @@ public abstract class Player extends GameObject {
         }
     }
 
-    // player WALKING state logic
-    protected void playerWalking() {
-        // if walk left key is pressed, move player to the left
-        if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
-            moveAmountX -= walkSpeed;
-            facingDirection = Direction.LEFT;
-        }
-
-        // if walk right key is pressed, move player to the right
-        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
-            moveAmountX += walkSpeed;
-            facingDirection = Direction.RIGHT;
-        } else if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY)) {
-            playerState = PlayerState.STANDING;
-        }
-
-        // if jump key is pressed, player enters JUMPING state
-        if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
-            keyLocker.lockKey(JUMP_KEY);
-            playerState = PlayerState.JUMPING;
-        }
-
-        // if crouch key is pressed,
-        else if (Keyboard.isKeyDown(CROUCH_KEY)) {
-            playerState = PlayerState.CROUCHING;
-        }
+protected void playerWalking() {
+    // if walk left key is pressed, move player to the left
+    if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
+        moveAmountX -= walkSpeed * speedMultiplier; // Apply speedMultiplier here
+        facingDirection = Direction.LEFT;
     }
+    
+    // if walk right key is pressed, move player to the right
+    else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
+        moveAmountX += walkSpeed * speedMultiplier; // And here
+        facingDirection = Direction.RIGHT;
+    } else if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY)) {
+        playerState = PlayerState.STANDING;
+    }
+
+    // if jump key is pressed, player enters JUMPING state
+    if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
+        keyLocker.lockKey(JUMP_KEY);
+        playerState = PlayerState.JUMPING;
+    }
+
+    // if crouch key is pressed,
+    else if (Keyboard.isKeyDown(CROUCH_KEY)) {
+        playerState = PlayerState.CROUCHING;
+    }
+}
+
+    
 
     // player CROUCHING state logic
     protected void playerCrouching() {

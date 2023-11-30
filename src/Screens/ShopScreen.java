@@ -159,18 +159,19 @@ public class ShopScreen extends Screen {
             keyPressTimer = 14;
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
-                if(this.player.getCoins() >= 30 && speedUpPurchased == false) {
+                if (this.player.getCoins() >= 30 && !speedUpPurchased) {
                     player.removeCoins(30);
-                    coinCount.setText("Coins: " + player.getCoins());
+                    player.increaseSpeed(2.2f); // Increase speed
                     speedUpPurchased = true;
                 }
+            
+            
                   
                 //check for correct amt coins
                 //remove coins
                 //apply effect
                 //mark purchased
-
-               
+                
                
                 // Inside ShopScreen.java
 
@@ -182,34 +183,17 @@ public class ShopScreen extends Screen {
                         this.healthUpPurchased = true;
                     }
 
-            // } else if (menuItemSelected == 1 ) {
-            //     if(this.player.getCoins() >= 4 && healthUpPurchased == false) {
-            //         player.removeCoins(4);
-            //         coinCount.setText("Coins: " + player.getCoins());
-            //         healthUpPurchased = true;
-
-            // if (menuItemSelected == 2) { // Assuming 2 is the menu item for the shield power-up
-            //     int costOfShield = 25;
-            //     if (this.player.getCoins() >= costOfShield && !shieldUpPurchased) {
-            //         this.player.removeCoins(costOfShield);
-            //         this.player.activateShield(); // Activate the shield power-up
-            //         shieldUpPurchased = true;
-            //     }
-            // }
-        
-
-
                 }
             else if (menuItemSelected == 2) {
                 
             }
             } else if (menuItemSelected == 3) {
                 //when level 2 exists this should send there - menu is temp
+                playLevelScreen.setPlayer(this.player);
                 playLevelScreen.goToCutscene(player);
             }
         }
     
-
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
         speedUp.draw(graphicsHandler);
