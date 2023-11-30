@@ -27,7 +27,7 @@ public class FinalCutscene1Screen extends Screen {
     public void initialize() {
         background = new CutsceneLev3Map();
         background.setAdjustCamera(false);
-        narration = new SpriteFont("Greetings, [currentSubject.getID]! You have comepleted three\ntrials in search of the \"end\" Please, pay no\nmind to any faintness or dizziness.", 175, 22, "Helvetica Bold", 22, Color.white);
+        narration = new SpriteFont("Greetings, [currentSubject.getID]! You have\ncomepleted three trials in search of the \"end\"\nPlease, pay no mind to any faintness or dizziness.", 175, 22, "Helvetica Bold", 22, Color.white);
         prompt = new SpriteFont("Press SPACE to continue...", 490, 130, "Comic Sans", 15, Color.white);
         keyPressTimer = 0;
         keyLocker.lockKey(Key.SPACE);

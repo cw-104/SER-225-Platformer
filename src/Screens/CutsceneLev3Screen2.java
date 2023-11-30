@@ -44,7 +44,7 @@ public class CutsceneLev3Screen2 extends Screen {
             keyLocker.unlockKey(Key.SPACE);
         }
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
-            playLevelScreen.level2();
+            playLevelScreen.level3();
            
         }
     }

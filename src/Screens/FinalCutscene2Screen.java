@@ -51,7 +51,6 @@ public class FinalCutscene2Screen extends Screen {
 
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
-        narration.drawWithParsedNewLines(graphicsHandler, 2);
         prompt.draw(graphicsHandler);
     }
 }

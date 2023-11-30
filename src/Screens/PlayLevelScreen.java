@@ -292,6 +292,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         shopScreen = new ShopScreen(this);
         cutsceneLev2Screen = new CutsceneLev2Screen(this);
         shop2Screen = new Shop2Screen(this);
+        shopCutsceneLev2Screen = new ShopCutsceneLev2Screen(this);
         cutsceneLev3Screen = new CutsceneLev3Screen(this);
 
         this.playLevelScreenState = PlayLevelScreenState.RUNNING;
@@ -333,6 +334,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         this.player.addListener(this);
         Point playerStartPosition = map.getPlayerStartPosition();
         this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
+        this.player.setCoins(prev.getCoins());
+        this.player.setLives(prev.getLives());
 
 
         levelClearedScreen = new LevelClearedScreen();
@@ -392,6 +395,9 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                         }
                         else if(shopCheck == 2) {
                             goToShopScene2(this.player);
+                        }
+                        else if(shopCheck == 3) {
+                            goToEndCutscene1(this.player);
                         }
                     }
                 }
@@ -499,10 +505,10 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
             finalCutscene1Screen.draw(graphicsHandler);
             break;
             case ENDCUTSCENE2:
-            finalCutscene1Screen.draw(graphicsHandler);
+            finalCutscene2Screen.draw(graphicsHandler);
             break;
             case ENDCUTSCENE3:
-            finalCutscene1Screen.draw(graphicsHandler);
+            finalCutscene3Screen.draw(graphicsHandler);
             break;
                 
         }
@@ -543,6 +549,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
     public void level3() {
         changeLevel(3);
         initialize2(this.player);
+        shopCheck = 3;
     }
 
     public void goBackToMenu() {
