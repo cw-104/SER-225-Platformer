@@ -474,12 +474,14 @@ public class ForestTileset extends Tileset {
 
                 // Forest Ground Slope 6,7 - 6,9 - 7,7 - 7,9
 
-                Frame ForestGroundSlopeFrame_0 = new FrameBuilder(getSubImage(6, 7))
+                Frame ForestGroundSlopeFrame_0 = new FrameBuilder(getSubImage(6, 9))
                                 .withScale(tileScale)
                                 .build();
 
                 MapTileBuilder ForestGroundSlopeTile_0 = new MapTileBuilder(ForestGroundSlopeFrame_0)
-                                .withTileType(TileType.SLOPE);
+                                .withTileType(TileType.SLOPE)
+                                .withTileLayout(SlopeTileLayoutUtils.createRight45SlopeLayout(spriteWidth,
+                                                (int) tileScale));
 
                 mapTiles.add(ForestGroundSlopeTile_0);
 
@@ -488,7 +490,9 @@ public class ForestTileset extends Tileset {
                                 .build();
 
                 MapTileBuilder ForestGroundSlopeTile_1 = new MapTileBuilder(ForestGroundSlopeFrame_1)
-                                .withTileType(TileType.SLOPE);
+                                .withTileType(TileType.SLOPE)
+                                .withTileLayout(SlopeTileLayoutUtils.createRight45SlopeLayout(spriteWidth,
+                                                (int) tileScale));
 
                 mapTiles.add(ForestGroundSlopeTile_1);
 
@@ -497,7 +501,9 @@ public class ForestTileset extends Tileset {
                                 .build();
 
                 MapTileBuilder ForestGroundSlopeTile_2 = new MapTileBuilder(ForestGroundSlopeFrame_2)
-                                .withTileType(TileType.SLOPE);
+                                .withTileType(TileType.SLOPE)
+                                .withTileLayout(SlopeTileLayoutUtils.createRight45SlopeLayout(spriteWidth,
+                                                (int) tileScale));
 
                 mapTiles.add(ForestGroundSlopeTile_2);
 

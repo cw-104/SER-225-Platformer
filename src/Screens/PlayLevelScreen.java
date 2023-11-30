@@ -18,6 +18,7 @@ import Utils.Point;
 import Maps.TestEnvironment;
 import Maps.Lab;
 import Maps.Lab_copy;
+import Maps.Space;
 import Players.Max;
 import SpriteFont.SpriteFont;
 import java.util.ArrayList;
@@ -40,12 +41,17 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     protected List<Coin> coinList = new ArrayList<>();
     protected SpriteFont coinCounter;
-private int currentLevel =1;
+    private int currentLevel = 1;
+
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
-        this.currentLevel =1;
+        this.currentLevel = 1;
     }
-public void changeLevel(int newLevel){
+
+    public void changeLevel(int newLevel) {
+
+        currentLevel = newLevel;
+    }
 
     currentLevel = newLevel;
 }
@@ -121,7 +127,7 @@ public void changeLevel(int newLevel){
         // map.getPlayerStartPosition().y);
         this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
 
-                                                                                               // max into the game
+        // max into the game
         this.player.setMap(map);
         this.player.addListener(this);
         Point playerStartPosition = map.getPlayerStartPosition();
@@ -262,7 +268,7 @@ public void changeLevel(int newLevel){
         // map.getPlayerStartPosition().y);
         this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y); // this is to implement
 
-                                                                                               // max into the game
+        // max into the game
         this.player.setMap(map);
         this.player.addListener(this);
         Point playerStartPosition = map.getPlayerStartPosition();
@@ -290,6 +296,8 @@ public void changeLevel(int newLevel){
         this.livesDisplay.setOutlineColor(Color.black);
         this.livesDisplay.setOutlineThickness(2);
     }
+
+
     public void update() {
         // based on screen state, perform specific actions
         switch (playLevelScreenState) {
@@ -406,7 +414,6 @@ public void changeLevel(int newLevel){
     public void resetLevel() {
         initialize();
     }
-    
 
     public void level2() {
         changeLevel(2);
@@ -444,5 +451,5 @@ public void changeLevel(int newLevel){
         }
         return totalCoins;
     }
-    
+
 }
