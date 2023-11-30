@@ -540,6 +540,14 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         initialize();
     }
 
+    public void resetLevel2(){
+        initialize1(this.player);
+    }
+
+    public void resetLevel3() {
+        initialize2(this.player);
+    }
+
     public void level2() {
         changeLevel(2);
         initialize1(this.player);
