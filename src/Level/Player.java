@@ -11,6 +11,7 @@ import GameObject.SpriteSheet;
 import Players.MaxBullet;
 import Utils.AirGroundState;
 import Utils.Direction;
+import Utils.Point;
 
 import java.util.ArrayList;
 
@@ -28,10 +29,11 @@ public abstract class Player extends GameObject {
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
     int lives = 3;
-    //protected float speedPowerUp;// added to implement speed powerup. may need to take out //Besa
+    
     private int currentLevel = 1; // Default level is 1// used to determine which level max/ player is in 
     // coin
     protected int coins;
+    private int cooldown = 5;// cool down int
     private SpeedPowerUp speedPowerUp;
     public int getCoins() {
         return coins;
@@ -78,9 +80,10 @@ public abstract class Player extends GameObject {
     protected Key MOVE_RIGHT_KEY = Key.D;
     protected Key CROUCH_KEY = Key.S;
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
+    protected Key SHOOT_KEY = Key.L; //  appropriate key for level 3
 
     // flags
-    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
+    protected boolean isInvincible = true; // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isAttacking = false;// when max is NOT attacking
         protected boolean isShooting = false;// for max shooting gun //stating as false
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName,int initialLevel) {
@@ -137,11 +140,32 @@ private boolean isJumpAttacking = false;// besa +atatck jump
                     speedPowerUp = null; // Speed power-up used, set it to null
                 }
             }
-
-
+// all the things are in the greg class. matches what we did it is just not in the player class
+if(cooldown>0){
+    cooldown --;
+}else if(cooldown <= 0 && Keyboard.isKeyDown(ATTACK_KEY)){
+    //method to spawn in a bullet
+    if(MaxInLevel ==1){ 
+           playerAttacking();
+    cooldown = 5; }
+}
+if(cooldown >0){
+    cooldown --;
+}
+if (Keyboard.isKeyDown(ATTACK_KEY) && cooldown <= 0){
+    if (MaxInLevel ==0){
+        isAttacking = true;
+        attack();
+cooldown = 30; // for cool-down testing
+    }
+    else if(MaxInLevel ==1){
+        playerAttacking();//BESA
+    }
+}
             // update player's animation
             super.update();
         }
+        
 
         // if player has beaten level
         else if (levelState == LevelState.LEVEL_COMPLETED) {
@@ -158,21 +182,8 @@ private boolean isJumpAttacking = false;// besa +atatck jump
     protected void applyGravity() {
         moveAmountY += gravity + momentumY;
     }
-/* *
-    protected void applyPowerUp() {
-//besa //come back to this
-        moveAmountX += speedPowerUp + speedPowerUp; // may need to change this // besa
-    }
-*/
-public void applySpeedPowerUp(float speedBoostAmount, int durationFrames) {
-    speedPowerUp = new SpeedPowerUp(getX(), getY(), 20, 5);//trying out 20,5// besa
-}
-public void checkSpeedPowerUpCollision(SpeedPowerUp powerUp) {
-    if (intersects(powerUp) && !powerUp.isCollected()) {
-        powerUp.setCollected(true);
-        applySpeedPowerUp(powerUp.getSpeedBoostAmount(), powerUp.getDurationFrames());
-    }
-}
+
+
 
 
     // based on player's current state, call appropriate player state handling
@@ -237,11 +248,52 @@ public void checkSpeedPowerUpCollision(SpeedPowerUp powerUp) {
 
                 }
                     break;
-                case SHOOTING:
-                playerShooting();
+                
+                
+                default:
+if (isJumpAttacking) {
+                    // Check if the jump attack animation has reached its last frame
+                    if (currentFrameIndex == getCurrentAnimation().length - 1) {
+                        // The jump attack animation has finished; return to the previous state
+                        playerState = previousPlayerState;
+                        isJumpAttacking = false;
+                    } else {
+                        // Continue updating the jump attack animation
+                        super.update();
 
+                        // Handle jump attacking logic here, e.g., check for collisions with enemies
+                        attackHitbox = currentFrame.getBounds();
+                        for (MapEntity entity : listOfMapEntities) {
+                            if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
+                                    entity.getBounds().intersects(attackHitbox)) {
+                                defeatEnemy(entity);
+                            }
+                        }
+                    }
+                }//just added
+
+                else if (currentFrameIndex == getCurrentAnimation().length - 1) {
+                    // Attack animation is finished; transition back to another state.
+                    playerState = PlayerState.STANDING; // You can choose a different state.
+                } else {
+                    // Continue playing the attack animation.
+                    super.update();
+                    attackHitbox = currentFrame.getBounds();
+                    for (MapEntity entity : listOfMapEntities) {
+                        if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
+                                entity.getBounds().intersects(attackHitbox)) {
+                            // Handle damaging the enemy
+                            defeatEnemy(entity); // Call a method to defeat the enemy
+                        }
+                    }
+
+                }
+                if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(ATTACK_KEY )) {// may have to make SHOOT_KEY
+                    keyLocker.lockKey(ATTACK_KEY);// may have to make SHOOT_KEY
+                    playerState = PlayerState.SHOOTING;
+                }
+    
                 break;
-
         }
     }
    
@@ -279,9 +331,7 @@ System.out.println("hello they are atttacking now, outside the statment");
                  System.out.println("hello they are atttacking now");
                  attack();//just added
             }
-           else if (MaxInLevel >= 2){
-            isShooting = true;
-           }
+           
 
         }
     }
@@ -326,10 +376,11 @@ System.out.println("hello they are atttacking now, outside the statment");
             // Notify active enemies about the attack
             for (Enemy enemy : activeEnemies) {
                 if (((AnimatedSprite) attackHitbox).intersects(enemy.getBounds())) {
-
+defeatEnemy(enemy);//besa added
                 }
             }
         }
+        playerState = PlayerState.ATTACKING;//added 
     }
 
     // player WALKING state logic
@@ -515,8 +566,12 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
             // Handle any logic related to attacking here, e.g., damaging enemies
             // Check for collisions with enemies and apply damage as needed
             super.update();
-            attackHitbox = currentFrame.getBounds();
-
+            attackHitbox = currentFrame.getBounds();//BESA HAL
+// Additional logic for shooting in Level 1
+        if (MaxInLevel == 1 && Keyboard.isKeyDown(SHOOT_KEY) && !keyLocker.isKeyLocked(SHOOT_KEY)) {
+            keyLocker.lockKey(SHOOT_KEY);
+            playerShooting();
+        }
             for (Enemy entity : map.getActiveEnemies()) {
                 if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
                         entity.getBounds().intersects(attackHitbox)) {
@@ -526,19 +581,13 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
 
                 }
             }
-
-            // Ensure the attack animation continues to update
-            // super.update();
-        }
-    }
-    protected void playerShooting(){ // add the logic for shooting 
-        if(MaxInLevel ==2){
+  if(MaxInLevel ==1){
         currentAnimationName = (facingDirection == Direction.RIGHT) ? "SHOOT_RIGHT" : "SHOOT_LEFT";
 
         int bulletx;
         float speedmovebull;
         
-        if(facingDirection == Direction.RIGHT){
+        if(facingDirection == Direction.RIGHT  ){//||facingDirection == Direction.LEFT 
             //edit code so bullet flies when k is pressed
             bulletx = Math.round(getX()+ getWidth());
             speedmovebull = 1.5f;
@@ -551,8 +600,47 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
         int bulletY = Math.round(getY() +90);
         MaxBullet bullet = new MaxBullet(getLocation(), speedmovebull, bulletY, facingDirection);
         map.addEnemy(bullet);
-            }
+          //just added  
+        if (currentFrameIndex == getCurrentAnimation().length - 1) {
+            // Shooting animation is finished; transition back to another state.
+            playerState = PlayerState.STANDING; // You can choose a different state.
+        } else {
+            // Continue playing the shooting animation.
+            super.update();
+        }
     }
+            // Ensure the attack animation continues to update
+            // super.update();
+        }
+    }
+    protected void playerShooting(){ // add the logic for shooting 
+        currentAnimationName = (facingDirection == Direction.RIGHT) ? "SHOOT_RIGHT" : "SHOOT_LEFT";
+
+    int bulletx;
+    float speedmovebull;
+
+    if (facingDirection == Direction.RIGHT) {
+        bulletx = Math.round(getX() + getWidth());
+        speedmovebull = 1.5f;
+    } else {
+        bulletx = Math.round(getX() - 21);
+        speedmovebull = -1.5f;
+    }
+
+    int bulletY = Math.round(getY() + 90);
+    MaxBullet bullet = new MaxBullet(new Point(bulletx, bulletY), speedmovebull, bulletY, facingDirection);
+    map.addEnemy(bullet);
+
+    if (currentFrameIndex == getCurrentAnimation().length - 1) {
+        // Shooting animation is finished; transition back to another state.
+        playerState = PlayerState.STANDING; // You can choose a different state.
+    } else {
+        // Continue playing the shooting animation.
+        super.update();
+    }
+    }
+
+   // }
 
     // while player is in air, this is called, and will increase momentumY by a set
     // amount until player reaches terminal velocity
@@ -598,7 +686,7 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
                 this.currentAnimationName = facingDirection == Direction.RIGHT ? "FALL_RIGHT" : "FALL_LEFT";
             }
 
-        } else if (playerState == PlayerState.ATTACKING) {
+        }  if (playerState == PlayerState.ATTACKING) {// got rid of else
             // Set the animation to the attack animation based on the facing direction
             this.currentAnimationName = (facingDirection == Direction.RIGHT) ? "ATTACK_RIGHT" : "ATTACK_LEFT";
 
@@ -612,28 +700,19 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
                 super.update();
 
                 // Handle attacking logic here, e.g., check for collisions with enemies
-                // For simplicity, we'll assume enemies are GameObjects with hitboxes
-
+                
                 // Get the current frame's hitbox
                 Rectangle attackHitbox = currentFrame.getBounds();
 
                 for (MapEntity entity : listOfMapEntities) {
                     if (entity.getMapEntityStatus() == MapEntityStatus.ACTIVE &&
                             entity.getBounds().intersects(attackHitbox)) {
-                        // Handle damaging the enemy
-                        // MapEntity DogEnemy; //COME BACK TO ME LATER // FINISH THE HEALTH
-                        // listOfMapEntities.add(DogEnemy);//COME BACK TO THIS!!!!!!!!!!!!
-                        // damageEnemy(entity); //comeback later
+                        
                     }
                 }
             }
         }
-        /*
-         * //come back to thisq!!!!!!!!
-         * DogEnemy dogEnemy = new DogEnemy("GuardDog2.png", 24, 15,
-         * startingAnimationName, 10);
-         * player.addActiveEnemy(dogEnemy);
-         */
+       
 
     }
 
@@ -824,10 +903,5 @@ playerAttacking();
                     playerShooting();
                 }
     }
-    //detects bullet interactions
-    public interface BulletInteractable {// for when bullet interacts with objects
-        void onInteract(MapEntity entity);
-        void onInteract(Player player);
-    }   
-
+    
 }

@@ -452,7 +452,7 @@ public void initialize2() {
         if (playLevelScreenState != PlayLevelScreenState.LEVEL_COMPLETED) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
             levelCompletedStateChangeStart = true;
-            player.setMaxInLevel();//just added //besa 
+            Player.setMaxInLevel();//just added //besa 
             
             Max.setMaxInLevel(); // Call this method to update the maximum instances of Max //will increase by 1 when called
            

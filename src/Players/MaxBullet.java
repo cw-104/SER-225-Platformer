@@ -15,17 +15,17 @@ import java.util.HashMap;
 //use the fireball as reference
 // look at the dino code for reference 
 //possibly usefibeball
-public class MaxBullet extends Enemy implements BulletInteractable{
+public class MaxBullet extends Enemy {
     private float movementSpeed;
     private int existenceFrames;
 
     public MaxBullet(Point location, float movementSpeed, int existenceFrames, Direction direction) {
-        super( location.x, location.y, new SpriteSheet(ImageLoader.load("bullet.png"), 31, 11), "DEFAULT");
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load("Fireball.png"), 7, 7), "DEFAULT");
         this.movementSpeed = movementSpeed;
         this.existenceFrames = existenceFrames;
 
         // Set the initial direction
-       // setFacingDirection(direction);
+       setFacingDirection(direction);
 
         // Load animations
        
@@ -52,10 +52,7 @@ public class MaxBullet extends Enemy implements BulletInteractable{
     }
 
     //private void setMapEntityStatus(MapEntityStatus removed) {}
-
-    public Direction getFacingDirection() {
-        return getFacingDirection();
-    }
+  
     
 
     @Override
@@ -105,18 +102,15 @@ public interface BulletInteractable {
 /**/
 
 
-
-    @Override
+@Override
     public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
-        return new HashMap<String, Frame[]>() {
-            {
-                put("DEFAULT", new Frame[]{
-                        new FrameBuilder(spriteSheet.getSprite(0, 0))
-                                .withScale(3)
-                                .withBounds(1, 1, 5, 5)
-                                .build()
-                });
-            }
-        };
+        return new HashMap<String, Frame[]>() {{
+            put("DEFAULT", new Frame[]{
+                    new FrameBuilder(spriteSheet.getSprite(0, 0))
+                            .withScale(3)
+                            .withBounds(1, 1, 5, 5)
+                            .build()
+            });
+        }};
     }
 }
