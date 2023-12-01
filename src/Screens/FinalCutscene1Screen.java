@@ -4,6 +4,7 @@ import Engine.*;
 import Level.Map;
 import Level.Player;
 import Maps.CutsceneLev3Map;
+import Maps.FinalCutsceneMap;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
@@ -25,7 +26,7 @@ public class FinalCutscene1Screen extends Screen {
 
     @Override
     public void initialize() {
-        background = new CutsceneLev3Map();
+        background = new FinalCutsceneMap();
         background.setAdjustCamera(false);
         narration = new SpriteFont("Greetings, [currentSubject.getID]! You have\ncompleted three trials in search of the \"end\"\nPlease, pay no mind to any faintness or dizziness.", 175, 22, "Helvetica Bold", 22, Color.white);
         prompt = new SpriteFont("Press SPACE to continue...", 490, 130, "Comic Sans", 15, Color.white);
