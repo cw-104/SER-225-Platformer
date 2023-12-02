@@ -17,15 +17,16 @@ import java.util.HashMap;
 // This is the class for the max player character
 // basically just sets some values for physics and then defines animations
 public class Max extends Player {
-private int currentLevel;
-private int MaxInLevel =0;
-        public Max(float x, float y){
-                super(new SpriteSheet(ImageLoader.load("Max19.png"), 50, 50), x, y, "STAND_RIGHT");
+        private int cooldown = 5;// cool down int
+        private static int MaxInLevel;
+
+        public Max(float x, float y, int currentLevel) {//added current level//may have to take out 
+                super(new SpriteSheet(ImageLoader.load("Max21.png"), 50, 50), x, y, "STAND_RIGHT", currentLevel);
                 gravity = .5f;
                 terminalVelocityY = 6f;
                 jumpHeight = 16.5f;
                 jumpDegrade = .5f;
-                walkSpeed = 7.5f; 
+                walkSpeed = 7.5f;
                 momentumYIncrease = .5f;
                 MaxInLevel = 0; // Initialize MaxInLevel to 0 //has max change in the next level // "Max.setMaxInLevel();" is called in level complete to increase
         }
@@ -172,7 +173,6 @@ private int MaxInLevel =0;
                                                                 .build()
                                 });
 
-                               
                                 put("DEATH_LEFT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
                                                                 .withScale(3)

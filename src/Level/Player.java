@@ -11,11 +11,8 @@ import GameObject.SpriteSheet;
 import Players.MaxBullet;
 import Utils.AirGroundState;
 import Utils.Direction;
-<<<<<<< HEAD
-import Utils.Point;
-=======
 import Utils.GameContext;
->>>>>>> 93d30d8a84a7ce05a21d6bec5cc4cd07f44ef7f8
+import Utils.Point;
 
 import java.util.ArrayList;
 
@@ -33,16 +30,13 @@ public abstract class Player extends GameObject {
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
     int lives = 3;
-<<<<<<< HEAD
     
     private int currentLevel = 1; // Default level is 1// used to determine which level max/ player is in 
-=======
    
     private float speedMultiplier = 1.0f;
     
     protected boolean hasShield = false;
 
->>>>>>> 93d30d8a84a7ce05a21d6bec5cc4cd07f44ef7f8
     // coin
     protected int coins;
     private int cooldown = 5;// cool down int
@@ -68,47 +62,6 @@ public abstract class Player extends GameObject {
     public void setCoins(int value) {
         coins = value;
     }
-    public void activateShield() {
-        GameContext.setPlayerHasShield(true);
-    }
-    
-    public void deactivateShield() {
-        GameContext.setPlayerHasShield(false);
-    }
-    
-    public boolean hasShield() {
-        return GameContext.playerHasShield();
-    }
-
-    public void increaseSpeed(float multiplier) {
-        this.speedMultiplier *= multiplier;
-        this.walkSpeed *= this.speedMultiplier; // Update walkSpeed based on the new multiplier
-    }
-    
-    public void setWalkSpeed(float newSpeed) {
-        this.walkSpeed = newSpeed;
-    }
-    
-    public float getWalkSpeed() {
-        return this.walkSpeed;
-    }
-        // New method to set the speed multiplier
-        public void setSpeedMultiplier(float multiplier) {
-            this.speedMultiplier = multiplier;
-        }
-    
-        // New method to get the speed multiplier
-        public float getSpeedMultiplier() {
-            return this.speedMultiplier;
-        }
-
-    
-    
-    
-    public void touchedEnemy(Enemy enemy) {
-        defeatEnemy(enemy);
-    }
-       
 
     // values used to handle player movement
     protected float jumpForce = 0;
@@ -185,10 +138,11 @@ private boolean isJumpAttacking = false;// besa +atatck jump
 
             updateLockedKeys();
 
+            
             if (speedPowerUp != null) {
                 speedPowerUp.update();
                 if (speedPowerUp.isCollected()) {
-                    speedPowerUp.applyPowerUp(this);
+                   // speedPowerUp.applyPowerUp(this);
                     speedPowerUp = null; // Speed power-up used, set it to null
                 }
             }
@@ -235,14 +189,9 @@ cooldown = 30; // for cool-down testing
         moveAmountY += gravity + momentumY;
     }
 
-<<<<<<< HEAD
-
-
-=======
     // protected void applyPowerUp() {
 
     // }
->>>>>>> 93d30d8a84a7ce05a21d6bec5cc4cd07f44ef7f8
 
     // based on player's current state, call appropriate player state handling
     // method
@@ -417,16 +366,13 @@ System.out.println("hello they are atttacking now, outside the statment");
 
     /* */// A subclass can override this method to specify what it does when it touches
          // the enemy
-<<<<<<< HEAD
     public void touchedEnemy(Enemy enemy) {
        
         System.out.println("i'm working");
         // enemy.hurtEnemy(this); //come back to this later //BESA
         defeatEnemy(enemy);
     }
-=======
 
->>>>>>> 93d30d8a84a7ce05a21d6bec5cc4cd07f44ef7f8
 
     public void attack() {
         if (!isAttacking) {
