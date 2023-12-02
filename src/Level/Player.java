@@ -789,6 +789,9 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
     }
     
 
+    private void deactivateShield() {
+    }
+
     // other entities can call this to tell the player they beat a level
     public void completeLevel() {
         levelState = LevelState.LEVEL_COMPLETED;
@@ -919,6 +922,23 @@ playerAttacking();
                     else if (isShooting =true){
                     playerShooting();
                 }
+    }
+
+    public Object getSpeedMultiplier() {
+        return null;
+    }
+
+    public void setSpeedMultiplier(Object speedMultiplier2) {
+    }
+
+    public boolean hasShield() {
+        return false;
+    }
+
+    public void increaseSpeed(float f) {
+    }
+
+    public void activateShield() {
     }
     
 }
