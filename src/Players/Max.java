@@ -20,7 +20,7 @@ public class Max extends Player {
         private static int MaxInLevel;
 
         public Max(float x, float y, int currentLevel) {
-                super(new SpriteSheet(ImageLoader.load("Max21.png"), 50, 50), x, y, "STAND_RIGHT");
+                super(new SpriteSheet(ImageLoader.load("Max22.png"), 50, 50), x, y, "STAND_RIGHT");
                 gravity = .5f;
                 terminalVelocityY = 6f;
                 jumpHeight = 16.5f;
