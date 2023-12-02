@@ -132,7 +132,7 @@ public abstract class Player extends GameObject {
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
         playerState = PlayerState.STANDING;
-//playerState = PlayerState.ATTACKING;// testing attack jump // besa//135//levelme
+
         previousPlayerState = playerState;
         levelState = LevelState.RUNNING;
     }
