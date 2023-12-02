@@ -132,7 +132,7 @@ public abstract class Player extends GameObject {
         airGroundState = AirGroundState.AIR;
         previousAirGroundState = airGroundState;
         playerState = PlayerState.STANDING;
-
+//playerState = PlayerState.ATTACKING;// testing attack jump // besa//135//levelme
         previousPlayerState = playerState;
         levelState = LevelState.RUNNING;
     }
@@ -430,7 +430,7 @@ protected void playerWalking() {
             // Check if the player is attacking while jumping
             if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(ATTACK_KEY)) {
                 keyLocker.lockKey(ATTACK_KEY);
-                isJumpAttacking = true;
+                isJumpAttacking = true;//besa //halle
                 currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_ATTACK_RIGHT" : "JUMP_ATTACK_LEFT";
 
                 // player is set to be in air and then player is sent into the air
