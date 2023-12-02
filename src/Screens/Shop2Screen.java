@@ -3,13 +3,13 @@ package Screens;
 import Engine.*;
 import Game.ScreenCoordinator;
 import Level.Map;
-import Maps.ShopScreenMap;
+import Maps.Shop2ScreenMap;
 import SpriteFont.SpriteFont;
 import Level.Player;
 import java.awt.*;
 
 // This is the class for the shop screen
-public class ShopScreen extends Screen {
+public class Shop2Screen extends Screen {
     protected ScreenCoordinator screenCoordinator;
     protected int currentMenuItemHovered = 0; // current menu item being "hovered" over
     protected int menuItemSelected = -1;
@@ -20,9 +20,9 @@ public class ShopScreen extends Screen {
     protected SpriteFont healthUp;
     protected SpriteFont healthUpText;
     protected boolean healthUpPurchased;
-    protected SpriteFont item3;
-    protected SpriteFont item4;
-    protected SpriteFont emptyText;
+    protected SpriteFont shield;
+    protected SpriteFont shieldText;
+    protected boolean shieldPurchased;
     protected SpriteFont exitText;
     protected SpriteFont purchasedText;
     protected SpriteFont coinCount;
@@ -34,12 +34,11 @@ public class ShopScreen extends Screen {
     protected KeyLocker keyLocker = new KeyLocker();
     protected Player player;
     protected PlayLevelScreen playLevelScreen;
-    protected SpriteFont shieldUp;
-    protected boolean shieldUpPurchased;
+    
 
 
 
-    public ShopScreen(PlayLevelScreen playLevelScreen) {
+    public Shop2Screen(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
         initialize();
     }
@@ -50,38 +49,38 @@ public class ShopScreen extends Screen {
         //player for access coin count
         this.player = playLevelScreen.player;
         //text and icons for shop items
-        speedUp = new SpriteFont("Speed up (30)", 72, 280, "Comic Sans", 25, new Color(0, 0, 0));
+        speedUp = new SpriteFont("Speed up (30)", 97, 280, "Comic Sans", 25, new Color(0, 0, 0));
         speedUp.setOutlineColor(Color.black);
         speedUp.setOutlineThickness(3);
 
-        healthUp = new SpriteFont("Health up (20)", 280, 280, "Comic Sans", 25, new Color(0, 0, 0));
+        healthUp = new SpriteFont("Health up (20)", 310, 280, "Comic Sans", 25, new Color(0, 0, 0));
         healthUp.setOutlineColor(Color.black);
         healthUp.setOutlineThickness(3);
         //marks if item is purchased so  prevents doubles
         speedUpPurchased = false;
         healthUpPurchased = false;
         //items not yet in shop
-        item3 = new SpriteFont("Coming Soon", 500, 280, "Comic Sans", 25, new Color(0, 0, 0));
-        item3.setOutlineColor(Color.black);
-        item3.setOutlineThickness(3);
+        shield = new SpriteFont("Shield (25)", 533, 280, "Comic Sans", 25, new Color(0, 0, 0));
+        shield.setOutlineColor(Color.black);
+        shield.setOutlineThickness(3);
         //leave screen text
-        exit = new SpriteFont("Leave", 680, 300, "Comic Sans", 25, new Color(0, 0, 0));
+        exit = new SpriteFont("Leave", 675, 300, "Comic Sans", 25, new Color(0, 0, 0));
         exit.setOutlineColor(Color.black);
         exit.setOutlineThickness(3);
         //max's text about the item
         speedUpText = new SpriteFont("\"Energy drink.\" Why is that in quotations?\n[Increases Speed]", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
-        healthUpText = new SpriteFont("\"Health drink.\" That's not suspicious at all\n[+1 Life]", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
-        emptyText = new SpriteFont("Coming soon to a vending machine near you.\nI guess.", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
+        healthUpText = new SpriteFont("\"Health drink.\" That's not suspicious at all.\n[+1 Life]", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
+        shieldText = new SpriteFont("\"Protective drink.\" This is going to give me\nradiation poisoning isn't it?\n[+1 Shield]", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         exitText = new SpriteFont("I don't want anything.", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
-        purchasedText = new SpriteFont("I guess this is mine now", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
+        purchasedText = new SpriteFont("I guess this is mine now.", 180, 400, "Comic Sans", 25, new Color(255, 255, 255));
         speedUpText.setOutlineColor(Color.black);
         speedUpText.setOutlineThickness(3);
-        notEnough = new SpriteFont("Don't have enough coins", 180, 400, "Comic Sans", 25, new Color(255,255,255));
+        notEnough = new SpriteFont("Don't have enough coins.", 180, 400, "Comic Sans", 25, new Color(255,255,255));
         //coint counter in the shop
         coins = player.getCoins();
         coinCount = new SpriteFont(("Coins: " + coins), 20, 20, "Comic Sans", 30, new Color(0,0,0));
 
-        background = new ShopScreenMap();
+        background = new Shop2ScreenMap();
         background.setAdjustCamera(false);
         keyPressTimer = 0;
         menuItemSelected = -1;
@@ -124,7 +123,7 @@ public class ShopScreen extends Screen {
             }
             exit.setColor(new Color(0, 0, 0));
             healthUp.setColor(new Color(0,0,0));
-            item3.setColor(new Color(0,0,0));
+            shield.setColor(new Color(0,0,0));
             pointerLocationX = 470;
             pointerLocationY = 130;
         } else if (currentMenuItemHovered == 1) {
@@ -135,19 +134,24 @@ public class ShopScreen extends Screen {
             else {
                 healthUp.setColor(new Color (255, 0, 0));
             }
-            item3.setColor(new Color(0,0,0));
+            shield.setColor(new Color(0,0,0));
             exit.setColor(new Color(0, 0, 0));
             pointerLocationX = 470;
             pointerLocationY = 230;
         } else if (currentMenuItemHovered == 2) {
             speedUp.setColor(new Color(0,0,0));
             healthUp.setColor(new Color(0,0,0));
-            item3.setColor(new Color(255,255,255));
+            if(shieldPurchased == false) {
+            shield.setColor(new Color(255, 255, 255));
+            }
+            else {
+                shield.setColor(new Color (255, 0, 0));
+            }
             exit.setColor(new Color(0, 0, 0));
         } else if (currentMenuItemHovered == 3) {
             speedUp.setColor(new Color(0,0,0));
             healthUp.setColor(new Color(0,0,0));
-            item3.setColor(new Color(0,0,0));
+            shield.setColor(new Color(0,0,0));
             exit.setColor(new Color(255,255,255));
         }
 
@@ -164,14 +168,13 @@ public class ShopScreen extends Screen {
                     player.increaseSpeed(2.2f); // Increase speed
                     speedUpPurchased = true;
                 }
-            
-            
                   
                 //check for correct amt coins
                 //remove coins
                 //apply effect
                 //mark purchased
-                
+
+               
                
                 // Inside ShopScreen.java
 
@@ -181,24 +184,30 @@ public class ShopScreen extends Screen {
                         this.player.removeCoins(costOfExtraLife); 
                         this.player.addExtraLife(); 
                         this.healthUpPurchased = true;
-                    }
+                    }            
 
                 }
-            else if (menuItemSelected == 2) {
-                
-            }
+                else if (menuItemSelected == 2) {
+                    int costOfShield = 25;
+                    if (this.player.getCoins() >= costOfShield && !this.shieldPurchased) {
+                        this.player.removeCoins(costOfShield);
+                        this.player.activateShield(); // Activate shield
+                        this.shieldPurchased = true;
+                    }
+                }
+
+
             } else if (menuItemSelected == 3) {
-                //when level 2 exists this should send there - menu is temp
-                playLevelScreen.setPlayer(this.player);
-                playLevelScreen.goToCutscene(player);
+                playLevelScreen.goToCutscene2(player);
             }
         }
     
+
     public void draw(GraphicsHandler graphicsHandler) {
         background.draw(graphicsHandler);
         speedUp.draw(graphicsHandler);
         healthUp.draw(graphicsHandler);
-        item3.draw(graphicsHandler);
+        shield.draw(graphicsHandler);
         //item4.draw(graphicsHandler);
         exit.draw(graphicsHandler);
         coinCount.draw(graphicsHandler);
@@ -235,7 +244,19 @@ public class ShopScreen extends Screen {
             }
         }
         else if(menuItemSelected == 2) {
-            emptyText.drawWithParsedNewLines(graphicsHandler, 2);
+            //message when not enough coins
+            if(this.player.getCoins() < 25 && shieldPurchased == false) {
+                notEnough.draw(graphicsHandler);
+            }
+            //description of item
+            else if(this.player.getCoins() >= 25 && shieldPurchased == false) {
+                shieldText.drawWithParsedNewLines(graphicsHandler, 2);
+            }
+            //purchased text
+            else if(shieldPurchased == true) {
+                purchasedText.draw(graphicsHandler);
+            }
+            
         }
         else if(menuItemSelected == 3) {
             exitText.draw(graphicsHandler);

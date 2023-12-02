@@ -3,7 +3,7 @@ package Screens;
 import Engine.*;
 import Level.Map;
 import Level.Player;
-import Maps.BunkerHallMap;
+import Maps.CutsceneLev3Map;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
@@ -25,9 +25,9 @@ public class CutsceneLev3Screen extends Screen {
 
     @Override
     public void initialize() {
-        background = new BunkerHallMap(); //to change
+        background = new CutsceneLev3Map();
         background.setAdjustCamera(false);
-        narration = new SpriteFont("Congratulations, [currentSubject.getID]! Enjoy\n this prize for your achievement [gun]. Proceed\nonwards and upwards! A new new reality awaits!", 175, 22, "Helvetica Bold", 22, Color.white);
+        narration = new SpriteFont("Congratulations, [currentSubject.getID]! Proceed\nonwards and upwards! A new new reality awaits!", 175, 22, "Helvetica Bold", 22, Color.white);
         prompt = new SpriteFont("Press SPACE to continue...", 490, 130, "Comic Sans", 15, Color.white);
         keyPressTimer = 0;
         keyLocker.lockKey(Key.SPACE);
@@ -44,7 +44,7 @@ public class CutsceneLev3Screen extends Screen {
             keyLocker.unlockKey(Key.SPACE);
         }
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
-            playLevelScreen.level2();
+            playLevelScreen.goToCutscene2_1(player);
            
         }
     }

@@ -25,7 +25,7 @@ public class Max extends Player {
                 terminalVelocityY = 6f;
                 jumpHeight = 16.5f;
                 jumpDegrade = .5f;
-                walkSpeed = 7.5f;
+                walkSpeed = 7.5f; 
                 momentumYIncrease = .5f;
                 MaxInLevel = 0; // Initialize MaxInLevel to 0 //has max change in the next level // "Max.setMaxInLevel();" is called in level complete to increase
         }
@@ -161,6 +161,7 @@ public class Max extends Player {
                                                                 .build()
                                 });
 
+                               
                                 put("DEATH_LEFT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
                                                                 .withScale(3)
