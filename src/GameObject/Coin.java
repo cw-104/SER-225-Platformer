@@ -43,6 +43,7 @@ public class Coin extends MapEntity {
     public int totalCoins(Player player) {
         return player.getCoins();
     }
+    
 
     @Override
     public void draw(GraphicsHandler graphicsHandler) {

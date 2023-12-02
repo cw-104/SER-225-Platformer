@@ -31,10 +31,7 @@ public class SpeedPowerUp  extends MapEntity{
     
         
 
-    public void applyPowerUp(Player player) {
-       player.applySpeedPowerUp(20, 5);//just changed // besa
-      //may need to change this file
-    }
+    
 
 
 

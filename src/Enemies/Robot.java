@@ -13,18 +13,17 @@ import Utils.AirGroundState;
 import Utils.Direction;
 import Utils.Point;
 import java.awt.Color;
-
 import java.util.HashMap;
 
-public class DogEnemyLevel2 extends Enemy {
-    private float gravity = 5f;
-    private float movementSpeed = 2f;
+public class Robot extends Enemy {
+    private float gravity = 8f;
+    private float movementSpeed = 8f;
     private Direction startFacingDirection;
     private Direction facingDirection;
     private AirGroundState airGroundState;
 
-    public DogEnemyLevel2(Point location, Direction facingDirection) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("GuardDog2.png"), 24, 15
+    public Robot(Point location, Direction facingDirection) {
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load("Robot.png"),50, 50
         ), "WALK_LEFT");
         this.startFacingDirection = facingDirection;
         this.initialize();
@@ -40,10 +39,10 @@ public class DogEnemyLevel2 extends Enemy {
         }
         airGroundState = AirGroundState.GROUND;
     }
-public void draw(GraphicsHandler graphicsHandler) {
-        super.draw(graphicsHandler);
-      // drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
-    }
+    public void draw(GraphicsHandler graphicsHandler) {
+     super.draw(graphicsHandler);
+      //drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
+      }
     @Override
     public void update(Player player) {
         float moveAmountX = 0;
@@ -110,28 +109,46 @@ public void draw(GraphicsHandler graphicsHandler) {
         return new HashMap<String, Frame[]>() {{
             put("WALK_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0), 8)
-                            .withScale(3)
-                            .withBounds(0, 0, 24, 15)
+                            .withScale(2)
+                            .withBounds(6, 6, 50, 40)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 1), 8)
-                            .withScale(3)
-                            .withBounds(0, 0, 24, 15)
+                            .withScale(2)
+                            .withBounds(6, 6, 50, 40)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(0, 2), 8)
+                            .withScale(2)
+                            .withBounds(6, 6, 50, 40)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(0, 3), 8)
+                            .withScale(2)
+                            .withBounds(6, 6, 50, 40)
                             .build()
-            });
+  });
 
             put("WALK_RIGHT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0), 8)
-                            .withScale(3)
+                            .withScale(2)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(0, 0, 24, 15)
+                            .withBounds(6, 6, 50,40)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 1), 8)
-                            .withScale(3)
+                            .withScale(2)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                            .withBounds(0, 0, 24, 15)
+                            .withBounds(6, 6, 50, 40)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(0, 2), 8)
+                            .withScale(2)
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .withBounds(6, 6, 50, 40)
+                            .build(),
+                    new FrameBuilder(spriteSheet.getSprite(0, 3), 8)
+                            .withScale(2)
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .withBounds(6, 6, 50 , 40)
                             .build()
+
             });
         }};
     }
 }
-

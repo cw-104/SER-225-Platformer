@@ -242,7 +242,7 @@ public class Max extends Player {
 // checking to see if max is in another level 
 
 //Repeat this process for the next level but change it to 2 (for level 3). //LOOK AT ME!! CHANGES MAX SPRITE FOR THE LEVEL  
-if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it worked and it did 
+if (MaxInLevel == 2) { //was originally > 2 // changed it to 0 to see if it worked and it did 
         setMaxInLevel();
         // Change the attack animations based on the player's/ Max's level
         put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe

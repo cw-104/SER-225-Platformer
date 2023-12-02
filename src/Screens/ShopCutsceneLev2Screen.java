@@ -3,13 +3,13 @@ package Screens;
 import Engine.*;
 import Level.Map;
 import Level.Player;
-import Maps.CutsceneLev3Map;
+import Maps.ShopCutsceneLev2Map;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
 
-// This is the class for the main menu screen
-public class CutsceneLev3Screen extends Screen {
+// This is the class for the second shop cutscene
+public class ShopCutsceneLev2Screen extends Screen {
     protected SpriteFont narration;
     protected SpriteFont prompt;
     protected Map background;
@@ -18,16 +18,16 @@ public class CutsceneLev3Screen extends Screen {
     protected int keyPressTimer;
     protected KeyLocker keyLocker = new KeyLocker();
 
-     public CutsceneLev3Screen(PlayLevelScreen playLevelScreen) {
+     public ShopCutsceneLev2Screen(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
         initialize();
     }
 
     @Override
     public void initialize() {
-        background = new CutsceneLev3Map();
+        background = new ShopCutsceneLev2Map();
         background.setAdjustCamera(false);
-        narration = new SpriteFont("Congratulations, [currentSubject.getID]! Enjoy\n this prize for your achievement [gun]. Proceed\nonwards and upwards! A new new reality awaits!", 175, 22, "Helvetica Bold", 22, Color.white);
+        narration = new SpriteFont("Why is it blue now?", 175, 22, "Helvetica Bold", 22, Color.white);
         prompt = new SpriteFont("Press SPACE to continue...", 490, 130, "Comic Sans", 15, Color.white);
         keyPressTimer = 0;
         keyLocker.lockKey(Key.SPACE);
@@ -44,7 +44,7 @@ public class CutsceneLev3Screen extends Screen {
             keyLocker.unlockKey(Key.SPACE);
         }
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
-            playLevelScreen.goToCutscene2_1(player);
+            playLevelScreen.goToShop2(player);
            
         }
     }
@@ -55,7 +55,6 @@ public class CutsceneLev3Screen extends Screen {
         prompt.draw(graphicsHandler);
     }
 }
-
 
 
 
