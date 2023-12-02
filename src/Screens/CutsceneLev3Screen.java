@@ -27,7 +27,7 @@ public class CutsceneLev3Screen extends Screen {
     public void initialize() {
         background = new CutsceneLev3Map();
         background.setAdjustCamera(false);
-        narration = new SpriteFont("Congratulations, [currentSubject.getID]! Enjoy\n this prize for your achievement [gun]. Proceed\nonwards and upwards! A new new reality awaits!", 175, 22, "Helvetica Bold", 22, Color.white);
+        narration = new SpriteFont("Congratulations, [currentSubject.getID]! Proceed\nonwards and upwards! A new new reality awaits!", 175, 22, "Helvetica Bold", 22, Color.white);
         prompt = new SpriteFont("Press SPACE to continue...", 490, 130, "Comic Sans", 15, Color.white);
         keyPressTimer = 0;
         keyLocker.lockKey(Key.SPACE);

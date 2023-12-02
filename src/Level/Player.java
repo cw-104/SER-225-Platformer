@@ -11,7 +11,11 @@ import GameObject.SpriteSheet;
 import Players.MaxBullet;
 import Utils.AirGroundState;
 import Utils.Direction;
+<<<<<<< HEAD
 import Utils.Point;
+=======
+import Utils.GameContext;
+>>>>>>> 93d30d8a84a7ce05a21d6bec5cc4cd07f44ef7f8
 
 import java.util.ArrayList;
 
@@ -29,8 +33,16 @@ public abstract class Player extends GameObject {
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
     int lives = 3;
+<<<<<<< HEAD
     
     private int currentLevel = 1; // Default level is 1// used to determine which level max/ player is in 
+=======
+   
+    private float speedMultiplier = 1.0f;
+    
+    protected boolean hasShield = false;
+
+>>>>>>> 93d30d8a84a7ce05a21d6bec5cc4cd07f44ef7f8
     // coin
     protected int coins;
     private int cooldown = 5;// cool down int
@@ -52,9 +64,51 @@ public abstract class Player extends GameObject {
     public void resetCoins() {
         coins = 0;
     }
+
     public void setCoins(int value) {
         coins = value;
     }
+    public void activateShield() {
+        GameContext.setPlayerHasShield(true);
+    }
+    
+    public void deactivateShield() {
+        GameContext.setPlayerHasShield(false);
+    }
+    
+    public boolean hasShield() {
+        return GameContext.playerHasShield();
+    }
+
+    public void increaseSpeed(float multiplier) {
+        this.speedMultiplier *= multiplier;
+        this.walkSpeed *= this.speedMultiplier; // Update walkSpeed based on the new multiplier
+    }
+    
+    public void setWalkSpeed(float newSpeed) {
+        this.walkSpeed = newSpeed;
+    }
+    
+    public float getWalkSpeed() {
+        return this.walkSpeed;
+    }
+        // New method to set the speed multiplier
+        public void setSpeedMultiplier(float multiplier) {
+            this.speedMultiplier = multiplier;
+        }
+    
+        // New method to get the speed multiplier
+        public float getSpeedMultiplier() {
+            return this.speedMultiplier;
+        }
+
+    
+    
+    
+    public void touchedEnemy(Enemy enemy) {
+        defeatEnemy(enemy);
+    }
+       
 
     // values used to handle player movement
     protected float jumpForce = 0;
@@ -72,7 +126,7 @@ public abstract class Player extends GameObject {
 
     // classes that listen to player events can be added to this list
     protected ArrayList<PlayerListener> listeners = new ArrayList<>();
-
+ 
     // define keys
     protected KeyLocker keyLocker = new KeyLocker();
     protected Key JUMP_KEY = Key.W;
@@ -114,8 +168,6 @@ private boolean isJumpAttacking = false;// besa +atatck jump
         if (levelState == LevelState.RUNNING) {
             applyGravity();
 
-            // update player's state and current actions, which includes things like
-            // determining how much it should move each frame and if its walking or jumping
             do {
                 previousPlayerState = playerState;
                 handlePlayerState();
@@ -183,8 +235,14 @@ cooldown = 30; // for cool-down testing
         moveAmountY += gravity + momentumY;
     }
 
+<<<<<<< HEAD
 
 
+=======
+    // protected void applyPowerUp() {
+
+    // }
+>>>>>>> 93d30d8a84a7ce05a21d6bec5cc4cd07f44ef7f8
 
     // based on player's current state, call appropriate player state handling
     // method
@@ -359,12 +417,16 @@ System.out.println("hello they are atttacking now, outside the statment");
 
     /* */// A subclass can override this method to specify what it does when it touches
          // the enemy
+<<<<<<< HEAD
     public void touchedEnemy(Enemy enemy) {
        
         System.out.println("i'm working");
         // enemy.hurtEnemy(this); //come back to this later //BESA
         defeatEnemy(enemy);
     }
+=======
+
+>>>>>>> 93d30d8a84a7ce05a21d6bec5cc4cd07f44ef7f8
 
     public void attack() {
         if (!isAttacking) {
@@ -383,33 +445,34 @@ defeatEnemy(enemy);//besa added
         playerState = PlayerState.ATTACKING;//added 
     }
 
-    // player WALKING state logic
-    protected void playerWalking() {
-        // if walk left key is pressed, move player to the left
-        if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
-            moveAmountX -= walkSpeed;
-            facingDirection = Direction.LEFT;
-        }
-
-        // if walk right key is pressed, move player to the right
-        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
-            moveAmountX += walkSpeed;
-            facingDirection = Direction.RIGHT;
-        } else if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY)) {
-            playerState = PlayerState.STANDING;
-        }
-
-        // if jump key is pressed, player enters JUMPING state
-        if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
-            keyLocker.lockKey(JUMP_KEY);
-            playerState = PlayerState.JUMPING;
-        }
-
-        // if crouch key is pressed,
-        else if (Keyboard.isKeyDown(CROUCH_KEY)) {
-            playerState = PlayerState.CROUCHING;
-        }
+protected void playerWalking() {
+    // if walk left key is pressed, move player to the left
+    if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
+        moveAmountX -= walkSpeed * speedMultiplier; // Apply speedMultiplier here
+        facingDirection = Direction.LEFT;
     }
+    
+    // if walk right key is pressed, move player to the right
+    else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
+        moveAmountX += walkSpeed * speedMultiplier; // And here
+        facingDirection = Direction.RIGHT;
+    } else if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY)) {
+        playerState = PlayerState.STANDING;
+    }
+
+    // if jump key is pressed, player enters JUMPING state
+    if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
+        keyLocker.lockKey(JUMP_KEY);
+        playerState = PlayerState.JUMPING;
+    }
+
+    // if crouch key is pressed,
+    else if (Keyboard.isKeyDown(CROUCH_KEY)) {
+        playerState = PlayerState.CROUCHING;
+    }
+}
+
+    
 
     // player CROUCHING state logic
     protected void playerCrouching() {
@@ -758,20 +821,27 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
         }
     }
 
+
+
     // other entities can call this method to hurt the player
     public void hurtPlayer(MapEntity mapEntity) {
         if (!isInvincible) {
-            if (lives > 0) {
+            if (GameContext.playerHasShield()) {
+                deactivateShield(); // Shield is used up
+            } 
+            else if(lives > 0 ) {
                 if (mapEntity instanceof Enemy) {
                     lives--; // Reduce the player's lives
-
+                }
+                
+                if (lives <= 0){
+                    levelState = LevelState.PLAYER_DEAD; // Set to dead if lives are lost
                 }
             }
-            if (lives <= 0) {
-                levelState = LevelState.PLAYER_DEAD; // Set to dead only if all lives are lost
-            }
+
         }
     }
+    
 
     // other entities can call this to tell the player they beat a level
     public void completeLevel() {
@@ -868,6 +938,7 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
     public void setLives(int lives) {
         this.lives = lives;
     }
+
     public void addExtraLife() {
         this.lives++; // Increment the player's lives by one
     }
