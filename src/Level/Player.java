@@ -70,7 +70,7 @@ public abstract class Player extends GameObject {
 
     public void increaseSpeed(float multiplier) {
         this.speedMultiplier *= multiplier;
-        this.walkSpeed *= this.speedMultiplier; // Update walkSpeed based on the new multiplier
+        this.walkSpeed += this.speedMultiplier; // Update walkSpeed based on the new multiplier
     }
     
     public void setWalkSpeed(float newSpeed) {
