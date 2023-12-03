@@ -123,7 +123,7 @@ public abstract class Player extends GameObject {
     protected Key ATTACK_KEY = Key.K;// testing button for swing attack annimation
 
     // flags
-    protected boolean isInvincible = true; // if true, player cannot be hurt by enemies (good for testing)
+    protected boolean isInvincible = false; // if true, player cannot be hurt by enemies (good for testing)
     protected boolean isAttacking = false;// when max is NOT attacking
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
@@ -144,7 +144,7 @@ public abstract class Player extends GameObject {
     private IntersectableRectangle attackHitbox;
     // for the enemy
 // Flag to track whether the player is currently performing a jump attack
-private boolean isJumpAttacking = false;// besa +atatck jump
+private boolean isJumpAttacking = false;// atatck jump
     public void update() {
         moveAmountX = 0;
         moveAmountY = 0;
@@ -329,7 +329,7 @@ private boolean isJumpAttacking = false;// besa +atatck jump
             isAttacking = true;
 
             // Define the attackHitbox based on the player's current position and dimensions
-            attackHitbox = new Rectangle(x, y, 12, 16); // 12 and 16 testvalues for attack hitbox//besa
+            attackHitbox = new Rectangle(x, y, 12, 16); // 12 and 16 testvalues for attack hitbox
 
             // Notify active enemies about the attack
             for (Enemy enemy : activeEnemies) {
@@ -451,7 +451,7 @@ protected void playerWalking() {
         else if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
             keyLocker.lockKey(ATTACK_KEY);
             playerState = PlayerState.ATTACKING;
-//besa
+//important
 currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP_LEFT";
 
             // player is set to be in air and then player is sent into the air
@@ -518,7 +518,7 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
             // The attack animation has finished; return to the previous state
             playerState = previousPlayerState;
            // playerState = PlayerState.STANDING; // may change
-           // isAttacking = false; //besa
+           // isAttacking = false; //not needed
 
         } else {
             // Handle any logic related to attacking here, e.g., damaging enemies
@@ -787,7 +787,7 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
     // Add a method to apply a speed power-up
 public void applySpeedPowerUp(float speedIncrease) {
     walkSpeed += speedIncrease;
-    // Example usage in  the game logic// player.applySpeedPowerUp(2.0f); // Increases walk speed by 2 units//besa
+    // Example usage in  the game logic// player.applySpeedPowerUp(2.0f); // Increases walk speed by 2 units//important
 }
 
     

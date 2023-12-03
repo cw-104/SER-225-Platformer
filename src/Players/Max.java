@@ -157,7 +157,7 @@ public class Max extends Player {
                                                 new FrameBuilder(spriteSheet.getSprite(5, 1), 8)
                                                                 .withScale(3)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(5, 2), -1)
+                                                new FrameBuilder(spriteSheet.getSprite(5, 0), -1)
                                                                 .withScale(3)
                                                                 .build()
                                 });
@@ -172,7 +172,7 @@ public class Max extends Player {
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(5, 2), -1)
+                                                new FrameBuilder(spriteSheet.getSprite(5, 0), -1)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .build()
@@ -233,7 +233,7 @@ public class Max extends Player {
 // checking to see if max is in another level 
 
 //Repeat this process for the next level but change it to 2 (for level 3). //LOOK AT ME!! CHANGES MAX SPRITE FOR THE LEVEL  
-if (MaxInLevel == 0) { //was originally > 2 // changed it to 0 to see if it worked and it did 
+if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it worked and it did 
         setMaxInLevel();
         // Change the attack animations based on the player's/ Max's level
         put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
