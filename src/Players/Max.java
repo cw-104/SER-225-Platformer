@@ -273,7 +273,7 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
 }                                   // sprites for level 3 will go here // for testing purposes change 2 to 1 or 0 to see if the sprite work[if level 3 test map is not ready]
                                         if (MaxInLevel == 2) { //was originally > 2 // changed it to 0 to see if it worked and it did 
                                                // setMaxInLevel();
-                                            //   System.out.println("MaxInLevel for this level is  " + MaxInLevel); // for testing 
+                                            
                                                 // Change the attack animations based on the player's/ Max's level
                                                 put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
                                                 new FrameBuilder(spriteSheet.getSprite(8, 3), 8)
