@@ -195,7 +195,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     // initializes second level
     public void initialize1(Player prev) {
-Max.setMaxInLevel();
+Max.setMaxInLevel();// increases max in level gets the level 2 sprites
         // define/setup map
         this.map = new Lab_copy();
 
@@ -348,8 +348,8 @@ Max.setMaxInLevel();
         
          this.map = new Space();
         this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, currentLevel);
-Max.setMaxInLevel();//besa
-Max.setMaxInLevel();
+Max.setMaxInLevel();//sets max inlevel to level 3 sprites
+Max.setMaxInLevel();// both ARE NEEDED !!
         coinList.clear();
         
         coinList.add(new Coin(1350, 3600));
@@ -547,7 +547,7 @@ Max.setMaxInLevel();
                 break;
             case LEVEL_COMPLETED:
                 levelClearedScreen.draw(graphicsHandler);
-              //  Max.setMaxInLevel(); //maybe able to fix// besa
+              //  Max.setMaxInLevel(); //maybe able to fix//
                 break;
             case LEVEL_LOSE:
                 levelLoseScreen.draw(graphicsHandler);
