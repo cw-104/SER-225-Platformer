@@ -53,7 +53,7 @@ public class Max extends Player {
                                                                                           // 20, 11)
                                                                 .build()
                                 });
-System.out.println("MaxInLevel for this level is  " + MaxInLevel);// for testing to see the value at start of lvl
+//System.out.println("MaxInLevel for this level is  " + MaxInLevel);// for testing to see the value at start of lvl //DevTest
                                 put("STAND_LEFT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(0, 0))
                                                                 .withScale(3)
@@ -269,7 +269,7 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
                 .withBounds(18, 3, 33, 28)
                 .build()
         });
-    System.out.println("MaxInLevel for this level is  " + MaxInLevel);
+    //System.out.println("MaxInLevel for this level is  " + MaxInLevel); //DevTest
 }                                   // sprites for level 3 will go here // for testing purposes change 2 to 1 or 0 to see if the sprite work[if level 3 test map is not ready]
                                         if (MaxInLevel == 2) { //was originally > 2 // changed it to 0 to see if it worked and it did 
                                                // setMaxInLevel();
