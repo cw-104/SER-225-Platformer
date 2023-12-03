@@ -20,7 +20,7 @@ public class Max extends Player {
         private static int MaxInLevel;
 
         public Max(float x, float y, int currentLevel) {
-                super(new SpriteSheet(ImageLoader.load("Max25.png"), 50, 50), x, y, "STAND_RIGHT");
+                super(new SpriteSheet(ImageLoader.load("MaxJ.png"), 50, 50), x, y, "STAND_RIGHT");
                 gravity = .5f;
                 terminalVelocityY = 6f;
                 jumpHeight = 16.5f;
@@ -28,6 +28,7 @@ public class Max extends Player {
                 walkSpeed = 7.5f; 
                 momentumYIncrease = .5f;
                 MaxInLevel = 0; // Initialize MaxInLevel to 0 //has max change in the next level // "Max.setMaxInLevel();" is called in level complete to increase
+        //setMaxInLevel();
         }
 
         public void update() {
@@ -232,21 +233,21 @@ public class Max extends Player {
 // checking to see if max is in another level 
 
 //Repeat this process for the next level but change it to 2 (for level 3). //LOOK AT ME!! CHANGES MAX SPRITE FOR THE LEVEL  
-if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it worked and it did 
+if (MaxInLevel == 0) { //was originally > 2 // changed it to 0 to see if it worked and it did 
         setMaxInLevel();
         // Change the attack animations based on the player's/ Max's level
         put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
-            new FrameBuilder(spriteSheet.getSprite(6, 4), 8)
+            new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
                 .withScale(3)
                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                 .withBounds(1, 3, 33, 28)
                 .build(),
-            new FrameBuilder(spriteSheet.getSprite(6, 5 ), 8)//+1
+            new FrameBuilder(spriteSheet.getSprite(6, 7 ), 8)//+1
                 .withScale(3)
                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                 .withBounds(1, 3, 33, 28)
                 .build(),
-            new FrameBuilder(spriteSheet.getSprite(6, 6), -1)
+            new FrameBuilder(spriteSheet.getSprite(7, 5), -1)
                 .withScale(3)
                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                 .withBounds(1, 3, 33, 28)
@@ -254,15 +255,15 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
         });
 
         put("ATTACK_RIGHT", new Frame[] {
-            new FrameBuilder(spriteSheet.getSprite(6, 4), 8)
+            new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
                 .withScale(3)
                 .withBounds(18, 3, 33, 28)
                 .build(),
-            new FrameBuilder(spriteSheet.getSprite(6, 5), 8)
+            new FrameBuilder(spriteSheet.getSprite(6, 7), 8)
                 .withScale(3)
                 .withBounds(18, 3, 33, 28)
                 .build(),
-            new FrameBuilder(spriteSheet.getSprite(6, 6 ), -1)
+            new FrameBuilder(spriteSheet.getSprite(7, 5 ), -1)
                 .withScale(3)
                 .withBounds(18, 3, 33, 28)
                 .build()
