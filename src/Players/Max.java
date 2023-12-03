@@ -7,6 +7,7 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
+import Level.LevelState;
 import Level.Player;
 import Screens.PlayLevelScreen;
 
@@ -28,7 +29,7 @@ public class Max extends Player {
                 walkSpeed = 7.5f; 
                 momentumYIncrease = .5f;
                 MaxInLevel = 0; // Initialize MaxInLevel to 0 //has max change in the next level // "Max.setMaxInLevel();" is called in level complete to increase
-        //setMaxInLevel();
+       // setMaxInLevel();
         }
 
         public void update() {
@@ -52,7 +53,7 @@ public class Max extends Player {
                                                                                           // 20, 11)
                                                                 .build()
                                 });
-
+System.out.println("MaxInLevel for this level is  " + MaxInLevel);// for testing to see the value at start of lvl
                                 put("STAND_LEFT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(0, 0))
                                                                 .withScale(3)
@@ -192,7 +193,7 @@ public class Max extends Player {
                                                                 .withBounds(15, 3, 16, 28)
                                                                 .build()
                                 });
-
+if (MaxInLevel == 0) {
                                 put("ATTACK_LEFT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(1, 7), 8)
                                                                 .withScale(3)
@@ -229,12 +230,12 @@ public class Max extends Player {
                                                                                            // the original bounds
                                                                 .build()
                                 });
-
+}
 // checking to see if max is in another level 
 
 //Repeat this process for the next level but change it to 2 (for level 3). //LOOK AT ME!! CHANGES MAX SPRITE FOR THE LEVEL  
 if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it worked and it did 
-        setMaxInLevel();
+       // setMaxInLevel();
         // Change the attack animations based on the player's/ Max's level
         put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
             new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
@@ -268,9 +269,11 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
                 .withBounds(18, 3, 33, 28)
                 .build()
         });
-    }                                   // sprites for level 3 will go here // for testing purposes change 2 to 1 or 0 to see if the sprite work[if level 3 test map is not ready]
+    System.out.println("MaxInLevel for this level is  " + MaxInLevel);
+}                                   // sprites for level 3 will go here // for testing purposes change 2 to 1 or 0 to see if the sprite work[if level 3 test map is not ready]
                                         if (MaxInLevel == 2) { //was originally > 2 // changed it to 0 to see if it worked and it did 
-                                                setMaxInLevel();
+                                               // setMaxInLevel();
+                                               System.out.println("MaxInLevel for this level is  " + MaxInLevel);
                                                 // Change the attack animations based on the player's/ Max's level
                                                 put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
                                                 new FrameBuilder(spriteSheet.getSprite(8, 3), 8)
@@ -313,7 +316,7 @@ if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it work
          
         public static   void setMaxInLevel() {
               //  this.MaxInLevel++; // Increment MaxInLevel
-                MaxInLevel++; // Increment MaxInLevel
+              MaxInLevel++; // Increment MaxInLevel
             }
 
 }

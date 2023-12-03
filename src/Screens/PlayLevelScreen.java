@@ -78,7 +78,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         // define/setup map
       this.map = new Lab();
         this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, currentLevel);
- 
+   Max.setMaxInLevel(); //maybe able to fix
 
         // Add Coins (only line needed for both creating and counting)
         coinList.add(new Coin(1150, 450));
@@ -348,7 +348,8 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         
          this.map = new Space();
         this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, currentLevel);
-
+Max.setMaxInLevel();//besa
+Max.setMaxInLevel();
         coinList.clear();
         
         coinList.add(new Coin(1350, 3600));
@@ -546,7 +547,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
                 break;
             case LEVEL_COMPLETED:
                 levelClearedScreen.draw(graphicsHandler);
-              //  Max.setMaxInLevel(); //maybe able to fix
+              //  Max.setMaxInLevel(); //maybe able to fix// besa
                 break;
             case LEVEL_LOSE:
                 levelLoseScreen.draw(graphicsHandler);
@@ -600,9 +601,10 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         if (playLevelScreenState != PlayLevelScreenState.LEVEL_COMPLETED) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
             levelCompletedStateChangeStart = true;
-            Max.setMaxInLevel(); // Call this method to update the maximum instances of Max //will increase by 1 when called
+           // Max.setMaxInLevel(); // Call this method to update the maximum instances of Max //will increase by 1 when called
            // goToNextLevel(); // Add this line
         }
+        
     }
 
     @Override
@@ -619,6 +621,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     public void resetLevel2(){
         initialize1(this.player);
+        
     }
 
     public void resetLevel3() {
@@ -635,6 +638,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         changeLevel(3);
         initialize2(this.player);
         shopCheck = 3;
+        Max.setMaxInLevel();Max.setMaxInLevel();
     }
 
     public void goBackToMenu() {
