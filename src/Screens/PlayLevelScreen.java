@@ -78,7 +78,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
         // define/setup map
       this.map = new Lab();
         this.player = new Max(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y, currentLevel);
-   Max.setMaxInLevel(); //maybe able to fix
+  // Max.setMaxInLevel(); //maybe able to fix
 
         // Add Coins (only line needed for both creating and counting)
         coinList.add(new Coin(1150, 450));
@@ -195,7 +195,7 @@ public class PlayLevelScreen extends Screen implements PlayerListener {
 
     // initializes second level
     public void initialize1(Player prev) {
-
+Max.setMaxInLevel();
         // define/setup map
         this.map = new Lab_copy();
 
