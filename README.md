@@ -23,8 +23,8 @@ Changes to content in the `docs` folder will not show up on the website unless t
 
 ERROR101 Credits:
 DEVELOPERS: 
-Charlize Aponte
-Gregory Jean-Baptiste
-Jason Jackson
-Jon Cela
+Charlize Aponte,
+Gregory Jean-Baptiste,
+Jason Jackson,
+Jon Cela,
 Shannon Gill
