@@ -20,3 +20,11 @@ Changes to content in the `docs` folder will not show up on the website unless t
 
 ## Credits
 **Alex Thimineur**: Programmed the game, made the art.
+
+ERROR101 Credits:
+DEVELOPERS: 
+Charlize Aponte
+Gregory Jean-Baptiste
+Jason Jackson
+Jon Cela
+Shannon Gill
