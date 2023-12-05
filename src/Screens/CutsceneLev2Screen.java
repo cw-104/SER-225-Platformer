@@ -28,8 +28,8 @@ public class CutsceneLev2Screen extends Screen {
         background = new BunkerHallMap();
         background.setAdjustCamera(false);
         //fun fact if you're trying to remember why \n isn't working: use the other draw command it has one that works with \n
-        narration = new SpriteFont("Congratulations, [currentSubject.getID]! Please\naccept this complimentary new weapon. Proceed\nonwards and outwards! A new reality awaits!", 175, 22, "Helvetica Bold", 22, Color.white);
-        prompt = new SpriteFont("Press SPACE to continue...", 490, 130, "Comic Sans", 15, Color.white);
+        narration = new SpriteFont("Congratulations, [currentSubject.getID]! Please\n accept this complimentary new weapon.\n Proceed onwards and outwards! A new reality\n awaits!", 175, 22, "Helvetica Bold", 22, Color.white);
+        prompt = new SpriteFont("Press SPACE to continue...", 490, 130, "Comic Sans", 14, Color.white);
         keyPressTimer = 0;
         keyLocker.lockKey(Key.SPACE);
     }

@@ -111,6 +111,39 @@ public class Space extends Map {
                                 getMapTile(139, 40).getLocation().subtractY(98), Direction.RIGHT);
                 enemies.add(alien_8);
 
+                  Alien alien_9 = new Alien(getMapTile(43, 44).getLocation().subtractY(98),
+                                getMapTile(47, 44).getLocation().subtractY(98), Direction.RIGHT);
+                enemies.add(alien_9);
+                Alien alien_10= new Alien(getMapTile(53, 43).getLocation().subtractY(98),
+                                getMapTile(56, 43).getLocation().subtractY(98), Direction.RIGHT);
+                enemies.add(alien_10);
+                 Alien alien_11= new Alien(getMapTile(65, 43).getLocation().subtractY(98),
+                                getMapTile(68, 43).getLocation().subtractY(98), Direction.RIGHT);
+                enemies.add(alien_11);
+                Alien alien_12= new Alien(getMapTile(70, 47).getLocation().subtractY(98),
+                                getMapTile(75, 47).getLocation().subtractY(98), Direction.RIGHT);
+                enemies.add(alien_12);
+                Alien alien_13= new Alien(getMapTile(161, 40).getLocation().subtractY(98),
+                                getMapTile(165, 40).getLocation().subtractY(98), Direction.RIGHT);
+                enemies.add(alien_13);
+                 Alien alien_14= new Alien(getMapTile(157, 41).getLocation().subtractY(98),
+                                getMapTile(160, 41).getLocation().subtractY(98), Direction.RIGHT);
+                enemies.add(alien_14);
+                Alien alien_15= new Alien(getMapTile(166, 41).getLocation().subtractY(98),
+                                getMapTile(169, 41).getLocation().subtractY(98), Direction.RIGHT);
+                enemies.add(alien_15);
+                Alien alien_16= new Alien(getMapTile(130, 35).getLocation().subtractY(98),
+                                getMapTile(134, 35).getLocation().subtractY(98), Direction.RIGHT);
+                enemies.add(alien_16);
+                 Alien alien_17= new Alien(getMapTile(137, 34).getLocation().subtractY(98),
+                                getMapTile(141, 34).getLocation().subtractY(98), Direction.RIGHT);
+                enemies.add(alien_17);
+                Alien alien_18= new Alien(getMapTile(115, 39).getLocation().subtractY(98),
+                                getMapTile(119, 39).getLocation().subtractY(98), Direction.RIGHT);
+                enemies.add(alien_18);
+
+
+
                 // Robots
                 Robot robot_1 = new Robot(getMapTile(111,
                                 54).getLocation().subtractY(25), Direction.LEFT);
@@ -139,6 +172,48 @@ public class Space extends Map {
                 Robot robot_7 = new Robot(getMapTile(121,
                                 30).getLocation().subtractY(25), Direction.LEFT);
                 enemies.add(robot_7);
+
+                Robot robot_8 = new Robot(getMapTile(89,
+                                39).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(robot_8);
+        
+                 Robot robot_10 = new Robot(getMapTile(110,
+                                27).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(robot_10);
+                 Robot robot_11= new Robot(getMapTile(110,
+                                30).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(robot_11);
+              
+                Robot robot_13= new Robot(getMapTile(134,
+                                25).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(robot_13);
+                Robot robot_14= new Robot(getMapTile(137,
+                                52).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(robot_14);
+                Robot robot_15= new Robot(getMapTile(130,
+                                52).getLocation().subtractY(22), Direction.LEFT);
+                enemies.add(robot_15);
+                 Robot robot_16= new Robot(getMapTile(124,
+                                52).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(robot_16);
+                 Robot robot_17= new Robot(getMapTile(117,
+                                52).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(robot_17);
+                Robot robot_18= new Robot(getMapTile(98,
+                                51).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(robot_18);
+                Robot robot_19= new Robot(getMapTile(87,
+                                51).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(robot_19);
+                Robot robot_20= new Robot(getMapTile(72,
+                                51).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(robot_20);
+                Robot robot_21= new Robot(getMapTile(166,
+                                51).getLocation().subtractY(25), Direction.LEFT);
+                enemies.add(robot_21);
+
+        
+
 
                 // Guards
                 PrisonGuardEnemy Guard_1 = new PrisonGuardEnemy(getMapTile(8, 50).getLocation().subtractY(75),
@@ -177,13 +252,23 @@ public class Space extends Map {
                                 getMapTile(169, 48).getLocation().subtractY(75), Direction.RIGHT);
                 enemies.add(Guard_9);
 
-                PrisonGuardEnemy Guard_10 = new PrisonGuardEnemy(getMapTile(154, 50).getLocation().subtractY(75),
+                PrisonGuardEnemy Guard_10 = new PrisonGuardEnemy(getMapTile(156, 50).getLocation().subtractY(75),
                                 getMapTile(158, 50).getLocation().subtractY(75), Direction.RIGHT);
                 enemies.add(Guard_10);
 
                 PrisonGuardEnemy Guard_11 = new PrisonGuardEnemy(getMapTile(172, 50).getLocation().subtractY(75),
                                 getMapTile(175, 50).getLocation().subtractY(75), Direction.RIGHT);
                 enemies.add(Guard_11);
+                PrisonGuardEnemy Guard_12 = new PrisonGuardEnemy(getMapTile(134, 44).getLocation().subtractY(75),
+                                getMapTile(138, 44).getLocation().subtractY(75), Direction.RIGHT);
+                enemies.add(Guard_12);
+                PrisonGuardEnemy Guard_13 = new PrisonGuardEnemy(getMapTile(141, 44).getLocation().subtractY(75),
+                                getMapTile(144, 44).getLocation().subtractY(75), Direction.RIGHT);
+                enemies.add(Guard_13);
+                 PrisonGuardEnemy Guard_14 = new PrisonGuardEnemy(getMapTile(122, 40).getLocation().subtractY(75),
+                                getMapTile(126, 40).getLocation().subtractY(75), Direction.RIGHT);
+                enemies.add(Guard_14);
+                
 
                 return enemies;
         }

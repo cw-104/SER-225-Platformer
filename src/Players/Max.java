@@ -17,30 +17,29 @@ import java.util.HashMap;
 // This is the class for the max player character
 // basically just sets some values for physics and then defines animations
 public class Max extends Player {
-private int currentLevel;
-private int MaxInLevel =0;
-        public Max(float x, float y){
-                super(new SpriteSheet(ImageLoader.load("Max19.png"), 50, 50), x, y, "STAND_RIGHT");
+
+        private static int MaxInLevel;
+
+        public Max(float x, float y, int currentLevel) {
+                super(new SpriteSheet(ImageLoader.load("MaxJ.png"), 50, 50), x, y, "STAND_RIGHT");
                 gravity = .5f;
                 terminalVelocityY = 6f;
                 jumpHeight = 16.5f;
                 jumpDegrade = .5f;
                 walkSpeed = 7.5f; 
                 momentumYIncrease = .5f;
-                this.currentLevel =currentLevel;
+                MaxInLevel = 0; // Initialize MaxInLevel to 0 //has max change in the next level // "Max.setMaxInLevel();" is called in level complete to increase
+       // setMaxInLevel();
         }
+
         public void update() {
                 super.update();
         }
 
         public void draw(GraphicsHandler graphicsHandler) {
                 super.draw(graphicsHandler);
-
-                // drawBounds(graphicsHandler, new Color(255, 0, 0, 170));
-
+               //drawBounds(graphicsHandler, new Color(255, 0, 0, 170));// turn this on/ off to see the bounds for Max
         }
-
-        
 
         @Override
         public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
@@ -54,7 +53,7 @@ private int MaxInLevel =0;
                                                                                           // 20, 11)
                                                                 .build()
                                 });
-
+//System.out.println("MaxInLevel for this level is  " + MaxInLevel);// for testing to see the value at start of lvl //DevTest
                                 put("STAND_LEFT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(0, 0))
                                                                 .withScale(3)
@@ -110,8 +109,6 @@ private int MaxInLevel =0;
                                                                 .withScale(3)
                                                                 .withBounds(15, 3, 16, 28)
                                                                 .build()
-
-                                                                
                                 });
 
                                 put("JUMP_LEFT", new Frame[] {
@@ -120,29 +117,6 @@ private int MaxInLevel =0;
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(19, 3, 16, 28)
                                                                 .build()
-                                });
-
-//jumpattack
-                put("JUMPATTACK_RIGHT", new Frame[] {
-                                                new FrameBuilder(spriteSheet.getSprite(4, 6))
-                                                                .withScale(3)
-                                                                .withBounds(1, 3, 33, 28)
-                                                                .build(),
-                                              
-
-                                                                
-                                });
-
-                                put("JUMPATTACK_LEFT", new Frame[] {
-                                                new FrameBuilder(spriteSheet.getSprite(4, 6))
-                                                                .withScale(3)
-                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                                                 .withBounds(1, 3, 33, 28)
-                                                                .build(),
-                                                 
-                                
-
-                             
                                 });
 
                                 put("FALL_RIGHT", new Frame[] {
@@ -163,7 +137,7 @@ private int MaxInLevel =0;
                                 put("CROUCH_RIGHT", new Frame[] { // putting 3 for now- fix
                                                 new FrameBuilder(spriteSheet.getSprite(1, 6), 8)
                                                                 .withScale(3)
-                                                                .withBounds(15, 8, 20, 23)// Original: 15,8,20,23
+                                                                .withBounds(15, 8, 20, 23)
                                                                 .build(),
 
                                 });
@@ -177,11 +151,9 @@ private int MaxInLevel =0;
 
                                 });
 
-
-                                put("DEATH_RIGHT", new Frame[] { 
+                                put("DEATH_RIGHT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(4, 4), 8)
-
-                                               .withScale(3)
+                                                                .withScale(3)
                                                                 .build(),
                                                 new FrameBuilder(spriteSheet.getSprite(4, 5), 8)
                                                                 .withScale(3)
@@ -193,8 +165,7 @@ private int MaxInLevel =0;
 
                                
                                 put("DEATH_LEFT", new Frame[] {
-                                                new FrameBuilder(spriteSheet.getSprite(5, 0), 8)
-
+                                                new FrameBuilder(spriteSheet.getSprite(4, 4), 8)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .build(),
@@ -222,21 +193,19 @@ private int MaxInLevel =0;
                                                                 .withBounds(15, 3, 16, 28)
                                                                 .build()
                                 });
-
-
-                                put("ATTACK_LEFT", new Frame[] { 
-                                                new FrameBuilder(spriteSheet.getSprite(7, 6), 8)
-
-                                                                .withScale(3)
-                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                                                .withBounds(1, 3, 33, 28)
-                                                                .build(),
+if (MaxInLevel == 0) {
+                                put("ATTACK_LEFT", new Frame[] {
                                                 new FrameBuilder(spriteSheet.getSprite(1, 7), 8)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(1, 3, 33, 28)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(3, 7), -1)
+                                                new FrameBuilder(spriteSheet.getSprite(2, 7), 8)
+                                                                .withScale(3)
+                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                                .withBounds(1, 3, 33, 28)
+                                                                .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(4, 7), -1)
                                                                 .withScale(3)
                                                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(1, 3, 33, 28)
@@ -244,85 +213,110 @@ private int MaxInLevel =0;
                                 });
 
                                 put("ATTACK_RIGHT", new Frame[] { // testing for batt attacking
-                                                new FrameBuilder(spriteSheet.getSprite(7, 6), 8)//6,0
+                                                new FrameBuilder(spriteSheet.getSprite(1, 7), 8)
                                                                 .withScale(3)
                                                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(18, 3, 33, 28)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(1, 7), 8)//6,1
+                                                new FrameBuilder(spriteSheet.getSprite(2, 7), 8)
                                                                 .withScale(3)
                                                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(18, 3, 33, 28)
                                                                 .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(3, 7), -1)//6,2
+                                                new FrameBuilder(spriteSheet.getSprite(4, 7), -1)
                                                                 .withScale(3)
                                                                 // .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                                                 .withBounds(18, 3, 33, 28) // .withBounds(8, 9, 8, 9) //
                                                                                            // the original bounds
                                                                 .build()
                                 });
-                                
-                               //attempt to change the sprites in changing kevel //startOfTest
-                                                                if(MaxInLevel>0){ //using column 6 as testvale //remember to come back and add the ptoper sprite sets
-                                put("ATTACK_LEFT", new Frame[] { 
-                                                                                new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
-                                                                                                .withScale(3)
-                                                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                                                                                .withBounds(1, 3, 33, 28)
-                                                                                                .build(),
-                                                                                new FrameBuilder(spriteSheet.getSprite(6, 7), 8)
-                                                                                                .withScale(3)
-                                                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                                                                                .withBounds(1, 3, 33, 28)
-                                                                                                .build(),
-                                                                                new FrameBuilder(spriteSheet.getSprite(8, 6), -1)
-                                                                                                .withScale(3)
-                                                                                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                                                                                                .withBounds(1, 3, 33, 28)
-                                                                                                .build()
-                                                                });
+}
+// checking to see if max is in another level 
 
-                                }//EndOfTest
-//attempt to change the sprites in changing kevel //startOfTest //right side 
-                                if(MaxInLevel>0){ //using column 6 as testvale //remember to come back and add the ptoper sprite sets
-put("ATTACK_RIGHT", new Frame[] { 
-                                                new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
-                                                                .withScale(3)
-                                                                .withBounds(1, 3, 33, 28)
-                                                                .build(),
-                                                new FrameBuilder(spriteSheet.getSprite(6, 7), 8)
-                                                                .withScale(3)                                                             
-                                                                .withBounds(1, 3, 33, 28)
-                                                                .build(),
+//Repeat this process for the next level but change it to 2 (for level 3). //LOOK AT ME!! CHANGES MAX SPRITE FOR THE LEVEL  
+if (MaxInLevel == 1) { //was originally > 2 // changed it to 0 to see if it worked and it did 
+       // setMaxInLevel();
+        // Change the attack animations based on the player's/ Max's level
+        put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
+            new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
+                .withScale(3)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .withBounds(1, 3, 33, 28)
+                .build(),
+            new FrameBuilder(spriteSheet.getSprite(6, 7 ), 8)//+1
+                .withScale(3)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .withBounds(1, 3, 33, 28)
+                .build(),
+            new FrameBuilder(spriteSheet.getSprite(7, 5), -1)
+                .withScale(3)
+                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                .withBounds(1, 3, 33, 28)
+                .build()
+        });
+
+        put("ATTACK_RIGHT", new Frame[] {
+            new FrameBuilder(spriteSheet.getSprite(6, 6), 8)
+                .withScale(3)
+                .withBounds(18, 3, 33, 28)
+                .build(),
+            new FrameBuilder(spriteSheet.getSprite(6, 7), 8)
+                .withScale(3)
+                .withBounds(18, 3, 33, 28)
+                .build(),
+            new FrameBuilder(spriteSheet.getSprite(7, 5 ), -1)
+                .withScale(3)
+                .withBounds(18, 3, 33, 28)
+                .build()
+        });
+    //System.out.println("MaxInLevel for this level is  " + MaxInLevel); //DevTest
+}                                   // sprites for level 3 will go here // for testing purposes change 2 to 1 or 0 to see if the sprite work[if level 3 test map is not ready]
+                                        if (MaxInLevel == 2) { //was originally > 2 // changed it to 0 to see if it worked and it did 
+                                               // setMaxInLevel();
+                                            
+                                                // Change the attack animations based on the player's/ Max's level
+                                                put("ATTACK_LEFT", new Frame[] {// sprites for attacking with axe
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)
+                                                        .withScale(3)
+                                                        .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                        .withBounds(1, 3, 33, 28)
+                                                        .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(8, 4 ), 8)//+1
+                                                        .withScale(3)
+                                                        .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                        .withBounds(1, 3, 33, 28)
+                                                        .build(),
                                                 new FrameBuilder(spriteSheet.getSprite(8, 6), -1)
-                                                                .withScale(3)                                                         
-                                                                .withBounds(1, 3, 33, 28)
-                                                                .build()
-                                });
+                                                        .withScale(3)
+                                                        .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                                        .withBounds(1, 3, 33, 28)
+                                                        .build()
+                                                });
 
-}//EndOfTest //right side 
+                                                put("ATTACK_RIGHT", new Frame[] {
+                                                new FrameBuilder(spriteSheet.getSprite(8, 3), 8)
+                                                        .withScale(3)
+                                                        .withBounds(18, 3, 33, 28)
+                                                        .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(8, 4), 8)
+                                                        .withScale(3)
+                                                        .withBounds(18, 3, 33, 28)
+                                                        .build(),
+                                                new FrameBuilder(spriteSheet.getSprite(8, 6 ), -1)
+                                                        .withScale(3)
+                                                        .withBounds(18, 3, 33, 28)
+                                                        .build()
+                                                });
+                                        }
+
                         }
                 };
-
-
         }
-        public int setMaxinLevel(int MaxInLevel){
-                this.MaxInLevel = MaxInLevel + 1 ;
-                if (levelState == LevelState.LEVEL_COMPLETED){
-                        MaxInLevel ++;
-                }
-                return MaxInLevel++;
-        }//come back 
-        //option a: swap images based on counter or B: have multiple max methods with differnt pngs
 
-        public int getMAxInLevel( int MaxInLevel){
-                return MaxInLevel;
-        }
-        
+         
+        public static   void setMaxInLevel() {
+              //  this.MaxInLevel++; // Increment MaxInLevel
+              MaxInLevel++; // Increment MaxInLevel
+            }
+
 }
-
-
-        
-        
-        
-
