@@ -621,15 +621,16 @@ Max.setMaxInLevel();// both ARE NEEDED !!
 
     public void resetLevel2(){
         initialize1(this.player);
-        
+        this.player.setLives(3);
     }
 
     public void resetLevel3() {
         initialize2(this.player);
+        this.player.setLives(3);
     }
 
     public void level2() {
-        changeLevel(2);
+        changeLevel(2); 
         initialize1(this.player);
         shopCheck = 2;
     }
