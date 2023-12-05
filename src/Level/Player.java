@@ -28,9 +28,9 @@ public abstract class Player extends GameObject {
     protected float terminalVelocityY = 0;
     protected float momentumYIncrease = 0;
     int lives = 3;
-   
+
     private float speedMultiplier = 1.0f;
-    
+
     protected boolean hasShield = false;
 
     // coin
@@ -55,14 +55,15 @@ public abstract class Player extends GameObject {
     public void setCoins(int value) {
         coins = value;
     }
+
     public void activateShield() {
         GameContext.setPlayerHasShield(true);
     }
-    
+
     public void deactivateShield() {
         GameContext.setPlayerHasShield(false);
     }
-    
+
     public boolean hasShield() {
         return GameContext.playerHasShield();
     }
@@ -71,31 +72,28 @@ public abstract class Player extends GameObject {
         this.speedMultiplier *= multiplier;
         this.walkSpeed *= this.speedMultiplier; // Update walkSpeed based on the new multiplier
     }
-    
+
     public void setWalkSpeed(float newSpeed) {
         this.walkSpeed = newSpeed;
     }
-    
+
     public float getWalkSpeed() {
         return this.walkSpeed;
     }
-        // New method to set the speed multiplier
-        public void setSpeedMultiplier(float multiplier) {
-            this.speedMultiplier = multiplier;
-        }
-    
-        // New method to get the speed multiplier
-        public float getSpeedMultiplier() {
-            return this.speedMultiplier;
-        }
 
-    
-    
-    
+    // New method to set the speed multiplier
+    public void setSpeedMultiplier(float multiplier) {
+        this.speedMultiplier = multiplier;
+    }
+
+    // New method to get the speed multiplier
+    public float getSpeedMultiplier() {
+        return this.speedMultiplier;
+    }
+
     public void touchedEnemy(Enemy enemy) {
         defeatEnemy(enemy);
     }
-       
 
     // values used to handle player movement
     protected float jumpForce = 0;
@@ -113,7 +111,7 @@ public abstract class Player extends GameObject {
 
     // classes that listen to player events can be added to this list
     protected ArrayList<PlayerListener> listeners = new ArrayList<>();
- 
+
     // define keys
     protected KeyLocker keyLocker = new KeyLocker();
     protected Key JUMP_KEY = Key.W;
@@ -292,7 +290,6 @@ public abstract class Player extends GameObject {
     /* */// A subclass can override this method to specify what it does when it touches
          // the enemy
 
-
     public void attack() {
         if (!isAttacking) {
             isAttacking = true;
@@ -309,34 +306,32 @@ public abstract class Player extends GameObject {
         }
     }
 
-protected void playerWalking() {
-    // if walk left key is pressed, move player to the left
-    if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
-        moveAmountX -= walkSpeed * speedMultiplier; // Apply speedMultiplier here
-        facingDirection = Direction.LEFT;
-    }
-    
-    // if walk right key is pressed, move player to the right
-    else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
-        moveAmountX += walkSpeed * speedMultiplier; // And here
-        facingDirection = Direction.RIGHT;
-    } else if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY)) {
-        playerState = PlayerState.STANDING;
-    }
+    protected void playerWalking() {
+        // if walk left key is pressed, move player to the left
+        if (Keyboard.isKeyDown(MOVE_LEFT_KEY)) {
+            moveAmountX -= walkSpeed * speedMultiplier; // Apply speedMultiplier here
+            facingDirection = Direction.LEFT;
+        }
 
-    // if jump key is pressed, player enters JUMPING state
-    if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
-        keyLocker.lockKey(JUMP_KEY);
-        playerState = PlayerState.JUMPING;
-    }
+        // if walk right key is pressed, move player to the right
+        else if (Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
+            moveAmountX += walkSpeed * speedMultiplier; // And here
+            facingDirection = Direction.RIGHT;
+        } else if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY)) {
+            playerState = PlayerState.STANDING;
+        }
 
-    // if crouch key is pressed,
-    else if (Keyboard.isKeyDown(CROUCH_KEY)) {
-        playerState = PlayerState.CROUCHING;
-    }
-}
+        // if jump key is pressed, player enters JUMPING state
+        if (Keyboard.isKeyDown(JUMP_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
+            keyLocker.lockKey(JUMP_KEY);
+            playerState = PlayerState.JUMPING;
+        }
 
-    
+        // if crouch key is pressed,
+        else if (Keyboard.isKeyDown(CROUCH_KEY)) {
+            playerState = PlayerState.CROUCHING;
+        }
+    }
 
     // player CROUCHING state logic
     protected void playerCrouching() {
@@ -371,12 +366,12 @@ protected void playerWalking() {
                     jumpForce = 0;
                 }
             }
-        }// jump + attack attempt
+        } // jump + attack attempt
         else if (Keyboard.isKeyDown(ATTACK_KEY) && !keyLocker.isKeyLocked(JUMP_KEY)) {
             keyLocker.lockKey(ATTACK_KEY);
             playerState = PlayerState.ATTACKING;
-//besa
-currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP_LEFT";
+            // besa
+            currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP_LEFT";
 
             // player is set to be in air and then player is sent into the air
             airGroundState = AirGroundState.AIR;
@@ -421,14 +416,15 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
             playerState = PlayerState.STANDING;
         }
         // trying to add attacking
-        if (Keyboard.isKeyDown(ATTACK_KEY) ) {
-          //  keyLocker.lockKey(ATTACK_KEY);
+        if (Keyboard.isKeyDown(ATTACK_KEY)) {
+            // keyLocker.lockKey(ATTACK_KEY);
             playerState = PlayerState.ATTACKING;
             isAttacking = true; // for when max is attacking
-//need to add make separate state for attacking in the air // could possibly get around without doing it, but that would be easiest method
-// make attack a part of other states
-//
-// use: hasAnimationLooped - to 
+            // need to add make separate state for attacking in the air // could possibly
+            // get around without doing it, but that would be easiest method
+            // make attack a part of other states
+            //
+            // use: hasAnimationLooped - to
 
         }
     }
@@ -441,8 +437,8 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
         if (currentFrameIndex == getCurrentAnimation().length - 1) {
             // The attack animation has finished; return to the previous state
             playerState = previousPlayerState;
-           // playerState = PlayerState.STANDING; // may change
-           // isAttacking = false; //besa
+            // playerState = PlayerState.STANDING; // may change
+            // isAttacking = false; //besa
 
         } else {
             // Handle any logic related to attacking here, e.g., damaging enemies
@@ -588,27 +584,23 @@ currentAnimationName = facingDirection == Direction.RIGHT ? "JUMP_RIGHT" : "JUMP
         }
     }
 
-
-
     // other entities can call this method to hurt the player
     public void hurtPlayer(MapEntity mapEntity) {
         if (!isInvincible) {
             if (GameContext.playerHasShield()) {
                 deactivateShield(); // Shield is used up
-            } 
-            else if(lives > 0 ) {
+            } else if (lives > 0) {
                 if (mapEntity instanceof Enemy) {
                     lives--; // Reduce the player's lives
                 }
-                
-                if (lives <= 0){
+
+                if (lives <= 0) {
                     levelState = LevelState.PLAYER_DEAD; // Set to dead if lives are lost
                 }
             }
 
         }
     }
-    
 
     // other entities can call this to tell the player they beat a level
     public void completeLevel() {
