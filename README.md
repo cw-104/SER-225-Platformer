@@ -21,7 +21,11 @@ Changes to content in the `docs` folder will not show up on the website unless t
 ## Credits
 **Alex Thimineur**: Programmed the game, made the art.
 
-ERROR101 Credits:
+## ERROR101 
+
+Welcome to Escape: Back to Reality, a challenging story mode platformer game. Your goal is to help the main character Max escape from the bunker by attacking/avoiding enemies until you reach the end of the level by hitting the exit sign box. You can also collect coins to use in the coins shop to buy a speed power up. You can access the coin shop in between levels. 
+
+Credits:
 DEVELOPERS: 
 Charlize Aponte,
 Gregory Jean-Baptiste,
